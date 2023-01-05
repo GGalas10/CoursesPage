@@ -42,6 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ICoursesServices.cs" />
+    <Compile Include="Services\IUserSerivces.cs" />
+    <Compile Include="Services\UserServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\APICore\Courses.Core.csproj">
+      <Project>{7f997270-0f60-462d-ac9b-bfbd510a2462}</Project>
+      <Name>Courses.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

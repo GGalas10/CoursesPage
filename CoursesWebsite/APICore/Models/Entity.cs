@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APICore.Models
 {
-    internal class Entity
+    public class Entity
     {
         public Guid Id { get; protected set; }
         public Entity()

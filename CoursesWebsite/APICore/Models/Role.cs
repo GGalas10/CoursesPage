@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APICore.Models
 {
-    internal class Role : Entity
+    public class Role : Entity
     {
         public string Name { get; protected set; }
 

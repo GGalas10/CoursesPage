@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APICore.Models
 {
-    internal class Course :Entity
+    public class Course :Entity
     {
         #region Properties
         private List<Topic> _topics;

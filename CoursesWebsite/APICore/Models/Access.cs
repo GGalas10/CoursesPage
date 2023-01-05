@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APICore.Models
 {
-    internal class Access
+    public class Access
     {
         public Guid UserId { get; protected set; }
         public Guid CourseId { get; protected set; }

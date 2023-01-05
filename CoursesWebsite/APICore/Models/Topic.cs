@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APICore.Models
 {
-    internal class Topic: Entity
+    public class Topic: Entity
     {
         private List<Lesson> _lessons;
         public string Name { get; protected set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APICore.Models
 {
-    internal class User :Entity
+    public class User :Entity
     {
         #region Properties
         public string UserName { get; protected set; }

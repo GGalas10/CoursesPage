@@ -13,6 +13,7 @@ namespace APICore.Models
         public string Name { get; protected set; }
         public string Description { get; protected set; }
         public string Author { get; protected set; }
+        public byte[] Image { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public IEnumerable<Topic> Topics => _topics;
         #endregion

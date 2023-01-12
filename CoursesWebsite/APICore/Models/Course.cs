@@ -14,6 +14,7 @@ namespace APICore.Models
         public string Description { get; protected set; }
         public string Author { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
+        public State state { get; protected set; }
         public IEnumerable<Topic> Topics => _topics;
         #endregion
         #region Constructors
@@ -28,6 +29,7 @@ namespace APICore.Models
             SetDescription(description);
             SetAuthor(author);
             CreatedAt = DateTime.UtcNow;
+            state = State.Active;
         }
 
         #endregion
@@ -72,6 +74,10 @@ namespace APICore.Models
             }
             foreach(var topic in topics)
             _topics.Add(topic);
+        }
+        public void SetState(State Setstate)
+        {
+            state = Setstate;
         }
         #endregion
     }

@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class UserServices : IUserSerivces
+    public class UserRepository : IUserRepository
     {
+        private readonly CoursesDbContext _context;
+        public UserRepository(CoursesDbContext context)
+        {
+            _context = context;
+        }
+
         public Task<User> GetAsyncLogin(string login, string password)
         {
             throw new NotImplementedException();

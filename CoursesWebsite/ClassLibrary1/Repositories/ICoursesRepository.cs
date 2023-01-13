@@ -16,5 +16,7 @@ namespace Infrastructure.Services
         Task DeleteAsync(Guid id);
         Task AddTopicAsync(Guid id,Topic topic);
         Task AddTopicsAsync(Guid id,List<Topic> topic);
+        Task AddLessonAsync(Guid idCourse,Guid IdTopic, Lesson lesson);
+        Task AddLessonsAsync(Guid idCourse, Guid IdTopic, List<Lesson> lessons);
     }
 }

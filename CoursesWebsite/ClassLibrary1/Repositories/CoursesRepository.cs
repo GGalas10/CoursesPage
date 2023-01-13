@@ -53,7 +53,8 @@ namespace Infrastructure.Services
                 throw new Exception("Topic can't be empty");
             var Course = await Task.FromResult(_context.Courses.FirstOrDefault(c => c.Id == id));
             Course.AddTopic(topic);
-
+            _context.SaveChangesAsync();
+            await Task.CompletedTask;
         }
         public async Task AddTopicsAsync(Guid id,List<Topic> topic) 
         {
@@ -61,6 +62,33 @@ namespace Infrastructure.Services
                 throw new Exception("List of topic can't be empty");
             var Course = await Task.FromResult(_context.Courses.FirstOrDefault(c => c.Id == id));
             Course.AddTopic(topic);
+            _context.SaveChangesAsync();
+            await Task.CompletedTask;
+        }
+        public async Task AddLessonAsync(Guid idCourses, Guid idTopic, Lesson lesson)
+        {
+            if (lesson == null)
+                throw new Exception("Lesson can't be empty");
+            var Topic = await Task.FromResult(_context.Courses.FirstOrDefault(c => c.Id == idCourses).Topics.FirstOrDefault(t => t.Id == idTopic));
+            if (Topic == null)
+                throw new Exception("Topic doesn't exists");
+            Topic.AddLesson(lesson);
+            _context.SaveChangesAsync();
+            await Task.CompletedTask;
+        }
+        public async Task AddLessonsAsync(Guid idCourses, Guid idTopic, List<Lesson> lessons)
+        {
+            if (lessons.Count < 0)
+                throw new Exception("List of lessons can't be empty");
+            var Topic = await Task.FromResult(_context.Courses.FirstOrDefault(c => c.Id == idCourses).Topics.FirstOrDefault(t => t.Id == idTopic));
+            if (Topic == null)
+                throw new Exception("Topic doesn't exists");
+            foreach(var lesson in lessons)
+            {
+                Topic.AddLesson(lesson);
+            }
+            _context.SaveChangesAsync();
+            await Task.CompletedTask;
         }
     }
 }

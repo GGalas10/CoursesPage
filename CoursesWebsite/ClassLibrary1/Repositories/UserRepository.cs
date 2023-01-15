@@ -1,9 +1,4 @@
 ﻿using APICore.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
@@ -15,25 +10,50 @@ namespace Infrastructure.Services
             _context = context;
         }
 
-        public Task<User> GetAsyncLogin(string login, string password)
+        public async Task<User> GetByLoginAsync(string login, string password)
         {
-            throw new NotImplementedException();
+            var user = await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Login == login));
+            if (user == null)
+                throw new Exception("User doesn't exist");
+            if (user.Password != password)
+                throw new Exception("Incorrect login details ");
+            return user;
         }
-        public Task<User> GetAsyncEmail(string email, string password)
+        public async Task<User> GetByEmailAsync(string email, string password)
         {
-            throw new NotImplementedException();
+            var user = await Task.FromResult(_context.Users.FirstOrDefault(u => u.Email == email));
+            if (user == null)
+                throw new Exception("User doesn't exist");
+            if (user.Password != password)
+                throw new Exception("Incorrect login details ");
+            return user;
         }
-        public Task CreateUserAsync(User user)
+        public async Task RegisterAsync(User user)
         {
-            throw new NotImplementedException();
+            await Task.FromResult(_context.Users.Add(user));
+            if (await _context.SaveChangesAsync() > 0)
+                await Task.CompletedTask;
+            else
+                throw new Exception($"Register can't be done.\nDatabase do not save value");
         }
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.FirstOrDefault(u=>u.Id == id);
+            user.SetState(State.Deleted);
+            if (await _context.SaveChangesAsync() > 0)
+                await Task.CompletedTask;
+            else
+                throw new Exception("Database do not save value");
         } 
-        public Task UpdateAsync(User user)
+        public async Task UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            var changeduser = _context.Users.FirstOrDefault(user=>user.Id == user.Id);
+            changeduser = user;
+            if (await _context.SaveChangesAsync() > 0)
+                await Task.CompletedTask;
+            else
+                throw new Exception("Database do not save value");
         }
+
     }
 }

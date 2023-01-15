@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APICore.Models
 {
@@ -12,10 +9,6 @@ namespace APICore.Models
         public string Name { get; protected set; }
         public string Description { get; protected set; }
         public IEnumerable<Lesson> Lessons => _lessons;
-        private Topic()
-        {
-
-        }
         public Topic(string name, string description)
         {
             SetName(name);

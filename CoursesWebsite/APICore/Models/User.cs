@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APICore.Models
 {
     public class User :Entity
     {
         #region Properties
+        private readonly HashSet<Guid> _purchasedCourses = new HashSet<Guid>();
         public string UserName { get; protected set; }
         public string Email { get; protected set; }
         public string Password { get; protected set; }
         public string Login { get; protected set; }
         public DateTime CreateAt { get; protected set; }
+        public State state { get; protected set; }
+        public IEnumerable<Guid> PurchasedCourses => _purchasedCourses;
         #endregion
         #region Constructors
-        private User()
-        {
-
-        }
         public User(string userName, string email, string password):base()
         {
             SetUserName(userName);
             SetEmail(email);
             SetPassword(password);
             SetLogin(email);
+            state = State.Active;
             CreateAt= DateTime.UtcNow;
         }
         public User(string userName, string email, string password, string login) : base()
@@ -34,6 +31,7 @@ namespace APICore.Models
             SetEmail(email);
             SetPassword(password);
             SetLogin(login);
+            state = State.Active;
             CreateAt = DateTime.UtcNow;
         }
         #endregion
@@ -62,6 +60,12 @@ namespace APICore.Models
                 throw new Exception("User Name cannot be empty");
             this.UserName= userName.Trim();
         }
+        public void CoursesBuy(Guid id)
+        => _purchasedCourses.Add(id);
+        public void DeleteCourses(Guid id)
+            => _purchasedCourses.Remove(id);
+        public void SetState(State newstate)
+            => state = newstate;
         #endregion
     }
 }

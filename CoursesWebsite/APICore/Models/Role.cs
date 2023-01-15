@@ -5,11 +5,6 @@ namespace APICore.Models
     public class Role : Entity
     {
         public string Name { get; protected set; }
-
-        private Role()
-        {
-
-        }
         public Role(string name)
         {
             SetName(name);

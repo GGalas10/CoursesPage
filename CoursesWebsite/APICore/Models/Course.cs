@@ -15,11 +15,6 @@ namespace APICore.Models
         public IEnumerable<Topic> Topics => _topics;
         #endregion
         #region Constructors
-        private Course()
-        {
-
-        }
-
         public Course(string name, string description, string author)
         {
             SetName(name);

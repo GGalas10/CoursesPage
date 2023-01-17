@@ -14,18 +14,18 @@ namespace Infrastructure.Services
         {
             var user = await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Login == login));
             if (user == null)
-                throw new Exception("User doesn't exist");
+                throw new Exception("Incorrect login credentials");
             if (user.Password != password)
-                throw new Exception("Incorrect login details ");
+                throw new Exception("Incorrect login credentials");
             return user;
         }
         public async Task<User> GetByEmailAsync(string email, string password)
         {
             var user = await Task.FromResult(_context.Users.FirstOrDefault(u => u.Email == email));
             if (user == null)
-                throw new Exception("User doesn't exist");
+                throw new Exception("Incorrect login credentials");
             if (user.Password != password)
-                throw new Exception("Incorrect login details ");
+                throw new Exception("Incorrect login credentials");
             return user;
         }
         public async Task RegisterAsync(User user)

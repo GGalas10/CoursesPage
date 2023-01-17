@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\Lesson.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Value Object\Name.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ICoursesRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />

@@ -6,11 +6,14 @@ namespace APICore.Models
     {
         public string LessonName { get; protected set; }
         public string LessonDescription { get; protected set; }
-        //public byte[] Video { get;protected set; } check the best way to save Video file
-        public Lesson(string lessonName, string lessonDescription)
+        public byte[] Video { get;protected set; }
+        public int LessonNumber { get; protected set; }
+        public Lesson(string lessonName, string lessonDescription, byte[] video,int lessonNumber) : base()
         {
             SetName(lessonName);
             SetDescription(lessonDescription);
+            SetVideo(video);
+            SetLessonNumber(lessonNumber);
         }      
         public void SetName(string name)
         {
@@ -23,6 +26,17 @@ namespace APICore.Models
             if (string.IsNullOrEmpty(description))
                 throw new Exception("Name cannot be empty");
             LessonDescription = description;
+        }
+        public void SetVideo(byte[] video)
+        {
+            if (video == null) 
+                throw new Exception("Video file cannot be empty");
+            Video = video;
+        }
+        public void SetLessonNumber(int lessonNumber)
+        {
+            if (lessonNumber < 0) throw new Exception("Number cannot be less than zero");
+            LessonNumber = lessonNumber;
         }
     }
 }

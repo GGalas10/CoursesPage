@@ -20,9 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
     <Folder Include="Comands\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

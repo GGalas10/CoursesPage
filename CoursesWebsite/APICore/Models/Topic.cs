@@ -33,7 +33,7 @@ namespace APICore.Models
                 throw new Exception("Lesson cannot be empty");
             _lessons.Add(lesson);
         }
-        public void AddLesson(List<Lesson> lessons)
+        public void AddLessons(List<Lesson> lessons)
         {
             if (lessons == null)
                 throw new Exception("Lesson cannot be empty");

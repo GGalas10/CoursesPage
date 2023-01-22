@@ -1,7 +1,14 @@
+using Courses.Infrastructure.Services;
+using Courses.Infrastructure.Settings;
+using ToDo_List_Infrastructure.Mappers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton(AutoMapperConfig.Initialize());
+builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
 var app = builder.Build();
 

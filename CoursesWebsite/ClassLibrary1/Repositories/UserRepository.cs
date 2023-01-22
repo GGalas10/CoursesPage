@@ -9,6 +9,8 @@ namespace Infrastructure.Services
         {
             _context = context;
         }
+        public async Task<User> GetAsync(Guid id)
+        => await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Id==id));
 
         public async Task<User> GetByLoginAsync(string login, string password)
         {

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using APICore.Models;
+using Courses.Infrastructure.DTO;
 
 namespace Courses.Infrastructure.Services
 {
     public interface IJwtHandler
     {
+        JWTDTO CreateToken(Guid userId, Role role);
     }
 }

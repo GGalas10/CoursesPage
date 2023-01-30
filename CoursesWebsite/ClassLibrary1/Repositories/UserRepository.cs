@@ -1,4 +1,5 @@
 ﻿using APICore.Models;
+using Courses.Infrastructure.Extensions;
 
 namespace Infrastructure.Services
 {
@@ -40,7 +41,7 @@ namespace Infrastructure.Services
         }
         public async Task DeleteAsync(Guid id)
         {
-            var user = _context.Users.FirstOrDefault(u=>u.Id == id);
+            var user = await this.GetOrFailASync(id);
             user.SetState(State.Deleted);
             if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;
@@ -49,7 +50,7 @@ namespace Infrastructure.Services
         } 
         public async Task UpdateAsync(User user)
         {
-            var changeduser = _context.Users.FirstOrDefault(user=>user.Id == user.Id);
+            var changeduser = await this.GetOrFailASync(user.Id);
             changeduser = user;
             if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;

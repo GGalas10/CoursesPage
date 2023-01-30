@@ -20,8 +20,4 @@
     <ProjectReference Include="..\APICore\Courses.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Comands\" />
-  </ItemGroup>
-
 </Project>

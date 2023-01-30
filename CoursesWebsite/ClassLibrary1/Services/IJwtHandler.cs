@@ -5,6 +5,6 @@ namespace Courses.Infrastructure.Services
 {
     public interface IJwtHandler
     {
-        JWTDTO CreateToken(Guid userId, Role role);
+        JWTDTO CreateToken(Guid userId, string role);
     }
 }

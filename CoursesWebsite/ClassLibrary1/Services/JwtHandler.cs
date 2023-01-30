@@ -17,14 +17,14 @@ namespace Courses.Infrastructure.Services
         {
             _jwtsettings = jwtsettings.Value;
         }
-        public JWTDTO CreateToken(Guid userId, Role role)
+        public JWTDTO CreateToken(Guid userId, string role)
         {
             var now = DateTime.UtcNow;
             var claims = new Claim[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
-                new Claim(ClaimTypes.Role, role.ToString()),
+                new Claim(ClaimTypes.Role, role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString()),
             };

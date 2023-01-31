@@ -10,24 +10,20 @@ namespace Infrastructure.Services
         {
             _context = context;
         }
-        public async Task<User> GetAsync(Guid id)
+        public async Task<User> GetByIdAsync(Guid id)
         => await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Id==id));
-
-        public async Task<User> GetByLoginAsync(string login, string password)
+        
+        public async Task<User> GetByLoginAsync(string login)
         {
             var user = await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Login == login));
             if (user == null)
                 throw new Exception("Incorrect login credentials");
-            if (user.Password != password)
-                throw new Exception("Incorrect login credentials");
             return user;
         }
-        public async Task<User> GetByEmailAsync(string email, string password)
+        public async Task<User> GetByEmailAsync(string email)
         {
             var user = await Task.FromResult(_context.Users.FirstOrDefault(u => u.Email == email));
             if (user == null)
-                throw new Exception("Incorrect login credentials");
-            if (user.Password != password)
                 throw new Exception("Incorrect login credentials");
             return user;
         }
@@ -41,7 +37,7 @@ namespace Infrastructure.Services
         }
         public async Task DeleteAsync(Guid id)
         {
-            var user = await this.GetOrFailASync(id);
+            var user = await this.GetOrFailByIdAsync(id);
             user.SetState(State.Deleted);
             if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;
@@ -50,7 +46,7 @@ namespace Infrastructure.Services
         } 
         public async Task UpdateAsync(User user)
         {
-            var changeduser = await this.GetOrFailASync(user.Id);
+            var changeduser = await this.GetOrFailByIdAsync(user.Id);
             changeduser = user;
             if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;

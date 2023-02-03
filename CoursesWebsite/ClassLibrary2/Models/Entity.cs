@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace APICore.Models
+namespace Courses.Core.Models
 {
     public class Entity
     {

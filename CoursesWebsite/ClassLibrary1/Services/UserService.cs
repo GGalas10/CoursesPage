@@ -1,13 +1,6 @@
-﻿using APICore.Repositories;
+﻿using Courses.Core.Repositories;
 using Courses.Infrastructure.DTO;
 using Courses.Infrastructure.Extensions;
-using Courses.Infrastructure.Settings;
-using Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Courses.Infrastructure.Services
 {
@@ -59,7 +52,7 @@ namespace Courses.Infrastructure.Services
             user = await _userRepository.GetByEmailAsync(email);
             if (user != null)
                 throw new Exception("Email already exist");
-            user = new APICore.Models.User(username,email,password);
+            user = new Courses.Core.Models.User(username,email,password);
             await _userRepository.RegisterAsync(user);
             var role = await _roleRepository.GetUserRole(user.Id);
             var token = _jwtHandler.CreateToken(user.Id, role);

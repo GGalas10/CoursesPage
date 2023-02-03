@@ -11,5 +11,6 @@ namespace APICore.Models
         public Guid Id { get; protected set; }
         public string Name { get; protected set; }
 
+        public void SetName { get; protected set; }
     }
 }

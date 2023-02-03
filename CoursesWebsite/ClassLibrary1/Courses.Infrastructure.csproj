@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APICore\Courses.Core.csproj" />
+    <ProjectReference Include="..\ClassLibrary2\Courses.Core.csproj" />
   </ItemGroup>
 
 </Project>

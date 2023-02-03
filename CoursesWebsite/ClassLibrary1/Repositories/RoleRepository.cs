@@ -1,6 +1,7 @@
-﻿using APICore.Models;
-using APICore.Repositories;
-using Infrastructure;
+﻿using APICore.Object_Value;
+using Courses.Core.Models;
+using Courses.Core.Repositories;
+using Courses.Infrastructure;
 
 namespace Courses.Infrastructure.Repositories
 {
@@ -26,7 +27,7 @@ namespace Courses.Infrastructure.Repositories
                 throw new Exception("Database can't save date");
         }
 
-        public async Task CreateRoleAsync(string name)
+        public async Task CreateRoleAsync(Name name)
         {
             if (string.IsNullOrWhiteSpace(name)) 
                 throw new Exception("Role cannot be empty");

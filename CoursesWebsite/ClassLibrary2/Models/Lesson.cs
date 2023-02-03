@@ -1,12 +1,13 @@
-﻿using System;
+﻿using APICore.Object_Value;
+using System;
 
-namespace APICore.Models
+namespace Courses.Core.Models
 {
     public class Lesson : Entity
     {
         #region Properties
-        public string LessonName { get; protected set; }
-        public string LessonDescription { get; protected set; }
+        public Name LessonName { get; protected set; }
+        public Name LessonDescription { get; protected set; }
         public byte[] Video { get;protected set; }
         public int LessonNumber { get; protected set; }
         #endregion

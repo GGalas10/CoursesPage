@@ -1,7 +1,10 @@
-﻿using APICore.Models;
+﻿using APICore.Object_Value;
+using Courses.Core.Models;
+using Courses.Core.Repositories;
+using Courses.Core.Value_Object;
 using Courses.Infrastructure.Extensions;
 
-namespace Infrastructure.Services
+namespace Courses.Infrastructure.Services
 {
     public class UserRepository : IUserRepository
     {
@@ -13,14 +16,14 @@ namespace Infrastructure.Services
         public async Task<User> GetByIdAsync(Guid id)
         => await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Id==id));
         
-        public async Task<User> GetByLoginAsync(string login)
+        public async Task<User> GetByLoginAsync(Name login)
         {
             var user = await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Login == login));
             if (user == null)
                 throw new Exception("Incorrect login credentials");
             return user;
         }
-        public async Task<User> GetByEmailAsync(string email)
+        public async Task<User> GetByEmailAsync(Email email)
         {
             var user = await Task.FromResult(_context.Users.FirstOrDefault(u => u.Email == email));
             if (user == null)

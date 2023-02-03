@@ -1,8 +1,8 @@
-﻿using APICore.Models;
+﻿using Courses.Core.Models;
 using AutoMapper;
 using Courses.Infrastructure.DTO;
 
-namespace ToDo_List_Infrastructure.Mappers
+namespace ToDo_List_Courses.Infrastructure.Mappers
 {
     public static class AutoMapperConfig
     {

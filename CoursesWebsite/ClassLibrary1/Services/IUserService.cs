@@ -1,4 +1,4 @@
-﻿using APICore.Models;
+﻿using Courses.Core.Models;
 using Courses.Infrastructure.DTO;
 
 namespace Courses.Infrastructure.Services

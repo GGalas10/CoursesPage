@@ -1,10 +1,4 @@
-﻿using APICore.Models;
-using Courses.Infrastructure.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Courses.Infrastructure.DTO;
 
 namespace Courses.Infrastructure.Services
 {

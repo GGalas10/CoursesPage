@@ -1,9 +1,6 @@
-﻿using APICore.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Courses.Core.Models;
 
-namespace Infrastructure.Services
+namespace Courses.Core.Repositories
 {
     public interface ICoursesRepository
     {

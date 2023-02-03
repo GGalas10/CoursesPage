@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace APICore.Object_Value
 {
-    public class Name
+    public record Name
     {
-        public string Value { get; protected set; }
+        public string Value { get; }
 
         public void SetValue(string value)
         {

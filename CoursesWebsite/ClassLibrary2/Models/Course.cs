@@ -1,16 +1,17 @@
-﻿using System;
+﻿using APICore.Object_Value;
+using System;
 using System.Collections.Generic;
 
-namespace APICore.Models
+namespace Courses.Core.Models
 {
     public class Course :Entity
     {
         #region Properties
-        private List<Topic> _topics;
-        private List<Guid> _categories;
-        public string Name { get; protected set; }
-        public string Description { get; protected set; }
-        public string Author { get; protected set; }
+        private HashSet<Topic> _topics;
+        private HashSet<Guid> _categories;
+        public Name Name { get; protected set; }
+        public Name Description { get; protected set; }
+        public Name Author { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public IEnumerable<Topic> Topics => _topics;
         public IEnumerable<Guid> Categories => _categories;
@@ -18,11 +19,13 @@ namespace APICore.Models
         #region Constructors
         public Course(string name, string description, string author):base()
         {
+            _topics= new HashSet<Topic>();
+            _categories= new HashSet<Guid>();
             SetName(name);
             SetDescription(description);
             SetAuthor(author);
             CreatedAt = DateTime.UtcNow;
-            state = State.Active;
+            State = State.Active;
         }
 
         #endregion

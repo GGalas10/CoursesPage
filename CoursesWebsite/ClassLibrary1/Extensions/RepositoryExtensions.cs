@@ -1,11 +1,5 @@
-﻿using APICore.Models;
-using Courses.Infrastructure.Comands.User;
-using Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Courses.Core.Models;
+using Courses.Core.Repositories;
 
 namespace Courses.Infrastructure.Extensions
 {

@@ -20,18 +20,22 @@ namespace Courses.Infrastructure.Services
         }
 
         public async Task<CourseDTO> GetByIdAsync(Guid courseId)
-        => await _mapper.Map<_coursesRepostiotory.GetAsync(courseId)>(CourseDTO);
-        public Task<IEnumerable<ViewCoursesDTO>> GetAllAsync()
+        =>_mapper.Map<CourseDTO>(await _coursesRepostiotory.GetAsync(courseId));
+
+        public async Task<IEnumerable<ViewCoursesDTO>> GetAllAsync()
+        => _mapper.Map<IEnumerable<ViewCoursesDTO>>(await _coursesRepostiotory.GetAllAsync());
+        public async Task<IEnumerable<ViewCoursesDTO>> GetByCourseIdAsync(IEnumerable<Guid> guids)
         {
-            throw new NotImplementedException();
+            List<ViewCoursesDTO> list = new List<ViewCoursesDTO>();
+            foreach(var courseId in guids)
+            {
+                list.Add(_mapper.Map<ViewCoursesDTO>(await _coursesRepostiotory.GetAsync(courseId)));  
+            }
+            return list;
         }
-        public Task<IEnumerable<ViewCoursesDTO>> GetByCourseIdAsync(IEnumerable<Guid> guids)
+        public async Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId)
         {
-            throw new NotImplementedException();
-        }
-        public Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId)
-        {
-            throw new NotImplementedException();
+            _mapper.Map<IEnumerable<ViewCoursesDTO>>(await _coursesRepostiotory.GetAllAsync().Result.Where(c => c.Categories.FirstOrDefault().id ==);
         }
         public Task CreateAsync(string name, string description, string author)
         {

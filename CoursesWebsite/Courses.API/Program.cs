@@ -1,6 +1,6 @@
 using Courses.Infrastructure.Services;
 using Courses.Infrastructure.Settings;
-using ToDo_List_Infrastructure.Mappers;
+using Courses.Infrastructure.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
+builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<ICourseService, CoursesService>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
 var app = builder.Build();

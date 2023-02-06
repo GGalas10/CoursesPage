@@ -2,8 +2,8 @@
 {
     public class CourseDTO
     {
-        string Name { get; set; }
-        string Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public List<TopicDTO> Topics { get; set; }
     }
 }

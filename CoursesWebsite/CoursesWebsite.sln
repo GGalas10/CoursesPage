@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Courses.API", "Courses.API\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Courses.Infrastructure", "ClassLibrary1\Courses.Infrastructure.csproj", "{68268951-2E59-4FF7-9372-8EF16B31BC2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Core", "ClassLibrary2\Courses.Core.csproj", "{F1789297-EE0B-4A72-8A1D-AE63149DBC1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Courses.Core", "ClassLibrary2\Courses.Core.csproj", "{F1789297-EE0B-4A72-8A1D-AE63149DBC1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

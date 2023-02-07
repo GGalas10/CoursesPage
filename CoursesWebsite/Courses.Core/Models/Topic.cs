@@ -1,18 +1,18 @@
 ﻿using APICore.Object_Value;
-using System;
-using System.Collections.Generic;
 
 namespace Courses.Core.Models
 {
     public class Topic: Entity
     {
         private List<Lesson> _lessons;
+        public List<Category> _categories;
         public Name Name { get; protected set; }
         public Name Description { get; protected set; }
         public IEnumerable<Lesson> Lessons => _lessons;
         public Topic(Name name, Name description)
         {
             _lessons= new List<Lesson>();
+            _categories= new List<Category>();
             SetName(name);
             SetDescription(description);
         }
@@ -37,7 +37,7 @@ namespace Courses.Core.Models
         }
         public void AddLessons(List<Lesson> lessons)
         {
-            if (lessons == null)
+            if (lessons.Count< 0)
                 throw new Exception("Lesson cannot be empty");
             foreach (Lesson lesson in lessons)
             {

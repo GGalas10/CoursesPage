@@ -10,6 +10,10 @@ namespace Courses.Infrastructure.Services
         {
             _context = context;
         }
+        public async Task<Course> GetAsync(Guid id)
+        => await Task.FromResult(_context.Courses.FirstOrDefault(c => c.Id == id && c.State == State.Active));
+        public async Task<List<Course>> GetAllAsync()
+            => await Task.FromResult(_context.Courses.Where(c => c.State == State.Active).ToList());
         public async Task CreateAsync(Course course)
         {
             var cours = await Task.FromResult(_context.Courses.FirstOrDefault(c=>c.Name == course.Name));
@@ -21,7 +25,22 @@ namespace Courses.Infrastructure.Services
             else
                 throw new Exception("Db can't save date");
         }
-
+        public async Task UpdateAsync(Guid id, Course course)
+        {
+            var upCourse = await Task.FromResult(_context.Courses.FirstOrDefault(course => course.Id == id));
+            upCourse.SetName(course.Name);
+            upCourse.SetDescription(course.Description);
+            upCourse.SetAuthor(course.Author);
+            foreach(var topic in course.Topics)
+            {
+                if(!upCourse.Topics.Contains(topic))
+                    upCourse.AddTopic(topic);
+            }
+            if (_context.SaveChangesAsync().Result > 0)
+                await Task.CompletedTask;
+            else
+                throw new Exception("Db can't save date");
+        }
         public async Task DeleteAsync(Guid id)
         {
             var deletedCours= await Task.FromResult(_context.Courses.FirstOrDefault(c=>c.Id == id));
@@ -30,25 +49,7 @@ namespace Courses.Infrastructure.Services
                 await Task.CompletedTask;
             else
                 throw new Exception("Db can't save date");
-        }
-
-        public async Task<List<Course>> GetAllAsync()
-            => await Task.FromResult(_context.Courses.Where(c=>c.State == State.Active).ToList());
-
-        public async Task<Course> GetAsync(Guid id)
-        => await Task.FromResult(_context.Courses.FirstOrDefault(c=>c.Id==id && c.State == State.Active));
-
-        public async Task UpdateAsync(Guid id,Course course)
-        {
-            var upCourse = await Task.FromResult(_context.Courses.FirstOrDefault(course=>course.Id == id));
-            upCourse.SetName(course.Name);
-            upCourse.SetDescription(course.Description);
-            upCourse.SetAuthor(course.Author);
-            if (_context.SaveChangesAsync().Result > 0)
-                await Task.CompletedTask;
-            else
-                throw new Exception("Db can't save date");
-        }
+        }     
         public async Task AddTopicAsync(Guid id, Topic topic) 
         {
             if (topic == null)

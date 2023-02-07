@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using APICore.Object_Value;
+using AutoMapper;
+using Courses.Core.Models;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.DTO;
 using System;
@@ -34,20 +36,26 @@ namespace Courses.Infrastructure.Services
             return list;
         }
         public async Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId)
+            => _mapper.Map<IEnumerable<ViewCoursesDTO>>(await Task.FromResult(_coursesRepostiotory.GetAllAsync().Result.Where(c=>c.Categories.Contains(categoryId))));
+        public async Task CreateAsync(string name, string description, string author)
         {
-            _mapper.Map<IEnumerable<ViewCoursesDTO>>(await _coursesRepostiotory.GetAllAsync().Result.Where(c => c.Categories.FirstOrDefault().id ==);
+            var course = new Course(name, description, author);
+            await _coursesRepostiotory.CreateAsync(course);
+            await Task.CompletedTask;
         }
-        public Task CreateAsync(string name, string description, string author)
+        public async Task AddTopicAsync(Guid courseId, string name, string description)
         {
-            throw new NotImplementedException();
+            var topic = new Topic(name, description);
+            await _coursesRepostiotory.AddTopicAsync(courseId, topic);
+            await Task.CompletedTask;
         }
-        public Task AddTopicAsync(Guid courseId, string name, string description)
+        public async Task AddLessonAsync(Guid courseId, Guid topicId, string name, string description, byte[] video)
         {
-            throw new NotImplementedException();
-        }
-        public Task AddLessonAsync(Guid courseId, Guid topicId, string name, string description, byte[] video)
-        {
-            throw new NotImplementedException();
+            var course = await _coursesRepostiotory.GetAsync(courseId);
+            var topic = course.Topics.FirstOrDefault(t => t.Id == topicId);
+            var lesson = new Lesson(name, description, video,(topic.Lessons.Count()+1));
+            await _coursesRepostiotory.AddLessonAsync(topicId, lesson);
+            await Task.CompletedTask;
         }  
     }
 }

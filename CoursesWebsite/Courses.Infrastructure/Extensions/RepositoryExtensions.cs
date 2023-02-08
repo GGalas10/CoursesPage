@@ -26,5 +26,12 @@ namespace Courses.Infrastructure.Extensions
                 throw new Exception("User doesn't exists");
             return @user;
         }
+        public static async Task<Course> GetOrFailById(this ICoursesRepository repository,Guid id)
+        {
+            var course = await repository.GetAsync(id);
+            if (course == null)
+                throw new Exception("Course doesn't exists");
+            return course;
+        }
     }
 }

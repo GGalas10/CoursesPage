@@ -1,5 +1,6 @@
 ﻿using Courses.Core.Models;
 using Courses.Core.Repositories;
+using Courses.Infrastructure.Extensions;
 
 namespace Courses.Infrastructure.Services
 {
@@ -27,7 +28,7 @@ namespace Courses.Infrastructure.Services
         }
         public async Task UpdateAsync(Guid id, Course course)
         {
-            var upCourse = await Task.FromResult(_context.Courses.FirstOrDefault(course => course.Id == id));
+            var upCourse = await this.GetOrFailById(id);
             upCourse.SetName(course.Name);
             upCourse.SetDescription(course.Description);
             upCourse.SetAuthor(course.Author);
@@ -43,7 +44,7 @@ namespace Courses.Infrastructure.Services
         }
         public async Task DeleteAsync(Guid id)
         {
-            var deletedCours= await Task.FromResult(_context.Courses.FirstOrDefault(c=>c.Id == id));
+            var deletedCours = await this.GetOrFailById(id);
             deletedCours.SetState(State.Deleted);
             if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
@@ -54,7 +55,7 @@ namespace Courses.Infrastructure.Services
         {
             if (topic == null)
                 throw new Exception("Topic can't be empty");
-            var Course = await Task.FromResult(_context.Courses.FirstOrDefault(c => c.Id == id));
+            var Course = await this.GetOrFailById(id);
             Course.AddTopic(topic);
             if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
@@ -65,7 +66,7 @@ namespace Courses.Infrastructure.Services
         {
             if (topic.Count<0)
                 throw new Exception("List of topic can't be empty");
-            var Course = await Task.FromResult(_context.Courses.FirstOrDefault(c => c.Id == id));
+            var Course = await this.GetOrFailById(id);
             Course.AddTopic(topic);
             if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;

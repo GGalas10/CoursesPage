@@ -42,9 +42,9 @@ namespace Courses.Infrastructure.Repositories
                 throw new Exception("Database can't save date");
         }
 
-        public async Task DeleteRoleAsync(Role role)
+        public async Task DeleteRoleAsync(Guid id)
         {
-            var newrole = await Task.FromResult(_context.Roles.FirstOrDefault(role=> role.Id == role.Id));
+            var newrole = await Task.FromResult(_context.Roles.FirstOrDefault(role=> role.Id == id));
             if (newrole == null)
                 throw new Exception("Role doesn't exists");
             newrole.SetState(State.Deleted);

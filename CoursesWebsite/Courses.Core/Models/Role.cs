@@ -5,22 +5,20 @@ namespace Courses.Core.Models
 {
     public class Role : Entity
     {
+        #region Properties
         public Name Name { get; protected set; }
-        public State state { get; protected set; }
+        #endregion
+        #region Constructors
         public Role(Name name) : base()
         {
             SetName(name);
-            state = State.Active;
-        }        
+        }
+        #endregion
+        #region Methods
         public void SetName(Name name)
         {
-            if (string.IsNullOrEmpty(name)) 
-                throw new Exception("Name cannot be empty");
             Name = name;
         }
-        public void SetState(State newState)
-        {
-            state = newState;
-        }
+        #endregion
     }
 }

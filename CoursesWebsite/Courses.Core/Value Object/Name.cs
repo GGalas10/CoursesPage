@@ -19,7 +19,7 @@ namespace APICore.Object_Value
         }
         public static implicit operator Name(string value)
             => new(value);
-        public static implicit operator string(Name emial)
-            => emial.Value;
+        public static implicit operator string(Name value)
+            => value.Value;
     }
 }

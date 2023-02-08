@@ -24,6 +24,9 @@ namespace Courses.Infrastructure.Mappers
                 cfg.CreateMap<Topic, TopicDTO>()
                 .ForMember(p => p.lessons, m => m.MapFrom(p=>p.Lessons))
                 .ForMember(p=>p.Description,m=>m.MapFrom(p=>p.Description));
+
+                cfg.CreateMap<Lesson,LessonDTO>()
+                .ForMember(p=>p.Video, m=>m.MapFrom(p=>p.Video));
             }).CreateMapper(); 
     }
 }

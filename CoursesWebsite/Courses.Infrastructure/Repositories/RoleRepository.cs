@@ -59,7 +59,7 @@ namespace Courses.Infrastructure.Repositories
             if (oldrole == null) 
                 throw new Exception("Role doesn't exists");
             oldrole.SetName(role.Name);
-            oldrole.SetState(role.state);
+            oldrole.SetState(role.State);
             if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;
             else

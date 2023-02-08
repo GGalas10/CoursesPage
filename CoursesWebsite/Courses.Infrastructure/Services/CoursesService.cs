@@ -2,6 +2,7 @@
 using AutoMapper;
 using Courses.Core.Models;
 using Courses.Core.Repositories;
+using Courses.Core.Value_Object;
 using Courses.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
@@ -37,9 +38,9 @@ namespace Courses.Infrastructure.Services
         }
         public async Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId)
             => _mapper.Map<IEnumerable<ViewCoursesDTO>>(await Task.FromResult(_coursesRepostiotory.GetAllAsync().Result.Where(c=>c.Categories.Contains(categoryId))));
-        public async Task CreateAsync(string name, string description, string author)
+        public async Task CreateAsync(string name, string description, string author,DigitalItem picture)
         {
-            var course = new Course(name, description, author);
+            var course = new Course(name, description, author,picture);
             await _coursesRepostiotory.CreateAsync(course);
             await Task.CompletedTask;
         }

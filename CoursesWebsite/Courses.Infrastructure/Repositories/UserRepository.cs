@@ -50,7 +50,16 @@ namespace Courses.Infrastructure.Services
         public async Task UpdateAsync(User user)
         {
             var changeduser = await this.GetOrFailByIdAsync(user.Id);
-            changeduser = user;
+            changeduser.SetState(user.State);
+            changeduser.SetEmail(user.Email);
+            changeduser.SetLogin(user.Login);
+            changeduser.SetUserName(user.UserName);
+            changeduser.SetPassword(user.Password);
+            foreach(var course in user.PurchasedCourses)
+            {
+                changeduser.CoursesBuy(course);
+            }
+            _context.Update(changeduser);
             if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;
             else

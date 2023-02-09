@@ -24,6 +24,13 @@ namespace Courses.API.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register()
         [HttpPost]
         public async Task<IActionResult> Login(Login comand)
         {

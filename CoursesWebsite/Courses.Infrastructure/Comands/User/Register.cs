@@ -8,7 +8,7 @@ namespace Courses.Infrastructure.Comands.User
         public Name UserName { get; set; }
         public Email UserEmail { get; set; }
         public Name? Login { get; set; }
-        public string Password { get; set; }
+        public Password Password { get; set; }
 
     }
 }

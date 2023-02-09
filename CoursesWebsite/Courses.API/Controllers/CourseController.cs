@@ -2,9 +2,10 @@
 
 namespace Courses.API.Controllers
 {
-    public class CourseController : Controller
+    public class CourseController : ApiBaseController
     {
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
             return View();
         }

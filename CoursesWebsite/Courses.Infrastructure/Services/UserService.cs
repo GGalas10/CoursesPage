@@ -44,7 +44,7 @@ namespace Courses.Infrastructure.Services
                 Token = token.Token,
             };
         }
-        public async Task<TokenDto> RegisterAsync(string username, string password, string email)
+        public async Task<TokenDto> RegisterAsync(string password, string email, string username,string? login)
         {
             var @user = await _userRepository.GetByLoginAsync(username);
             if (user != null)

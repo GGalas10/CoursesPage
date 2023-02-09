@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
 {
-    public class UserController : Controller
+    public class UserController : ApiBaseController
     {
         private readonly IUserService _userService;
         private readonly IJwtHandler _jwtHandler;
@@ -30,7 +30,11 @@ namespace Courses.API.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register(Register command)
+        {
+            await _userService.RegisterAsync(command.UserName, command.Password, command.Login, command.UserEmail);
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public async Task<IActionResult> Login(Login comand)
         {

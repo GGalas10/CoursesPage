@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Courses.API.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ApiBaseController
     {
         private readonly ILogger<HomeController> _logger;
 

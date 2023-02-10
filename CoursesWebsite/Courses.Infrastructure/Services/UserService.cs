@@ -1,6 +1,7 @@
 ﻿using Courses.Core.Repositories;
 using Courses.Infrastructure.DTO;
 using Courses.Infrastructure.Extensions;
+using Courses.Infrastructure.Sercurity;
 
 namespace Courses.Infrastructure.Services
 {
@@ -54,6 +55,10 @@ namespace Courses.Infrastructure.Services
                 throw new Exception("Email already exist");
             user = new Courses.Core.Models.User(username,email,password);
             await _userRepository.RegisterAsync(user);
+            var newUser = await _userRepository.GetOrFailByEmailAsync(email);
+            var userSalt = SecurityClass.CreateSalt(newUser.Id);
+            newUser.SetPassword(SecurityClass.HashPassword(newUser.Password,userSalt));
+            await _userRepository.UpdateAsync(newUser);
             var role = await _roleRepository.GetUserRole(user.Id);
             var token = _jwtHandler.CreateToken(user.Id, role);
             return new TokenDto

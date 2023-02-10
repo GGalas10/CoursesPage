@@ -13,6 +13,7 @@ namespace Courses.Core.Models
         public Email Email { get; protected set; }
         public Name Password { get; protected set; }
         public Name Login { get; protected set; }
+        public string Salt { get; protected set; }
         public DateTime CreateAt { get; protected set; }
         public IEnumerable<Guid> PurchasedCourses => _purchasedCourses;
         #endregion
@@ -58,6 +59,12 @@ namespace Courses.Core.Models
         => _purchasedCourses.Add(id);
         public void DeleteCourses(Guid id)
             => _purchasedCourses.Remove(id);
+        public void SetSalt(string salt)
+        {
+            if (string.IsNullOrEmpty(salt))
+                throw new Exception("Salt cannot be empty");
+            Salt = salt;
+        }
         #endregion
     }
 }

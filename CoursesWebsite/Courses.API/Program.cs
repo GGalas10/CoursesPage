@@ -7,6 +7,7 @@ using Courses.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
-builder.Services.AddDbContext<CoursesDbContext>();
+builder.Services.AddDbContext<CoursesDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DevDb"));
+});
 
 builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
 

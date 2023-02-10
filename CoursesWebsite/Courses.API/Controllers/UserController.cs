@@ -17,17 +17,17 @@ namespace Courses.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View();
+            return await Task.FromResult(View());
         }
         [HttpGet]
         public async Task<IActionResult> Login()
         {
-            return View();
+            return await Task.FromResult(View());
         }
         [HttpGet]
         public async Task<IActionResult> Register()
         {
-            return View();
+            return await Task.FromResult(View());
         }
         [HttpPost]
         public async Task<IActionResult> Register(Register command)
@@ -39,7 +39,7 @@ namespace Courses.API.Controllers
         public async Task<IActionResult> Login(Login comand)
         {
             _userService.LoginAsync(comand.Name, comand.Password);
-            return View("Index");
+            return await Task.FromResult(View("Index"));
         }
     }
 }

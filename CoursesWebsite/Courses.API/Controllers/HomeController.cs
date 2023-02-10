@@ -13,18 +13,18 @@ namespace Courses.API.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return await Task.FromResult(View());
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            return View();
+            return await Task.FromResult(View());
         }
-        public async Task<IActionResult> Unauthorized() 
+        public new async Task<IActionResult> Unauthorized() 
         {
-            return View();
+            return await Task.FromResult(View());
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

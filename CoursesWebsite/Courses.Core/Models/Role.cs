@@ -1,5 +1,4 @@
-﻿using APICore.Object_Value;
-using System;
+﻿using Courses.Core.Value_Object;
 
 namespace Courses.Core.Models
 {

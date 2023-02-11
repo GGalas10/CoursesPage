@@ -1,5 +1,4 @@
-﻿using APICore.Object_Value;
-using Courses.Core.Value_Object;
+﻿using Courses.Core.Value_Object;
 using Courses.Infrastructure.DTO;
 
 namespace Courses.Infrastructure.Services

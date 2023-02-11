@@ -1,17 +1,20 @@
-﻿using APICore.Object_Value;
-using Courses.Core.Models;
+﻿using Courses.Core.Models;
 using Courses.Core.Repositories;
 using Courses.Core.Value_Object;
 using Courses.Infrastructure.Extensions;
+using Courses.Infrastructure.Sercurity;
+using models = Courses.Core.Models;
 
 namespace Courses.Infrastructure.Services
 {
     public class UserRepository : IUserRepository
     {
         private readonly CoursesDbContext _context;
-        public UserRepository(CoursesDbContext context)
+        private readonly IPasswordRepository _passwordRepository;
+        public UserRepository(CoursesDbContext context, IPasswordRepository passwordRepository)
         {
             _context = context;
+            _passwordRepository = passwordRepository;
         }
         public async Task<User> GetByIdAsync(Guid id)
         => await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Id==id));
@@ -30,9 +33,13 @@ namespace Courses.Infrastructure.Services
                 throw new Exception("Incorrect login credentials");
             return user;
         }
-        public async Task RegisterAsync(User user)
+        public async Task RegisterAsync(User user,string password)
         {
             await Task.FromResult(_context.Users.Add(user));
+            Guid guid = await Task.FromResult(this.GetByEmailAsync(user.Email).Result.Id);
+            var salt = SecurityClass.CreateSalt(guid);
+            var pass = SecurityClass.HashPassword(password,salt);
+            var newpass = new models.Password(pass, salt);
             if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;
             else
@@ -47,14 +54,15 @@ namespace Courses.Infrastructure.Services
             else
                 throw new Exception("Database do not save value");
         } 
-        public async Task UpdateAsync(User user)
+        public async Task UpdateAsync(User user,models.Password? password)
         {
             var changeduser = await this.GetOrFailByIdAsync(user.Id);
             changeduser.SetState(user.State);
             changeduser.SetEmail(user.Email);
             changeduser.SetLogin(user.Login);
             changeduser.SetUserName(user.UserName);
-            changeduser.SetPassword(user.Password);
+            if (password != null)
+                    _passwordRepository.UpdateAsync(password);
             foreach(var course in user.PurchasedCourses)
             {
                 changeduser.CoursesBuy(course);

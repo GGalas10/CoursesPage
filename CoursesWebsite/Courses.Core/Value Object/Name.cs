@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APICore.Object_Value
+namespace Courses.Core.Value_Object
 {
     public record Name
     {

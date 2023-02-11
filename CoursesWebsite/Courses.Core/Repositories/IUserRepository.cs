@@ -1,6 +1,6 @@
-﻿using APICore.Object_Value;
-using Courses.Core.Models;
+﻿using Courses.Core.Models;
 using Courses.Core.Value_Object;
+using models = Courses.Core.Models;
 
 namespace Courses.Core.Repositories
 {
@@ -9,8 +9,8 @@ namespace Courses.Core.Repositories
         Task<User> GetByIdAsync(Guid id);
         Task<User> GetByLoginAsync(Name login);
         Task<User> GetByEmailAsync(Email email);
-        Task RegisterAsync(User user);
+        Task RegisterAsync(User user,string password);
         Task DeleteAsync(Guid id);
-        Task UpdateAsync(User user);
+        Task UpdateAsync(User user,models.Password password);
     }
 }

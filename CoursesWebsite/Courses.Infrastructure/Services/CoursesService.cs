@@ -1,14 +1,8 @@
-﻿using APICore.Object_Value;
-using AutoMapper;
+﻿using AutoMapper;
 using Courses.Core.Models;
 using Courses.Core.Repositories;
 using Courses.Core.Value_Object;
 using Courses.Infrastructure.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Courses.Infrastructure.Services
 {

@@ -1,7 +1,4 @@
-﻿using APICore.Object_Value;
-using Courses.Core.Value_Object;
-using System;
-using System.Collections.Generic;
+﻿using Courses.Core.Value_Object;
 
 namespace Courses.Core.Models
 {
@@ -11,7 +8,7 @@ namespace Courses.Core.Models
         private readonly HashSet<Guid> _purchasedCourses = new HashSet<Guid>();
         public Name UserName { get; protected set; }
         public Email Email { get; protected set; }
-        public Name Password { get; protected set; }
+        public Guid PasswordId { get; protected set; }
         public Name Login { get; protected set; }
         public string Salt { get; protected set; }
         public DateTime CreateAt { get; protected set; }
@@ -19,41 +16,30 @@ namespace Courses.Core.Models
         #endregion
         #region Constructors
         private User() { }
-        public User(string userName, Email email, string password):base()
+        public User(string userName, Email email, string? login) : base()
         {
             _purchasedCourses = new HashSet<Guid>();
             SetUserName(userName);
             SetEmail(email);
-            SetPassword(password);
-            SetLogin(email);
-            CreateAt= DateTime.UtcNow;
-        }
-        public User(string userName, Email email, string password, string login) : base()
-        {
-            _purchasedCourses = new HashSet<Guid>();
-            SetUserName(userName);
-            SetEmail(email);
-            SetPassword(password);
-            SetLogin(login);
+            if (login != null)
+                SetLogin(login);
+            else
+                SetLogin(email);
             CreateAt = DateTime.UtcNow;
         }
         #endregion
         #region Methods
         public void SetEmail(string email)
         {
-            this.Email= email.Trim();
-        }
-        public void SetPassword(string password)
-        {
-            this.Password= password.Trim();
+            Email= email.Trim();
         }
         public void SetLogin(string login)
         {
-            this.Login= login.Trim();
+            Login= login.Trim();
         }
         public void SetUserName(string userName)
         {
-            this.UserName= userName.Trim();
+            UserName= userName.Trim();
         }
         public void CoursesBuy(Guid id)
         => _purchasedCourses.Add(id);

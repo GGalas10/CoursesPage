@@ -1,11 +1,4 @@
-﻿using APICore.Object_Value;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Courses.Core.Value_Object
+﻿namespace Courses.Core.Value_Object
 {
     public record DigitalItem
     {

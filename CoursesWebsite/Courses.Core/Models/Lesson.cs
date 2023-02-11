@@ -1,6 +1,4 @@
-﻿using APICore.Object_Value;
-using Courses.Core.Value_Object;
-using System;
+﻿using Courses.Core.Value_Object;
 
 namespace Courses.Core.Models
 {
@@ -9,7 +7,7 @@ namespace Courses.Core.Models
         #region Properties
         public Name LessonName { get; protected set; }
         public Name LessonDescription { get; protected set; }
-        public DigitalItem[] Video { get;protected set; }
+        public DigitalItem Video { get;protected set; }
         public Number LessonNumber { get; protected set; }
         #endregion
         #region ctor
@@ -32,7 +30,7 @@ namespace Courses.Core.Models
         {
             LessonDescription = description;
         }
-        public void SetVideo(DigitalItem[] video)
+        public void SetVideo(DigitalItem video)
         {
             Video = video;
         }

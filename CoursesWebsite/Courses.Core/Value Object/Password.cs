@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Courses.Core.Value_Object
     {
         
         [Required]
-        [MinLength(8)]
+        [MinLength(8,ErrorMessage ="Hasło nie może być krótsze niż 8 znaków")]
         public string Value { get; set; }
         public Password(string value)
         {

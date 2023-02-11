@@ -27,14 +27,12 @@ namespace Courses.Infrastructure.Services
             if (course == null)
                 throw new Exception("Course doesn't exist");
             user.CoursesBuy(courseId);
-            await _userRepository.UpdateAsync(user);
+            await _userRepository.UpdateAsync(user,null);
         }
         public async Task<TokenDto> LoginAsync(string username,string password)
         {
             var @user = await _userRepository.GetOrFailByLoginAsync(username);
             if (user == null)
-                throw new Exception("Wrong credentials");
-            if (user.Password != password)
                 throw new Exception("Wrong credentials");
             var role = await _roleRepository.GetUserRole(user.Id);
             var token = _jwtHandler.CreateToken(user.Id, role);
@@ -53,12 +51,8 @@ namespace Courses.Infrastructure.Services
             user = await _userRepository.GetByEmailAsync(email);
             if (user != null)
                 throw new Exception("Email already exist");
-            user = new Courses.Core.Models.User(username,email,password);
-            await _userRepository.RegisterAsync(user);
-            var newUser = await _userRepository.GetOrFailByEmailAsync(email);
-            var userSalt = SecurityClass.CreateSalt(newUser.Id);
-            newUser.SetPassword(SecurityClass.HashPassword(newUser.Password,userSalt));
-            await _userRepository.UpdateAsync(newUser);
+            user = new Courses.Core.Models.User(username,email,login);
+            await _userRepository.RegisterAsync(user,password);
             var role = await _roleRepository.GetUserRole(user.Id);
             var token = _jwtHandler.CreateToken(user.Id, role);
             return new TokenDto

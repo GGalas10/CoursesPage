@@ -1,5 +1,4 @@
-﻿using APICore.Object_Value;
-using Courses.Core.Value_Object;
+﻿using Courses.Core.Value_Object;
 
 namespace Courses.Core.Models
 {
@@ -18,7 +17,7 @@ namespace Courses.Core.Models
         #endregion
         #region Constructors
         private Course() { }
-        public Course(string name, string description, string author, DigitalItem picture):base()
+        public Course(string name, string description, string author, byte[] picture):base()
         {
             _topics= new HashSet<Topic>();
             _categories= new HashSet<Guid>();

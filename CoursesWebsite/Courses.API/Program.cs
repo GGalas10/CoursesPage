@@ -28,6 +28,7 @@ builder.Services.AddScoped<ICourseService, CoursesService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository,RoleRepository>();
 builder.Services.AddScoped<ICoursesRepository,CoursesRepository>();
+builder.Services.AddScoped<IPasswordRepository, PasswordRepository>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 

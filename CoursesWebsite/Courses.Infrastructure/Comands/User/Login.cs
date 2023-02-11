@@ -1,4 +1,4 @@
-﻿using APICore.Object_Value;
+﻿using Courses.Core.Value_Object;
 
 namespace Courses.Infrastructure.Comands.User
 {

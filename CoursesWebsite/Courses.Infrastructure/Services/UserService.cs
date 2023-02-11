@@ -11,12 +11,14 @@ namespace Courses.Infrastructure.Services
         private readonly IJwtHandler _jwtHandler;
         private readonly ICourseService _courseService;
         private readonly IRoleRepository _roleRepository;
-        public UserService(IUserRepository userRepository, IJwtHandler jwtHandler,ICourseService courseService,IRoleRepository roleRepository)
+        private readonly IPasswordRepository _passwordRepository;
+        public UserService(IUserRepository userRepository, IJwtHandler jwtHandler,ICourseService courseService,IRoleRepository roleRepository,IPasswordRepository passwordRepository)
         {
             _roleRepository= roleRepository;
             _courseService = courseService;
             _userRepository = userRepository;
             _jwtHandler = jwtHandler;
+            _passwordRepository= passwordRepository;
         }
         public async Task BuyCourses(Guid userId, Guid courseId)
         {
@@ -34,6 +36,7 @@ namespace Courses.Infrastructure.Services
             var @user = await _userRepository.GetOrFailByLoginAsync(username);
             if (user == null)
                 throw new Exception("Wrong credentials");
+            var pass = await 
             var role = await _roleRepository.GetUserRole(user.Id);
             var token = _jwtHandler.CreateToken(user.Id, role);
             return new TokenDto

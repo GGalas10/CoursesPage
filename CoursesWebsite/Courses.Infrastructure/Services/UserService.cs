@@ -36,7 +36,11 @@ namespace Courses.Infrastructure.Services
             var @user = await _userRepository.GetOrFailByLoginAsync(username);
             if (user == null)
                 throw new Exception("Wrong credentials");
-            var pass = await 
+            var pass = await _passwordRepository.GetByIdAsync(user.PasswordId);
+            if(!SecurityClass.ComparePassword(pass.NormalizedPassword,password,pass.Salt))
+            {
+                throw new Exception("Wrong credentials");
+            }
             var role = await _roleRepository.GetUserRole(user.Id);
             var token = _jwtHandler.CreateToken(user.Id, role);
             return new TokenDto

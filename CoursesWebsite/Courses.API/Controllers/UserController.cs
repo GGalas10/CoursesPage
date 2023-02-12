@@ -13,32 +13,32 @@ namespace Courses.API.Controllers
             _userService = userService;
             _jwtHandler = jwtHandler;
         }
-
-        [HttpGet]
+        [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
-            return await Task.FromResult(View());
+            return View();
         }
-        [HttpGet]
+        [HttpGet("Login")]
         public async Task<IActionResult> Login()
         {
-            return await Task.FromResult(View());
+            return View();
         }
-        [HttpGet]
+        [HttpGet("Register")]
         public async Task<IActionResult> Register()
         {
-            return await Task.FromResult(View());
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Register(Register command)
         {
-            await _userService.RegisterAsync(command.UserName, command.Password, command.Login, command.UserEmail);
+            var token = await _userService.RegisterAsync(command.UserName, command.Password, command.Login, command.UserEmail);
+            HttpContext.Response.Cookies.Append("Bearer", token.Token);
             return RedirectToAction("Index");
         }
         [HttpPost]
         public async Task<IActionResult> Login(Login comand)
         {
-            _userService.LoginAsync(comand.Name, comand.Password);
+            var token = await _userService.LoginAsync(comand.Name, comand.Password);
             return await Task.FromResult(View("Index"));
         }
     }

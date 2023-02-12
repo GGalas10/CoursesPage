@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 namespace Courses.API.Controllers
 {
-    [Route("controller")]
+    [Route("[controller]")]
     public class ApiBaseController : Controller
     {
         protected Guid UserId => User?.Identity?.IsAuthenticated == true ?

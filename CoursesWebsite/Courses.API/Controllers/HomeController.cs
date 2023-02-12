@@ -12,16 +12,18 @@ namespace Courses.API.Controllers
         {
             _logger = logger;
         }
-
+        [Route("/")]
+        [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             return await Task.FromResult(View());
         }
-
+        [HttpGet("Privavy")]
         public async Task<IActionResult> Privacy()
         {
             return await Task.FromResult(View());
         }
+        [HttpGet("Unauthorized")]
         public new async Task<IActionResult> Unauthorized() 
         {
             return await Task.FromResult(View());

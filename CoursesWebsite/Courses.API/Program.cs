@@ -8,11 +8,17 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession();
+builder.Services.AddRazorPages();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddMvc();
 
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
@@ -37,7 +43,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(o =>
+}).AddCookie().AddJwtBearer(o =>
 {
     o.SaveToken = true;
     o.TokenValidationParameters = new TokenValidationParameters
@@ -46,6 +52,14 @@ builder.Services.AddAuthentication(options =>
         (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
         ValidateLifetime = false,
         ValidateIssuerSigningKey = true
+    };
+    o.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            context.Token = context.Request.Cookies["Bearer"];
+            return Task.CompletedTask;
+        }
     };
 });
 builder.Services.AddAuthorization();
@@ -61,6 +75,14 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseStatusCodePages(async context =>
+{
+    var response = context.HttpContext.Response;
+
+    if (response.StatusCode == (int)HttpStatusCode.Unauthorized ||
+            response.StatusCode == (int)HttpStatusCode.Forbidden)
+        response.Redirect("/Unauthorized");
+});
 app.UseRouting();
 
 app.UseAuthentication();

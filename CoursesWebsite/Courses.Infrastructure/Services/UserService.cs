@@ -77,13 +77,13 @@ namespace Courses.Infrastructure.Services
                 Token = token.Token,
             };
         }
-        public async Task UpdateUserAsync(Guid UserId,Register register)
+        public async Task UpdateUserAsync(Guid UserId,Update update)
         {
             var @user = await _userRepository.GetByIdAsync(UserId);
-            user.SetUserName(register.UserName);
-            user.SetEmail(register.UserEmail);
+            user.SetUserName(update.Login);
+            user.SetEmail(update.Email);
             var password = await _passwordRepository.GetByIdAsync(@user.Id);
-            var newPassword = SecurityClass.HashPassword(register.Password, password.Salt);
+            var newPassword = SecurityClass.HashPassword(update.Password, password.Salt);
             password.SetPassword(newPassword);
             await _userRepository.UpdateAsync();
             await _passwordRepository.UpdateAsync();

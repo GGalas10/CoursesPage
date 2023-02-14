@@ -1,17 +1,26 @@
-﻿@{
+﻿@model Courses.Infrastructure.Comands.User.Register;
+@{
     <link rel="stylesheet" href="~/css/User.css">
 }
 @{
-
-    <div class="RegisterHeader"></div>
-    <div class="RegisterBox">
-        <div class="RegisterLoginBox">
+    <form asp-controller="User" asp-action="Register" method="post">
+        <div class="RegisterHeader"></div>
+        <div class="RegisterBox">
+            <div class="RegisterLoginBox">
+                <labe id="LabelRegister">Podaj login</labe>
+                <input type="text" asp-for="Login" id="RegisterLogin">
+            </div>
+            <div class="RegisterEmailBox">
+                <label id="LabelRegister">Podaj Email</label>
+                <input type="text" asp-for="UserEmail" id="RegisterEmail">
+            </div>
+            <div class="RegisterPassworBox">        
+                <label id="LabelRegister">Podaj hasło</label>
+                <input type="text" asp-for="Password" id="RegisterPassword">
+            </div>
+            <div class="RegisterBtnBox">
+                <input type="submit" value="Zarejestruj" id="RegisterBtn">
+            </div>
         </div>
-        <div class="RegisterEmailBox">
-        </div>
-        <div class="RegisterPassworBox">        
-        </div>
-        <div class="RegisterBtnBox">
-        </div>
-    </div>
+    </form>
 }

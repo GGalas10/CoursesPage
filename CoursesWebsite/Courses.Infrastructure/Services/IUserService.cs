@@ -9,6 +9,6 @@ namespace Courses.Infrastructure.Services
         Task<TokenDto> LoginAsync(string username, string password);
         Task<TokenDto> RegisterAsync(string email, string password,string username,string login);
         Task BuyCoursesAsync(Guid userId, Guid courseId);
-        Task UpdateUserAsync(Guid UserId, Register register);
+        Task UpdateUserAsync(Guid UserId, Update update);
     }
 }

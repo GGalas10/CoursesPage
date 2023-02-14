@@ -11,6 +11,6 @@ namespace Courses.Core.Repositories
         Task<User> GetByEmailAsync(Email email);
         Task RegisterAsync(User user,string password);
         Task DeleteAsync(Guid id);
-        Task UpdateAsync(User user,models.Password password);
+        Task UpdateAsync(User user,models.UserPassword password);
     }
 }

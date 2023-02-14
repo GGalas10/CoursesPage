@@ -28,14 +28,14 @@ namespace Courses.API.Controllers
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register(Register command)
         {
             var token = await _userService.RegisterAsync(command.UserName, command.Password, command.Login, command.UserEmail);
             HttpContext.Response.Cookies.Append("Bearer", token.Token);
             return RedirectToAction("Index");
         }
-        [HttpPost]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login(Login comand)
         {
             var token = await _userService.LoginAsync(comand.Name, comand.Password);

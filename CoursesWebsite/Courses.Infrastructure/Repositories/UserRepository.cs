@@ -39,7 +39,7 @@ namespace Courses.Infrastructure.Services
             Guid guid = await Task.FromResult(this.GetByEmailAsync(user.Email).Result.Id);
             var salt = SecurityClass.CreateSalt(guid);
             var pass = SecurityClass.HashPassword(password,salt);
-            var newpass = new models.Password(pass, salt);
+            var newpass = new models.UserPassword(pass, salt);
             if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;
             else
@@ -54,7 +54,7 @@ namespace Courses.Infrastructure.Services
             else
                 throw new Exception("Database do not save value");
         } 
-        public async Task UpdateAsync(User user,models.Password? password)
+        public async Task UpdateAsync(User user,models.UserPassword? password)
         {
             var changeduser = await this.GetOrFailByIdAsync(user.Id);
             changeduser.SetState(user.State);

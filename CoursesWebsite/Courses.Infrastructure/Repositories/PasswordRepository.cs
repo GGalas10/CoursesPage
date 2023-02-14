@@ -15,9 +15,9 @@ namespace Courses.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<Password> GetByIdAsync(Guid id)
+        public async Task<UserPassword> GetByIdAsync(Guid id)
             =>await Task.FromResult(_context.Password.FirstOrDefault(p=>p.Id == id));
-        public async Task CreateAsync(Password password)
+        public async Task CreateAsync(UserPassword password)
         {
             await Task.FromResult(_context.Password.Add(password));
             if (await _context.SaveChangesAsync() > 0)
@@ -25,7 +25,7 @@ namespace Courses.Infrastructure.Repositories
             else
                 throw new Exception("Database cannot save date");
         }
-        public async Task UpdateAsync(Password password)
+        public async Task UpdateAsync(UserPassword password)
         {
             var pass = await Task.FromResult(_context.Password.FirstOrDefault(p=>p.Id == password.Id));
             pass.SetPassword(password.NormalizedPassword);

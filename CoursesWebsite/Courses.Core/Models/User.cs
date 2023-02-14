@@ -8,10 +8,9 @@ namespace Courses.Core.Models
         private readonly HashSet<Guid> _purchasedCourses = new HashSet<Guid>();
         public Name UserName { get; protected set; }
         public Email Email { get; protected set; }
-        public Guid PasswordId { get; protected set; }
         public Name Login { get; protected set; }
-        public string Salt { get; protected set; }
         public DateTime CreateAt { get; protected set; }
+        public virtual UserPassword UserPassword { get; protected set; }
         public IEnumerable<Guid> PurchasedCourses => _purchasedCourses;
         #endregion
         #region Constructors
@@ -45,11 +44,11 @@ namespace Courses.Core.Models
         => _purchasedCourses.Add(id);
         public void DeleteCourses(Guid id)
             => _purchasedCourses.Remove(id);
-        public void SetSalt(string salt)
+        public void SetSalt(UserPassword userPassword)
         {
-            if (string.IsNullOrEmpty(salt))
-                throw new Exception("Salt cannot be empty");
-            Salt = salt;
+            if (userPassword == null)
+                throw new Exception("User password cannot be empty");
+            UserPassword= userPassword;
         }
         #endregion
     }

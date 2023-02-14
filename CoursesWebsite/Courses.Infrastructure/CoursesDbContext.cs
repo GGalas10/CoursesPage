@@ -13,12 +13,15 @@ namespace Courses.Infrastructure
         public DbSet<Category> Categories { get; set; }
         public DbSet<Topic> topics { get; set; }
         public DbSet<Lesson> lessons { get; set; }
-        public DbSet<Password> Password { get; set; }
+        public DbSet<UserPassword> Password { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>().HasKey(x => x.Id);
+            modelBuilder.Entity<User>()
+                .HasOne(p => p.UserPassword)
+                .WithOne(up => up.User)
+                .HasForeignKey<UserPassword>(up => up.UserId);
         }
     }
 }

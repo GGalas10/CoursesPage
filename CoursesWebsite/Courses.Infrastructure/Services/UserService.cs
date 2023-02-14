@@ -36,7 +36,7 @@ namespace Courses.Infrastructure.Services
             var @user = await _userRepository.GetOrFailByLoginAsync(username);
             if (user == null)
                 throw new Exception("Wrong credentials");
-            var pass = await _passwordRepository.GetByIdAsync(user.PasswordId);
+            var pass = await _passwordRepository.GetByIdAsync(user.UserPassword.Id);
             if(!SecurityClass.ComparePassword(pass.NormalizedPassword,password,pass.Salt))
             {
                 throw new Exception("Wrong credentials");

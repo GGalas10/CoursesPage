@@ -54,24 +54,9 @@ namespace Courses.Infrastructure.Services
             else
                 throw new Exception("Database do not save value");
         } 
-        public async Task UpdateAsync(User user,models.UserPassword? password)
+        public async Task<bool> UpdateAsync()
         {
-            var changeduser = await this.GetOrFailByIdAsync(user.Id);
-            changeduser.SetState(user.State);
-            changeduser.SetEmail(user.Email);
-            changeduser.SetLogin(user.Login);
-            changeduser.SetUserName(user.UserName);
-            if (password != null)
-                    _passwordRepository.UpdateAsync(password);
-            foreach(var course in user.PurchasedCourses)
-            {
-                changeduser.CoursesBuy(course);
-            }
-            _context.Update(changeduser);
-            if (await _context.SaveChangesAsync() > 0)
-                await Task.CompletedTask;
-            else
-                throw new Exception("Database do not save value");
+            return (await _context.SaveChangesAsync() > 0) ? true:false;
         }
 
     }

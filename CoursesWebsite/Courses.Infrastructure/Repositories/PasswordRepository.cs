@@ -25,11 +25,8 @@ namespace Courses.Infrastructure.Repositories
             else
                 throw new Exception("Database cannot save date");
         }
-        public async Task UpdateAsync(UserPassword password)
+        public async Task UpdateAsync()
         {
-            var pass = await Task.FromResult(_context.Password.FirstOrDefault(p=>p.Id == password.Id));
-            pass.SetPassword(password.NormalizedPassword);
-            _context.Update(pass);
             if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;
             else

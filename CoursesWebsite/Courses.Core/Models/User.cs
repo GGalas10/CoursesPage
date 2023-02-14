@@ -44,12 +44,6 @@ namespace Courses.Core.Models
         => _purchasedCourses.Add(id);
         public void DeleteCourses(Guid id)
             => _purchasedCourses.Remove(id);
-        public void SetSalt(UserPassword userPassword)
-        {
-            if (userPassword == null)
-                throw new Exception("User password cannot be empty");
-            UserPassword= userPassword;
-        }
         #endregion
     }
 }

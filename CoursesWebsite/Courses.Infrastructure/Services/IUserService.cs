@@ -1,4 +1,5 @@
 ﻿using Courses.Core.Models;
+using Courses.Infrastructure.Comands.User;
 using Courses.Infrastructure.DTO;
 
 namespace Courses.Infrastructure.Services
@@ -7,6 +8,7 @@ namespace Courses.Infrastructure.Services
     {
         Task<TokenDto> LoginAsync(string username, string password);
         Task<TokenDto> RegisterAsync(string email, string password,string username,string login);
-        Task BuyCourses(Guid userId, Guid courseId);
+        Task BuyCoursesAsync(Guid userId, Guid courseId);
+        Task UpdateUserAsync(Guid UserId, Register register);
     }
 }

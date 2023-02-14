@@ -1,4 +1,5 @@
 ﻿using Courses.Core.Repositories;
+using Courses.Infrastructure.Comands.User;
 using Courses.Infrastructure.DTO;
 using Courses.Infrastructure.Extensions;
 using Courses.Infrastructure.Sercurity;
@@ -20,7 +21,7 @@ namespace Courses.Infrastructure.Services
             _jwtHandler = jwtHandler;
             _passwordRepository= passwordRepository;
         }
-        public async Task BuyCourses(Guid userId, Guid courseId)
+        public async Task BuyCoursesAsync(Guid userId, Guid courseId)
         {
             var @user = await _userRepository.GetOrFailByIdAsync(userId);
             if (@user == null)
@@ -29,7 +30,14 @@ namespace Courses.Infrastructure.Services
             if (course == null)
                 throw new Exception("Course doesn't exist");
             user.CoursesBuy(courseId);
-            await _userRepository.UpdateAsync(user,null);
+            if(await _userRepository.UpdateAsync())
+            {
+                await Task.CompletedTask;
+            }
+            else
+            {
+                throw new ArgumentException("Database cannot save new data");
+            }
         }
         public async Task<TokenDto> LoginAsync(string username,string password)
         {
@@ -68,6 +76,18 @@ namespace Courses.Infrastructure.Services
                 Role = role,
                 Token = token.Token,
             };
+        }
+        public async Task UpdateUserAsync(Guid UserId,Register register)
+        {
+            var @user = await _userRepository.GetByIdAsync(UserId);
+            user.SetUserName(register.UserName);
+            user.SetEmail(register.UserEmail);
+            var password = await _passwordRepository.GetByIdAsync(@user.Id);
+            var newPassword = SecurityClass.HashPassword(register.Password, password.Salt);
+            password.SetPassword(newPassword);
+            await _userRepository.UpdateAsync();
+            await _passwordRepository.UpdateAsync();
+            await Task.CompletedTask;
         }
     }
 }

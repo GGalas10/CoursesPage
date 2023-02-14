@@ -26,6 +26,7 @@ namespace Courses.API.Controllers
         [HttpGet("Register")]
         public async Task<IActionResult> Register()
         {
+            ViewData["Title"] = "Rejestracja";
             return View();
         }
         [HttpPost("Register")]

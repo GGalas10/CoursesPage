@@ -7,8 +7,8 @@ namespace Courses.Infrastructure.Comands.User
     public class Login
     {
         [Required]
-        public string Name { get; set; }
+        public Name Name { get; set; }
         [Required]
-        public string Password { get; set; }
+        public Name Password { get; set; }
     }
 }

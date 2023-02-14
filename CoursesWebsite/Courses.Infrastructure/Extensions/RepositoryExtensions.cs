@@ -1,5 +1,6 @@
 ﻿using Courses.Core.Models;
 using Courses.Core.Repositories;
+using Courses.Core.Value_Object;
 
 namespace Courses.Infrastructure.Extensions
 {
@@ -12,14 +13,14 @@ namespace Courses.Infrastructure.Extensions
                 throw new Exception("User doesn't exists");
             return @user;
         }
-        public static async Task<User> GetOrFailByLoginAsync(this IUserRepository repository, string login)
+        public static async Task<User> GetOrFailByLoginAsync(this IUserRepository repository, Name login)
         {
             var @user = await repository.GetByLoginAsync(login);
             if (@user == null)
                 throw new Exception("User doesn't exists");
             return @user;
         }
-        public static async Task<User> GetOrFailByEmailAsync(this IUserRepository repository, string email)
+        public static async Task<User> GetOrFailByEmailAsync(this IUserRepository repository, Email email)
         {
             var @user = await repository.GetByEmailAsync(email);
             if (@user == null)

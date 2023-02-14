@@ -8,6 +8,7 @@ namespace Courses.Core.Models
         public Name Name { get; protected set; }
         #endregion
         #region Constructors
+        private Role() { }
         public Role(Name name) : base()
         {
             SetName(name);

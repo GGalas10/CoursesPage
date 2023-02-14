@@ -1,11 +1,14 @@
 ﻿using Courses.Core.Value_Object;
+using System.ComponentModel.DataAnnotations;
 
 namespace Courses.Infrastructure.Comands.User
 {
 
     public class Login
     {
-        public Name Name { get; set; }
-        public Name Password { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public string Password { get; set; }
     }
 }

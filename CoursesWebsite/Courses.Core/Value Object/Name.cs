@@ -1,12 +1,4 @@
-﻿using Courses.Core.Value_Object;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Courses.Core.Value_Object
+﻿namespace Courses.Core.Value_Object
 {
     public record Name
     {
@@ -19,7 +11,7 @@ namespace Courses.Core.Value_Object
         }
         public static implicit operator Name(string value)
             => new(value);
-        public static implicit operator string(Name value)
-            => value.Value;
+        public static implicit operator string(Name name)
+            => name.Value;
     }
 }

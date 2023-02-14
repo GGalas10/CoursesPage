@@ -18,6 +18,10 @@ namespace Courses.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Role>()
+                .HasKey(p => p.Id);
+            modelBuilder.Entity<UserPassword>()
+                .HasKey(p => p.Id);
             modelBuilder.Entity<User>()
                 .HasOne(p => p.UserPassword)
                 .WithOne(up => up.User)

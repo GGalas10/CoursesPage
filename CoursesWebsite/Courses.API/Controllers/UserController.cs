@@ -38,8 +38,19 @@ namespace Courses.API.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(Login comand)
         {
-            var token = await _userService.LoginAsync(comand.Name, comand.Password);
-            return await Task.FromResult(View("Index"));
+            if (ModelState.IsValid)
+            {
+                var token = await _userService.LoginAsync(comand.Name, comand.Password);
+                if(token == null)
+                    ViewData["Error"] = "Błędne dane logowania";
+                HttpContext.Response.Cookies.Append("Bearer", token.Token);
+                return await Task.FromResult(View("Index"));
+            }
+            else
+            {
+                ViewData["Error"] = "Podano błędne wartości";
+                return View();
+            }
         }
     }
 }

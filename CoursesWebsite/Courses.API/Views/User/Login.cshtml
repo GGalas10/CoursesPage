@@ -1,7 +1,7 @@
 ﻿@model Courses.Infrastructure.Comands.User.Login
 @{
     <link rel="stylesheet" href="~/css/User.css"/>
-    <form method="post">
+    <form method="post" asp-controller="User" asp-action="Login">
         <div class="LoginHeader">
         <label id="HeaderLbl">Logowanie użytkownika</label>
         </div>
@@ -13,9 +13,12 @@
         <div id="PasswordBox">
             <label id="LabelLogin">Podaj hasło użytkownika</label>
             <input type="password" asp-for="@Model.Password" style="text-align:center;width:90%;height:4vh;font-size:3vh;">
-        </div>            
-        <div id="ButtonBox">
-                <input type="submit" value="Zaloguj" id="LoginBtn">
+        </div>
+            @if (ViewData["Error"] != string.Empty)
+                @ViewData["Error"]
+
+        <div id="ButtonBox">           
+            <input type="submit" value="Zaloguj" id="LoginBtn">
         </div>
     </div>
     </form>

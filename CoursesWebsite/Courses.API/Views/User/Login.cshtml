@@ -1,3 +1,22 @@
-﻿@{
-
+﻿@model Courses.Infrastructure.Comands.User.Login
+@{
+    <link rel="stylesheet" href="~/css/User.css"/>
+    <form method="post">
+        <div class="LoginHeader">
+        <label id="HeaderLbl">Logowanie użytkownika</label>
+        </div>
+    <div class="LoginBox">        
+        <div id="UsernameBox">
+            <label id="LabelLogin">Podaj login użytkownika</label>
+            <input type="text" asp-for="@Model.Name" style="text-align:center;width:90%;height:4vh;font-size:3vh;">
+        </div>
+        <div id="PasswordBox">
+            <label id="LabelLogin">Podaj hasło użytkownika</label>
+            <input type="password" asp-for="@Model.Password" style="text-align:center;width:90%;height:4vh;font-size:3vh;">
+        </div>            
+        <div id="ButtonBox">
+                <input type="submit" value="Zaloguj" id="LoginBtn">
+        </div>
+    </div>
+    </form>
 }

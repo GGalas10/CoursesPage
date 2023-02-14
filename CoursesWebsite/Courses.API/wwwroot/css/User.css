@@ -1,0 +1,76 @@
+﻿body {
+    min-height: 100%;
+    margin: 5px;
+}
+/*<-- Login Page -->*/
+.LoginHeader {
+    text-align: center;
+    background-color: red;
+    height: 7vh;
+    width: 50vw;
+    margin: 5px;
+}
+.LoginBox {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 50vh;
+    background-color: dimgrey;
+    margin: 5px;
+}
+#HeaderLbl{
+    font-size: 4vh;
+    font-weight:bold;
+}
+#UsernameBox {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    width: 99%;
+    height: 10vh;
+    background-color: blue;
+}
+#PasswordBox {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    width: 99%;
+    height: 10vh;
+    background-color: green;
+}
+#ButtonBox {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    width: 99%;
+    height: 20vh;
+    background-color: fuchsia;
+}
+#LabelLogin{
+    font-weight: bold;
+    font-size: 3vh;
+    color:black;
+}
+#LoginBtn {
+    border-radius: 30px;
+    background-color: aqua;
+    font-weight: bold;
+    font-size: 3vh;
+    color: black;
+    width: 70%;
+    height: 10vh
+}
+#LoginBtn:hover {
+    border-color: aqua;
+    background-color: black;
+    color: aqua;
+}
+    /*<-- End of login -->*/

@@ -17,7 +17,7 @@
             <div class="OneBox">
                 <label id="LabelRegister">Podaj hasło</label>
                 <input type="password" asp-for="Password" id="RegisterPassword">
-                <div class="Rectangle"><div id="SmallSquare"></div></div>
+                <div id="Rectangle"><div id="SmallSquare"></div></div>
             </div>
             @if (ViewData["Error"] != string.Empty)
                 @ViewData["Error"]
@@ -27,39 +27,6 @@
         </div>
     </form>
     <script type="text/javascript">
-        const passwordInput = document.getElementById('RegisterPassword');
-        passwordInput.addEventListener("input", function () {
-            let password = passwordInput.value;
-            let smallBox = document.getElementById('SmallSquare');
-            if(password.length == 0){
-                smallBox.innerHTML = "";
-                smallBox.style.width="0%";
-            }
-            if (password.length == 1) {
-                smallBox.style.backgroundColor = "red";
-                smallBox.style.width = "20%";
-                smallBox.innerHTML = "Słabe hasło";
-            };
-            if (password.length > 2) {
-                smallBox.style.backgroundColor = "purple";
-                smallBox.style.width = "40%";
-                smallBox.innerHTML = "Słabe hasło";
-            };
-            if (password.length > 3) {
-                smallBox.style.backgroundColor = "orange";
-                smallBox.style.width = "60%";
-                smallBox.innerHTML = "Średnie hasło";
-            };
-            if (password.length > 4) {
-                smallBox.style.backgroundColor = "green";
-                smallBox.style.width = "80%";
-                smallBox.innerHTML = "Silne hasło";
-            };
-            if (password.length > 5) {
-                smallBox.style.backgroundColor = "darkgreen";
-                smallBox.style.width = "100%";
-                smallBox.innerHTML = "Bardzo sile hasło";
-            };
-        });
+    
     </script>
 }

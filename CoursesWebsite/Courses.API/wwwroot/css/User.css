@@ -120,7 +120,10 @@
     background-color: darkorange;
 }
 /*<-- Password Rectangle -->*/
-.Rectangle {
+#Rectangle {
+    text-align: center;
+    font-size: 1.5vh;
+    font-weight: bold;
     margin: 5px 0px 5px 0px;
     width: 80%;
     height: 2vh;
@@ -128,10 +131,7 @@
     background-color: white;
     border: none;
 }
-#SmallSquare{
-    text-align:center;
-    font-size: 1.5vh;
-    font-weight: bold;
+#SmallSquare{   
     color: white;
     width:0%;
     height: 100%;

@@ -18,6 +18,8 @@
                 <label id="LabelRegister">Podaj hasło</label>
                 <input type="text" asp-for="Password" id="RegisterPassword">
             </div>
+            @if (ViewData["Error"] != string.Empty)
+                @ViewData["Error"]
             <div class="RegisterBtnBox">
                 <input type="submit" value="Zarejestruj" id="RegisterBtn">
             </div>

@@ -16,11 +16,13 @@ namespace Courses.API.Controllers
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
+            ViewData["Title"] = "Lista kursów użytkownika";
             return View();
         }
         [HttpGet("Login")]
         public async Task<IActionResult> Login()
         {
+            ViewData["Title"] = "Logowanie";
             return View();
         }
         [HttpGet("Register")]
@@ -33,6 +35,11 @@ namespace Courses.API.Controllers
         public async Task<IActionResult> Register(Register command)
         {
             var token = await _userService.RegisterAsync(command.UserName, command.Password, command.Login, command.UserEmail);
+            if (token == null)
+            {
+                ViewData["Error"] = "Błąd rejestracji";
+                return View();
+            }
             HttpContext.Response.Cookies.Append("Bearer", token.Token);
             return RedirectToAction("Index");
         }

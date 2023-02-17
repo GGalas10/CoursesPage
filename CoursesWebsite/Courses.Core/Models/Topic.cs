@@ -8,6 +8,7 @@ namespace Courses.Core.Models
         public Name Name { get; protected set; }
         public Name Description { get; protected set; }
         public IEnumerable<Lesson> Lessons => _lessons;
+        private Topic(){}
         public Topic(Name name, Name description)
         {
             _lessons= new List<Lesson>();

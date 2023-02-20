@@ -60,5 +60,11 @@ namespace Courses.API.Controllers
                 return View();
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Response.Cookies.Delete("Bearer");
+            return await Task.FromResult(RedirectToAction("Login"));
+        }
     }
 }

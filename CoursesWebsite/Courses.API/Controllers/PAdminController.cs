@@ -7,7 +7,7 @@ namespace Courses.API.Controllers
     [Route("API/PAdmin")]
     public class PAdminController : Controller
     {
-        [Authorize(Roles = "Admin")]
+        [Authorize(AuthenticationSchemes = "AdminCookieAuthenticationScheme", Roles = "Admin")]
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
@@ -29,6 +29,7 @@ namespace Courses.API.Controllers
         {
             return View();
         }
+        [HttpPost("Register")]
         public async Task<IActionResult> Register(Register command)
         {
 

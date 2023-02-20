@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,6 +64,14 @@ builder.Services.AddAuthentication(options =>
             return Task.CompletedTask;
         }
     };
+}).AddCookie("AdminCookie", options =>
+{
+    options.LoginPath = "/API/PAdmin/Login";
+    options.LogoutPath = "/API/PAdmin/Login";
+}).AddCookie("UserCookie", options =>
+{
+    options.LoginPath = "/User/Login";
+    options.LogoutPath= "/";
 });
 builder.Services.AddAuthorization();
 var app = builder.Build();

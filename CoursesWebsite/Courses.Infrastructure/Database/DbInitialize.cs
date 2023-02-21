@@ -15,7 +15,6 @@ namespace Courses.Infrastructure.Database
             if (!context.Users.Any())
             {
                 await userService.RegisterAsync("root@root.com", "Root$123", "Admin", "Admin"); 
-                await roleService.
             }
         }
     }

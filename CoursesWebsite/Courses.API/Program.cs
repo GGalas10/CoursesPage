@@ -1,21 +1,19 @@
+using Courses.Core.Repositories;
+using Courses.Infrastructure.Database;
+using Courses.Infrastructure.Mappers;
+using Courses.Infrastructure.Repositories;
 using Courses.Infrastructure.Services;
 using Courses.Infrastructure.Settings;
-using Courses.Infrastructure.Mappers;
-using Courses.Core.Repositories;
-using Courses.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Net;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Courses.Infrastructure.Database;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddSession();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
@@ -75,6 +73,19 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddAuthorization();
 var app = builder.Build();
+
+using(var scope = app.Services.CreateScope())
+{
+    var service = scope.ServiceProvider;
+    var dbContext = service.GetRequiredService<CoursesDbContext>();
+    var userSerivce = service.GetRequiredService<IUserService>();
+    var roleService = service.GetRequiredService<IRoleService>();
+    var userRepository = service.GetRequiredService<IUserRepository>();
+    var roleRepository = service.GetRequiredService<IRoleRepository>();
+    dbContext.Database.Migrate();
+    DbInitialize.Initialize(dbContext,userSerivce,roleService, userRepository, roleRepository);
+
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

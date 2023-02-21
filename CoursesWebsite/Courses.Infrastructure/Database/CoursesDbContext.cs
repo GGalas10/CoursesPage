@@ -1,9 +1,9 @@
 ﻿using Courses.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Courses.Infrastructure
+namespace Courses.Infrastructure.Database
 {
-    public class CoursesDbContext:DbContext
+    public class CoursesDbContext : DbContext
     {
         public CoursesDbContext(DbContextOptions<CoursesDbContext> options) : base(options) { }
         public DbSet<Course> Courses { get; set; }

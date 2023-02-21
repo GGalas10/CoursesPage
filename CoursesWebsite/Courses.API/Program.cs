@@ -3,13 +3,13 @@ using Courses.Infrastructure.Settings;
 using Courses.Infrastructure.Mappers;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Repositories;
-using Courses.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Courses.Infrastructure.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 

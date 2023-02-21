@@ -4,7 +4,10 @@ namespace Courses.Infrastructure.Services
 {
     public interface IRoleService
     {
-        public Task<Role> GetUserRoleAsync(Guid id);
-        public Task CreateRole(string name);
+        public Task AsignRoleAsync(Guid userId, Guid roleId);
+        public Task<string> GetUserRoleAsync(Guid id);
+        public Task CreateRoleAsync(string name);
+        public Task DeleteRoleAsync(Guid id);
+        public Task UpdateRoleAsync(Role role);
     }
 }

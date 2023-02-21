@@ -5,10 +5,11 @@ namespace Courses.Core.Repositories
 {
     public interface IRoleRepository
     {
-        Task<string> GetUserRole(Guid userId);
-        Task CreateRoleAsync(Name name);
+        public Task<Role> GetRoleAsync(Guid roleId);
+        Task<Role> GetUserRole(Guid userId);
+        Task CreateRoleAsync(Role role);
         Task DeleteRoleAsync(Guid id);
-        Task UpdateRoleAsync(Role role);
+        Task UpdateRoleAsync();
         Task AssignRole(Guid userId,Guid roleId);
     }
 }

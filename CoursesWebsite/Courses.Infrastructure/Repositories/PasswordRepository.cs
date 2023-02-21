@@ -1,5 +1,6 @@
 ﻿using Courses.Core.Models;
 using Courses.Core.Repositories;
+using Courses.Infrastructure.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -23,12 +23,14 @@ builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
 builder.Services.AddDbContext<CoursesDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DevDb"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
+        ,x=>x.MigrationsAssembly("Courses.API"));
 });
 
 builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ICourseService, CoursesService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository,RoleRepository>();

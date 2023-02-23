@@ -1,12 +1,19 @@
-﻿namespace Courses.Core.Value_Object
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Courses.Core.Value_Object
 {
-    public record DigitalItem
+    [Owned]
+    public record DigitalItem : IEquatable<DigitalItem>
     {
-        public byte[] Value;
+        public byte[] Value { get; }
+        public DigitalItem() 
+        { 
+            Value = Array.Empty<byte>();
+        }
         public DigitalItem(byte[] value)
         {
             if (value == null)
-                throw new Exception("Digital item cannot be empty");
+                throw new Exception("Value cannot be empty");
             Value = value;
         }
         public static implicit operator DigitalItem(byte[] item)

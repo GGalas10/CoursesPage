@@ -7,7 +7,8 @@ namespace Courses.Core.Models
         private List<Lesson> _lessons;
         public Name Name { get; protected set; }
         public Name Description { get; protected set; }
-        public IEnumerable<Lesson> Lessons => _lessons;
+        public virtual Course Course { get; protected set; }
+        public ICollection<Lesson> Lessons => _lessons;
         private Topic(){}
         public Topic(Name name, Name description)
         {

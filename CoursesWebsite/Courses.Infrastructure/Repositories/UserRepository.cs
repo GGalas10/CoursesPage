@@ -20,23 +20,20 @@ namespace Courses.Infrastructure.Services
         public async Task<User> GetByIdAsync(Guid id)
         => await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Id==id));
         
-        public async Task<User> GetByLoginAsync(Name login)
+        public async Task<User> GetByLoginAsync(string login)
         {
-            var user = await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Login == login));
-            if (user == null)
-                throw new Exception("Incorrect login credentials");
-            return user;
+            var user = _context.Users.AsEnumerable().FirstOrDefault(u=>u.Login.Value == login);
+            return await Task.FromResult(user);
         }
         public async Task<User> GetByEmailAsync(Email email)
         {
-            var user = await Task.FromResult(_context.Users.FirstOrDefault(u => u.Email == email));
-            if (user == null)
-                throw new Exception("Incorrect login credentials");
-            return user;
+            var user = _context.Users.AsEnumerable().FirstOrDefault(u => u.Email == email);
+            return await Task.FromResult(user);
         }
         public async Task RegisterAsync(User user,string password)
         {
             await Task.FromResult(_context.Users.Add(user));
+            await UpdateAsync();
             Guid guid = await Task.FromResult(this.GetByEmailAsync(user.Email).Result.Id);
             var salt = SecurityClass.CreateSalt(guid);
             var pass = SecurityClass.HashPassword(password,salt);

@@ -6,21 +6,21 @@ namespace Courses.Core.Models
     {
         #region Properties
         private HashSet<Topic> _topics;
-        private HashSet<Guid> _categories;
+        private HashSet<Category> _categories;
         public Name Name { get; protected set; }
         public Name Description { get; protected set; }
         public Name Author { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DigitalItem Picutre { get; protected set; }
-        public IEnumerable<Topic> Topics => _topics;
-        public IEnumerable<Guid> Categories => _categories;
+        public ICollection<Topic> Topics => _topics;
+        public ICollection<Category> Categories => _categories;
         #endregion
         #region Constructors
         private Course() { }
         public Course(string name, string description, string author, byte[] picture):base()
         {
             _topics= new HashSet<Topic>();
-            _categories= new HashSet<Guid>();
+            _categories= new HashSet<Category>();
             SetName(name);
             SetDescription(description);
             SetAuthor(author);
@@ -52,11 +52,11 @@ namespace Courses.Core.Models
             foreach(var topic in topics)
             _topics.Add(topic);
         }
-        public void AddCategory(Guid Category)
+        public void AddCategory(Category Category)
         {
             _categories.Add(Category);
         }
-        public void RemoveCategory(Guid Category)
+        public void RemoveCategory(Category Category)
         {
             _categories.Remove(Category);
         }

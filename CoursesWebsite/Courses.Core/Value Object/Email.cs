@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Courses.Core.Value_Object
 {
-    public record Email
+    [Owned]
+    public record Email : IEquatable<Email>
     {
         public string Value { get; }
+        public Email()
+        {
+            Value = string.Empty;
+        }
         public Email(string value) 
         {
             if(string.IsNullOrEmpty(value)) 
                 throw new ArgumentNullException("User email cannot be empty");
             var isValid = new EmailAddressAttribute().IsValid(value);
-            if (isValid is false)
+            if (isValid)
                 throw new ArgumentException("Email structure is invalid");
             Value = value;
         }

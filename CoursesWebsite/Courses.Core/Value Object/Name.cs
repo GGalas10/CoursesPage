@@ -1,8 +1,15 @@
-﻿namespace Courses.Core.Value_Object
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Courses.Core.Value_Object
 {
-    public record Name
+    [Owned]
+    public record Name : IEquatable<Name>
     {
         public string Value { get; }
+        public Name()
+        {
+            Value = string.Empty;
+        }
         public Name(string value)
         {
             if (string.IsNullOrEmpty(value))

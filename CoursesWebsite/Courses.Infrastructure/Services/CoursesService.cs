@@ -31,7 +31,7 @@ namespace Courses.Infrastructure.Services
             return list;
         }
         public async Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId)
-            => _mapper.Map<IEnumerable<ViewCoursesDTO>>(await Task.FromResult(_coursesRepostiotory.GetAllAsync().Result.Where(c=>c.Categories.Contains(categoryId))));
+            => _mapper.Map<IEnumerable<ViewCoursesDTO>>(await Task.FromResult(_coursesRepostiotory.GetAllAsync().Result));
         public async Task CreateAsync(string name, string description, string author,DigitalItem picture)
         {
             var course = new Course(name, description, author,picture);

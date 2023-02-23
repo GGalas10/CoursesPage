@@ -50,11 +50,11 @@ namespace Courses.Infrastructure.Services
                 throw new Exception("Wrong credentials");
             }
             var role = await _roleRepository.GetUserRole(user.Id);
-            var token = _jwtHandler.CreateToken(user.Id, role);
+            var token = _jwtHandler.CreateToken(user.Id, role.Name);
             return new TokenDto
             {
                 Expires = token.Expires,
-                Role = role,
+                Role = role.Name,
                 Token = token.Token,
             };
         }
@@ -69,11 +69,11 @@ namespace Courses.Infrastructure.Services
             user = new Courses.Core.Models.User(username,email,login);
             await _userRepository.RegisterAsync(user,password);
             var role = await _roleRepository.GetUserRole(user.Id);
-            var token = _jwtHandler.CreateToken(user.Id, role);
+            var token = _jwtHandler.CreateToken(user.Id, role.Name);
             return new TokenDto
             {
                 Expires = token.Expires,
-                Role = role,
+                Role = role.Name,
                 Token = token.Token,
             };
         }

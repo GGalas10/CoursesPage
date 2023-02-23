@@ -9,8 +9,9 @@ namespace Courses.Core.Models
         public Name LessonDescription { get; protected set; }
         public DigitalItem Video { get;protected set; }
         public Number LessonNumber { get; protected set; }
+        public virtual Topic Topic { get; protected set; }
         #endregion
-        #region ctor
+        #region Constructors
         private Lesson() { }
         public Lesson(string lessonName, string lessonDescription, byte[] video,int lessonNumber) : base()
         {

@@ -1,8 +1,15 @@
-﻿namespace Courses.Core.Value_Object
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Courses.Core.Value_Object
 {
-    public record Number
+    [Owned]
+    public record Number : IEquatable<Number>
     {
-        public int Value { get; set; }
+        public int Value { get; }
+        public Number()
+        {
+
+        }
         public Number(int value)
         {
             if (value < 0)

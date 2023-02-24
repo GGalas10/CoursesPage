@@ -4,6 +4,7 @@ using Courses.Infrastructure.Mappers;
 using Courses.Infrastructure.Repositories;
 using Courses.Infrastructure.Services;
 using Courses.Infrastructure.Settings;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -44,7 +45,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddCookie.AddJwtBearer(o =>
+}).AddCookie().AddJwtBearer(o =>
 {
     o.SaveToken = true;
     o.TokenValidationParameters = new TokenValidationParameters
@@ -64,7 +65,7 @@ builder.Services.AddAuthentication(options =>
             return Task.CompletedTask;
         }
     };
-}).AddScheme("AdminCookie", options =>
+}).AddScheme<CookieAuthenticationOptions, CustomCookieAuthenticationHandler>("AdminCookie", options =>
 {
     options.LoginPath = "/API/PAdmin/Login";
     options.LogoutPath = "/API/PAdmin/Login";

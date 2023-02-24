@@ -13,7 +13,6 @@ namespace Courses.API.Controllers
         {
             return await Task.FromResult(View());
         }
-
         [HttpGet("Login")]
         public async Task<IActionResult> Login()
         {

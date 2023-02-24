@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Courses.API.Migrations
 {
     [DbContext(typeof(CoursesDbContext))]
-    [Migration("20230222210908_second")]
-    partial class second
+    [Migration("20230223231718_First_Migration")]
+    partial class First_Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,6 +190,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("CategoryId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Name");
+
                             b1.HasKey("CategoryId");
 
                             b1.ToTable("Categories");
@@ -209,6 +214,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("CourseId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Author");
+
                             b1.HasKey("CourseId");
 
                             b1.ToTable("Courses");
@@ -221,6 +231,11 @@ namespace Courses.API.Migrations
                         {
                             b1.Property<Guid>("CourseId")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Description");
 
                             b1.HasKey("CourseId");
 
@@ -235,6 +250,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("CourseId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Name");
+
                             b1.HasKey("CourseId");
 
                             b1.ToTable("Courses");
@@ -247,6 +267,11 @@ namespace Courses.API.Migrations
                         {
                             b1.Property<Guid>("CourseId")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<byte[]>("Value")
+                                .IsRequired()
+                                .HasColumnType("varbinary(max)")
+                                .HasColumnName("Picture");
 
                             b1.HasKey("CourseId");
 
@@ -282,6 +307,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("LessonId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("LessonDescription");
+
                             b1.HasKey("LessonId");
 
                             b1.ToTable("lessons");
@@ -294,6 +324,11 @@ namespace Courses.API.Migrations
                         {
                             b1.Property<Guid>("LessonId")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("LessonName");
 
                             b1.HasKey("LessonId");
 
@@ -308,6 +343,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("LessonId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<byte[]>("Value")
+                                .IsRequired()
+                                .HasColumnType("varbinary(max)")
+                                .HasColumnName("Video");
+
                             b1.HasKey("LessonId");
 
                             b1.ToTable("lessons");
@@ -320,6 +360,10 @@ namespace Courses.API.Migrations
                         {
                             b1.Property<Guid>("LessonId")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Value")
+                                .HasColumnType("int")
+                                .HasColumnName("LessonNumber");
 
                             b1.HasKey("LessonId");
 
@@ -351,6 +395,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("RoleId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Name");
+
                             b1.HasKey("RoleId");
 
                             b1.ToTable("Roles");
@@ -376,6 +425,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("TopicId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Description");
+
                             b1.HasKey("TopicId");
 
                             b1.ToTable("topics");
@@ -388,6 +442,11 @@ namespace Courses.API.Migrations
                         {
                             b1.Property<Guid>("TopicId")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Name");
 
                             b1.HasKey("TopicId");
 
@@ -413,6 +472,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("UserId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Login");
+
                             b1.HasKey("UserId");
 
                             b1.ToTable("Users");
@@ -426,6 +490,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("UserId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("UserName");
+
                             b1.HasKey("UserId");
 
                             b1.ToTable("Users");
@@ -438,6 +507,11 @@ namespace Courses.API.Migrations
                         {
                             b1.Property<Guid>("UserId")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Email");
 
                             b1.HasKey("UserId");
 
@@ -470,6 +544,11 @@ namespace Courses.API.Migrations
                             b1.Property<Guid>("UserPasswordId")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Salt");
+
                             b1.HasKey("UserPasswordId");
 
                             b1.ToTable("Password");
@@ -485,7 +564,8 @@ namespace Courses.API.Migrations
 
                             b1.Property<string>("Value")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("NormalizedPassword");
 
                             b1.HasKey("UserPasswordId");
 

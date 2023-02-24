@@ -51,7 +51,12 @@ namespace Courses.API.Controllers
                 var token = await _userService.LoginAsync(comand.Name, comand.Password);
                 if(token == null)
                     ViewData["Error"] = "Błędne dane logowania";
-                HttpContext.Response.Cookies.Append("Bearer", token.Token);
+                HttpContext.Response.Cookies.Append("Bearer", token.Token,new CookieOptions()
+                {
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.None,
+                    Secure = true
+                });
                 return await Task.FromResult(View("Index"));
             }
             else

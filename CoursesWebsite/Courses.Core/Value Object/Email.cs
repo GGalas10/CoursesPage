@@ -16,7 +16,7 @@ namespace Courses.Core.Value_Object
             if(string.IsNullOrEmpty(value)) 
                 throw new ArgumentNullException("User email cannot be empty");
             var isValid = new EmailAddressAttribute().IsValid(value);
-            if (isValid)
+            if (!isValid)
                 throw new ArgumentException("Email structure is invalid");
             Value = value;
         }

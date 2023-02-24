@@ -4,6 +4,7 @@ using Courses.Core.Value_Object;
 using Courses.Infrastructure.Database;
 using Courses.Infrastructure.Extensions;
 using Courses.Infrastructure.Sercurity;
+using Microsoft.EntityFrameworkCore;
 using models = Courses.Core.Models;
 
 namespace Courses.Infrastructure.Services
@@ -18,27 +19,28 @@ namespace Courses.Infrastructure.Services
             _passwordRepository = passwordRepository;
         }
         public async Task<User> GetByIdAsync(Guid id)
-        => await Task.FromResult(_context.Users.FirstOrDefault(u=>u.Id==id));
+        => await Task.FromResult(_context.Users.Include(u=>u.UserPassword).FirstOrDefault(u=>u.Id==id));
         
         public async Task<User> GetByLoginAsync(string login)
         {
-            var user = _context.Users.AsEnumerable().FirstOrDefault(u=>u.Login.Value == login);
+            var user = _context.Users.Include(u => u.UserPassword).AsEnumerable().FirstOrDefault(u=>u.Login.Value == login);
             return await Task.FromResult(user);
         }
         public async Task<User> GetByEmailAsync(Email email)
         {
-            var user = _context.Users.AsEnumerable().FirstOrDefault(u => u.Email == email);
+            var user = _context.Users.Include(u => u.UserPassword).AsEnumerable().FirstOrDefault(u => u.Email == email);
             return await Task.FromResult(user);
         }
         public async Task RegisterAsync(User user,string password)
         {
             await Task.FromResult(_context.Users.Add(user));
             await UpdateAsync();
-            Guid guid = await Task.FromResult(this.GetByEmailAsync(user.Email).Result.Id);
-            var salt = SecurityClass.CreateSalt(guid);
+            var newUser = await Task.FromResult(this.GetByEmailAsync(user.Email)).Result;
+            var salt = SecurityClass.CreateSalt(newUser.Id);
             var pass = SecurityClass.HashPassword(password,salt);
-            var newpass = new models.UserPassword(pass, salt);
-            if (await _context.SaveChangesAsync() > 0)
+            var newpass = new models.UserPassword(pass, salt,user);
+            _context.Password.Add(newpass);
+            if (await UpdateAsync())
                 await Task.CompletedTask;
             else
                 throw new Exception($"Register can't be done.\nDatabase do not save value");
@@ -47,14 +49,14 @@ namespace Courses.Infrastructure.Services
         {
             var user = await this.GetOrFailByIdAsync(id);
             user.SetState(State.Deleted);
-            if (await _context.SaveChangesAsync() > 0)
+            if (await UpdateAsync())
                 await Task.CompletedTask;
             else
                 throw new Exception("Database do not save value");
         } 
         public async Task<bool> UpdateAsync()
         {
-            return (await _context.SaveChangesAsync() > 0) ? true:false;
+            return (_context.SaveChanges() > 0) ? true:false;
         }
 
     }

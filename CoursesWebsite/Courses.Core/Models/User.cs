@@ -10,7 +10,7 @@ namespace Courses.Core.Models
         public Email Email { get; protected set; }
         public Name Login { get; protected set; }
         public DateTime CreateAt { get; protected set; }
-        public virtual UserPassword UserPassword { get; protected set; }
+        public UserPassword UserPassword { get; set; }
         public IEnumerable<Guid> PurchasedCourses => _purchasedCourses;
         #endregion
         #region Constructors

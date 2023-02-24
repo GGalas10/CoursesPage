@@ -58,7 +58,7 @@ namespace Courses.Infrastructure.Services
                 Token = token.Token,
             };
         }
-        public async Task<TokenDto> RegisterAsync(string password, string email, string username,string? login)
+        public async Task<TokenDto> RegisterAsync(string email, string password, string username, string? login)
         {
             var @user = await _userRepository.GetByLoginAsync(username);
             if (user != null)
@@ -87,6 +87,19 @@ namespace Courses.Infrastructure.Services
             password.SetPassword(newPassword);
             await _userRepository.UpdateAsync();
             await _passwordRepository.UpdateAsync();
+            await Task.CompletedTask;
+        }
+
+        async Task IUserService.Initialize(string email, string password, string username, string login)
+        {
+            var @user = await _userRepository.GetByLoginAsync(username);
+            if (user != null)
+                throw new Exception("Username already exist");
+            user = await _userRepository.GetByEmailAsync(email);
+            if (user != null)
+                throw new Exception("Email already exist");
+            user = new Courses.Core.Models.User(username, email, login);
+            await _userRepository.RegisterAsync(user, password);
             await Task.CompletedTask;
         }
     }

@@ -1,7 +1,7 @@
 ﻿@model Courses.Infrastructure.Comands.User.Login
 @{
     <link rel="stylesheet" href="~/css/User.css"/>
-    <form method="post" asp-controller="User" asp-action="Login">
+    @using(Html.BeginForm("Login","User",FormMethod.Post)){
         <div class="LoginHeader">
         <label id="HeaderLbl">Logowanie użytkownika</label>
         </div>
@@ -20,5 +20,5 @@
             <input type="submit" value="Zaloguj" id="LoginBtn">
         </div>
     </div>
-    </form>
+    }
 }

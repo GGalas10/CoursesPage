@@ -15,12 +15,12 @@ namespace Courses.Infrastructure.Repositories
         public async Task<Role> GetRoleAsync(Guid id)
             => await Task.FromResult(_context.Roles.FirstOrDefault(r=>r.Id==id));
         public async Task<Role> GetRoleAsync(Name name)
-            => await Task.FromResult(_context.Roles.FirstOrDefault(r => r.Name == name));
+            => await Task.FromResult(_context.Roles.AsEnumerable().FirstOrDefault(r => r.Name.Value == name));
         public async Task AssignRole(Guid userId, Guid roleId)
         {           
             var userrole = new UserRole(userId, roleId);
             _context.UsersRoles.Add(userrole);
-            if (await _context.SaveChangesAsync() > 0)
+            if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Database can't save date");
@@ -29,7 +29,7 @@ namespace Courses.Infrastructure.Repositories
         public async Task CreateRoleAsync(Role newRole)
         {         
             _context.Roles.Add(newRole);
-            if(await _context.SaveChangesAsync()>0)
+            if(_context.SaveChangesAsync().Result >0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Database can't save date");
@@ -41,14 +41,14 @@ namespace Courses.Infrastructure.Repositories
             if (newrole == null)
                 throw new Exception("Role doesn't exists");
             newrole.SetState(State.Deleted);
-            if (await _context.SaveChangesAsync() > 0)
+            if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Database can't save date");
         }
         public async Task UpdateRoleAsync()
         {
-            if (await _context.SaveChangesAsync() > 0)
+            if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Database can't save date");

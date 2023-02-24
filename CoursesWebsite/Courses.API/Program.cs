@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddCookie().AddJwtBearer(o =>
+}).AddCookie.AddJwtBearer(o =>
 {
     o.SaveToken = true;
     o.TokenValidationParameters = new TokenValidationParameters
@@ -64,7 +64,7 @@ builder.Services.AddAuthentication(options =>
             return Task.CompletedTask;
         }
     };
-}).AddCookie("AdminCookie", options =>
+}).AddScheme("AdminCookie", options =>
 {
     options.LoginPath = "/API/PAdmin/Login";
     options.LogoutPath = "/API/PAdmin/Login";

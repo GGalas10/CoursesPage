@@ -15,7 +15,7 @@ namespace Courses.Infrastructure.Database
             }
             if (!context.Users.Any())
             {
-                await userService.RegisterAsync("root@root.com", "Root$123", "Admin", "Admin");
+                await userService.Initialize("root@root.com", "Root$123", "Admin", "Admin");
                 var user = await userRepository.GetByEmailAsync("root@root.com");
                 var role = await roleRepository.GetRoleAsync("Admin");
                 await roleService.AsignRoleAsync(user.Id, role.Id);

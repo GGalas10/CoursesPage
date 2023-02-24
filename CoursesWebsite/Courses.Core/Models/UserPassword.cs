@@ -8,13 +8,14 @@ namespace Courses.Core.Models
         public Password NormalizedPassword { get; protected set; }
         public Name Salt { get; protected set; }
         public Guid UserId { get; set; }
-        public virtual User User { get; protected set; }
+        public User User { get; protected set; }
         private UserPassword() { }
-        public UserPassword(Password normalizedPassword, Name salt)
+        public UserPassword(Password normalizedPassword, Name salt,User user)
         {
             Id = Guid.NewGuid();
             SetPassword(normalizedPassword);
             SetSalt(salt);
+            User = user;
         }
         public void SetPassword(Password password)
         {

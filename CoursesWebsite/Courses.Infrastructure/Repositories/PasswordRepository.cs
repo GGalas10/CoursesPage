@@ -21,14 +21,14 @@ namespace Courses.Infrastructure.Repositories
         public async Task CreateAsync(UserPassword password)
         {
             await Task.FromResult(_context.Password.Add(password));
-            if (await _context.SaveChangesAsync() > 0)
+            if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Database cannot save date");
         }
         public async Task UpdateAsync()
         {
-            if (await _context.SaveChangesAsync() > 0)
+            if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Database cannot save date");

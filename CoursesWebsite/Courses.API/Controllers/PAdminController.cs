@@ -5,12 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace Courses.API.Controllers
 {
     [Route("API/PAdmin")]
-    public class PAdminController : Controller
+    public class PAdminController : ApiBaseController
     {
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy ="RequireAdminRole")]
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
+            ViewData["Id"] = UserId;
             return await Task.FromResult(View());
         }
         [Authorize]
@@ -19,6 +20,7 @@ namespace Courses.API.Controllers
         {
             return await Task.FromResult(View());
         }
+        [Authorize(Roles ="Admin")]
         [HttpGet("Register")]
         public async Task<IActionResult> Register()
         {

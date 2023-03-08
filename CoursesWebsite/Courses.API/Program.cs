@@ -6,6 +6,7 @@ using Courses.Infrastructure.Services;
 using Courses.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
@@ -47,17 +48,14 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddCookie().AddJwtBearer(o =>
 {
-    o.SaveToken = true;
     o.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
-        ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey
-        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        ValidateAudience = false
     };
     o.Events = new JwtBearerEvents
     {
@@ -68,7 +66,6 @@ builder.Services.AddAuthentication(options =>
         }
     };
 });
-builder.Services.AddAuthorization();
 var app = builder.Build();
 
 using(var scope = app.Services.CreateScope())

@@ -7,20 +7,18 @@ namespace Courses.API.Controllers
     [Route("API/PAdmin")]
     public class PAdminController : ApiBaseController
     {
-        [Authorize(Policy ="RequireAdminRole")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             ViewData["Id"] = UserId;
             return await Task.FromResult(View());
         }
-        [Authorize]
         [HttpGet("Login")]
         public async Task<IActionResult> Login()
         {
             return await Task.FromResult(View());
-        }
-        [Authorize(Roles ="Admin")]
+        }       
         [HttpGet("Register")]
         public async Task<IActionResult> Register()
         {

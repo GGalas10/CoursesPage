@@ -7,12 +7,13 @@ namespace Courses.API.Controllers
     [Route("API/PAdmin")]
     public class PAdminController : Controller
     {
-        [Authorize(AuthenticationSchemes = "AdminCookie", Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             return await Task.FromResult(View());
         }
+        [Authorize]
         [HttpGet("Login")]
         public async Task<IActionResult> Login()
         {

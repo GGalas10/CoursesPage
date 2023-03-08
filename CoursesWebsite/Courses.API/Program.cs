@@ -50,12 +50,14 @@ builder.Services.AddAuthentication(options =>
     o.SaveToken = true;
     o.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateAudience= true,
-        ValidateIssuer= true,
-        IssuerSigningKey = new SymmetricSecurityKey
-        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
         ValidateLifetime = true,
-        ValidateIssuerSigningKey = true
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
     o.Events = new JwtBearerEvents
     {
@@ -65,14 +67,6 @@ builder.Services.AddAuthentication(options =>
             return Task.CompletedTask;
         }
     };
-}).AddScheme<CookieAuthenticationOptions, CustomCookieAuthenticationHandler>("AdminCookie", options =>
-{
-    options.LoginPath = "/API/PAdmin/Login";
-    options.LogoutPath = "/API/PAdmin/Login";
-}).AddCookie("UserCookie", options =>
-{
-    options.LoginPath = "/User/Login";
-    options.LogoutPath= "/";
 });
 builder.Services.AddAuthorization();
 var app = builder.Build();

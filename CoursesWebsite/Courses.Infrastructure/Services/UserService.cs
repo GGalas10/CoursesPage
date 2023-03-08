@@ -21,31 +21,13 @@ namespace Courses.Infrastructure.Services
             _jwtHandler = jwtHandler;
             _passwordRepository= passwordRepository;
         }
-        public async Task BuyCoursesAsync(Guid userId, Guid courseId)
-        {
-            var @user = await _userRepository.GetOrFailByIdAsync(userId);
-            if (@user == null)
-                throw new Exception("User doesn't exist");
-            var course = await _courseService.GetByIdAsync(courseId);
-            if (course == null)
-                throw new Exception("Course doesn't exist");
-            user.CoursesBuy(courseId);
-            if(await _userRepository.UpdateAsync())
-            {
-                await Task.CompletedTask;
-            }
-            else
-            {
-                throw new ArgumentException("Database cannot save new data");
-            }
-        }
-        public async Task<TokenDto> LoginAsync(string username,string password)
+        public async Task<TokenDto> LoginAsync(string username, string password)
         {
             var @user = await _userRepository.GetOrFailByLoginAsync(username);
             if (user == null)
                 throw new Exception("Wrong credentials");
             var pass = await _passwordRepository.GetByIdAsync(user.UserPassword.Id);
-            if(!SecurityClass.ComparePassword(pass.NormalizedPassword,password,pass.Salt))
+            if (!SecurityClass.ComparePassword(pass.NormalizedPassword, password, pass.Salt))
             {
                 throw new Exception("Wrong credentials");
             }
@@ -66,8 +48,8 @@ namespace Courses.Infrastructure.Services
             user = await _userRepository.GetByEmailAsync(email);
             if (user != null)
                 throw new Exception("Email already exist");
-            user = new Courses.Core.Models.User(username,email,login);
-            await _userRepository.RegisterAsync(user,password);
+            user = new Courses.Core.Models.User(username, email, login);
+            await _userRepository.RegisterAsync(user, password);
             var role = await _roleRepository.GetUserRole(user.Id);
             var token = _jwtHandler.CreateToken(user.Id, role.Name);
             return new TokenDto
@@ -77,6 +59,24 @@ namespace Courses.Infrastructure.Services
                 Token = token.Token,
             };
         }
+        public async Task BuyCoursesAsync(Guid userId, Guid courseId)
+        {
+            var @user = await _userRepository.GetOrFailByIdAsync(userId);
+            if (@user == null)
+                throw new Exception("User doesn't exist");
+            var course = await _courseService.GetByIdAsync(courseId);
+            if (course == null)
+                throw new Exception("Course doesn't exist");
+            user.CoursesBuy(courseId);
+            if(await _userRepository.UpdateAsync())
+            {
+                await Task.CompletedTask;
+            }
+            else
+            {
+                throw new ArgumentException("Database cannot save new data");
+            }
+        }       
         public async Task UpdateUserAsync(Guid UserId,Update update)
         {
             var @user = await _userRepository.GetByIdAsync(UserId);
@@ -89,7 +89,6 @@ namespace Courses.Infrastructure.Services
             await _passwordRepository.UpdateAsync();
             await Task.CompletedTask;
         }
-
         async Task IUserService.Initialize(string email, string password, string username, string login)
         {
             var @user = await _userRepository.GetByLoginAsync(username);
@@ -98,7 +97,7 @@ namespace Courses.Infrastructure.Services
             user = await _userRepository.GetByEmailAsync(email);
             if (user != null)
                 throw new Exception("Email already exist");
-            user = new Courses.Core.Models.User(username, email, login);
+            user = new Core.Models.User(username, email, login);
             await _userRepository.RegisterAsync(user, password);
             await Task.CompletedTask;
         }

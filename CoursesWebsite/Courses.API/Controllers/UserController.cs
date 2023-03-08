@@ -54,8 +54,9 @@ namespace Courses.API.Controllers
                 HttpContext.Response.Cookies.Append("Bearer", token.Token,new CookieOptions()
                 {
                     HttpOnly = true,
-                    SameSite = SameSiteMode.None,
-                    Secure = true
+                    SameSite = SameSiteMode.Strict,
+                    Secure = true,
+                    Expires = DateTime.UtcNow.AddMinutes(15)
                 });
                 return await Task.FromResult(View("Index"));
             }

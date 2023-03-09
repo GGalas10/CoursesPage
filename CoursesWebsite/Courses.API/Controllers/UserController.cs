@@ -1,5 +1,6 @@
 ﻿using Courses.Infrastructure.Comands.User;
 using Courses.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
@@ -22,6 +23,10 @@ namespace Courses.API.Controllers
         [HttpGet("Login")]
         public async Task<IActionResult> Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewData["Title"] = "Logowanie";
             return View();
         }
@@ -40,17 +45,26 @@ namespace Courses.API.Controllers
                 ViewData["Error"] = "Błąd rejestracji";
                 return View();
             }
-            HttpContext.Response.Cookies.Append("Bearer", token.Token);
+            HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.Strict,
+                Secure = true,
+                Expires = DateTime.UtcNow.AddMinutes(15)
+            });
             return RedirectToAction("Index");
         }
         [HttpPost("Login")]
         public async Task<IActionResult> Login(Login comand)
-        {
+        {      
             if (ModelState.IsValid)
             {
                 var token = await _userService.LoginAsync(comand.Name, comand.Password);
                 if(token == null)
+                {
                     ViewData["Error"] = "Błędne dane logowania";
+                    return View();
+                }               
                 HttpContext.Response.Cookies.Append("Bearer", token.Token,new CookieOptions()
                 {
                     HttpOnly = true,

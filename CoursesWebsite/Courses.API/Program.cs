@@ -97,7 +97,7 @@ app.UseStatusCodePages(async context =>
 
     if (response.StatusCode == (int)HttpStatusCode.Unauthorized ||
             response.StatusCode == (int)HttpStatusCode.Forbidden)
-        response.Redirect("/Unauthorized");
+        response.Redirect("/Home/Unauthorized");
 });
 app.UseRouting();
 

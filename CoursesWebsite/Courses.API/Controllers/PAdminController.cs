@@ -17,6 +17,10 @@ namespace Courses.API.Controllers
         [HttpGet("Login")]
         public async Task<IActionResult> Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return await Task.FromResult(View());
         }       
         [HttpGet("Register")]

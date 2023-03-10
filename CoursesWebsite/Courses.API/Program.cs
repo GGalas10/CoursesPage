@@ -3,10 +3,10 @@ using Courses.Infrastructure.Database;
 using Courses.Infrastructure.Mappers;
 using Courses.Infrastructure.Repositories;
 using Courses.Infrastructure.Services;
+using Courses.Infrastructure.Services.Interfaces;
+using Courses.Infrastructure.Services.Services;
 using Courses.Infrastructure.Settings;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
@@ -38,6 +38,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository,RoleRepository>();
 builder.Services.AddScoped<ICoursesRepository,CoursesRepository>();
 builder.Services.AddScoped<IPasswordRepository, PasswordRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepostiory>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 

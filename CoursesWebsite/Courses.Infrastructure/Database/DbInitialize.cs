@@ -1,6 +1,6 @@
 ﻿using Courses.Core.Models;
 using Courses.Core.Repositories;
-using Courses.Infrastructure.Services;
+using Courses.Infrastructure.Services.Interfaces;
 
 namespace Courses.Infrastructure.Database
 {

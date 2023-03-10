@@ -1,6 +1,5 @@
 ﻿using Courses.Infrastructure.Comands.User;
-using Courses.Infrastructure.Services;
-using Microsoft.AspNetCore.Authorization;
+using Courses.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
@@ -8,11 +7,9 @@ namespace Courses.API.Controllers
     public class UserController : ApiBaseController
     {
         private readonly IUserService _userService;
-        private readonly IJwtHandler _jwtHandler;
         public UserController(IUserService userService, IJwtHandler jwtHandler)
         {
             _userService = userService;
-            _jwtHandler = jwtHandler;
         }
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
@@ -25,6 +22,7 @@ namespace Courses.API.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                ViewData["Title"] = "Home";
                 return RedirectToAction("Index", "Home");
             }
             ViewData["Title"] = "Logowanie";
@@ -39,7 +37,7 @@ namespace Courses.API.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(Register command)
         {
-            var token = await _userService.RegisterAsync(command.UserName, command.Password, command.Login, command.UserEmail);
+            var token = await _userService.RegisterAsync(command.UserName, command.Password, command.Login, command.UserEmail,"User");
             if (token == null)
             {
                 ViewData["Error"] = "Błąd rejestracji";

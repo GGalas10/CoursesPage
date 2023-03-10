@@ -1,12 +1,8 @@
 ﻿using Courses.Core.Models;
 using Courses.Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Courses.Infrastructure.Services.Interfaces;
 
-namespace Courses.Infrastructure.Services
+namespace Courses.Infrastructure.Services.Services
 {
     public class RoleService : IRoleService
     {
@@ -21,16 +17,19 @@ namespace Courses.Infrastructure.Services
         public async Task AsignRoleAsync(Guid userId, Guid roleId)
         {
             var user = _userRepository.GetByIdAsync(userId);
-            if(user == null)
+            if (user == null)
                 throw new Exception("User doesn't exists");
             var role = _roleRepository.GetRoleAsync(roleId);
             if (role == null)
                 throw new Exception("Role doesn't exists");
             await _roleRepository.AssignRole(userId, roleId);
         }
-        public async Task<string> GetUserRoleAsync(Guid id)
-        =>await Task.FromResult(_roleRepository.GetUserRole(id).Result.Name);
-
+        public async Task<Guid> GetRoleIdByNameAsync(string name)
+            => await Task.FromResult(_roleRepository.GetRoleAsync(name).Result.Id);
+        public async Task<Role> GetRoleIdByIdAsync(Guid id)
+            => await _roleRepository.GetRoleAsync(id);
+        public async Task<Role> GetUserRoleAsync(Guid userId)
+        => await _roleRepository.GetUserRole(userId);
         public async Task CreateRoleAsync(string name)
         {
             var newRole = new Role(name);

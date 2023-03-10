@@ -1,6 +1,6 @@
 ﻿using Courses.Infrastructure.DTO;
 
-namespace Courses.Infrastructure.Services
+namespace Courses.Infrastructure.Services.Interfaces
 {
     public interface IJwtHandler
     {

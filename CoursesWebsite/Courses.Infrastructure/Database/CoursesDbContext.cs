@@ -16,6 +16,7 @@ namespace Courses.Infrastructure.Database
         public DbSet<Topic> topics { get; set; }
         public DbSet<Lesson> lessons { get; set; }
         public DbSet<UserPassword> Password { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -73,6 +74,8 @@ namespace Courses.Infrastructure.Database
             });
             modelBuilder.Entity<UserRole>()
                 .HasKey(pk => pk.UserId);
+            modelBuilder.Entity<Cart>()
+                .HasKey(pk => pk.Id);
         }
     }
 }

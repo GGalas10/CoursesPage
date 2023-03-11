@@ -11,6 +11,8 @@ namespace Courses.Infrastructure.Repositories
         {
             _context = context;
         }
+        public async Task<Cart> GetCartByIdAsync(Guid cartId)
+        => await Task.FromResult(_context.Carts.FirstOrDefault(c => c.Id == cartId));
         public async Task<Cart> GetUserCartAsync(Guid userId)
         => await Task.FromResult(_context.Carts.FirstOrDefault(c=>c.UserId == userId));
         public async Task CreateCartAsync(Cart cart)

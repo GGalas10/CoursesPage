@@ -4,6 +4,7 @@ namespace Courses.Core.Repositories
 {
     public interface ICartRepository
     {
+        Task<Cart> GetCartByIdAsync(Guid cartId);
         Task<Cart> GetUserCartAsync(Guid userId);
         Task CreateCartAsync(Cart cart);
         Task UpdateCartAsync();

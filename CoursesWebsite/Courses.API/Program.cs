@@ -1,3 +1,4 @@
+using Courses.API.Middleware;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
 using Courses.Infrastructure.Mappers;
@@ -39,6 +40,7 @@ builder.Services.AddScoped<IRoleRepository,RoleRepository>();
 builder.Services.AddScoped<ICoursesRepository,CoursesRepository>();
 builder.Services.AddScoped<IPasswordRepository, PasswordRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepostiory>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
@@ -104,6 +106,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+var _cartSerivce = app.Services.CreateScope();
+app.UseMiddleware<CheckCartMiddleware>(_cartSerivce.ServiceProvider.GetService<ICartService>());
 
 app.MapControllerRoute(
     name: "default",

@@ -2,10 +2,10 @@
 {
     public interface ICartService
     {
-        Task CreateCartAsync(Guid userId);
-        Task DeleteCartAsync();
-        Task SaleAsync();
-        Task AddProductAsync(Guid id);
-        Task DeleteProductAsync(Guid id);
+        Task<Guid> CreateCartAsync(Guid userId);
+        Task DeleteCartAsync(Guid CartId);
+        Task SaleAsync(Guid CartId);
+        Task AddProductAsync(Guid CartId,Guid id);
+        Task DeleteProductAsync(Guid CartId, Guid id);
     }
 }

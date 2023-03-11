@@ -11,27 +11,33 @@ namespace Courses.Infrastructure.Services.Services
         {
             _cartRepository = cartRepository;
         }
-        public async Task CreateCartAsync(Guid userId)
+        public async Task<Guid> CreateCartAsync(Guid userId)
         {
             var cart = new Cart(userId);
             await _cartRepository.CreateCartAsync(cart);
+            return cart.Id;
         }
 
-        public Task DeleteCartAsync()
+        public async Task DeleteCartAsync(Guid CartId)
+        {
+            await _cartRepository.DeleteCartAsync(CartId);
+
+        }
+        public Task SaleAsync(Guid CartId)
         {
             throw new NotImplementedException();
         }
-        public Task SaleAsync()
+        public async Task AddProductAsync(Guid CartId,Guid id)
         {
-            throw new NotImplementedException();
+            var cart = await _cartRepository.GetUserCartAsync(CartId);
+            cart.AddCourse(id);
+            await _cartRepository.UpdateCartAsync();
         }
-        public Task AddProductAsync(Guid id)
+        public async Task DeleteProductAsync(Guid CartId,Guid id)
         {
-            throw new NotImplementedException();
-        }
-        public Task DeleteProductAsync(Guid id)
-        {
-            throw new NotImplementedException();
+            var cart = await _cartRepository.GetUserCartAsync(CartId);
+            cart.RemoveCourse(id);
+            await _cartRepository.UpdateCartAsync();
         }       
     }
 }

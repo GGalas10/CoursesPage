@@ -7,9 +7,11 @@ namespace Courses.API.Controllers
     public class UserController : ApiBaseController
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService, IJwtHandler jwtHandler)
+        private readonly ICartService _cartService;
+        public UserController(IUserService userService, ICartService cartService)
         {
             _userService = userService;
+            _cartService = cartService;
         }
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
@@ -50,6 +52,9 @@ namespace Courses.API.Controllers
                 Secure = true,
                 Expires = DateTime.UtcNow.AddMinutes(15)
             });
+            HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
+            var cartId = Guid.Parse(strCartId);
+            await _cartService.UpdateUserIdAsync(UserId, cartId);
             return RedirectToAction("Index");
         }
         [HttpPost("Login")]
@@ -70,6 +75,9 @@ namespace Courses.API.Controllers
                     Secure = true,
                     Expires = DateTime.UtcNow.AddMinutes(15)
                 });
+                HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
+                var cartId = Guid.Parse(strCartId);
+                await _cartService.UpdateUserIdAsync(UserId, cartId);
                 return await Task.FromResult(View("Index"));
             }
             else

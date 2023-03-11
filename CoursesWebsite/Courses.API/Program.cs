@@ -79,8 +79,9 @@ using(var scope = app.Services.CreateScope())
     var roleService = service.GetRequiredService<IRoleService>();
     var userRepository = service.GetRequiredService<IUserRepository>();
     var roleRepository = service.GetRequiredService<IRoleRepository>();
+    var cartRepository = service.GetRequiredService<ICartRepository>();
     dbContext.Database.Migrate();
-    DbInitialize.Initialize(dbContext,userSerivce,roleService, userRepository, roleRepository);
+    DbInitialize.Initialize(dbContext,userSerivce,roleService, userRepository, roleRepository,cartRepository);
 
 }
 

@@ -17,7 +17,12 @@ namespace Courses.Infrastructure.Services.Services
             await _cartRepository.CreateCartAsync(cart);
             return cart.Id;
         }
-
+        public async Task UpdateUserIdAsync(Guid userId, Guid cartId)
+        {
+            var cart = await _cartRepository.GetCartByIdAsync(userId);
+            cart.SetUserGuid(userId);
+            await _cartRepository.UpdateCartAsync();
+        }
         public async Task DeleteCartAsync(Guid CartId)
         {
             await _cartRepository.DeleteCartAsync(CartId);

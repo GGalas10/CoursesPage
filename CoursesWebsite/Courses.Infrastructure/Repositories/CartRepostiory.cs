@@ -23,7 +23,8 @@ namespace Courses.Infrastructure.Repositories
 
         public async Task DeleteCartAsync(Guid cartId)
         {
-            await Task.FromResult(_context.Remove(cartId));
+            var cart = _context.Carts.FirstOrDefault(c=>c.Id== cartId);
+            await Task.FromResult(_context.Remove(cart));
             await UpdateCartAsync();
         }
         public async Task Sale(Cart cart)

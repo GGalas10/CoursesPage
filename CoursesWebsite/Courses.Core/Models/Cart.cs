@@ -13,6 +13,7 @@
             Id = new Guid();
             UserId = userId;
             CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
         public void AddCourse(Guid courseId)
         {

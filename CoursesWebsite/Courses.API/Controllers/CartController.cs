@@ -22,7 +22,7 @@ namespace Courses.API.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var userCart = await _cartService.GetCartById(cartId);
-                if (userCart != null)
+                if (userCart == null)
                 {
                     IEnumerable<CartCourseDTO> cart = new List<CartCourseDTO>();
                     return View(cart);
@@ -33,7 +33,7 @@ namespace Courses.API.Controllers
             else
             {
                 var baseCart = await _cartService.GetCartById(cartId);
-                if (baseCart != null)
+                if (baseCart == null)
                 {
                     IEnumerable<CartCourseDTO> cart = new List<CartCourseDTO>();
                     return View(cart);

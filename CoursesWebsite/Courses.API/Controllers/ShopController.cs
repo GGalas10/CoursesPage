@@ -2,7 +2,8 @@
 
 namespace Courses.API.Controllers
 {
-    public class ShopController : Controller
+    [Route("controller")]
+    public class ShopController : ApiBaseController
     {
         public IActionResult Index()
         {

@@ -1,4 +1,4 @@
-using Courses.API.Middleware;
+using Courses.API.Framework;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
 using Courses.Infrastructure.Mappers;
@@ -109,7 +109,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 var _cartSerivce = app.Services.CreateScope();
 app.UseMiddleware<CheckCartMiddleware>(_cartSerivce.ServiceProvider.GetService<ICartService>());
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

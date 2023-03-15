@@ -44,6 +44,7 @@ namespace Courses.API.Middleware
                         Expires = DateTime.UtcNow.AddDays(7)
                     });
                 }
+                await _next(context);
 
             }   
         }

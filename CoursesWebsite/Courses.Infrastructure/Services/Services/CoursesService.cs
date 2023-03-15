@@ -22,6 +22,15 @@ namespace Courses.Infrastructure.Services.Services
 
         public async Task<IEnumerable<ViewCoursesDTO>> GetAllAsync()
         => _mapper.Map<IEnumerable<ViewCoursesDTO>>(await _coursesRepostiotory.GetAllAsync());
+        public async Task<IEnumerable<CartCourseDTO>> GetCoursesForCart(IEnumerable<Guid> guids)
+        {
+            List<CartCourseDTO> list = new List<CartCourseDTO>();
+            foreach (var courseId in guids)
+            {
+                list.Add(_mapper.Map<CartCourseDTO>(await _coursesRepostiotory.GetAsync(courseId)));
+            }
+            return list;
+        }
         public async Task<IEnumerable<ViewCoursesDTO>> GetByCourseIdAsync(IEnumerable<Guid> guids)
         {
             List<ViewCoursesDTO> list = new List<ViewCoursesDTO>();
@@ -33,9 +42,9 @@ namespace Courses.Infrastructure.Services.Services
         }
         public async Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId)
             => _mapper.Map<IEnumerable<ViewCoursesDTO>>(await Task.FromResult(_coursesRepostiotory.GetAllAsync().Result));
-        public async Task CreateAsync(string name, string description, string author, DigitalItem picture)
+        public async Task CreateAsync(string name, string description, string author, DigitalItem picture,double price)
         {
-            var course = new Course(name, description, author, picture);
+            var course = new Course(name, description, author, picture,Math.Round(price,2));
             await _coursesRepostiotory.CreateAsync(course);
             await Task.CompletedTask;
         }

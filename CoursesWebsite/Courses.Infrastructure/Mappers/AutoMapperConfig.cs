@@ -27,6 +27,13 @@ namespace Courses.Infrastructure.Mappers
 
                 cfg.CreateMap<Lesson,LessonDTO>()
                 .ForMember(p=>p.Video, m=>m.MapFrom(p=>p.Video));
+
+                cfg.CreateMap<Cart, UserCartDTO>()
+                .ForMember(g => g.ProductGuid, m => m.MapFrom(p => p.Courses));
+
+                cfg.CreateMap<Course, CartCourseDTO>()
+                .ForMember(p => p.Name, m => m.MapFrom(p => p.Name))
+                .ForMember(p => p.Price, m => m.MapFrom(p => p.Price));
             }).CreateMapper(); 
     }
 }

@@ -9,6 +9,7 @@ namespace Courses.Core.Models
         private HashSet<Category> _categories;
         public Name Name { get; protected set; }
         public Name Description { get; protected set; }
+        public Double Price { get; protected set; }
         public Name Author { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DigitalItem Picutre { get; protected set; }
@@ -17,12 +18,13 @@ namespace Courses.Core.Models
         #endregion
         #region Constructors
         private Course() { }
-        public Course(string name, string description, string author, byte[] picture):base()
+        public Course(string name, string description, string author, byte[] picture,double price):base()
         {
             _topics= new HashSet<Topic>();
             _categories= new HashSet<Category>();
             SetName(name);
             SetDescription(description);
+            SetPrice(price);
             SetAuthor(author);
             SetPicture(picture);
             CreatedAt = DateTime.UtcNow;
@@ -63,6 +65,12 @@ namespace Courses.Core.Models
         public void SetPicture(DigitalItem Picture)
         {
             this.Picutre= Picture;
+        }
+        public void SetPrice(double price)
+        {
+            if (price <= 0)
+                throw new Exception("Price cannot be smaller than or equal 0");
+            Price = price;
         }
         #endregion
     }

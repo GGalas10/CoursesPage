@@ -1,5 +1,7 @@
-﻿using Courses.Core.Models;
+﻿using AutoMapper;
+using Courses.Core.Models;
 using Courses.Core.Repositories;
+using Courses.Infrastructure.DTO;
 using Courses.Infrastructure.Services.Interfaces;
 
 namespace Courses.Infrastructure.Services.Services
@@ -7,9 +9,11 @@ namespace Courses.Infrastructure.Services.Services
     public class CartService : ICartService
     {
         private readonly ICartRepository _cartRepository;
-        public CartService(ICartRepository cartRepository)
+        private readonly IMapper _mapper;
+        public CartService(ICartRepository cartRepository,IMapper mapper)
         {
             _cartRepository = cartRepository;
+            _mapper = mapper;
         }
         public async Task<Guid> CreateCartAsync(Guid userId)
         {
@@ -17,6 +21,10 @@ namespace Courses.Infrastructure.Services.Services
             await _cartRepository.CreateCartAsync(cart);
             return cart.Id;
         }
+        public async Task<UserCartDTO> GetUserCart(Guid userid)
+        => _mapper.Map<UserCartDTO>(await _cartRepository.GetUserCartAsync(userid));
+        public async Task<UserCartDTO> GetCartById(Guid cartId)
+        => _mapper.Map<UserCartDTO>(await _cartRepository.GetCartByIdAsync(cartId));
         public async Task UpdateUserIdAsync(Guid userId, Guid cartId)
         {
             var cart = await _cartRepository.GetCartByIdAsync(userId);

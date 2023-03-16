@@ -16,6 +16,7 @@ namespace Courses.API.Controllers
             _cartService = cartService;
             _courseService = courseService;
         }
+        [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);

@@ -7,9 +7,9 @@ namespace Courses.Infrastructure.Services.Interfaces
         Task<CategoryDTO> GetCategoryByIdAsync(Guid id);
         Task<CategoryDTO> GetCategoryByNameAsync(string name);
         Task<IEnumerable<ViewCoursesDTO>> GetCoursesByNameAsync(string name);
-        Task<IEnumerable<ViewCoursesDTO>> GetCoursesByIdAsync(Guid Id);
+        Task<IEnumerable<ViewCoursesDTO>> GetCoursesByIdAsync(Guid id);
         Task CreateCategory(string name);
-        Task UpdateCategory(string name);
+        Task UpdateCategory(Guid id,string name);
         Task DeleteCategory(Guid id);
     }
 }

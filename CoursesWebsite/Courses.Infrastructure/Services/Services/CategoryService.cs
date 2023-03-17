@@ -29,14 +29,16 @@ namespace Courses.Infrastructure.Services.Services
             return _mapper.Map<CategoryDTO>(category);
         }
 
-        public async Task<IEnumerable<ViewCoursesDTO>> GetCoursesByIdAsync(Guid Id)
+        public async Task<IEnumerable<ViewCoursesDTO>> GetCoursesByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetCategoryByIdAsync(id);
+            return _mapper.Map<IEnumerable<ViewCoursesDTO>>(category.Course);
         }
 
         public async Task<IEnumerable<ViewCoursesDTO>> GetCoursesByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetCategoryByNameAsync(name);
+            return _mapper.Map<IEnumerable<ViewCoursesDTO>>(category.Course);
         }
         public async Task CreateCategory(string name)
         {
@@ -46,13 +48,18 @@ namespace Courses.Infrastructure.Services.Services
             await _categoryRepository.CreateCategoryAsync(newCategory);
             await Task.CompletedTask;
         }
-        public Task UpdateCategory(string name)
+        public async Task UpdateCategory(Guid id,string name)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetCategoryByIdAsync(id);
+            if (category.Name == name)
+                await Task.CompletedTask;
+            category.SetName(name);
+            await _categoryRepository.UpdateCategoryAsync();
         }
-        public Task DeleteCategory(Guid id)
+        public async Task DeleteCategory(Guid id)
         {
-            throw new NotImplementedException();
+            await _categoryRepository.DeleteCategoryAsync(id);
+            await Task.CompletedTask;
         }       
     }
 }

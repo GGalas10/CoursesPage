@@ -6,10 +6,13 @@ namespace Courses.API.Controllers
     [Route("controller")]
     public class ShopController : ApiBaseController
     {
+        private readonly ICategoryService _categoryService;
         private readonly ICourseService _courseService;
         private readonly ICartService _cartService;
-        public ShopController(ICourseService courseService)
+        public ShopController(ICourseService courseService,ICategoryService categoryService,ICartService cartService)
         {
+            _cartService = cartService;
+            _categoryService = categoryService;
             _courseService = courseService;
         }
         [HttpGet]
@@ -20,8 +23,8 @@ namespace Courses.API.Controllers
         }
         public async Task<IActionResult> Catergory(Guid id)
         {
-            
-            return View();
+            var categoryCourses = await _categoryService.GetCoursesByIdAsync(id);
+            return View(categoryCourses);
         }
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)

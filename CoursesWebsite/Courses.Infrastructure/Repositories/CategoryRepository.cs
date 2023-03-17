@@ -1,6 +1,7 @@
 ﻿using Courses.Core.Models;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Infrastructure.Repositories
 {
@@ -12,9 +13,9 @@ namespace Courses.Infrastructure.Repositories
             _context = context;
         }
         public async Task<Category> GetCategoryByIdAsync(Guid id)
-        => await Task.FromResult(_context.Categories.FirstOrDefault(c => c.Id == id));
+        => await Task.FromResult(_context.Categories.Include(c=>c.Course).FirstOrDefault(c => c.Id == id));
         public async Task<Category> GetCategoryByNameAsync(string name)
-        => await Task.FromResult(_context.Categories.FirstOrDefault(c => c.Name == name));
+        => await Task.FromResult(_context.Categories.Include(c => c.Course).FirstOrDefault(c => c.Name == name));
         public async Task CreateCategoryAsync(Category category)
         {
             _context.Categories.Add(category);

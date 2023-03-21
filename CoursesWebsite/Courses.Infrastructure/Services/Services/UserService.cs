@@ -67,7 +67,6 @@ namespace Courses.Infrastructure.Services.Services
             var course = await _courseService.GetByIdAsync(courseId);
             if (course == null)
                 throw new Exception("Course doesn't exist");
-            user.CoursesBuy(courseId);
             if (await _userRepository.UpdateAsync())
             {
                 await Task.CompletedTask;

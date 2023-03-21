@@ -9,6 +9,7 @@ namespace Courses.Infrastructure.Services.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ICoursesRepository _coursesRepository;
         private readonly IMapper _mapper;
         public CategoryService(ICategoryRepository categoryRepository,IMapper mapper)
         {
@@ -32,13 +33,15 @@ namespace Courses.Infrastructure.Services.Services
         public async Task<IEnumerable<ViewCoursesDTO>> GetCoursesByIdAsync(Guid id)
         {
             var category = await _categoryRepository.GetCategoryByIdAsync(id);
-            return _mapper.Map<IEnumerable<ViewCoursesDTO>>(category.Course);
+            var courses = await _coursesRepository.GetAllByCategoryIdAsync(id);
+            return _mapper.Map<IEnumerable<ViewCoursesDTO>>(courses);
         }
 
         public async Task<IEnumerable<ViewCoursesDTO>> GetCoursesByNameAsync(string name)
         {
             var category = await _categoryRepository.GetCategoryByNameAsync(name);
-            return _mapper.Map<IEnumerable<ViewCoursesDTO>>(category.Course);
+            var courses = await _coursesRepository.GetAllByCategoryIdAsync(category.Id);
+            return _mapper.Map<IEnumerable<ViewCoursesDTO>>(courses);
         }
         public async Task CreateCategory(string name)
         {

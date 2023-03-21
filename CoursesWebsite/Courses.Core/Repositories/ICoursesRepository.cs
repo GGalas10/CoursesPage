@@ -6,6 +6,7 @@ namespace Courses.Core.Repositories
     {
         Task<Course> GetAsync(Guid id);
         Task<List<Course>> GetAllAsync();
+        Task<List<Course>> GetAllByCategoryIdAsync(Guid categoryId);
         Task CreateAsync(Course course);
         Task UpdateAsync(Guid id,Course course);
         Task DeleteAsync(Guid id);

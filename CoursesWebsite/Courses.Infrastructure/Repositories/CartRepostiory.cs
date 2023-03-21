@@ -15,6 +15,16 @@ namespace Courses.Infrastructure.Repositories
         => await Task.FromResult(_context.Carts.FirstOrDefault(c => c.Id == cartId));
         public async Task<Cart> GetUserCartAsync(Guid userId)
         => await Task.FromResult(_context.Carts.FirstOrDefault(c=>c.UserId == userId));
+        public async Task AddToCartAsync(CoursesCart course)
+        {
+            await Task.FromResult(_context.coursesCarts.Add(course));
+            await UpdateCartAsync();
+        }
+        public async Task RemoveFromCartAsync(CoursesCart course) 
+        {
+            await Task.FromResult(_context.coursesCarts.Remove(course));
+            await UpdateCartAsync();
+        }
         public async Task CreateCartAsync(Cart cart)
         {
             await Task.FromResult(_context.Carts.Add(cart));

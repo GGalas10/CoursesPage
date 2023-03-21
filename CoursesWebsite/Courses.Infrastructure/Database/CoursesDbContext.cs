@@ -17,6 +17,8 @@ namespace Courses.Infrastructure.Database
         public DbSet<Lesson> lessons { get; set; }
         public DbSet<UserPassword> Password { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<CoursesCart> coursesCarts { get; set; }
+        public DbSet<CoursesCategory> coursesCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,7 +52,6 @@ namespace Courses.Infrastructure.Database
                 entity.OwnsOne(a => a.Author, a =>{ a.Property(p => p.Value).HasColumnName("Author"); });
                 entity.OwnsOne(p => p.Picutre, a =>{ a.Property(p => p.Value).HasColumnName("Picture"); });
                 entity.HasMany(t => t.Topics).WithOne(t => t.Course);
-                entity.HasMany(c => c.Categories).WithMany(c => c.Course);
             });
             modelBuilder.Entity<Topic>(entity =>
             {
@@ -70,12 +71,18 @@ namespace Courses.Infrastructure.Database
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.OwnsOne(n=>n.Name, a => { a.Property(p => p.Value).HasColumnName("Name"); });
-                entity.HasMany(c => c.Course);
             });
             modelBuilder.Entity<UserRole>()
                 .HasKey(pk => pk.UserId);
+            
             modelBuilder.Entity<Cart>()
                 .HasKey(pk => pk.Id);
+
+            modelBuilder.Entity<CoursesCart>()
+                .HasNoKey();
+
+            modelBuilder.Entity<CoursesCategory>()
+                .HasNoKey();
         }
     }
 }

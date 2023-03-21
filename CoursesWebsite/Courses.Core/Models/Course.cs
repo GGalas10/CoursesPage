@@ -6,7 +6,6 @@ namespace Courses.Core.Models
     {
         #region Properties
         private HashSet<Topic> _topics;
-        private HashSet<Category> _categories;
         public Name Name { get; protected set; }
         public Name Description { get; protected set; }
         public Double Price { get; protected set; }
@@ -14,14 +13,12 @@ namespace Courses.Core.Models
         public DateTime CreatedAt { get; protected set; }
         public DigitalItem Picutre { get; protected set; }
         public ICollection<Topic> Topics => _topics;
-        public ICollection<Category> Categories => _categories;
         #endregion
         #region Constructors
         private Course() { }
         public Course(string name, string description, string author, byte[] picture,double price):base()
         {
             _topics= new HashSet<Topic>();
-            _categories= new HashSet<Category>();
             SetName(name);
             SetDescription(description);
             SetPrice(price);
@@ -53,14 +50,6 @@ namespace Courses.Core.Models
         {
             foreach(var topic in topics)
             _topics.Add(topic);
-        }
-        public void AddCategory(Category Category)
-        {
-            _categories.Add(Category);
-        }
-        public void RemoveCategory(Category Category)
-        {
-            _categories.Remove(Category);
         }
         public void SetPicture(DigitalItem Picture)
         {

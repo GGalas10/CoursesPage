@@ -10,8 +10,7 @@ namespace Courses.Infrastructure.Mappers
             => new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<User, UserDTO>()
-                .ForMember(p=>p.Name, m=>m.MapFrom(p=>p.UserName))
-                .ForMember(p=>p.AvailableCourses,m=>m.MapFrom(p=>p.PurchasedCourses));
+                .ForMember(p => p.Name, m => m.MapFrom(p => p.UserName));
                
                 cfg.CreateMap<Course, CourseDTO>()
                 .ForMember(c => c.Topics, m => m.MapFrom(p => p.Topics))
@@ -27,9 +26,6 @@ namespace Courses.Infrastructure.Mappers
 
                 cfg.CreateMap<Lesson,LessonDTO>()
                 .ForMember(p=>p.Video, m=>m.MapFrom(p=>p.Video));
-
-                cfg.CreateMap<Cart, UserCartDTO>()
-                .ForMember(g => g.ProductGuid, m => m.MapFrom(p => p.Courses));
 
                 cfg.CreateMap<Course, CartCourseDTO>()
                 .ForMember(p => p.Name, m => m.MapFrom(p => p.Name))

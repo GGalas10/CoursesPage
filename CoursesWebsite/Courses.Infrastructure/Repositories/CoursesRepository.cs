@@ -16,6 +16,16 @@ namespace Courses.Infrastructure.Services
         => await Task.FromResult(_context.Courses.FirstOrDefault(c => c.Id == id && c.State == State.Active));
         public async Task<List<Course>> GetAllAsync()
             => await Task.FromResult(_context.Courses.Where(c => c.State == State.Active).ToList());
+        public async Task<List<Course>> GetAllByCategoryIdAsync(Guid categoryId)
+        {
+            var allGuidInCategory = await Task.FromResult(_context.coursesCategories.Where(c=>c.CategoryId == categoryId).ToList());
+            var allCourses = new List<Course>();
+            foreach(var oneGuid in allGuidInCategory)
+            {
+                allCourses.Add(await GetAsync(oneGuid.CourseId));
+            }
+            return allCourses;
+        }
         public async Task CreateAsync(Course course)
         {
             var cours = await Task.FromResult(_context.Courses.FirstOrDefault(c=>c.Name == course.Name));

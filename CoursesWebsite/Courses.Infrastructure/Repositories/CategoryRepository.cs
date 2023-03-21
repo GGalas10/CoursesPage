@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Infrastructure.Repositories
 {
-    internal class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly CoursesDbContext _context;
         public CategoryRepository(CoursesDbContext context)

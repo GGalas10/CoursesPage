@@ -41,6 +41,8 @@ builder.Services.AddScoped<ICoursesRepository,CoursesRepository>();
 builder.Services.AddScoped<IPasswordRepository, PasswordRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepostiory>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 

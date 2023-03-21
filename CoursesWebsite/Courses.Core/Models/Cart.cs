@@ -10,7 +10,8 @@
         public IEnumerable<Guid> Courses => _courses;
         public Cart(Guid userId)
         {
-            Id = new Guid();
+            _courses = new HashSet<Guid>();
+            Id = Guid.NewGuid();
             UserId = userId;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;

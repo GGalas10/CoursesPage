@@ -11,7 +11,7 @@ namespace Courses.Infrastructure.Database
             var carts = context.Carts.ToList();
             foreach(var cart in carts)
             {
-                if (cart.UpdatedAt <= DateTime.UtcNow.AddDays(7))
+                if (cart.UpdatedAt.AddDays(7) <= DateTime.UtcNow)
                     await cartRepostiory.DeleteCartAsync(cart.Id);
             }
             if(!context.Roles.Any())

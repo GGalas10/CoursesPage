@@ -5,7 +5,7 @@ namespace Courses.Core.Models
     public class User :Entity
     {
         #region Properties
-        private readonly HashSet<Guid> _purchasedCourses = new HashSet<Guid>();
+        private readonly HashSet<Guid> _purchasedCourses;
         public Name UserName { get; protected set; }
         public Email Email { get; protected set; }
         public Name Login { get; protected set; }

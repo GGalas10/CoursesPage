@@ -1,9 +1,9 @@
-﻿using Courses.Infrastructure.Services.Interfaces;
+﻿using Courses.Core.Models;
+using Courses.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
 {
-    [Route("controller")]
     public class ShopController : ApiBaseController
     {
         private readonly ICategoryService _categoryService;
@@ -15,27 +15,27 @@ namespace Courses.API.Controllers
             _categoryService = categoryService;
             _courseService = courseService;
         }
-        [HttpGet]
+        [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
-            var courses = await _courseService.GetAllAsync();
-            return View(courses);
+            //var courses = await _courseService.GetAllAsync();
+            return View();
         }
         public async Task<IActionResult> Catergory(Guid id)
         {
             var categoryCourses = await _categoryService.GetCoursesByIdAsync(id);
             return View(categoryCourses);
         }
-        [HttpGet]
+        [HttpGet("Details")]
         public async Task<IActionResult> Details(Guid id)
         {
             var course = await _courseService.GetByIdAsync(id);
             return View(course);
         }
-        [HttpPost]
+        [HttpPost("AddToCart")]
         public async Task AddToCart(Guid courseId)
         {
-            var cartId =Guid.Parse(HttpContext.Request.Cookies["CartId"]);
+            var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
             await _cartService.AddProductAsync(cartId, courseId);
         }
         [HttpPost]
@@ -43,6 +43,18 @@ namespace Courses.API.Controllers
         {
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
             await _cartService.DeleteProductAsync(cartId, courseId);
+        }
+        [HttpPost("Test")]
+        public async Task<string> Test()
+        {
+            var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
+            var cart = await _cartService.GetCartById(cartId);
+            string test="";
+            foreach(var item in cart.ProductGuid)
+            {
+                test += item.ToString() + ",";
+            }
+            return test;
         }
     }
 }

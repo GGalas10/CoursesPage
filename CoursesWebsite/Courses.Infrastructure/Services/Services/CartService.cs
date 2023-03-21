@@ -42,13 +42,13 @@ namespace Courses.Infrastructure.Services.Services
         }
         public async Task AddProductAsync(Guid CartId,Guid id)
         {
-            var cart = await _cartRepository.GetUserCartAsync(CartId);
+            var cart = await _cartRepository.GetCartByIdAsync(CartId);
             cart.AddCourse(id);
             await _cartRepository.UpdateCartAsync();
         }
         public async Task DeleteProductAsync(Guid CartId,Guid id)
         {
-            var cart = await _cartRepository.GetUserCartAsync(CartId);
+            var cart = await _cartRepository.GetCartByIdAsync(CartId);
             cart.RemoveCourse(id);
             await _cartRepository.UpdateCartAsync();
         }       

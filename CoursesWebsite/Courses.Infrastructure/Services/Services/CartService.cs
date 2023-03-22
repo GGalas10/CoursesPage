@@ -22,9 +22,18 @@ namespace Courses.Infrastructure.Services.Services
             return cart.Id;
         }
         public async Task<UserCartDTO> GetUserCart(Guid userid)
-        => _mapper.Map<UserCartDTO>(await _cartRepository.GetUserCartAsync(userid));
+        {
+            var userCart = await _cartRepository.GetUserCartAsync(userid);
+            var cartDto = new UserCartDTO();
+            cartDto.ProductGuid = await _cartRepository.GetProductsInCartByIdAsync(userCart.Id);
+            return cartDto;
+        }
         public async Task<UserCartDTO> GetCartById(Guid cartId)
-        => _mapper.Map<UserCartDTO>(await _cartRepository.GetCartByIdAsync(cartId));
+        {
+            var cartDto = new UserCartDTO();
+            cartDto.ProductGuid = await _cartRepository.GetProductsInCartByIdAsync(cartId);
+            return cartDto;
+        }
         public async Task UpdateUserIdAsync(Guid userId, Guid cartId)
         {
             var cart = await _cartRepository.GetCartByIdAsync(userId);

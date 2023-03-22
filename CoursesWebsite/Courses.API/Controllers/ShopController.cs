@@ -38,23 +38,11 @@ namespace Courses.API.Controllers
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
             await _cartService.AddProductAsync(cartId, courseId);
         }
-        [HttpPost]
+        [HttpPost("DeleteFromCart")]
         public async Task DeleteFromCart(Guid courseId)
         {
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
             await _cartService.DeleteProductAsync(cartId, courseId);
-        }
-        [HttpPost("Test")]
-        public async Task<string> Test()
-        {
-            var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
-            var cart = await _cartService.GetCartById(cartId);
-            string test="";
-            foreach(var item in cart.ProductGuid)
-            {
-                test += item.ToString() + ",";
-            }
-            return test;
         }
     }
 }

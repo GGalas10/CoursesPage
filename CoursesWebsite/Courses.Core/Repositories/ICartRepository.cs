@@ -6,6 +6,7 @@ namespace Courses.Core.Repositories
     {
         Task<Cart> GetCartByIdAsync(Guid cartId);
         Task<Cart> GetUserCartAsync(Guid userId);
+        Task<List<Guid>> GetProductsInCartByIdAsync(Guid cartId);
         Task AddToCartAsync(CoursesCart course);
         Task RemoveFromCartAsync(CoursesCart course);
         Task CreateCartAsync(Cart cart);

@@ -1,6 +1,7 @@
 ﻿using Courses.Core.Models;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
+using Courses.Infrastructure.DTO;
 
 namespace Courses.Infrastructure.Repositories
 {
@@ -15,6 +16,11 @@ namespace Courses.Infrastructure.Repositories
         => await Task.FromResult(_context.Carts.FirstOrDefault(c => c.Id == cartId));
         public async Task<Cart> GetUserCartAsync(Guid userId)
         => await Task.FromResult(_context.Carts.FirstOrDefault(c=>c.UserId == userId));
+        public async Task<List<Guid>> GetProductsInCartByIdAsync(Guid cartId)
+        {
+            var productsGuids = await Task.FromResult(_context.coursesCarts.Where(c=>c.CartId == cartId).Select(c=>c.CourseId));
+            return productsGuids.ToList();
+        }
         public async Task AddToCartAsync(CoursesCart course)
         {
             await Task.FromResult(_context.coursesCarts.Add(course));

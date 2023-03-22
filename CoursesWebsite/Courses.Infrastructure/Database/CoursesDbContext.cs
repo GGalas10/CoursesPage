@@ -79,10 +79,10 @@ namespace Courses.Infrastructure.Database
                 .HasKey(pk => pk.Id);
 
             modelBuilder.Entity<CoursesCart>()
-                .HasNoKey();
+                .HasKey(pk => pk.Id);
 
             modelBuilder.Entity<CoursesCategory>()
-                .HasNoKey();
+                .HasKey(pk => pk.Id);
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using Courses.Core.Models;
-using Courses.Core.Value_Object;
+﻿using Courses.Core.Models.Cart;
+using Courses.Core.Models.Category;
+using Courses.Core.Models.Course;
+using Courses.Core.Models.User;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Courses.Infrastructure.Database
 {

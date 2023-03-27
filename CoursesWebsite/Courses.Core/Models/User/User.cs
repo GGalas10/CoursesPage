@@ -1,8 +1,9 @@
-﻿using Courses.Core.Value_Object;
+﻿using Courses.Core.Models.Common;
+using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models
+namespace Courses.Core.Models.User
 {
-    public class User :Entity
+    public class User : Entity
     {
         #region Properties
         public Name UserName { get; protected set; }
@@ -27,15 +28,15 @@ namespace Courses.Core.Models
         #region Methods
         public void SetEmail(string email)
         {
-            Email= email.Trim();
+            Email = email.Trim();
         }
         public void SetLogin(string login)
         {
-            Login= login.Trim();
+            Login = login.Trim();
         }
         public void SetUserName(string userName)
         {
-            UserName= userName.Trim();
+            UserName = userName.Trim();
         }
         #endregion
     }

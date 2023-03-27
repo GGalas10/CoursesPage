@@ -46,59 +46,51 @@ passwordInput.addEventListener("input", function () {
 
 /*<!-- Cart --> */
 function addToCart(courseId) {
-    var button = document.getElementById('TestBtn'); // pobieramy element Button z HTML
+    var button = document.getElementById('TestBtn');
     $.ajax({
         type: "POST",
-        url: "/Shop/AddToCart", // adres URL do metody kontrolera
-        data: { courseId: courseId }, // przekazujemy parametr courseId
+        url: "/Shop/AddToCart",
+        data: { courseId: courseId },
         beforeSend: function () {
-            // wyświetlamy animację ładowania
             button.disabled = true;
             button.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Dodawanie...';
         },
         success: function () {
-            // jeśli dodanie do koszyka się powiedzie, aktualizujemy stan przycisku
             button.innerHTML = '<i class="fa fa-check"></i> Dodano do koszyka';
             button.classList.remove("btn-primary");
             button.classList.add("btn-success");
         },
         error: function () {
-            // jeśli dodanie do koszyka się nie powiedzie, wyświetlamy komunikat błędu
             button.innerHTML = '<i class="fa fa-times"></i> Error';
             button.classList.remove("btn-primary");
             button.classList.add("btn-danger");
         },
         complete: function () {
-            // kończymy animację ładowania i przywracamy przycisk do pierwotnego stanu
             button.disabled = false;
         },
     });
 }
 function DeleteFromCart(courseId) {
-    var button = document.getElementById('TestBtn'); // pobieramy element Button z HTML
+    var button = document.getElementById('TestBtn');
     $.ajax({
         type: "POST",
-        url: "/Shop/DeleteFromCart", // adres URL do metody kontrolera
-        data: { courseId: courseId }, // przekazujemy parametr courseId
+        url: "/Shop/DeleteFromCart",
+        data: { courseId: courseId },
         beforeSend: function () {
-            // wyświetlamy animację ładowania
             button.disabled = true;
             button.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Usuwanie...';
         },
         success: function () {
-            // jeśli dodanie do koszyka się powiedzie, aktualizujemy stan przycisku
             button.innerHTML = '<i class="fa fa-check"></i> Usunięto z koszyka';
             button.classList.remove("btn-primary");
             button.classList.add("btn-success");
         },
         error: function () {
-            // jeśli dodanie do koszyka się nie powiedzie, wyświetlamy komunikat błędu
             button.innerHTML = '<i class="fa fa-times"></i> Error';
             button.classList.remove("btn-primary");
             button.classList.add("btn-danger");
         },
         complete: function () {
-            // kończymy animację ładowania i przywracamy przycisk do pierwotnego stanu
             button.disabled = false;
         },
     });

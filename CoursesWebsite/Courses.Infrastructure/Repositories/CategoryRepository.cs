@@ -1,4 +1,4 @@
-﻿using Courses.Core.Models;
+﻿using Courses.Core.Models.Category;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;

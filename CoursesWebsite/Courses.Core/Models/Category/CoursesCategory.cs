@@ -1,4 +1,4 @@
-﻿namespace Courses.Core.Models
+﻿namespace Courses.Core.Models.Category
 {
     public class CoursesCategory
     {
@@ -6,7 +6,7 @@
         public Guid CourseId { get; protected set; }
         public Guid CategoryId { get; protected set; }
         private CoursesCategory() { }
-        public CoursesCategory(Guid categoryId,Guid courseId)
+        public CoursesCategory(Guid categoryId, Guid courseId)
         {
             Id = Guid.NewGuid();
             CourseId = categoryId;

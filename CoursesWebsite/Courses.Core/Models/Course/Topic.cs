@@ -1,18 +1,19 @@
-﻿using Courses.Core.Value_Object;
+﻿using Courses.Core.Models.Common;
+using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models
+namespace Courses.Core.Models.Course
 {
-    public class Topic: Entity
+    public class Topic : Entity
     {
         private List<Lesson> _lessons;
         public Name Name { get; protected set; }
         public Name Description { get; protected set; }
         public virtual Course Course { get; protected set; }
         public ICollection<Lesson> Lessons => _lessons;
-        private Topic(){}
+        private Topic() { }
         public Topic(Name name, Name description)
         {
-            _lessons= new List<Lesson>();
+            _lessons = new List<Lesson>();
             SetName(name);
             SetDescription(description);
         }
@@ -31,18 +32,18 @@ namespace Courses.Core.Models
         }
         public void AddLesson(Lesson lesson)
         {
-            if (lesson == null) 
+            if (lesson == null)
                 throw new Exception("Lesson cannot be empty");
             _lessons.Add(lesson);
         }
         public void AddLessons(List<Lesson> lessons)
         {
-            if (lessons.Count< 0)
+            if (lessons.Count < 0)
                 throw new Exception("Lesson cannot be empty");
             foreach (Lesson lesson in lessons)
             {
                 _lessons.Add(lesson);
-            }           
+            }
         }
     }
 }

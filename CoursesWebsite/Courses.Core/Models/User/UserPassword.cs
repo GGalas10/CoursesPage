@@ -1,6 +1,6 @@
 ﻿using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models
+namespace Courses.Core.Models.User
 {
     public class UserPassword
     {
@@ -10,7 +10,7 @@ namespace Courses.Core.Models
         public Guid UserId { get; set; }
         public User User { get; protected set; }
         private UserPassword() { }
-        public UserPassword(Password normalizedPassword, Name salt,User user)
+        public UserPassword(Password normalizedPassword, Name salt, User user)
         {
             Id = Guid.NewGuid();
             SetPassword(normalizedPassword);

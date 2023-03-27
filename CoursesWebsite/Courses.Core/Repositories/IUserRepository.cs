@@ -1,4 +1,4 @@
-﻿using Courses.Core.Models;
+﻿using Courses.Core.Models.User;
 using Courses.Core.Value_Object;
 using models = Courses.Core.Models;
 

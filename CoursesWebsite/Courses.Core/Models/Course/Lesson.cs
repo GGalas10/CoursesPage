@@ -1,19 +1,20 @@
-﻿using Courses.Core.Value_Object;
+﻿using Courses.Core.Models.Common;
+using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models
+namespace Courses.Core.Models.Course
 {
     public class Lesson : Entity
     {
         #region Properties
         public Name LessonName { get; protected set; }
         public Name LessonDescription { get; protected set; }
-        public DigitalItem Video { get;protected set; }
+        public DigitalItem Video { get; protected set; }
         public Number LessonNumber { get; protected set; }
         public virtual Topic Topic { get; protected set; }
         #endregion
         #region Constructors
         private Lesson() { }
-        public Lesson(string lessonName, string lessonDescription, byte[] video,int lessonNumber) : base()
+        public Lesson(string lessonName, string lessonDescription, byte[] video, int lessonNumber) : base()
         {
             SetName(lessonName);
             SetDescription(lessonDescription);

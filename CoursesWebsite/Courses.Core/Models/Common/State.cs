@@ -1,4 +1,4 @@
-﻿namespace Courses.Core.Models
+﻿namespace Courses.Core.Models.Common
 {
     public enum State
     {

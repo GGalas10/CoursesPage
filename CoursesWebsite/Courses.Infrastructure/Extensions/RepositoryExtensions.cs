@@ -1,4 +1,5 @@
-﻿using Courses.Core.Models;
+﻿using Courses.Core.Models.Course;
+using Courses.Core.Models.User;
 using Courses.Core.Repositories;
 using Courses.Core.Value_Object;
 

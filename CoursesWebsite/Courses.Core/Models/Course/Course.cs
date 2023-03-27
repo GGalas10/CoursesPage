@@ -1,14 +1,15 @@
-﻿using Courses.Core.Value_Object;
+﻿using Courses.Core.Models.Common;
+using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models
+namespace Courses.Core.Models.Course
 {
-    public class Course :Entity
+    public class Course : Entity
     {
         #region Properties
         private HashSet<Topic> _topics;
         public Name Name { get; protected set; }
         public Name Description { get; protected set; }
-        public Double Price { get; protected set; }
+        public double Price { get; protected set; }
         public Name Author { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DigitalItem Picutre { get; protected set; }
@@ -16,9 +17,9 @@ namespace Courses.Core.Models
         #endregion
         #region Constructors
         private Course() { }
-        public Course(string name, string description, string author, byte[] picture,double price):base()
+        public Course(string name, string description, string author, byte[] picture, double price) : base()
         {
-            _topics= new HashSet<Topic>();
+            _topics = new HashSet<Topic>();
             SetName(name);
             SetDescription(description);
             SetPrice(price);
@@ -48,12 +49,12 @@ namespace Courses.Core.Models
         }
         public void AddTopic(List<Topic> topics)
         {
-            foreach(var topic in topics)
-            _topics.Add(topic);
+            foreach (var topic in topics)
+                _topics.Add(topic);
         }
         public void SetPicture(DigitalItem Picture)
         {
-            this.Picutre= Picture;
+            Picutre = Picture;
         }
         public void SetPrice(double price)
         {

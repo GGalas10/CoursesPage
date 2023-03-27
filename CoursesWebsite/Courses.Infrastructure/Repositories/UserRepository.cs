@@ -1,11 +1,11 @@
-﻿using Courses.Core.Models;
+﻿using Courses.Core.Models.Common;
+using Courses.Core.Models.User;
 using Courses.Core.Repositories;
 using Courses.Core.Value_Object;
 using Courses.Infrastructure.Database;
 using Courses.Infrastructure.Extensions;
 using Courses.Infrastructure.Sercurity;
 using Microsoft.EntityFrameworkCore;
-using models = Courses.Core.Models;
 
 namespace Courses.Infrastructure.Services
 {
@@ -38,7 +38,7 @@ namespace Courses.Infrastructure.Services
             var newUser = await Task.FromResult(this.GetByEmailAsync(user.Email)).Result;
             var salt = SecurityClass.CreateSalt(newUser.Id);
             var pass = SecurityClass.HashPassword(password,salt);
-            var newpass = new models.UserPassword(pass, salt,user);
+            var newpass = new UserPassword(pass, salt,user);
             _context.Password.Add(newpass);
             if (await UpdateAsync())
                 await Task.CompletedTask;

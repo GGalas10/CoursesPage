@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Courses.Core.Models
+namespace Courses.Core.Models.User
 {
     public class UserRole
     {
@@ -10,6 +10,6 @@ namespace Courses.Core.Models
         {
             UserId = userId;
             RoleId = roleId;
-        }       
+        }
     }
 }

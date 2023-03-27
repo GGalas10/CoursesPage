@@ -1,6 +1,7 @@
-﻿using Courses.Core.Value_Object;
+﻿using Courses.Core.Models.Common;
+using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models
+namespace Courses.Core.Models.Category
 {
     public class Category : Entity
     {

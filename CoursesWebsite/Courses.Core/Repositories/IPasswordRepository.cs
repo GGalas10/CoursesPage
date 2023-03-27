@@ -1,4 +1,4 @@
-﻿using Courses.Core.Models;
+﻿using Courses.Core.Models.User;
 
 namespace Courses.Core.Repositories
 {

@@ -1,6 +1,8 @@
-﻿using Courses.Core.Models;
-using AutoMapper;
+﻿using AutoMapper;
 using Courses.Infrastructure.DTO;
+using Courses.Core.Models.Course;
+using Courses.Core.Models.Category;
+using Courses.Core.Models.User;
 
 namespace Courses.Infrastructure.Mappers
 {

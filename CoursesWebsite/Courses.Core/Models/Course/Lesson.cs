@@ -26,10 +26,14 @@ namespace Courses.Core.Models.Course
         #region Methods
         public void SetName(string name)
         {
+            if (string.IsNullOrEmpty(name))
+                throw new Exception("Name cannot be empty");
             LessonName = name;
         }
         public void SetDescription(string description)
         {
+            if (string.IsNullOrEmpty(description))
+                throw new Exception("Description cannot be empty");
             LessonDescription = description;
         }
         public void SetVideo(DigitalItem video)
@@ -38,6 +42,8 @@ namespace Courses.Core.Models.Course
         }
         public void SetLessonNumber(int lessonNumber)
         {
+            if (lessonNumber <= 0)
+                throw new Exception("Lesson number cannot be less or equal 0");
             LessonNumber = lessonNumber;
         }
         #endregion

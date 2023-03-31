@@ -11,7 +11,7 @@ namespace Courses.Infrastructure.Services.Interfaces
         Task UpdateUserIdAsync(Guid userId, Guid cartId);
         Task DeleteCartAsync(Guid CartId);
         Task SaleAsync(Guid CartId);
-        Task AddProductAsync(Guid CartId,Guid id);
-        Task DeleteProductAsync(Guid CartId, Guid id);
+        Task AddProductAsync(Guid CartId,string name,double price);
+        Task DeleteProductAsync(Guid CartId, string name, double price);
     }
 }

@@ -18,7 +18,7 @@ namespace Courses.Infrastructure.Repositories
         => await Task.FromResult(_context.Carts.FirstOrDefault(c=>c.UserId == userId));
         public async Task<List<Guid>> GetProductsInCartByIdAsync(Guid cartId)
         {
-            var productsGuids = await Task.FromResult(_context.coursesCarts.Where(c=>c.CartId == cartId).Select(c=>c.CourseId));
+            var productsGuids = await Task.FromResult(_context.coursesCarts.Where(c=>c.Id == cartId).Select(c=>c.CourseId));
             return productsGuids.ToList();
         }
         public async Task AddToCartAsync(CoursesCart course)

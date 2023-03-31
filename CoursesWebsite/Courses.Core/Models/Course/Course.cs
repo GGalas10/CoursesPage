@@ -1,5 +1,6 @@
 ﻿using Courses.Core.Models.Common;
 using Courses.Core.Value_Object;
+using System.Xml.Linq;
 
 namespace Courses.Core.Models.Course
 {
@@ -33,14 +34,20 @@ namespace Courses.Core.Models.Course
         #region Methods
         public void SetName(string name)
         {
+            if (string.IsNullOrEmpty(name))
+                throw new Exception("Name cannot be empty");
             Name = name;
         }
         public void SetDescription(string description)
         {
+            if (string.IsNullOrEmpty(description))
+                throw new Exception("Description cannot be empty");
             Description = description;
         }
         public void SetAuthor(string author)
         {
+            if (string.IsNullOrEmpty(author))
+                throw new Exception("Author cannot be empty");
             Author = author;
         }
         public void AddTopic(Topic topic)

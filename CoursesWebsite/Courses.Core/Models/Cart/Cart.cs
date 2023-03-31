@@ -14,6 +14,7 @@
             UserId = userId;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
+            _Carts = new List<CoursesCart>();
         }
         public void SetUserGuid(Guid userId)
         {

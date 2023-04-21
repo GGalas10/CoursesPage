@@ -2,15 +2,15 @@
 
 namespace Courses.Core.Models.Billing
 {
-    public class BillingCourses
+    public class InvoicingCourses
     {
         public Guid CourseId { get; protected set; }
         public Guid BillId { get; protected set; }
         public Name CourseName { get; protected set; }
         public double Price { get; protected set; }
-        public virtual Bill Bill { get; protected set; }
-        private BillingCourses() { }
-        public BillingCourses(Guid courseId,string courseName,double price)
+        public virtual Invoice Invoice { get; protected set; }
+        private InvoicingCourses() { }
+        public InvoicingCourses(Guid courseId,string courseName,double price)
         {
             CourseId = courseId;
             SetCourseName(courseName);

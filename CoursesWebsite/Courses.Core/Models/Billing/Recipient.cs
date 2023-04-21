@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Courses.Core.Models.Common;
 
 namespace Courses.Core.Models.Billing
 {
-    internal class Recipient
+    public class Recipient
     {
+        public Guid Id { get; protected set; }
+        public Adress DeliveryAdress { get;protected set; }
     }
 }

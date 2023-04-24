@@ -1,6 +1,6 @@
 ﻿using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models.Billing
+namespace Courses.Core.Models.Invoicing
 {
     public class InvoicingCourses
     {

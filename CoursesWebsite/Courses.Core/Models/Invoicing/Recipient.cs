@@ -1,6 +1,6 @@
 ﻿using Courses.Core.Models.Common;
 
-namespace Courses.Core.Models.Billing
+namespace Courses.Core.Models.Invoicing
 {
     public class Recipient
     {

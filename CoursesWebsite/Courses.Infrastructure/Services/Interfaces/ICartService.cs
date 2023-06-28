@@ -9,9 +9,9 @@ namespace Courses.Infrastructure.Services.Interfaces
         Task<UserCartDTO> GetUserCart(Guid userId);
         Task<UserCartDTO> GetCartById(Guid cartId);
         Task UpdateUserIdAsync(Guid userId, Guid cartId);
-        Task DeleteCartAsync(Guid CartId);
-        Task SaleAsync(Guid CartId);
-        Task AddProductAsync(Guid CartId,string name,double price);
-        Task DeleteProductAsync(Guid CartId, string name, double price);
+        Task DeleteCartAsync(Guid cartId);
+        Task SaleAsync(Guid cartId);
+        Task AddProductAsync(Guid cartId,string name,double price);
+        Task DeleteProductAsync(Guid cartId, Guid courseId);
     }
 }

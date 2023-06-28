@@ -33,10 +33,11 @@ namespace Courses.API.Controllers
             return View(course);
         }
         [HttpPost("AddToCart")]
-        public async Task AddToCart(Guid courseId)
+        public async Task AddToCart(Guid courseId,double price)
         {
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
-            await _cartService.AddProductAsync(cartId, courseId);
+            var course = await _courseService.GetByIdAsync(courseId);
+            await _cartService.AddProductAsync(cartId, course.Name,price);
         }
         [HttpPost("DeleteFromCart")]
         public async Task DeleteFromCart(Guid courseId)

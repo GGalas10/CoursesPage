@@ -82,9 +82,13 @@ namespace Courses.Infrastructure.Database
             });
             modelBuilder.Entity<UserRole>()
                 .HasKey(pk => pk.UserId);
-            
-            modelBuilder.Entity<Cart>()
-                .HasKey(pk => pk.Id);
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.HasKey(p => p.Id);
+                entity.HasMany(mC => mC._Carts).WithOne(oC => oC.Cart);
+            });
+                
 
             modelBuilder.Entity<CoursesCart>()
                 .HasKey(pk => pk.Id);

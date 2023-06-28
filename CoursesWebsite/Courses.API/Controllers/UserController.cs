@@ -53,8 +53,6 @@ namespace Courses.API.Controllers
                 Expires = DateTime.UtcNow.AddMinutes(15)
             });
             HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
-            var cartId = Guid.Parse(strCartId);
-            await _cartService.UpdateUserIdAsync(UserId, cartId);
             return RedirectToAction("Index");
         }
         [HttpPost("Login")]
@@ -77,7 +75,6 @@ namespace Courses.API.Controllers
                 });
                 HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
                 var cartId = Guid.Parse(strCartId);
-                await _cartService.UpdateUserIdAsync(UserId, cartId);
                 return await Task.FromResult(View("Index"));
             }
             else
@@ -86,7 +83,7 @@ namespace Courses.API.Controllers
                 return View();
             }
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             HttpContext.Response.Cookies.Delete("Bearer");

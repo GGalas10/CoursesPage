@@ -1,5 +1,6 @@
 ﻿using Courses.Core.Models.Cart;
 using Courses.Core.Models.Category;
+using Courses.Core.Models.Common;
 using Courses.Core.Models.Course;
 using Courses.Core.Models.Invoicing;
 using Courses.Core.Models.Invoicing.Settings;
@@ -95,8 +96,12 @@ namespace Courses.Infrastructure.Database
 
             modelBuilder.Entity<CoursesCategory>()
                 .HasKey(pk => pk.Id);
-            modelBuilder.Entity<Invoice>()
-                .HasKey(pk => pk.Id);
+            modelBuilder.Entity<Invoice>(entity =>
+            {
+                entity.HasKey(pk => pk.Id);
+                entity.HasMany(fk => fk.Courses).WithOne(fk => fk.Invoice);
+            });
+                
             modelBuilder.Entity<InvoiceSettings>()
                 .HasNoKey();
             modelBuilder.Entity<InvoicingCourses>(entity =>

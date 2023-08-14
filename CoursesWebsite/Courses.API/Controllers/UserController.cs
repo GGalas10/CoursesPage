@@ -89,5 +89,10 @@ namespace Courses.API.Controllers
             HttpContext.Response.Cookies.Delete("Bearer");
             return await Task.FromResult(RedirectToAction("Login"));
         }
+        //public async Task<JsonResult> GetUserTheme(string themeName)
+        //{
+        //    if()
+
+        //}
     }
 }

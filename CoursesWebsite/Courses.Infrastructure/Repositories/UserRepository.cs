@@ -58,6 +58,15 @@ namespace Courses.Infrastructure.Services
         {
             return (_context.SaveChanges() > 0) ? true:false;
         }
+        public async Task<UserConfiguration> GetUserConfigurationAsync(Guid userId)
+        {
+            if (userId == Guid.Empty)
+                throw new Exception("Userid cannot be null or empty");
+            var config = await _context.UserConfigurations.FirstOrDefaultAsync(uc=>uc.UserId == userId);
+            if (config == null)
+                throw new Exception("Config for this user cannot exists");
+            return config;
+        }
 
     }
 }

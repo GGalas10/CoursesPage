@@ -11,5 +11,6 @@ namespace Courses.Infrastructure.Services.Interfaces
         Task BuyCoursesAsync(Guid userId, Guid courseId);
         Task UpdateUserAsync(Guid UserId, Update update);
         internal Task Initialize(string email, string password, string username, string login);
+        Task<UserConfigDTO> GetUserConfig(Guid userId);
     }
 }

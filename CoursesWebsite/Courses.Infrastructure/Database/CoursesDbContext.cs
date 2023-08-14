@@ -28,6 +28,7 @@ namespace Courses.Infrastructure.Database
         public DbSet<InvoicingCourses> invoicingCourses { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Recipient> Recipients { get; set; }
+        public DbSet<UserConfiguration> UserConfigurations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

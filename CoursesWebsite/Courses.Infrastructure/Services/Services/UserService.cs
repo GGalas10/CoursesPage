@@ -100,5 +100,9 @@ namespace Courses.Infrastructure.Services.Services
             await _userRepository.RegisterAsync(user, password);
             await Task.CompletedTask;
         }
+        public async Task<UserConfigDTO> GetUserConfig(Guid userId)
+        {
+
+        }
     }
 }

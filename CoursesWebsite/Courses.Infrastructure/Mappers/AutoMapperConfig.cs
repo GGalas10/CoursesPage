@@ -36,6 +36,11 @@ namespace Courses.Infrastructure.Mappers
                 cfg.CreateMap<Category, CategoryDTO>()
                 .ForMember(p => p.Id, m => m.MapFrom(p => p.Id))
                 .ForMember(p => p.Name, m => m.MapFrom(p => p.Name));
+
+                cfg.CreateMap<UserConfiguration, UserConfigDTO>()
+                .ForMember(p => p.Theme, m => m.MapFrom(p => p.Theme))
+                .ForMember(p => p.Region, m => m.MapFrom(p => p.Region));
+
             }).CreateMapper(); 
     }
 }

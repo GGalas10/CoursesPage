@@ -8,11 +8,11 @@
     <div class="LoginBox">        
         <div id="UsernameBox">
             <label id="LabelLogin">Podaj login użytkownika</label>
-            <input type="text" asp-for="Name" style="text-align:center;width:90%;height:4vh;font-size:3vh;">
+            <input type="text" asp-for="Name" style="text-align:center;width:90%;height:4rem;font-size:3rem; max-height:15px;">
         </div>
         <div id="PasswordBox">
             <label id="LabelLogin">Podaj hasło użytkownika</label>
-            <input type="password" asp-for="Password" style="text-align:center;width:90%;height:4vh;font-size:3vh;">
+                <input type="password" asp-for="Password" style="text-align:center;width:90%;height:4rem;font-size:3rem;max-height:15px;">
         </div>
             @if (ViewData["Error"] != string.Empty)
                 @ViewData["Error"]

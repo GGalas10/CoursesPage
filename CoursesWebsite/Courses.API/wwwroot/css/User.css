@@ -1,27 +1,36 @@
 ﻿body {
-    min-height: 100%;
-    margin: 5px;
+    font-size: 10px;
+}
+@media (max-width: 1080px){
+    body{
+        font-size:5px;
+    }
+}
+@media(min-width: 1920px){
+    body{
+        font-size: 20px;
+    }
 }
 /*<-- Login Page -->*/
 .LoginHeader {
     text-align: center;
     background-color: red;
-    height: 7vh;
-    width: 50vw;
-    margin: 5px;
+    min-height: 7rem;
+    min-width: 75%;
+    margin: 0.5rem;
 }
 .LoginBox {
     flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50vw;
-    height: 50vh;
+    min-width: 75%;
+    min-height: 25rem;
     background-color: dimgrey;
-    margin: 5px;
+    margin: 0.5rem;
 }
 #HeaderLbl{
-    font-size: 4vh;
+    font-size: 3rem;
     font-weight:bold;
 }
 #UsernameBox {
@@ -29,9 +38,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px;
+    padding: 0.5rem;
     width: 99%;
-    height: 10vh;
+    min-height: 10rem;
     background-color: blue;
 }
 #PasswordBox {
@@ -39,9 +48,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px;
+    margin: 0.5rem;
     width: 99%;
-    height: 10vh;
+    height: 10rem;
     background-color: green;
 }
 #ButtonBox {
@@ -49,24 +58,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px;
+    margin: 0.5rem;
     width: 99%;
-    height: 20vh;
+    height: 20rem;
     background-color: fuchsia;
 }
 #LabelLogin{
     font-weight: bold;
-    font-size: 3vh;
+    font-size: 2rem;
     color:black;
 }
 #LoginBtn {
     border-radius: 30px;
     background-color: aqua;
     font-weight: bold;
-    font-size: 3vh;
+    font-size: 3rem;
     color: black;
     width: 70%;
-    height: 10vh
+    height: 10rem;
 }
 #LoginBtn:hover {
     border-color: aqua;

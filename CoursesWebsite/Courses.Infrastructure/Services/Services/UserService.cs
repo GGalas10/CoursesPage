@@ -15,13 +15,15 @@ namespace Courses.Infrastructure.Services.Services
         private readonly ICourseService _courseService;
         private readonly IRoleService _roleService;
         private readonly IPasswordRepository _passwordRepository;
-        public UserService(IUserRepository userRepository, IJwtHandler jwtHandler, ICourseService courseService, IRoleService roleService, IPasswordRepository passwordRepository)
+        private readonly IUserConfigService _userConfigService;
+        public UserService(IUserRepository userRepository, IJwtHandler jwtHandler, ICourseService courseService, IRoleService roleService, IPasswordRepository passwordRepository, IUserConfigService userConfigService)
         {
             _roleService = roleService;
             _courseService = courseService;
             _userRepository = userRepository;
             _jwtHandler = jwtHandler;
             _passwordRepository = passwordRepository;
+            _userConfigService = userConfigService;
         }
         public async Task<TokenDto> LoginAsync(string username, string password)
         {
@@ -97,12 +99,9 @@ namespace Courses.Infrastructure.Services.Services
             if (user != null)
                 throw new Exception("Email already exist");
             user = new User(username, email, login);
+            await _userConfigService.CreateUserConfigAsync(user.Id, "Theme1", "PL-pl");
             await _userRepository.RegisterAsync(user, password);
             await Task.CompletedTask;
-        }
-        public async Task<UserConfigDTO> GetUserConfig(Guid userId)
-        {
-
         }
     }
 }

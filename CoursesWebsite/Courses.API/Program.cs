@@ -43,6 +43,8 @@ builder.Services.AddScoped<ICartRepository, CartRepostiory>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IUserConfigRepository, UserConfigRepository>();
+builder.Services.AddScoped<IUserConfigService, UserConfigService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
@@ -82,8 +84,9 @@ using(var scope = app.Services.CreateScope())
     var userRepository = service.GetRequiredService<IUserRepository>();
     var roleRepository = service.GetRequiredService<IRoleRepository>();
     var cartRepository = service.GetRequiredService<ICartRepository>();
+    var userConfigRepository = service.GetRequiredService<IUserConfigRepository>();
     dbContext.Database.Migrate();
-    DbInitialize.Initialize(dbContext,userSerivce,roleService, userRepository, roleRepository,cartRepository);
+    DbInitialize.Initialize(dbContext,userSerivce,roleService, userRepository, roleRepository,cartRepository,userConfigRepository);
 
 }
 

@@ -6,7 +6,7 @@ namespace Courses.Infrastructure.Database
 {
     public static class DbInitialize
     {
-        public async static void Initialize(CoursesDbContext context, IUserService userService,IRoleService roleService,IUserRepository userRepository,IRoleRepository roleRepository,ICartRepository cartRepostiory) 
+        public async static void Initialize(CoursesDbContext context, IUserService userService,IRoleService roleService,IUserRepository userRepository,IRoleRepository roleRepository,ICartRepository cartRepostiory,IUserConfigRepository userConfigRepository) 
         { 
             var carts = context.Carts.ToList();
             foreach(var cart in carts)

@@ -38,8 +38,7 @@ namespace Courses.API.Framework
             var payload = JsonConvert.SerializeObject(response);
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
-
-            return context.Response.WriteAsync(payload);
+            return context.Response.WriteAsJsonAsync(payload);
         }
     }
 }

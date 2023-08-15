@@ -1,24 +1,36 @@
 ﻿@model Courses.Infrastructure.Comands.User.Login
 @{
     <link rel="stylesheet" href="~/css/User.css"/>
-    @using(Html.BeginForm("Login","User",FormMethod.Post)){
-        <div class="LoginHeader">
-        <label id="HeaderLbl">Logowanie użytkownika</label>
+    <div class="LoginCol">
+        @using(Html.BeginForm("Login","User",FormMethod.Post)){
+            <div class="LoginHeader">
+            <label class="HeaderLbl">Logowanie użytkownika</label>
+            </div>
+        <div class="LoginBox">        
+            <div class="UsernameBox">
+                <label class="LabelLogin">Podaj login użytkownika</label>
+                <input type="text" asp-for="Name" class="textInput">
+            </div>
+            <div class="UsernameBox">
+                <label class="LabelLogin">Podaj hasło użytkownika</label>
+                    <input type="password" asp-for="Password" class="textInput">
+            </div>
+            <div class="ErrorLbl">
+                        @if (ViewData["Error"] != string.Empty)
+                            @ViewData["Error"] 
+            </div>
+            <div class="ButtonBox">           
+                <input type="submit" value="Zaloguj" class="LoginBtn">
+            </div>
         </div>
-    <div class="LoginBox">        
-        <div id="UsernameBox">
-            <label id="LabelLogin">Podaj login użytkownika</label>
-            <input type="text" asp-for="Name" style="text-align:center;width:90%;height:4rem;font-size:3rem; max-height:15px;">
-        </div>
-        <div id="PasswordBox">
-            <label id="LabelLogin">Podaj hasło użytkownika</label>
-                <input type="password" asp-for="Password" style="text-align:center;width:90%;height:4rem;font-size:3rem;max-height:15px;">
-        </div>
-            @if (ViewData["Error"] != string.Empty)
-                @ViewData["Error"]
-        <div id="ButtonBox">           
-            <input type="submit" value="Zaloguj" id="LoginBtn">
+        }
+    </div>
+    <div class="RegisterCol">
+        <div class="RegisterInfo">
+            <p>Nie masz jeszcze konta?</p>
+            <div class="RegBtn">
+                <a asp-area="" asp-controller="User" asp-action="Register" class="RegisterBtn">Zarejestruj się</a>
+            </div>
         </div>
     </div>
-    }
 }

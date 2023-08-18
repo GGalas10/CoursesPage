@@ -8,7 +8,7 @@ namespace Courses.Core.Repositories
     {
         Task<User> GetByIdAsync(Guid id);
         Task<User> GetByLoginAsync(string login);
-        Task<User> GetByEmailAsync(Email email);
+        Task<User> GetByEmailAsync(string email);
         Task RegisterAsync(User user,string password);
         Task DeleteAsync(Guid id);
         Task<bool> UpdateAsync();

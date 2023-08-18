@@ -20,7 +20,7 @@ namespace Courses.API.Controllers
                 return Json(config.Theme);
             }catch (Exception ex)
             {
-                return Json("test");
+                return Json("test. "+ex.Message);
             }
         }
         public async Task<string> GetTheme()

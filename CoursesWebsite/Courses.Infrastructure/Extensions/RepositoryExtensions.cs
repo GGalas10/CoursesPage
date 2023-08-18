@@ -21,7 +21,7 @@ namespace Courses.Infrastructure.Extensions
                 throw new Exception("User doesn't exists");
             return @user;
         }
-        public static async Task<User> GetOrFailByEmailAsync(this IUserRepository repository, Email email)
+        public static async Task<User> GetOrFailByEmailAsync(this IUserRepository repository, string email)
         {
             var @user = await repository.GetByEmailAsync(email);
             if (@user == null)

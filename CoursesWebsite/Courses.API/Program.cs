@@ -75,7 +75,7 @@ builder.Services.AddAuthentication(options =>
 });
 var app = builder.Build();
 
-using(var scope = app.Services.CreateScope())
+using(var scope = app.Services.CreateAsyncScope())
 {
     var service = scope.ServiceProvider;
     var dbContext = service.GetRequiredService<CoursesDbContext>();
@@ -84,9 +84,9 @@ using(var scope = app.Services.CreateScope())
     var userRepository = service.GetRequiredService<IUserRepository>();
     var roleRepository = service.GetRequiredService<IRoleRepository>();
     var cartRepository = service.GetRequiredService<ICartRepository>();
-    var userConfigRepository = service.GetRequiredService<IUserConfigRepository>();
+    var userConfigService = service.GetRequiredService<IUserConfigService>();
     dbContext.Database.Migrate();
-    DbInitialize.Initialize(dbContext,userSerivce,roleService, userRepository, roleRepository,cartRepository,userConfigRepository);
+    DbInitialize.Initialize(dbContext,userSerivce,roleService, userRepository, roleRepository,cartRepository, userConfigService);
 
 }
 
@@ -118,5 +118,4 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 app.Run();

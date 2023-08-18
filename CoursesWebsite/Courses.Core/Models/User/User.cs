@@ -1,5 +1,7 @@
 ﻿using Courses.Core.Models.Common;
 using Courses.Core.Value_Object;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Courses.Core.Models.User
 {
@@ -7,14 +9,15 @@ namespace Courses.Core.Models.User
     {
         #region Properties
         public Name UserName { get; protected set; }
-        public Email Email { get; protected set; }
+        [Column("Email")]
+        public string Email { get; protected set; }
         public Name Login { get; protected set; }
         public DateTime CreateAt { get; protected set; }
         public UserPassword UserPassword { get; set; }
         #endregion
         #region Constructors
         private User() { }
-        public User(string userName, Email email, string? login) : base()
+        public User(string userName, string email, string? login) : base()
         {
             SetUserName(userName);
             SetEmail(email);
@@ -28,6 +31,11 @@ namespace Courses.Core.Models.User
         #region Methods
         public void SetEmail(string email)
         {
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentNullException("User email cannot be empty");
+            var isValid = new EmailAddressAttribute().IsValid(email);
+            if (!isValid)
+                throw new ArgumentException("Email structure is invalid");
             Email = email.Trim();
         }
         public void SetLogin(string login)

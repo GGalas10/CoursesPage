@@ -1,4 +1,6 @@
-﻿namespace Courses.Core.Models.User
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Courses.Core.Models.User
 {
     public class UserConfiguration
     {
@@ -14,7 +16,7 @@
             if(user == null) 
                 throw new Exception("User cannot be null or empty");
             UserId = user.Id == Guid.Empty ? throw new Exception("User id cannot be null or empty") : user.Id ;
-            user = user;
+            User = user;
             SetRegion(Region); 
             SetTheme(Theme);
         }

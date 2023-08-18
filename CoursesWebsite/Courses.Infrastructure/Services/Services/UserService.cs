@@ -58,6 +58,7 @@ namespace Courses.Infrastructure.Services.Services
             if (usRole == Guid.Empty || usRole == null)
                 throw new Exception("role does not exist");
             await _roleService.AsignRoleAsync(user.Id, usRole);
+            await _userRepository.UpdateAsync();
             var token = await LoginAsync(username, password);
             return token;
         }
@@ -92,15 +93,9 @@ namespace Courses.Infrastructure.Services.Services
         }
         async Task IUserService.Initialize(string email, string password, string username, string login)
         {
-            var @user = await _userRepository.GetByLoginAsync(username);
-            if (user != null)
-                throw new Exception("Username already exist");
-            user = await _userRepository.GetByEmailAsync(email);
-            if (user != null)
-                throw new Exception("Email already exist");
-            user = new User(username, email, login);
-            await _userConfigService.CreateUserConfigAsync(user.Id, "Theme1", "PL-pl");
+            var user = new User(username, email, login);
             await _userRepository.RegisterAsync(user, password);
+            await _userConfigService.CreateUserConfigAsync(user.Id, "Theme1", "PL-pl");
             await Task.CompletedTask;
         }
     }

@@ -26,16 +26,16 @@ namespace Courses.Infrastructure.Services
             var user = _context.Users.Include(u => u.UserPassword).AsEnumerable().FirstOrDefault(u=>u.Login.Value == login);
             return await Task.FromResult(user);
         }
-        public async Task<User> GetByEmailAsync(Email email)
+        public async Task<User> GetByEmailAsync(string email)
         {
-            var user = _context.Users.Include(u => u.UserPassword).AsEnumerable().FirstOrDefault(u => u.Email == email);
-            return await Task.FromResult(user);
+            var user = await _context.Users.Include(u => u.UserPassword).FirstOrDefaultAsync(u => u.Email == email);
+            return user;
         }
         public async Task RegisterAsync(User user,string password)
         {
-            await Task.FromResult(_context.Users.Add(user));
+            await _context.Users.AddAsync(user);
             await UpdateAsync();
-            var newUser = await Task.FromResult(this.GetByEmailAsync(user.Email)).Result;
+            var newUser = await this.GetByEmailAsync(user.Email);
             var salt = SecurityClass.CreateSalt(newUser.Id);
             var pass = SecurityClass.HashPassword(password,salt);
             var newpass = new UserPassword(pass, salt,user);

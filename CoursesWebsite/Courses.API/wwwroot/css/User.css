@@ -45,7 +45,6 @@ a:hover{
 }
 .UsernameBox{
     margin: 0.5rem;
-    border: 0.01rem dotted black;
     font-size: 1rem;
 }
 .textInput {
@@ -69,7 +68,6 @@ a:hover{
 .LoginBtn:hover{
     background-color: white;
     color:black;
-    border: 0.1px solid black;
 }
 .RegBtn {
     text-align: center;

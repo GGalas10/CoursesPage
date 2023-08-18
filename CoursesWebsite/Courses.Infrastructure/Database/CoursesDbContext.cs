@@ -52,7 +52,6 @@ namespace Courses.Infrastructure.Database
                 entity.HasKey(u => u.Id);
                 entity.HasOne(p => p.UserPassword).WithOne(up => up.User);
                 entity.OwnsOne(n => n.UserName, a => { a.Property(p => p.Value).HasColumnName("UserName"); });
-                entity.OwnsOne(n => n.Email, a => { a.Property(p => p.Value).HasColumnName("Email"); });
                 entity.OwnsOne(n => n.Login, a => { a.Property(p => p.Value).HasColumnName("Login"); });
             });
             modelBuilder.Entity<Course>(entity =>

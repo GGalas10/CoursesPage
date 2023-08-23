@@ -1,4 +1,5 @@
 using Courses.API.Framework;
+using Courses.API.HostedService;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
 using Courses.Infrastructure.Mappers;
@@ -45,6 +46,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUserConfigRepository, UserConfigRepository>();
 builder.Services.AddScoped<IUserConfigService, UserConfigService>();
+
+builder.Services.AddHostedService<CartHostedService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 

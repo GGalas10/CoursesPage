@@ -19,6 +19,8 @@ namespace Courses.Core.Models.User
         private User() { }
         public User(string userName, string email, string? login) : base()
         {
+            if (string.IsNullOrEmpty(userName))
+                userName = login;
             SetUserName(userName);
             SetEmail(email);
             if (login != null)

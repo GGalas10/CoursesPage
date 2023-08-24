@@ -21,6 +21,7 @@ namespace Courses.API.HostedService
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            await Console.Out.WriteLineAsync("Starting cart hosted service");
             _timer = new Timer(ClearDbFromCart, null, TimeSpan.Zero, TimeSpan.FromMinutes(60));
             await Task.CompletedTask;
         }
@@ -29,19 +30,11 @@ namespace Courses.API.HostedService
         {
             _timer?.Change(Timeout.Infinite, 0);
         }
-        private async void ClearDbFromCart(object state)
+        private async void ClearDbFromCart(object? state)
         {
-            using (var scope = _scoopedFactory.CreateScope())
-            {
-                var _context = scope.ServiceProvider.GetRequiredService<CoursesDbContext>();
-                var carts = _context.Carts.ToList();
-                var _cartRepository = scope.ServiceProvider.GetRequiredService<ICartRepository>();
-                foreach (var cart in carts)
-                {
-                    if (cart.UpdatedAt.AddDays(7) <= DateTime.UtcNow)
-                        await _cartRepository.DeleteCartAsync(cart.Id);
-                }
-            }
+            var scope = _scoopedFactory.CreateScope();
+            var _cartRepository = scope.ServiceProvider.GetRequiredService<ICartRepository>();
+            await _cartRepository.ClearCartFromDatabase();
         }
     }
 }

@@ -8,10 +8,12 @@ namespace Courses.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly ICartService _cartService;
-        public UserController(IUserService userService, ICartService cartService)
+        private readonly IUserConfigService _userConfigService;
+        public UserController(IUserService userService, ICartService cartService,IUserConfigService userConfigService)
         {
             _userService = userService;
             _cartService = cartService;
+            _userConfigService = userConfigService;
         }
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
@@ -36,10 +38,12 @@ namespace Courses.API.Controllers
             ViewData["Title"] = "Rejestracja";
             return View();
         }
+
+
         [HttpPost("Register")]
         public async Task<IActionResult> Register(Register command)
         {
-            var token = await _userService.RegisterAsync(command.UserName, command.Password, command.Login, command.UserEmail,"User");
+            var token = await _userService.RegisterAsync(command.UserEmail, command.Password, command.UserName, command.Login,"User");
             if (token == null)
             {
                 ViewData["Error"] = "Błąd rejestracji";
@@ -60,22 +64,30 @@ namespace Courses.API.Controllers
         {      
             if (ModelState.IsValid)
             {
-                var token = await _userService.LoginAsync(comand.Name, comand.Password);
-                if(token == null)
+                try
                 {
-                    ViewData["Error"] = "Błędne dane logowania";
+                    var token = await _userService.LoginAsync(comand.Name, comand.Password);
+                    if (token == null)
+                    {
+                        ViewData["Error"] = "Błędne dane logowania";
+                        return View();
+                    }
+                    HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
+                    {
+                        HttpOnly = true,
+                        SameSite = SameSiteMode.Strict,
+                        Secure = true,
+                        Expires = DateTime.UtcNow.AddMinutes(15)
+                    });
+                    HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
+                    var cartId = Guid.Parse(strCartId);
+                    return await Task.FromResult(View("Index"));
+                }catch (Exception ex)
+                {
+                    await Console.Out.WriteLineAsync(ex.Message);
+                    ViewData["Error"] = "Podano błędne wartości";
                     return View();
-                }               
-                HttpContext.Response.Cookies.Append("Bearer", token.Token,new CookieOptions()
-                {
-                    HttpOnly = true,
-                    SameSite = SameSiteMode.Strict,
-                    Secure = true,
-                    Expires = DateTime.UtcNow.AddMinutes(15)
-                });
-                HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
-                var cartId = Guid.Parse(strCartId);
-                return await Task.FromResult(View("Index"));
+                }
             }
             else
             {
@@ -89,10 +101,22 @@ namespace Courses.API.Controllers
             HttpContext.Response.Cookies.Delete("Bearer");
             return await Task.FromResult(RedirectToAction("Login"));
         }
-        //public async Task<JsonResult> GetUserTheme(string themeName)
-        //{
-        //    if()
+        [HttpGet("GetUserTheme")]
+        public async Task<JsonResult> GetUserTheme()
+        {
+            var config = await _userConfigService.GetUserConfigAsync(Guid.Parse(User.Identity.Name));
+            return Json(config.Theme);
 
-        //}
+        }
+        [HttpGet("ChangeTheme")]
+        public async Task<JsonResult> ChangeTheme()
+        {
+            var config = await _userConfigService.GetUserConfigAsync(Guid.Parse(User.Identity.Name));
+            if (config.Theme == "Theme1")
+                await _userConfigService.UpdateUserConfigAsync(Guid.Parse(User.Identity.Name), new Infrastructure.Comands.Config.UpdateConfig(){ Theme = "Theme2" });
+            else
+                await _userConfigService.UpdateUserConfigAsync(Guid.Parse(User.Identity.Name), new Infrastructure.Comands.Config.UpdateConfig() { Theme = "Theme1" });
+            return Json(config.Theme);
+        }
     }
 }

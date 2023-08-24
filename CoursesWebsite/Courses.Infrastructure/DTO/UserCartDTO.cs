@@ -2,6 +2,6 @@
 {
     public class UserCartDTO
     {
-        public IEnumerable<Guid> ProductGuid { get; set; }
+        public List<Guid> ProductGuid { get; set; }
     }
 }

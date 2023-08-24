@@ -1,4 +1,5 @@
 ﻿using Courses.Core.Models;
+using Courses.Core.Models.User;
 using Courses.Infrastructure.Comands.User;
 using Courses.Infrastructure.DTO;
 

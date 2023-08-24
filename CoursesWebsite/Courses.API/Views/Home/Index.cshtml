@@ -1,8 +1,49 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<link rel="stylesheet" href="/css/Home.css" asp-append-version="true" />
+<script>
+    function GoToShop() {
+        location.href="/Shop/Index";
+    }
+</script>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="MainInformation">
+            <p>Witamy na naszej stronie z kursami wszelakiej maści.</p>
+        </div>
+    <h3>Dlaczego my?</h3>
+    <div class="HomeHeader">           
+        <div class="InfoCol">          
+            <h2>Zespół</h2> 
+            <p>Aplikację tworzy młody zespół z głową pełną pomysłów, które usprawniają Twoją naukę i korzystanie z platformy.</p>
+            <p></p>
+            <div class="ImageBox">
+                <img class="HomeImg" src="/Images/BrainHome.jpg"/>
+            </div>
+        </div>
+        <div class="InfoCol">
+            <h2>Jakość</h2>
+            <p>Wszystkie osoby dodające kursy do naszej aplikacji są sprawdzane pod kątem wiedzy i umiejętności.</p>
+            <p></p>
+            <div class="ImageBox">
+                <img class="HomeImg" src="/Images/BrainHome.jpg" />
+            </div>
+        </div>
+        <div class="InfoCol">
+            <h2>Szybkość</h2>
+            <p>Zaraz po zakupie i zaksięgowaniu kwoty otrzymujesz dostęp do swojego kursu, który jest dożywotni</p>
+            <p></p>
+            <div class="ImageBox">
+                <img class="HomeImg" src="/Images/BrainHome.jpg" />
+            </div>
+        </div>
+    </div>
+    <div class="HomeBody">
+        <div class="HomeShopInfo">
+            <p class="HomeShopInfoText">Jeżeli chcesz się przekonać o jakości naszej platfromy kup już teraz swój pierwszy kurs !!!</p>
+            <div class="HomeShopBtn" onclick="GoToShop()">
+                <p>Idź do sklepu</p>
+            </div>
+        </div>
+    </div>
 </div>

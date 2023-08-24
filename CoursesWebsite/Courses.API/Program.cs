@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -77,21 +78,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 var app = builder.Build();
-
-using(var scope = app.Services.CreateAsyncScope())
-{
-    var service = scope.ServiceProvider;
-    var dbContext = service.GetRequiredService<CoursesDbContext>();
-    var userSerivce = service.GetRequiredService<IUserService>();
-    var roleService = service.GetRequiredService<IRoleService>();
-    var userRepository = service.GetRequiredService<IUserRepository>();
-    var roleRepository = service.GetRequiredService<IRoleRepository>();
-    var cartRepository = service.GetRequiredService<ICartRepository>();
-    var userConfigService = service.GetRequiredService<IUserConfigService>();
-    dbContext.Database.Migrate();
-    DbInitialize.Initialize(dbContext,userSerivce,roleService, userRepository, roleRepository,cartRepository, userConfigService);
-
-}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

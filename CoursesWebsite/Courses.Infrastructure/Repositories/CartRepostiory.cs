@@ -2,6 +2,7 @@
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
 using Courses.Infrastructure.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Infrastructure.Repositories
 {
@@ -54,6 +55,15 @@ namespace Courses.Infrastructure.Repositories
                 await Task.CompletedTask;
             else
                 throw new Exception("Database cannot save data");
+        }
+        public async Task ClearCartFromDatabase()
+        {
+            var allCart = await _context.Carts.ToListAsync();
+            foreach(var cart in allCart)
+            {
+                if (cart.UpdatedAt.AddDays(30) <= DateTime.UtcNow)
+                    await this.DeleteCartAsync(cart.Id);
+            }
         }
     }
 }

@@ -1,19 +1,16 @@
 ﻿<!DOCTYPE html>
-@inject Courses.Infrastructure.Services.Interfaces.IUserConfigService userService;
-@* @{
-    var userTheme = User.Identity.IsAuthenticated ? userService.GetUserConfigAsync(Guid.Parse(User.Identity.Name)).Result.Theme : "Theme1";
-} *@
 <html lang="en">
-<head>
+<head >
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Courses.API</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Courses.API.styles.css" asp-append-version="true" />    
-@*     <link rel="stylesheet" href="/css/Themes/@(userTheme).css" /> *@
+    <link rel="stylesheet" href="~/Courses.API.styles.css" asp-append-version="true" />  
+    <link id="Theme" rel="stylesheet" href="~/css/Themes/Theme2.css" asp-append-version="true" />
+        
 </head>
-<body>
+<body onload="GetTheme()">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -43,6 +40,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="PAdmin" asp-action="Index">PAdmin</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a class="nav-link text-dark" id="ChangeTheme" onclick="ChangeTheme()">Theme</a>
+                            </li>
+                        }
                         <li class="d-flex ms-auto order-5">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index" style="width:30px;height:30px;"><img src="/Images/Cart.png" /></a>
                         </li>

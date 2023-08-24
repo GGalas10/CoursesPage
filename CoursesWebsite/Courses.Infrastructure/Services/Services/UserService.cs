@@ -46,6 +46,8 @@ namespace Courses.Infrastructure.Services.Services
         }
         public async Task<TokenDto> RegisterAsync(string email, string password, string username, string? login, string? role)
         {
+            if (string.IsNullOrEmpty(username))
+                username = login;
             var @user = await _userRepository.GetByLoginAsync(username);
             if (user != null)
                 throw new Exception("Username already exist");
@@ -59,6 +61,7 @@ namespace Courses.Infrastructure.Services.Services
                 throw new Exception("role does not exist");
             await _roleService.AsignRoleAsync(user.Id, usRole);
             await _userRepository.UpdateAsync();
+            await _userConfigService.CreateUserConfigAsync(user.Id, "Theme1", "Pl-pl");
             var token = await LoginAsync(username, password);
             return token;
         }

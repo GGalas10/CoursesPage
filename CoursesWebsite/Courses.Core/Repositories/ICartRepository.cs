@@ -13,5 +13,6 @@ namespace Courses.Core.Repositories
         Task UpdateCartAsync();
         Task DeleteCartAsync(Guid cartId);
         Task Sale(Cart cart);
+        Task ClearCartFromDatabase();
     }
 }

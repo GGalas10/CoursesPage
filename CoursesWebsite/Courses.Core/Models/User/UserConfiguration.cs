@@ -18,7 +18,7 @@ namespace Courses.Core.Models.User
             UserId = user.Id == Guid.Empty ? throw new Exception("User id cannot be null or empty") : user.Id ;
             User = user;
             SetRegion(Region); 
-            SetTheme(Theme);
+            SetTheme(theme);
         }
         public void SetRegion(string region) 
         {
@@ -28,7 +28,7 @@ namespace Courses.Core.Models.User
         }
         public void SetTheme(string theme) 
         {
-            if (!string.IsNullOrEmpty(theme))
+            if (string.IsNullOrEmpty(theme))
                 throw new Exception("Theme name cannot be null or empty");
             Theme = theme;
         }

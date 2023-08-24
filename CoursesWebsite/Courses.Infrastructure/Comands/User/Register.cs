@@ -6,12 +6,10 @@ namespace Courses.Infrastructure.Comands.User
 {
     public class Register
     {
-        public string UserName { get; set; }
-        [EmailAddress]
-        public string UserEmail { get; set; }
-        public string? Login { get; set; }
-        [PasswordPropertyText]
-        public Password Password { get; set; }
+        public string? UserName { get; set; }
+        public string? UserEmail { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
 
     }
 }

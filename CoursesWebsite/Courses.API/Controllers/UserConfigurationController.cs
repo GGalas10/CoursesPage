@@ -11,26 +11,24 @@ namespace Courses.API.Controllers
         {
             _userConfigService = userConfigService;
         }
-        [HttpGet("GetTheme")]
+        [HttpGet("GetUserTheme")]
         public async Task<JsonResult> GetUserTheme()
         {
-            try
-            {
-                var config = await _userConfigService.GetUserConfigAsync(UserId);
-                return Json(config.Theme);
-            }catch (Exception ex)
-            {
-                return Json("test. "+ex.Message);
-            }
+            if (!User.Identity.IsAuthenticated)
+                return Json("Theme2");
+            var config = await _userConfigService.GetUserConfigAsync(Guid.Parse(User.Identity.Name));
+            return Json(config.Theme);
+
         }
-        public async Task<string> GetTheme()
+        [HttpGet("ChangeTheme")]
+        public async Task<JsonResult> ChangeTheme()
         {
-           if(User.Identity.IsAuthenticated)
-            {
-                var config = await _userConfigService.GetUserConfigAsync(UserId);
-                return config.Theme;
-            }
-           return "Theme2";
+            var config = await _userConfigService.GetUserConfigAsync(Guid.Parse(User.Identity.Name));
+            if (config.Theme == "Theme1")
+                await _userConfigService.UpdateUserConfigAsync(Guid.Parse(User.Identity.Name), new Infrastructure.Comands.Config.UpdateConfig() { Theme = "Theme2" });
+            else
+                await _userConfigService.UpdateUserConfigAsync(Guid.Parse(User.Identity.Name), new Infrastructure.Comands.Config.UpdateConfig() { Theme = "Theme1" });
+            return Json(config.Theme);
         }
     }
 }

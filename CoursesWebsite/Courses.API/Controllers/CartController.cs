@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Courses.API.Controllers
 {
-    [Route("controller")]
     public class CartController : ApiBaseController
     {      
         private readonly ICartService _cartService;
@@ -42,6 +41,20 @@ namespace Courses.API.Controllers
                 var Courses = await _courseService.GetCoursesForCart(baseCart.ProductGuid);
                 return View(Courses);
             }
+        }
+        [HttpGet("GetCartProduct")]
+        public async Task<JsonResult> GetCartProduct()
+        {
+            var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
+            var cart = await _cartService.GetCartById(cartId);
+            if (cart.ProductGuid.Count() <= 0)
+            {
+                for(int i = 0;i < 10;i++)
+                {
+                    cart.ProductGuid.Add(Guid.NewGuid());
+                }
+            }
+            return Json(cart.ProductGuid);
         }
     }
 }

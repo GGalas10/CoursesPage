@@ -1,0 +1,73 @@
+﻿body {
+
+}
+.MainInformation {
+    font-size: 4rem;
+    text-align: center;
+    min-width: 90%
+}
+.HomeHeader{
+    display: flex;
+    width: 100%;
+}
+.InfoCol {
+    border-radius: 25px;
+    font-size: 1rem;
+    background-color: grey;
+    margin: 5px auto;
+    max-width: 33%;
+    height: 40% auto;
+}
+@media (max-width: 960px) {
+    .InfoCol {
+        max-width: 100%;
+        width: 100%;
+    }
+    .HomeHeader{
+        display: block;
+    }
+    .ImageBox{
+       
+    }
+}
+.ImageBox{
+    padding: 15px;
+    height: 250px auto;
+    width: 250px auto;
+    margin: 0px auto;
+}
+.HomeImg {
+    height:100%;
+    width:100%;
+}
+.HomeBody{
+    box-sizing: border-box;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    border: 2px solid red;
+}
+.HomeShopInfo {
+    width: 98%;
+    align-content:center;
+}
+.HomeShopBtn {
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    background-color: greenyellow;
+    width: 50%;
+    height: 50px;
+    margin: auto;
+}
+.HomeShopBtn:hover{
+    background-color: black;
+    color: greenyellow;
+}
+.HomeShopInfoText{
+    font-size: 1.5rem;
+}

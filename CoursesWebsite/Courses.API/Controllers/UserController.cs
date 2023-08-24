@@ -8,12 +8,12 @@ namespace Courses.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly ICartService _cartService;
-        private readonly IUserConfigService _userConfigService;
-        public UserController(IUserService userService, ICartService cartService,IUserConfigService userConfigService)
+        private readonly IRoleService _roleService;
+        public UserController(IUserService userService, ICartService cartService,IRoleService roleService)
         {
             _userService = userService;
             _cartService = cartService;
-            _userConfigService = userConfigService;
+            _roleService = roleService;
         }
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
@@ -43,21 +43,28 @@ namespace Courses.API.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(Register command)
         {
-            var token = await _userService.RegisterAsync(command.UserEmail, command.Password, command.UserName, command.Login,"User");
-            if (token == null)
+            try
             {
-                ViewData["Error"] = "Błąd rejestracji";
+                var token = await _userService.RegisterAsync(command.UserEmail, command.Password, command.UserName, command.Login, "User");
+                if (token == null)
+                {
+                    ViewData["Error"] = "Błąd rejestracji";
+                    return View();
+                }
+                HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
+                {
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.Strict,
+                    Secure = true,
+                    Expires = DateTime.UtcNow.AddMinutes(15)
+                });
+                HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
+                return RedirectToAction("Index");
+            }catch (Exception ex)
+            {
+                ViewData["Error"] = ex.Message;
                 return View();
             }
-            HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
-            {
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Secure = true,
-                Expires = DateTime.UtcNow.AddMinutes(15)
-            });
-            HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
-            return RedirectToAction("Index");
         }
         [HttpPost("Login")]
         public async Task<IActionResult> Login(Login comand)
@@ -81,8 +88,9 @@ namespace Courses.API.Controllers
                     });
                     HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
                     var cartId = Guid.Parse(strCartId);
-                    return await Task.FromResult(View("Index"));
-                }catch (Exception ex)
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception ex)
                 {
                     await Console.Out.WriteLineAsync(ex.Message);
                     ViewData["Error"] = "Podano błędne wartości";
@@ -101,22 +109,18 @@ namespace Courses.API.Controllers
             HttpContext.Response.Cookies.Delete("Bearer");
             return await Task.FromResult(RedirectToAction("Login"));
         }
-        [HttpGet("GetUserTheme")]
-        public async Task<JsonResult> GetUserTheme()
+        [HttpGet("CheckAdmin")]
+        public async Task<JsonResult> CheckAdmin()
         {
-            var config = await _userConfigService.GetUserConfigAsync(Guid.Parse(User.Identity.Name));
-            return Json(config.Theme);
+            if (!User.Identity.IsAuthenticated)
+                return Json(false);
+            var role = await _roleService.GetUserRoleAsync(Guid.Parse(User.Identity.Name));
+            if (role.Name == "Admin")
+                return Json(true);
+            else 
+                return Json(false);
+        }
 
-        }
-        [HttpGet("ChangeTheme")]
-        public async Task<JsonResult> ChangeTheme()
-        {
-            var config = await _userConfigService.GetUserConfigAsync(Guid.Parse(User.Identity.Name));
-            if (config.Theme == "Theme1")
-                await _userConfigService.UpdateUserConfigAsync(Guid.Parse(User.Identity.Name), new Infrastructure.Comands.Config.UpdateConfig(){ Theme = "Theme2" });
-            else
-                await _userConfigService.UpdateUserConfigAsync(Guid.Parse(User.Identity.Name), new Infrastructure.Comands.Config.UpdateConfig() { Theme = "Theme1" });
-            return Json(config.Theme);
-        }
+
     }
 }

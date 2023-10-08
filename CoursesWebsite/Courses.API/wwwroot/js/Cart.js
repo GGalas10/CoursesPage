@@ -11,14 +11,15 @@
                 <p>Twój koszyk</p><div id="Products"></div></div>`;
                 let productDiv = document.getElementById("Products");
                 $.each(result, function (element) {
-                    productDiv.innerHTML += `<p style="font-size:.5rem;">` + result[element] + `</p>`;
+                    productDiv.innerHTML += `<p style="font-size:.6rem;">` + result[element] + `</p>`;
                 })
+                productDiv.innerHTML +=`<div class="CartBtn"><a href="/Cart/Index">Idź do koszyka</a></div>`
             },
     });        
         cartDiv.classList += " Hidden";
     }else {
         
-        cartDiv.classList.remove("Hidden");
-        document.getElementById("CartBox").remove();
+        //cartDiv.classList.remove("Hidden");
+        //document.getElementById("CartBox").remove();
     }
 }

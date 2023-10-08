@@ -1,0 +1,54 @@
+﻿.NaviBarMain {
+    text-align: center;
+    display: inline-flex;
+    width: 100%;
+    font-size: 1rem;
+    background-color: lightslategray;
+    height: 50px;
+    box-sizing: border-box;
+}
+.NaviBar {
+    display: flex;
+}
+.NaviDiv {
+    padding-top: 15px;
+    align-items: center;
+}
+.NaviItem {
+    text-decoration: none;
+    margin: auto 30px;
+    color:white;
+}
+.NaviItem:hover{
+    text-decoration: none;
+    color:black;
+    transition: 0.5s;
+}
+.NaviCart {
+    margin-top: 5px;
+    width:50px;
+    height: 50px;
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+}
+.CartImg{
+    width: 30px;
+}
+@media (max-width: 768px) {
+    .CartImg {
+        width: 15px;
+    }
+    .NaviDiv {
+        padding-top: 5px;
+    }
+    .NaviCart {
+        margin-top: 2.5px;
+        width: 25px;
+        height: 25px;
+        right: 5px;
+    }
+    .NaviBarMain {
+        height: 25px;
+    }
+}

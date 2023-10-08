@@ -1,0 +1,34 @@
+﻿.ShopHeader {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    font: bolder;
+    background-color: lightslategray;
+    width: 100% !important;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.ShopMenu {
+    background-color: lightslategray;
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+}
+.MenuItem:hover {
+    border: 2px solid white;
+    color: black;
+    background-color: white;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font-size: 2.1rem;
+    transition: 0.3s ease-in-out;
+}
+.MenuItem {
+    background-color: lightslategray;
+    text-decoration: none;
+    margin: 15px;
+    color: white;
+    height: 100%;
+}

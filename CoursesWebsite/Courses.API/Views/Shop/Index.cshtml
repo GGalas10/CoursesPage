@@ -1,11 +1,16 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+<link rel="stylesheet" href="/css/Shop.css" asp-append-version="true" />
 @{
-    var id = Guid.NewGuid();
-    <button id="TestBtn" class="btn btn-primary" onclick="addToCart('@id')">Testbtn</button>
-    <button id="xyz" class="btn btn-primary" onclick="test()">Test</button>
-    <div id="Test">
-    
+    <div class="ShopHeader">kursy w najniższych cennach tylko u nas</div>
+    <div class="ShopMenu">
+        <a class="MenuItem">Kategoria 1</a>
+        <a class="MenuItem">Kategoria 2</a>
+        <a class="MenuItem">Kategoria 3</a>
+        <a class="MenuItem">Kategoria 4</a>
+        <a class="MenuItem">Kategoria 5</a>
+        <a class="MenuItem">Kategoria 6</a>
     </div>
 }
+<script src="/js/Shop.js" asp-append-version="true"></script>

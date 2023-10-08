@@ -15,9 +15,13 @@
         font-size: 20px;
     }
 }
+a{
+    text-decoration: none;
+}
 html {
   position: relative;
   min-height: 100%;
+  font-family: 'Lucida Calligraphy';
 }
 
 body {

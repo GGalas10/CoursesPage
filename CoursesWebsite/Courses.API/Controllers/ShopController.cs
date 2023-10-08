@@ -19,6 +19,7 @@ namespace Courses.API.Controllers
         public async Task<IActionResult> Index()
         {
             //var courses = await _courseService.GetAllAsync();
+            ViewData["Title"] = "Sklep";
             return View();
         }
         public async Task<IActionResult> Catergory(Guid id)

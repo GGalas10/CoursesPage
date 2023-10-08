@@ -1,66 +1,57 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head >
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Courses.API</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"]</title>
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Courses.API.styles.css" asp-append-version="true" />  
-    <link rel="stylesheet" href="~/css/Cart.css" asp-append-version="true" />  
+    <link rel="stylesheet" href="~/Courses.API.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Cart.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Loyout.css" asp-append-version="true" />
     <link id="Theme" rel="stylesheet" href="~/css/Themes/Theme2.css" asp-append-version="true" />
-        
+
 </head>
 <body onload="GetTheme(); CreateAdminPanel()">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ms-auto">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Log</a>
-                            </li>
-                        }else{
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Wyloguj</a>
-                            </li>
-                        }
-                        <div id="AdminPanelLink" ></div>
-                        
-                        @* @if (User.Identity.IsAuthenticated)
-                        {
-                            <li>
-                                <a class="nav-link text-dark" id="ChangeTheme" onclick="ChangeTheme()">Theme</a>
-                            </li>
-                        } *@
-                        <li class="d-flex ms-auto order-5">
-                            <a class="nav-link text-dark" id="CartBtn" onclick="OpenCart()" @* asp-area="" asp-controller="Cart" asp-action="Index" *@ style="width:30px;height:30px;"><img src="/Images/Cart.png" /></a>
-                        </li>
-                    </ul>
+        <div class="NaviBarMain">
+            <div class="NaviBar">
+                <div class="NaviDiv">
+                    <a class="NaviItem" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 </div>
+                <div class="NaviDiv">
+                    <a class="NaviItem" asp-area="" asp-controller="Shop" asp-action="Index">Sklep</a>
+                </div>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <div class="NaviDiv">
+                        <a class="NaviItem" asp-area="" asp-controller="User" asp-action="Login">Logowanie</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="NaviDiv">
+                        <a class="NaviItem" asp-area="" asp-controller="User" asp-action="Logout">Wyloguj</a>
+                    </div>
+                }
+                <div id="AdminPanelLink"></div>
+                @* @if (User.Identity.IsAuthenticated)
+                {
+                <li>
+                <a class="nav-link text-dark" id="ChangeTheme" onclick="ChangeTheme()">Theme</a>
+                </li>
+                } *@
             </div>
-        </nav>
+            <div class="NaviCart">
+                    <a id="CartBtn" onclick="OpenCart()"><img class="CartImg" src="/Images/Cart.png" /></a>
+            </div>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Courses.API - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/Theme.js" asp-append-version="true"></script>

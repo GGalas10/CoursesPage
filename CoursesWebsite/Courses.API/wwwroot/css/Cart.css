@@ -1,10 +1,29 @@
-﻿body {
+﻿.CartBtn{
+    width: 100%;
+
+}
+.CartBtn:hover{
+    background: white;
+    color: black !important;
 }
 .CartBox {
+    color: white;
     position: fixed;
-    right: 5px;
-    width:200px;
-    border:3px solid red;
-    background-color: red;
-    opacity: 0.6;
+    right: 8px;
+    width: 200px;
+    background-color: black;
+    border: 0.5px solid black;
+    opacity: 0.8;
+}
+.CartBox a{
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    width: 200px;
+}
+.CartBox a:hover{
+    text-decoration: none;
+    color: black;
+    width: 200px;
 }

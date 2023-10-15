@@ -12,6 +12,8 @@ namespace Courses.Infrastructure.Repositories
         {
             _context = context;
         }
+        public async Task<List<Category>> GetAll()
+        => _context.Categories.Where(cat=>cat.State == Core.Models.Common.State.Active).ToList();
         public async Task<Category> GetCategoryByIdAsync(Guid id)
         => await Task.FromResult(_context.Categories.FirstOrDefault(c => c.Id == id));
         public async Task<Category> GetCategoryByNameAsync(string name)

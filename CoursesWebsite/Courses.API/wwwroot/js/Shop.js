@@ -61,5 +61,27 @@ function test() {
             console.log(error);
         }
     });
-}
+};
 /*<!-- Cart --> */
+/*<--- Shop Menu ---> */
+window.onload= function() {
+    console.log("Pobieranie kategori");
+    var menuList = document.getElementById("CategoryList");
+    $.ajax({
+        type: "GET",
+        url: "/Category/GetAllCategory",
+        success: function (data) {
+            $.each(data, function (oneCategory) {
+                menuList.innerHTML +=`<a class="MenuItem" id="CategoryItem" data="${data[oneCategory].id}" onclick="CategoryClik(this)">${data[oneCategory].name}</a>`
+            })          
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
+function CategoryClik(sender) {
+    var data = String(sender.attributes.data.value);
+    console.log(data);
+    }
+/*<--- Shop Menu ---> */

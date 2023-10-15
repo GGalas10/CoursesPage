@@ -16,8 +16,11 @@ namespace Courses.Infrastructure.Services.Services
             _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
-        
 
+        public async Task<List<CategoryDTO>> GetAllCategory()
+        {
+            return _mapper.Map<List<CategoryDTO>>(await _categoryRepository.GetAll());
+        }
         public async Task<CategoryDTO> GetCategoryByIdAsync(Guid id)
         {
             var category = await _categoryRepository.GetCategoryByIdAsync(id);

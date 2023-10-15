@@ -31,4 +31,6 @@
     margin: 15px;
     color: white;
     height: 100%;
+    cursor: pointer;
+    user-select: none;
 }

@@ -96,39 +96,34 @@ a:hover{
 /*<-- End of login -->*/
 /*<-- Register -->*/
 .RegisterHeader {
-    width: 50vw;
-    height: 7vh;
-    background-color: gray;
+    text-align:center;
+}
+.RegisterHeaderText{
+    font-size: 3rem;
+    font-weight: bold;
 }
 .RegisterBox {
     flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50vw;
-    height: 44vh;
-    background-color: lightblue;
 }
 .OneBox{
     display: contents;
     text-align:center;
     justify-content:center;
     align-items:center;
-    width: 100%;
-    height: 11vh;
 }
 #LabelRegister{
-    font-size: 4vh;
+    font-size: 2rem;
     font-weight: bold;
 }
 #RegisterTextBox, #RegisterPassword {
-    width: 80%;
-    height: 4vh;
-    font-size: 3vh;
+    font-size: 2rem;
 }
 #RegisterBtn{
-    font-size: 3vh;
-    width: 80%;
+    font-size: 2.5rem;
+    padding: 15px 50px;
     background-color: royalblue;
     border: none;
     border-radius: 25px;
@@ -141,18 +136,18 @@ a:hover{
 /*<-- Password Rectangle -->*/
 #Rectangle {
     text-align: center;
-    font-size: 1.5vh;
+    font-size: 1.2rem;
     font-weight: bold;
-    margin: 5px 0px 5px 0px;
-    width: 80%;
-    height: 2vh;
+    margin: 5px 0px;
+    min-height: 3px;
+    height: auto;
+    min-width: 600px;
     border: solid 1px;
     background-color: white;
     border: none;
 }
 #SmallSquare{   
-    color: white;
-    width:0%;
+    color: black;
     height: 100%;
     background-color: red;
 }

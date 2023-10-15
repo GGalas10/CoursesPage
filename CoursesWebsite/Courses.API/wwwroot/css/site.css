@@ -21,7 +21,7 @@ a{
 html {
   position: relative;
   min-height: 100%;
-  font-family: 'Lucida Calligraphy';
+  font-family: Courier New, Courier, monospace;
 }
 
 body {

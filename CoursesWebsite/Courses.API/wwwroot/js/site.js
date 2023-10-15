@@ -13,31 +13,27 @@ passwordInput.addEventListener("input", function () {
         test++;
     if (hasSpecialCharacter.test(password))
         test++;
-    if (password.length <= 8)
+    if (password.length < 8)
         test = 0;
     else
         test++;
     if (test == 0) {
         smallBox.innerHTML = "";
-        smallBox.style.width = "0%";
     };
     if (test == 1) {
-        smallBox.style.backgroundColor = "red";
-        smallBox.style.width = "25%";
+        smallBox.style.background = "linear-gradient(to right, red 25%, white 25%)";
         smallBox.innerHTML = "Słabe hasło";
     };
     if (test == 2) {
-        smallBox.style.backgroundColor = "orange";
-        smallBox.style.width = "50%";
+        smallBox.style.background = "linear-gradient(to right, orange 50%, white 50%)"; 
         smallBox.innerHTML = "Średnie hasło";
     };
     if (test == 3) {
-        smallBox.style.backgroundColor = "green";
-        smallBox.style.width = "75%";
+        smallBox.style.background = "linear-gradient(to right, green 75%, white 25%)";
         smallBox.innerHTML = "Silne hasło";
     };
     if (test == 4) {
-        smallBox.style.backgroundColor = "darkgreen";
+        smallBox.style.background = "linear-gradient(to right, darkgreen 100%, white 0%)"
         smallBox.style.width = "100%";
         smallBox.innerHTML = "Bardzo sile hasło";
     };

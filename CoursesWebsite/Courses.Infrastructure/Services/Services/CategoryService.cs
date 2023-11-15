@@ -33,14 +33,14 @@ namespace Courses.Infrastructure.Services.Services
             return _mapper.Map<CategoryDTO>(category);
         }
 
-        public async Task<IEnumerable<ViewCoursesDTO>> GetCoursesByIdAsync(Guid id)
+        public async Task<IEnumerable<ViewCoursesDTO>> GetCoursesByCategoryIdAsync(Guid id)
         {
             var category = await _categoryRepository.GetCategoryByIdAsync(id);
             var courses = await _coursesRepository.GetAllByCategoryIdAsync(id);
             return _mapper.Map<IEnumerable<ViewCoursesDTO>>(courses);
         }
 
-        public async Task<IEnumerable<ViewCoursesDTO>> GetCoursesByNameAsync(string name)
+        public async Task<IEnumerable<ViewCoursesDTO>> GetCoursesByCategoryNameAsync(string name)
         {
             var category = await _categoryRepository.GetCategoryByNameAsync(name);
             var courses = await _coursesRepository.GetAllByCategoryIdAsync(category.Id);

@@ -9,7 +9,7 @@ namespace Courses.API.Controllers
     public class PAdminController : ApiBaseController
     {
         private readonly IUserService _userService;
-        public PAdminController(IUserService userService) 
+        public PAdminController(IUserService userService) :base()
         {
             _userService = userService;
         }

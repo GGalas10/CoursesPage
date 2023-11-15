@@ -7,7 +7,7 @@ namespace Courses.API.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService):base()
         {
             _categoryService = categoryService;
         }
@@ -15,18 +15,22 @@ namespace Courses.API.Controllers
         public async Task<IActionResult> GetAllCategory()
         {
             var allCategory = await _categoryService.GetAllCategory();
-            for (int i = 0; i <= 4; i++)
+            if (allCategory.Count <= 0)
             {
-                var newCategory = new CategoryDTO();
-                newCategory.Id = Guid.NewGuid();
-                newCategory.Name = $"CategoryName {i}";
-                allCategory.Add(newCategory);
-            }; 
+                for (int i = 0; i <= 4; i++)
+                {
+                    var newCategory = new CategoryDTO();
+                    newCategory.Id = Guid.NewGuid();
+                    newCategory.Name = $"Kategoria {i}";
+                    allCategory.Add(newCategory);
+                };
+            }
             return Json(allCategory);
         }
-        //public async Task<IActionResult> GetCategory(string id)
-        //{
-        //    var guidId = Guid.Parse(id);
-        //}
+        [HttpGet]
+        public async Task<IActionResult> GetCategory(string id)
+        {
+            return View(await _categoryService.GetCoursesByCategoryIdAsync(Guid.Parse(id)));
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Courses.API.Controllers
     public class UserConfigurationController : ApiBaseController
     {
         private readonly IUserConfigService _userConfigService;
-        public UserConfigurationController(IUserConfigService userConfigService)
+        public UserConfigurationController(IUserConfigService userConfigService):base()
         {
             _userConfigService = userConfigService;
         }

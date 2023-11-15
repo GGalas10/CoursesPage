@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Courses.API.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Cart.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/PAdminLayout.css" asp-append-version="true" />
+    <link id="Theme" rel="stylesheet" href="~/css/Themes/Theme2.css" asp-append-version="true" />
+    <script src="~/js/PAdmin.js" asp-append-version="true"></script>
+
+</head>
+<body onload="GetTheme(); CreateAdminPanel()">
+    <div id="Menu" class="RightMenu">
+        <div class="ResizeBtn" onclick="ResizeMenu()"></div>
+        <div class="SingleMenuItem"><div class="MenuText"><p>Dom</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
+        <div class="SingleMenuItem"><div class="MenuText"><p>Moje kursy</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
+        <div class="SingleMenuItem"><div class="MenuText"><p>Rozliczenia</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
+        <div class="SingleMenuItem"><div class="MenuText"><p>Ustawienia</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
+        <div class="SingleMenuItem"><div class="MenuText"><p>Wyloguj</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Theme.js" asp-append-version="true"></script>
+    <script src="/js/OtherScript.js" asp-append-version="true"></script>
+    <script src="~/js/Cart.js" asp-append-version="true"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

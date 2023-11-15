@@ -9,7 +9,7 @@ namespace Courses.API.Controllers
         private readonly IUserService _userService;
         private readonly ICartService _cartService;
         private readonly IRoleService _roleService;
-        public UserController(IUserService userService, ICartService cartService,IRoleService roleService)
+        public UserController(IUserService userService, ICartService cartService,IRoleService roleService):base()
         {
             _userService = userService;
             _cartService = cartService;

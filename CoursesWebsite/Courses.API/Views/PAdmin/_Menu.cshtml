@@ -4,24 +4,51 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Courses.API.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Cart.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/PAdminLayout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
     <link id="Theme" rel="stylesheet" href="~/css/Themes/Theme2.css" asp-append-version="true" />
     <script src="~/js/PAdmin.js" asp-append-version="true"></script>
 
 </head>
+@{
+    bool checker()
+    {
+        if (User.Identity.IsAuthenticated){
+            var claims = User.Claims.ToList();
+            var role = claims.First(c => c.Properties.ContainsKey("role"));
+
+            if (role.Value == "Admin")
+                return true;
+            else
+                return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
 <body onload="GetTheme(); CreateAdminPanel()">
-    <div id="Menu" class="RightMenu">
+    
+        <div id="Menu" class="RightMenu">
         <div class="ResizeBtn" onclick="ResizeMenu()"></div>
-        <div class="SingleMenuItem"><div class="MenuText"><p>Dom</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
-        <div class="SingleMenuItem"><div class="MenuText"><p>Moje kursy</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
-        <div class="SingleMenuItem"><div class="MenuText"><p>Rozliczenia</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
-        <div class="SingleMenuItem"><div class="MenuText"><p>Ustawienia</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
-        <div class="SingleMenuItem"><div class="MenuText"><p>Wyloguj</p></div><div class="ImgDiv"><img src="~/Images/pdf.ico" class="MenuImg" /></div></div>
-    </div>
+        @if (checker())
+        {
+            <div class="SingleMenuItem"><div class="MenuText"><p>Dom</p></div><div class="ImgDiv"><img src="~/Images/home.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem"><div class="MenuText"><p>Moje kursy</p></div><div class="ImgDiv"><img src="~/Images/courses.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem"><div class="MenuText"><p>Rozliczenia</p></div><div class="ImgDiv"><img src="~/Images/settlements.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem"><div class="MenuText"><p>Ustawienia</p></div><div class="ImgDiv"><img src="~/Images/setting.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem"><div class="MenuText"><p>Wyloguj</p></div><div class="ImgDiv"><img src="~/Images/logout.png" class="MenuImg" /></div></div>
+        }
+        else
+        {
+            <div class="SingleMenuItem" onclick="GoTo('Login')"><div class="MenuText"><p>Zaloguj</p></div><div class="ImgDiv"><img src="~/Images/login.png" class="MenuImg" /></div></div>
+        }
+        </div>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -36,3 +63,8 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    function GoTo(location) {
+        document.location.href = `/API/PAdmin/${location}`;
+    }
+</script>

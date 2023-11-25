@@ -5,6 +5,7 @@
     top: 0;
     position: fixed;
     background-color: #2e12b778;
+    color: #595959;
 }
 .ResizeBtn {
     width: 10px;
@@ -41,10 +42,18 @@
     height:40px;
     margin:0;
 }
-.MenuImg {
-    margin: 0;
-    width: 35px;
-    height: 35px;
+@media(min-width: 768px) {
+    .MenuImg {
+        margin: 0;
+        width: 35px;
+        height: 35px;
+    }
+}
+@media(max-width: 800px) {
+    .MenuImg {
+        width: 15px;
+        height: 15px;
+    }
 }
 .ImgDiv {
     max-height: 40px;

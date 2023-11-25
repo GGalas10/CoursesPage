@@ -1,10 +1,12 @@
-﻿using Courses.Infrastructure.Comands.User;
+﻿using Courses.API.Extension;
+using Courses.Infrastructure.Comands.User;
 using Courses.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
 {
+    [Layout("_Menu")]
     [Route("API/PAdmin")]
     public class PAdminController : ApiBaseController
     {
@@ -37,7 +39,7 @@ namespace Courses.API.Controllers
             return View();
         }
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(Login command)
+        public async Task<IActionResult> Login([FromBody]Login command)
         {
             return await Task.FromResult(View());
         }

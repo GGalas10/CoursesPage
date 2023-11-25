@@ -1,0 +1,32 @@
+﻿body {
+
+}
+.MasterDivForLogin {
+    margin: 25px;
+    justify-content: center;
+    display: flex;
+}
+.DivLogin{
+    width: 50%;
+    
+}
+.LoginAdmin {
+    width: 48%;
+    font-size: 1rem;
+    margin: 5px;
+}
+.LoginBtnAdmin {
+    user-select: none;
+    color: #464545;
+    background-color: #3a0ae687;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10px !important;
+    margin: auto;
+    border: 1px solid black;
+    width: 80%;
+}
+.LoginBtnAdmin:hover{
+    color: #3a0ae687;
+    background-color: #464545;
+}

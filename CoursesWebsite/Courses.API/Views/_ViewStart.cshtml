@@ -1,10 +1,3 @@
 ﻿@{
-    @if (this.Path.Contains("PAdmin"))
-    {
-        Layout = "_Menu";
-    }
-    else
-    {
-        Layout = "_Layout";
-    }
+    Layout = (string)ViewData["Layout"] ?? "_Layout";
 }

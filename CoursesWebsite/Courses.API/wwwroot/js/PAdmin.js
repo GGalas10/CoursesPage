@@ -8,3 +8,21 @@ function ResizeMenu() {
         menu.classList.add("Resize");
     }
 }
+function LoginUser() {
+    var email = document.getElementById("Email");
+    var password = document.getElementById("Password");
+    var loginUser = new Object();
+    loginUser.name = email.value;
+    loginUser.password = password.value;
+    $.ajax({
+        url: "/API/PAdmin/Login",
+        type: "POST",
+        contentType: 'application/json',
+        data: JSON.stringify(loginUser),
+        success: function (data) {
+
+        }, error: function (xhr) {
+            console.log(xhr);
+        }
+    })
+}

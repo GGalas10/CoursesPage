@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Courses.Infrastructure.DTO;
+using Microsoft.AspNetCore.Mvc;
 namespace Courses.API.Controllers
 {
     [Route("[controller]")]
@@ -10,6 +11,16 @@ namespace Courses.API.Controllers
             UserId = User?.Identity?.IsAuthenticated == true ?
             Guid.Parse(User.Identity.Name) :
             Guid.Empty;
+        }
+        protected void AddBearerTokenToCookie(TokenDto token)
+        {
+            HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.Strict,
+                Secure = true,
+                Expires = DateTime.UtcNow.AddMinutes(15)
+            });
         }
     }
 }

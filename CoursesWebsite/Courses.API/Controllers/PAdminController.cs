@@ -32,34 +32,22 @@ namespace Courses.API.Controllers
             ViewData["Title"] = "Logowanie";
             return View();
         }       
-        [HttpGet("Register")]
-        public async Task<IActionResult> Register()
-        {
-            ViewData["Title"] = "Rejestracja";
-            return View();
-        }
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody]Login command)
         {
-            return await Task.FromResult(View());
-        }
-        [HttpPost("Register")]
-        public async Task<IActionResult> Register(Register command)
-        {
-            var token = await _userService.RegisterAsync(command.UserName, command.Password, command.Login, command.UserEmail, "User");
-            if (token == null)
+            try
             {
-                ViewData["Error"] = "Błąd rejestracji";
-                return View();
+                var token = await _userService.LoginAsync(command.Name, command.Password);
+                if (token == null)
+                {
+                    throw new Exception("Wrong credentials");
+                }
+                AddBearerTokenToCookie(token);
+                return RedirectToAction("Index");
+            }catch(Exception ex)
+            {
+                return Json("Wrong credentials");
             }
-            HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
-            {
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Secure = true,
-                Expires = DateTime.UtcNow.AddMinutes(15)
-            });
-            return RedirectToAction("Index");
         }
         [HttpPost]
         public async Task<IActionResult> Logout()

@@ -27,22 +27,28 @@ namespace Courses.Infrastructure.Services.Services
         }
         public async Task<TokenDto> LoginAsync(string username, string password)
         {
-            var @user = await _userRepository.GetOrFailByLoginAsync(username);
-            if (user == null)
-                throw new Exception("Wrong credentials");
-            var pass = await _passwordRepository.GetByIdAsync(user.UserPassword.Id);
-            if (!SecurityClass.ComparePassword(pass.NormalizedPassword, password, pass.Salt))
+            try
             {
-                throw new Exception("Wrong credentials");
+                var @user = await _userRepository.GetOrFailByLoginAsync(username);
+                if (user == null)
+                    throw new Exception("Wrong credentials");
+                var pass = await _passwordRepository.GetByIdAsync(user.UserPassword.Id);
+                if (!SecurityClass.ComparePassword(pass.NormalizedPassword, password, pass.Salt))
+                {
+                    throw new Exception("Wrong credentials");
+                }
+                var role = await _roleService.GetUserRoleAsync(user.Id);
+                var token = _jwtHandler.CreateToken(user.Id, role.Name);
+                return new TokenDto
+                {
+                    Expires = token.Expires,
+                    Role = role.Name,
+                    Token = token.Token,
+                };
+            }catch (Exception ex)
+            {
+                throw ex;
             }
-            var role = await _roleService.GetUserRoleAsync(user.Id);
-            var token = _jwtHandler.CreateToken(user.Id, role.Name);
-            return new TokenDto
-            {
-                Expires = token.Expires,
-                Role = role.Name,
-                Token = token.Token,
-            };
         }
         public async Task<TokenDto> RegisterAsync(string email, string password, string username, string? login, string? role)
         {

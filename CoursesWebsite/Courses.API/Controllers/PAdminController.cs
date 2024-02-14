@@ -52,7 +52,7 @@ namespace Courses.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            if (User.Identity.IsAuthenticated)
+            if (IsAuthenticated())
             {
                 HttpContext.Response.Cookies.Delete("Bearer");
                 return await Task.FromResult(RedirectToAction("Login"));

@@ -64,6 +64,16 @@
 </body>
 </html>
 <script>
+    document.body.onload = function () {
+        var isResize = localStorage.getItem('Resize');
+        if (isResize != null) {
+            if (isResize == "true") {
+                var menu = document.getElementById("Menu");
+                menu.style.left = 0;
+                menu.classList.add("Resize");
+            }
+        }
+    };
     function GoTo(location) {
         document.location.href = `/API/PAdmin/${location}`;
     }

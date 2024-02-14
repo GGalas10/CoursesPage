@@ -3,9 +3,11 @@ function ResizeMenu() {
     if (menu.classList.contains("Resize")){
         menu.style.left = '-7.1rem';
         menu.classList.remove("Resize");
+        localStorage.setItem('Resize', "false");
     } else {
         menu.style.left = 0;
         menu.classList.add("Resize");
+        localStorage.setItem('Resize', "true");
     }
 }
 function LoginUser() {

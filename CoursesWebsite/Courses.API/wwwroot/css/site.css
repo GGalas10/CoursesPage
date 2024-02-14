@@ -1,31 +1,58 @@
 @media (max-width: 768px) {
     html {
         font-size: 10px;
+        background-image: url("/Images/background.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    main{
+        padding:50px;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1920px) {
     html {
         font-size: 16px;
+        background-image: url("/Images/background.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    main {
+        padding: 50px;
     }
 }
 
 @media (min-width: 1920px) {
     html {
         font-size: 20px;
+        background-image: url("/Images/background.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    main {
+        padding: 50px;
     }
 }
 a{
     text-decoration: none;
 }
 html {
-  position: relative;
-  min-height: 100%;
-  font-family: Courier New, Courier, monospace;
+    position: relative;
+    min-height: 100%;
+    font-family: Courier New, Courier, monospace;
+    background-image: url("/Images/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    color: whitesmoke !important;
 }
 .nav-link{
     font-size: 1rem;

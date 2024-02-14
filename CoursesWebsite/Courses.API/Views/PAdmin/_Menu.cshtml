@@ -37,11 +37,11 @@
         <div class="ResizeBtn" onclick="ResizeMenu()"></div>
         @if (checker())
         {
-            <div class="SingleMenuItem"><div class="MenuText"><p>Dom</p></div><div class="ImgDiv"><img src="~/Images/home.png" class="MenuImg" /></div></div>
-            <div class="SingleMenuItem"><div class="MenuText"><p>Moje kursy</p></div><div class="ImgDiv"><img src="~/Images/courses.png" class="MenuImg" /></div></div>
-            <div class="SingleMenuItem"><div class="MenuText"><p>Rozliczenia</p></div><div class="ImgDiv"><img src="~/Images/settlements.png" class="MenuImg" /></div></div>
-            <div class="SingleMenuItem"><div class="MenuText"><p>Ustawienia</p></div><div class="ImgDiv"><img src="~/Images/setting.png" class="MenuImg" /></div></div>
-            <div class="SingleMenuItem"><div class="MenuText"><p>Wyloguj</p></div><div class="ImgDiv"><img src="~/Images/logout.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem" onclick="GoTo('Index')"><div class="MenuText"><p>Dom</p></div><div class="ImgDiv"><img src="~/Images/home.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem" onclick="GoTo('Courses')"><div class="MenuText"><p>Moje kursy</p></div><div class="ImgDiv"><img src="~/Images/courses.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem" onclick="GoTo('Settlements')"><div class="MenuText"><p>Rozliczenia</p></div><div class="ImgDiv"><img src="~/Images/settlements.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem" onclick="GoTo('Settings')"><div class="MenuText"><p>Ustawienia</p></div><div class="ImgDiv"><img src="~/Images/setting.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem" onclick="Logout()"><div class="MenuText"><p>Wyloguj</p></div><div class="ImgDiv"><img src="~/Images/logout.png" class="MenuImg" /></div></div>
         }
         else
         {
@@ -66,5 +66,18 @@
 <script>
     function GoTo(location) {
         document.location.href = `/API/PAdmin/${location}`;
+    }
+    function Logout() {
+        $.ajax({
+            method: "POST",
+            url: "/API/PAdmin/Logut",
+            success: function () {
+                document.location.href(`/API/PAdmin/Login`)
+            },
+            error: function(xhr,error){
+                console.log(error);
+                console.log(xhr);
+            },
+        })
     }
 </script>

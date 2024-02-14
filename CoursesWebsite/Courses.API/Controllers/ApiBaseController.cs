@@ -6,7 +6,7 @@ namespace Courses.API.Controllers
     public class ApiBaseController : Controller
     {
         protected Guid UserId;
-        public ApiBaseController() 
+        public ApiBaseController()
         {
             UserId = User?.Identity?.IsAuthenticated == true ?
             Guid.Parse(User.Identity.Name) :
@@ -21,6 +21,12 @@ namespace Courses.API.Controllers
                 Secure = true,
                 Expires = DateTime.UtcNow.AddMinutes(15)
             });
+        }
+        protected bool IsAuthenticated()
+        {
+            if (User.Identity.IsAuthenticated)
+                return true;
+            return false;
         }
     }
 }

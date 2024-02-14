@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: white;
+    background-color: transparent !important;
     font-size: 10px;
-    color: black;
+    color: whitesmoke;
 }

@@ -7,9 +7,11 @@
     color: black !important;
 }
 .CartBox {
+    z-index: 1;
+    overflow-wrap: break-word;
     color: white;
     position: fixed;
-    right: 8px;
+    right: 55px;
     width: 200px;
     background-color: black;
     border: 0.5px solid black;

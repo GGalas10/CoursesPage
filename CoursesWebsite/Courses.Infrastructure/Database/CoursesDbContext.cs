@@ -43,7 +43,7 @@ namespace Courses.Infrastructure.Database
             modelBuilder.Entity<UserPassword>(entity =>
             {
                 entity.HasKey(k => k.Id);
-                entity.OwnsOne(p => p.NormalizedPassword, a =>{ a.Property(p => p.Value).HasColumnName("NormalizedPassword"); });
+                entity.OwnsOne(p => p.NormalizedPassword, a => { a.Property(p => p.Value).HasColumnName("NormalizedPassword"); });
                 entity.OwnsOne(s => s.Salt, a => { a.Property(p => p.Value).HasColumnName("Salt"); });
                 entity.HasOne(u => u.User).WithOne(up => up.UserPassword).HasForeignKey<UserPassword>(fk => fk.UserId);
             });
@@ -56,10 +56,10 @@ namespace Courses.Infrastructure.Database
             });
             modelBuilder.Entity<Course>(entity =>
             {
-                entity.OwnsOne(n => n.Name, a =>{ a.Property(p => p.Value).HasColumnName("Name"); });
-                entity.OwnsOne(d => d.Description, a =>{ a.Property(p => p.Value).HasColumnName("Description"); });
-                entity.OwnsOne(a => a.Author, a =>{ a.Property(p => p.Value).HasColumnName("Author"); });
-                entity.OwnsOne(p => p.Picutre, a =>{ a.Property(p => p.Value).HasColumnName("Picture"); });
+                entity.OwnsOne(n => n.Name, a => { a.Property(p => p.Value).HasColumnName("Name"); });
+                entity.OwnsOne(d => d.Description, a => { a.Property(p => p.Value).HasColumnName("Description"); });
+                entity.OwnsOne(a => a.Author, a => { a.Property(p => p.Value).HasColumnName("Author"); });
+                entity.OwnsOne(p => p.Picutre, a => { a.Property(p => p.Value).HasColumnName("Picture"); });
                 entity.HasMany(t => t.Topics).WithOne(t => t.Course);
             });
             modelBuilder.Entity<Topic>(entity =>
@@ -79,7 +79,7 @@ namespace Courses.Infrastructure.Database
             });
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.OwnsOne(n=>n.Name, a => { a.Property(p => p.Value).HasColumnName("Name"); });
+                entity.OwnsOne(n => n.Name, a => { a.Property(p => p.Value).HasColumnName("Name"); });
             });
             modelBuilder.Entity<UserRole>()
                 .HasKey(pk => pk.UserId);
@@ -89,10 +89,14 @@ namespace Courses.Infrastructure.Database
                 entity.HasKey(p => p.Id);
                 entity.HasMany(mC => mC._Carts).WithOne(oC => oC.Cart);
             });
-                
 
-            modelBuilder.Entity<CoursesCart>()
-                .HasKey(pk => pk.Id);
+
+            modelBuilder.Entity<CoursesCart>(entity =>
+            {
+                entity.HasKey(pk => pk.Id);
+                entity.HasOne(fk => fk.Cart).WithMany(fk => fk._Carts);
+            });
+                
 
             modelBuilder.Entity<CoursesCategory>()
                 .HasKey(pk => pk.Id);
@@ -109,8 +113,8 @@ namespace Courses.Infrastructure.Database
                 entity.HasKey(pk => pk.CourseId);
                 entity.HasOne(fk => fk.Invoice);
             });
-            /*modelBuilder.Entity<Buyer>()
-                .HasKey(pk=>pk.)*/
+            modelBuilder.Entity<Buyer>()
+                .HasKey(pk => pk.Id);
             modelBuilder.Entity<Recipient>()
                 .HasKey(pk => pk.Id);
                 

@@ -1,4 +1,5 @@
 ﻿using Courses.Core.Value_Object;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Courses.Core.Models.Cart
 {
@@ -8,6 +9,7 @@ namespace Courses.Core.Models.Cart
         public Guid CourseId { get; protected set; }
         public Name Name { get; protected set; }
         public double Price { get; protected set; }
+        [ForeignKey("CartIdForCourses")]
         public Cart Cart { get; protected set; }
         private CoursesCart() { }
         public CoursesCart(Guid courseId,string name,double price)

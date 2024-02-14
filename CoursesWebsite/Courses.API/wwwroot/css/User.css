@@ -1,13 +1,24 @@
-﻿@media (max-width: 768px) {
+﻿@media (max-width: 1200px) {
     .LoginCol {
         width: 90% !important;
         border: none !important;
         float: none !important;
     }
     .RegisterCol {
-        width: 90% !important;
+        width: 85% !important;
         float: none !important;
         text-align: center !important; 
+    }
+}
+@media(max-width:1920px){
+    .LoginCol {
+        width: 60% !important;
+    }
+
+    .RegisterCol {
+        width: 28% !important;
+        float: none !important;
+        text-align: center !important;
     }
 }
 a {
@@ -24,20 +35,27 @@ a:hover{
     justify-content: center;
     text-align: center;
     width: 66%;
-    border-right: 0.2rem solid black;
     display: flex;
     float: left;
     padding: 0.2rem;
     align-content: center;
     margin: 0.3rem;
+    background-color: #ffffff3d;
+    backdrop-filter:blur(3px);
+    border-radius:25px;
 }
 .RegisterCol {
+    margin: 0.3rem;
     justify-content: center;
     font-size: 2.5rem;
     width: 28%;
     float: right;
     display: flex;
-    text-align:center;
+    text-align: center;
+    background-color: #ffffff3d;
+    backdrop-filter: blur(3px);
+    border-radius: 25px;
+    padding: 25px;
 }
 .LoginHeader {
     font-size: 2.5rem;
@@ -52,6 +70,9 @@ a:hover{
     height: 2rem;
     width: 90%;
     margin: 0.3rem;
+    border-radius: 25px;
+    padding-left:15px;
+    text-align:center;
 }
 .ButtonBox {
     height: 3rem;
@@ -77,6 +98,7 @@ a:hover{
     border-radius: 0.5rem;
 }
 .RegisterBtn{
+    margin-top:25px;
     min-width: 100%;
     font-size: 2rem;
     border:none;

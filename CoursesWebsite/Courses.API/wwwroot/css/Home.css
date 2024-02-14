@@ -15,7 +15,7 @@
     padding: 15px;
     border-radius: 25px;
     font-size: 1rem;
-    background-color: grey;
+    background-color: #80808066;
     margin: 5px auto;
     max-width: 33%;
     height: 40% auto;
@@ -49,7 +49,6 @@
     justify-content: center;
     align-content: center;
     width: 100%;
-    border: 2px solid red;
 }
 .HomeShopInfo {
     padding: 15px 5px;
@@ -67,6 +66,9 @@
     width: 50%;
     height: 50px;
     margin: auto;
+    font-weight: bolder;
+    color: black;
+    transition: 0.5s;
 }
 .HomeShopBtn:hover{
     background-color: black;

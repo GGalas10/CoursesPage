@@ -2,7 +2,7 @@
 using System.Data;
 using System.Net;
 
-namespace Courses.API.Framework
+namespace Courses.API.Middlewares
 {
     public class ErrorHandlerMiddleware
     {

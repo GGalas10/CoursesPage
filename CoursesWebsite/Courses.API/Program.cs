@@ -1,5 +1,5 @@
-using Courses.API.Framework;
 using Courses.API.HostedService;
+using Courses.API.Middlewares;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
 using Courses.Infrastructure.Mappers;
@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,8 +31,8 @@ builder.Services.AddDbContext<CoursesDbContext>(options =>
         ,x=>x.MigrationsAssembly("Courses.API"));
 });
 
+#region Services
 builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
-
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ICourseService, CoursesService>();
@@ -48,6 +47,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUserConfigRepository, UserConfigRepository>();
 builder.Services.AddScoped<IUserConfigService, UserConfigService>();
 
+#endregion
 builder.Services.AddHostedService<CartHostedService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));

@@ -16,10 +16,10 @@
                 productDiv.innerHTML +=`<div class="CartBtn"><a href="/Cart/Index">Idź do koszyka</a></div>`
             },
     });        
-        cartDiv.classList += " Hidden";
+        cartDiv.classList += "Hidden";
     }else {
         
-        //cartDiv.classList.remove("Hidden");
-        //document.getElementById("CartBox").remove();
+        cartDiv.classList.remove("Hidden");
+        document.getElementById("CartBox").remove();
     }
 }

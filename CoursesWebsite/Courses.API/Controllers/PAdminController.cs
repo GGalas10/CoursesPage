@@ -17,15 +17,15 @@ namespace Courses.API.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpGet("Index")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             ViewData["Title"] = "Panel administracyjny";
             return View();
         }
         [HttpGet("Login")]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
+            if (IsAuthenticated())
             {
                 return RedirectToAction("Index", "Home");
             }

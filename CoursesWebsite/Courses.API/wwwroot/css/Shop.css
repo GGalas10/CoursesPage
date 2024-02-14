@@ -1,35 +1,40 @@
 ﻿.ShopHeader {
+    border-radius: 15px 15px 0 0;
+    margin-top:15px;
     text-align: center;
     text-transform: uppercase;
     font-size: 2.5rem;
     font: bolder;
-    background-color: lightslategray;
+    background-color: #7788997a;
     width: 100% !important;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
 }
 .ShopMenu {
-    background-color: lightslategray;
+    border-radius: 0 0 15px 15px;
+    background-color: #7788997a;
     width: 100%;
     font-size: 2rem;
     text-align: center;
 }
 .MenuItem:hover {
-    border: 2px solid white;
-    color: black;
-    background-color: white;
+    border: 2px solid #ffffff6e;
+    background-color: #ffffff6e;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     font-size: 2.1rem;
     transition: 0.3s ease-in-out;
+    
 }
 .MenuItem {
-    background-color: lightslategray;
+    border-radius: 25px 25px 0 0;
+    padding:5px;
+    background-color: transparent;
     text-decoration: none;
     margin: 15px;
-    color: white;
+    color: whitesmoke;
     height: 100%;
     cursor: pointer;
     user-select: none;

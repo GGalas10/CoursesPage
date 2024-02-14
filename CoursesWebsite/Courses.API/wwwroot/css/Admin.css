@@ -1,32 +1,42 @@
 ﻿body {
-
+    background-color:transparent !important;
+    margin-left:300px;
+    margin-right:30px;
 }
 .MasterDivForLogin {
-    margin: 25px;
-    justify-content: center;
-    display: flex;
+    margin-top: 20%;
+    text-align:center;
 }
-.DivLogin{
-    width: 50%;
-    
+.DivLogin {
+    width:70%;
+    height:50%;
+    background-color: #ffffff2e;
+    backdrop-filter: blur(3px);
+    border-radius:25px;
+    display:inline-block;
+    justify-content:center;
+    padding:30px;
 }
 .LoginAdmin {
-    width: 48%;
     font-size: 1rem;
-    margin: 5px;
+    margin: 15px;
+    width:50%;
+    border-radius:13px;
+    padding:5px;
 }
 .LoginBtnAdmin {
     user-select: none;
-    color: #464545;
-    background-color: #3a0ae687;
+    color: whitesmoke;
+    background-color: #43414fa6;
     font-size: 1.2rem;
     text-align: center;
-    margin-top: 10px !important;
     margin: auto;
     border: 1px solid black;
-    width: 80%;
+    width: 50%;
+    border-radius: 15px;
+    transition: 0.5s;
 }
 .LoginBtnAdmin:hover{
-    color: #3a0ae687;
-    background-color: #464545;
+    color: #43414fa6;
+    background-color: whitesmoke;
 }

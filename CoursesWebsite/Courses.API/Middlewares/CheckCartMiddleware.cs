@@ -2,7 +2,7 @@
 using Courses.Infrastructure.Services.Interfaces;
 using Courses.Infrastructure.Services.Services;
 
-namespace Courses.API.Framework
+namespace Courses.API.Middlewares
 {
     public class CheckCartMiddleware
     {

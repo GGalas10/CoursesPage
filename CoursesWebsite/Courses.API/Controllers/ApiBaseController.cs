@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 namespace Courses.API.Controllers
 {
-    [Route("[controller]")]
     public class ApiBaseController : Controller
     {
         protected Guid UserId;

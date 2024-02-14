@@ -15,7 +15,7 @@ namespace Courses.API.Controllers
             _categoryService = categoryService;
             _courseService = courseService;
         }
-        [HttpGet("Index")]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             //var courses = await _courseService.GetAllAsync();

@@ -15,13 +15,13 @@ namespace Courses.API.Controllers
             _cartService = cartService;
             _roleService = roleService;
         }
-        [HttpGet("Index")]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             ViewData["Title"] = "Lista kursów użytkownika";
             return View();
         }
-        [HttpGet("Login")]
+        [HttpGet]
         public async Task<IActionResult> Login()
         {
             if (User.Identity.IsAuthenticated)
@@ -32,7 +32,7 @@ namespace Courses.API.Controllers
             ViewData["Title"] = "Logowanie";
             return View();
         }
-        [HttpGet("Register")]
+        [HttpGet]
         public async Task<IActionResult> Register()
         {
             ViewData["Title"] = "Rejestracja";
@@ -40,7 +40,7 @@ namespace Courses.API.Controllers
         }
 
 
-        [HttpPost("Register")]
+        [HttpPost]
         public async Task<IActionResult> Register(Register command)
         {
             try
@@ -66,7 +66,7 @@ namespace Courses.API.Controllers
                 return View();
             }
         }
-        [HttpPost("Login")]
+        [HttpPost]
         public async Task<IActionResult> Login(Login comand)
         {      
             if (ModelState.IsValid)
@@ -109,7 +109,7 @@ namespace Courses.API.Controllers
             HttpContext.Response.Cookies.Delete("Bearer");
             return await Task.FromResult(RedirectToAction("Login"));
         }
-        [HttpGet("CheckAdmin")]
+        [HttpGet]
         public async Task<JsonResult> CheckAdmin()
         {
             if (!User.Identity.IsAuthenticated)

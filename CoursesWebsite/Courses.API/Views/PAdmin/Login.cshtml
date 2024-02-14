@@ -3,6 +3,22 @@
         <input id="Email" class="LoginAdmin" type="text" placeholder="Name" />
         <input id="Password" class="LoginAdmin" type="password" placeholder="Password" />
         <div onclick="LoginUser()" class="LoginBtnAdmin">Zaloguj</div>
-        <p id="ErrorDiv" style="color:red;font-size:1rem;text-align:center;"></p>
+        <p id="ErrorDiv" style="color:red;font-size:1rem;text-align:center;margin-top:15px;"></p>
     </div>
 </div>
+<script>
+    document.getElementById('Password').onkeydown = function (e) {
+        if (e.keyCode == 13) {
+            LoginUser();
+        }else{
+            document.getElementById('ErrorDiv').innerHTML = "";
+        }
+    };
+    document.getElementById('Password').onkeydown = function (e) {
+        if (e.keyCode == 13) {
+            LoginUser();
+        }else{
+            document.getElementById('ErrorDiv').innerHTML = "";
+        }
+    }
+</script>

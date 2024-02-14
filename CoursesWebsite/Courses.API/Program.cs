@@ -48,6 +48,7 @@ builder.Services.AddScoped<IUserConfigRepository, UserConfigRepository>();
 builder.Services.AddScoped<IUserConfigService, UserConfigService>();
 
 #endregion
+
 builder.Services.AddHostedService<CartHostedService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));

@@ -1,0 +1,38 @@
+﻿<link rel="stylesheet" href="~/css/Course/Create.css" asp-append-version="true" />
+<form id="CourseValidator" class="CreatePanel">
+    <div id="FirstPanel" class="FirstPanel">
+        <h1>Na początku uzupełnijmy podstawowe dane Twojego kursu</h1>
+        <section>
+            <label for="Title">Podaj nazwę kursu</label>
+            <input name="Title" id="Title" type="text" maxlength="50" placeholder="Tytuł kursu"/>
+        </section>
+        <section>
+            <label for="Description">Poniżej opisz swój kurs</label>
+            <textarea name="Description" id="Description"></textarea>
+        </section>
+        <div class="NextBtn" onclick="firstPanelDone()">Dalej</div>
+    </div>
+    <div class="SecondPanel">
+        <h1>Teraz wybierz zdjęcie</h1>
+        <section>
+        <p>Jest to istotny element Twojego kursu ponieważ ładne zdjęcie zawsze przyciąga klientów.</p>
+        <br />
+        <label for="Picture" class="ImgBtn">Wybierz zdjęcie</label>
+        <input name="Picture" id="Picture" type="file" style="display:none" accept="image/png, image/jpeg"/>
+        <div id="PictureView" class="Pic"></div>
+        </section>
+        <section>
+            <div class="NextBtn TwoBtnInSection" onclick="ReturnToFirstPanel()">Wstecz</div>
+            <div class="NextBtn TwoBtnInSection" onclick="firstPanelDone()">Dalej</div>
+        </section>
+
+    </div>
+    <div class="LastPanel">
+        <h1>To już ostatni krok tworzenia Twojego kursu</h1>
+        <label for="Price">Podaj cenę za swój kurs</label>
+        <input name="Price" id="Price" type="number" />
+        <label for="Author">Podaj Imię i Nazwisko autora kursu</label>
+        <input type="text" name="Author" id="Author"/>
+    </div>
+</form>
+<script src="/js/Course/Create.js"></script>

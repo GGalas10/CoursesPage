@@ -15,7 +15,7 @@ namespace Courses.API.Controllers
             _cartService = cartService;
             _courseService = courseService;
         }
-        [HttpGet("Index")]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
@@ -42,7 +42,7 @@ namespace Courses.API.Controllers
                 return View(Courses);
             }
         }
-        [HttpGet("GetCartProduct")]
+        [HttpGet]
         public async Task<JsonResult> GetCartProduct()
         {
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);

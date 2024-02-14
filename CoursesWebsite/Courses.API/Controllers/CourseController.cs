@@ -3,13 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CourseController : ApiBaseController
     {
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return await Task.FromResult(View());
+            return View();
+        }
+        //[Authorize]
+        [HttpGet]
+        public IActionResult Create()
+        {
+          return View();
         }
     }
 }

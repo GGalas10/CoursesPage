@@ -10,9 +10,9 @@
             <label for="Description">Poniżej opisz swój kurs</label>
             <textarea name="Description" id="Description"></textarea>
         </section>
-        <div class="NextBtn" onclick="firstPanelDone()">Dalej</div>
+        <div class="NextBtn" onclick="FirstPanelDone()">Dalej</div>
     </div>
-    <div class="SecondPanel">
+    <div id="SecondPanel" class="SecondPanel">
         <h1>Teraz wybierz zdjęcie</h1>
         <section>
         <p>Jest to istotny element Twojego kursu ponieważ ładne zdjęcie zawsze przyciąga klientów.</p>
@@ -23,16 +23,51 @@
         </section>
         <section>
             <div class="NextBtn TwoBtnInSection" onclick="ReturnToFirstPanel()">Wstecz</div>
-            <div class="NextBtn TwoBtnInSection" onclick="firstPanelDone()">Dalej</div>
+            <div class="NextBtn TwoBtnInSection" onclick="SecondPanelDone()">Dalej</div>
         </section>
 
     </div>
-    <div class="LastPanel">
+    <div id="LastPanel" class="LastPanel">
         <h1>To już ostatni krok tworzenia Twojego kursu</h1>
-        <label for="Price">Podaj cenę za swój kurs</label>
-        <input name="Price" id="Price" type="number" />
+        <section>
+            <label for="Price">Podaj cenę za swój kurs</label>
+            <input name="Price" id="Price" type="number" min="0" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'/>
+        </section>
+        <section>
         <label for="Author">Podaj Imię i Nazwisko autora kursu</label>
         <input type="text" name="Author" id="Author"/>
+        </section>
+        <section style="max-height: 150px;">
+            <div class="NextBtn TwoBtnInSection" onclick="ReturnToSecondPanel()">Wstecz</div>
+            <div class="NextBtn TwoBtnInSection" onclick="GoToSummary()">Przejdź do podsumowania</div>
+        </section>
+    </div>
+    <div id="Summary" class="Sumary">
+        <h1>Podsumowanie tworzenia kursu</h1>
+        <div class="SummarySection">
+            <div class="FirstSumarySection">
+                <h2>Podstawowe informacje</h2>
+                <span>Tytuł:</span>
+                <p id="SummaryTitle" name="SummaryTitle" class="SummaryTitle"></p>
+                <span>Opis:</span>
+                <p id="SummaryDescription" class="SummaryDescriptio" style="overflow: auto;max-height: 200px;"></p>
+                <div class="SummaryBtn" onclick="ReturnToFirstPanel()">Zmień</div>
+            </div>
+            <div class="SecondSection">
+                <h2>Zdjęcie kursu</h2>
+                <div id="SummaryPicture" style="height:60%;width:80%;margin:auto"></div>
+                <div class="SummaryBtn" onclick="ReturnToSecondPanel()">Zmień</div>
+            </div>
+            <div class="ThridSection">
+                <h2>Cena i autor</h2>
+                <label for="SummaryPrice">Cena:</label>
+                <p id="SummaryPrice" name="SummaryPrice"></p>
+                <label for="SummaryAuthor">Autor</label>
+                <p id="SummaryAuthor" class="SummaryAuthor" name="SummaryAuthor"></p>
+                <div class="SummaryBtn" onclick="ReturnToLastPanel()">Zmień</div>
+            </div>
+        </div>
+        <div class="CreateCourse">Stwórz kurs</div>
     </div>
 </form>
 <script src="/js/Course/Create.js"></script>

@@ -57,3 +57,7 @@ body {
 .nav-link{
     font-size: 1rem;
 }
+.BaseBtn{
+    cursor:pointer;
+    user-select:none;
+}

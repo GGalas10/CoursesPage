@@ -1,9 +1,12 @@
 ﻿/* || COMON CLASSES */
 .CreatePanel{
+    display:flex;
+    justify-content:center;
     overflow:hidden;
     height:900px;
-    width:100%;
+    width:90%;
     position:absolute;
+    margin:auto;
 }
 .CreatePanel h1{
     height:10%;
@@ -75,9 +78,9 @@
 
 /* || SECOND PANEL */
 .SecondPanel {
+    transform:translateX(250%);
     border-radius: 0 25px 25px 0;
     padding: 25px;
-    margin-left: 50px;
     backdrop-filter: blur(25px);
     height: 800px;
     background-color: #33313185;
@@ -116,9 +119,9 @@
 }
 /* || LAST PANEL */
 .LastPanel {
+    transform: translateX(250%);
     border-radius: 0 25px 25px 0;
     padding: 25px;
-    margin-left: 100px;
     backdrop-filter: blur(25px);
     height: 800px;
     background-color: #201e1e85;
@@ -150,14 +153,14 @@
 
 /* || SUMARY PANEL*/
 .Sumary {
+    transform: translateX(250%);
     border-radius: 0 25px 25px 0;
     padding: 25px;
-    margin-left: 150px;
     backdrop-filter: blur(25px);
     height: 800px;
     background-color: #07060691;
-    display:grid;
-    text-align:center;
+    display: grid;
+    text-align: center;
     z-index: 1;
     box-sizing: border-box;
     position: absolute;
@@ -222,4 +225,9 @@
 .CreateCourse:hover {
     color: #05d905a6;
     background-color: #f5f5f594;
+}
+.SummaryButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

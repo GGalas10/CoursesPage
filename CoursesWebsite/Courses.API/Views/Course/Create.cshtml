@@ -22,7 +22,7 @@
         <div id="PictureView" class="Pic"></div>
         </section>
         <section>
-            <div class="NextBtn TwoBtnInSection" onclick="ReturnToFirstPanel()">Wstecz</div>
+            <div class="NextBtn TwoBtnInSection" onclick="ReturnToFirstPanel('false')">Wstecz</div>
             <div class="NextBtn TwoBtnInSection" onclick="SecondPanelDone()">Dalej</div>
         </section>
 
@@ -38,7 +38,7 @@
         <input type="text" name="Author" id="Author"/>
         </section>
         <section style="max-height: 150px;">
-            <div class="NextBtn TwoBtnInSection" onclick="ReturnToSecondPanel()">Wstecz</div>
+            <div class="NextBtn TwoBtnInSection" onclick="ReturnToSecondPanel('false')">Wstecz</div>
             <div class="NextBtn TwoBtnInSection" onclick="GoToSummary()">Przejdź do podsumowania</div>
         </section>
     </div>
@@ -50,24 +50,26 @@
                 <span>Tytuł:</span>
                 <p id="SummaryTitle" name="SummaryTitle" class="SummaryTitle"></p>
                 <span>Opis:</span>
-                <p id="SummaryDescription" class="SummaryDescriptio" style="overflow: auto;max-height: 200px;"></p>
-                <div class="SummaryBtn" onclick="ReturnToFirstPanel()">Zmień</div>
+                <p id="SummaryDescription" class="SummaryDescriptio" style="overflow: auto;max-height: 200px;"></p>                
             </div>
             <div class="SecondSection">
                 <h2>Zdjęcie kursu</h2>
-                <div id="SummaryPicture" style="height:60%;width:80%;margin:auto"></div>
-                <div class="SummaryBtn" onclick="ReturnToSecondPanel()">Zmień</div>
+                <div id="SummaryPicture" style="height:60%;width:80%;margin:auto"></div>              
             </div>
             <div class="ThridSection">
                 <h2>Cena i autor</h2>
                 <label for="SummaryPrice">Cena:</label>
                 <p id="SummaryPrice" name="SummaryPrice"></p>
                 <label for="SummaryAuthor">Autor</label>
-                <p id="SummaryAuthor" class="SummaryAuthor" name="SummaryAuthor"></p>
-                <div class="SummaryBtn" onclick="ReturnToLastPanel()">Zmień</div>
+                <p id="SummaryAuthor" class="SummaryAuthor" name="SummaryAuthor"></p>                
             </div>
         </div>
-        <div class="CreateCourse">Stwórz kurs</div>
+        <div class="SummaryButtons">
+            <div id="ReturnFirst" class="SummaryBtn" onclick="ReturnToFirstPanel('true')" style="width:15%">Zmień</div>
+            <div id="ReturnSecond" class="SummaryBtn" onclick="ReturnToSecondPanel('true')" style="width:55%">Zmień</div>
+            <div id="ReturnLast" class="SummaryBtn" onclick="ReturnToLastPanel()" style="width:15%">Zmień</div>
+            </div>
+        <div class="CreateCourse" id="CreateCourse">Stwórz kurs</div>
     </div>
 </form>
 <script src="/js/Course/Create.js"></script>

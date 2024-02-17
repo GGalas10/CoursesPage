@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Core.Value_Object
 {
@@ -20,5 +21,13 @@ namespace Courses.Core.Value_Object
             => new(item);
         public static implicit operator byte[](DigitalItem item)
             => item.Value;
+        public static async Task<byte[]> CreateFromIFromFile(IFormFile fromFile)
+        {
+           using(var memoryStream  = new MemoryStream())
+            {
+                await fromFile.CopyToAsync(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
     }
 }

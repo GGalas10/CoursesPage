@@ -1,4 +1,5 @@
 ﻿using Courses.Core.Value_Object;
+using Courses.Infrastructure.Comands.Course;
 using Courses.Infrastructure.DTO;
 
 namespace Courses.Infrastructure.Services.Interfaces
@@ -10,7 +11,7 @@ namespace Courses.Infrastructure.Services.Interfaces
         Task<IEnumerable<ViewCoursesDTO>> GetByCourseIdAsync(IEnumerable<Guid> guids);
         Task<IEnumerable<CartCourseDTO>> GetCoursesForCart(IEnumerable<Guid> guids);
         Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId);
-        Task CreateAsync(string name, string description, string author, DigitalItem picture,double price);
+        Task<Guid> CreateAsync(Create command);
         Task AddTopicAsync(Guid courseId, string name, string description);
         Task AddLessonAsync(Guid courseId, Guid topicId, string name, string description, byte[] video);
     }

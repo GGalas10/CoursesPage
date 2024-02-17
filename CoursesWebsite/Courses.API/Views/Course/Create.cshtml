@@ -4,11 +4,11 @@
         <h1>Na początku uzupełnijmy podstawowe dane Twojego kursu</h1>
         <section>
             <label for="Title">Podaj nazwę kursu</label>
-            <input name="Title" id="Title" type="text" maxlength="50" placeholder="Tytuł kursu"/>
+            <input name="Title" id="Title" type="text" maxlength="50" placeholder="Tytuł kursu" required/>
         </section>
         <section>
             <label for="Description">Poniżej opisz swój kurs</label>
-            <textarea name="Description" id="Description"></textarea>
+            <textarea name="Description" id="Description" required></textarea>
         </section>
         <div class="NextBtn" onclick="FirstPanelDone()">Dalej</div>
     </div>
@@ -17,8 +17,8 @@
         <section>
         <p>Jest to istotny element Twojego kursu ponieważ ładne zdjęcie zawsze przyciąga klientów.</p>
         <br />
-        <label for="Picture" class="ImgBtn">Wybierz zdjęcie</label>
-        <input name="Picture" id="Picture" type="file" style="display:none" accept="image/png, image/jpeg"/>
+        <label for="CoursePicture" class="ImgBtn">Wybierz zdjęcie</label>
+        <input name="CoursePicture" id="CoursePicture" type="file" style="display:none" accept="image/png, image/jpeg"/ required>
         <div id="PictureView" class="Pic"></div>
         </section>
         <section>
@@ -31,11 +31,11 @@
         <h1>To już ostatni krok tworzenia Twojego kursu</h1>
         <section>
             <label for="Price">Podaj cenę za swój kurs</label>
-            <input name="Price" id="Price" type="number" min="0" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'/>
+            <input name="Price" id="Price" type="number" min="0" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)' required/>
         </section>
         <section>
-        <label for="Author">Podaj Imię i Nazwisko autora kursu</label>
-        <input type="text" name="Author" id="Author"/>
+        <label for="AuthorName">Podaj Imię i Nazwisko autora kursu</label>
+        <input type="text" name="AuthorName" id="AuthorName" required/>
         </section>
         <section style="max-height: 150px;">
             <div class="NextBtn TwoBtnInSection" onclick="ReturnToSecondPanel('false')">Wstecz</div>
@@ -69,7 +69,7 @@
             <div id="ReturnSecond" class="SummaryBtn" onclick="ReturnToSecondPanel('true')" style="width:55%">Zmień</div>
             <div id="ReturnLast" class="SummaryBtn" onclick="ReturnToLastPanel()" style="width:15%">Zmień</div>
             </div>
-        <div class="CreateCourse" id="CreateCourse">Stwórz kurs</div>
+        <div class="CreateCourse" id="CreateCourse" onclick="CreateCourse()">Stwórz kurs</div>
     </div>
 </form>
 <script src="/js/Course/Create.js"></script>

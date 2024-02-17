@@ -19,13 +19,9 @@ namespace Courses.Infrastructure.Services
             _passwordRepository = passwordRepository;
         }
         public async Task<User> GetByIdAsync(Guid id)
-        => await Task.FromResult(_context.Users.Include(u=>u.UserPassword).FirstOrDefault(u=>u.Id==id));
-        
+        => await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         public async Task<User> GetByLoginAsync(string login)
-        {
-            var user = _context.Users.Include(u => u.UserPassword).AsEnumerable().FirstOrDefault(u=>u.Login.Value == login);
-            return await Task.FromResult(user);
-        }
+        => await _context.Users.Include(u => u.UserPassword).FirstOrDefaultAsync(u=>u.Login.Value == login);
         public async Task<User> GetByEmailAsync(string email)
         {
             var user = await _context.Users.Include(u => u.UserPassword).FirstOrDefaultAsync(u => u.Email == email);

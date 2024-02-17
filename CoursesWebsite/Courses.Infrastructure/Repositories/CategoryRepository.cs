@@ -13,14 +13,14 @@ namespace Courses.Infrastructure.Repositories
             _context = context;
         }
         public async Task<List<Category>> GetAll()
-        => _context.Categories.Where(cat=>cat.State == Core.Models.Common.State.Active).ToList();
+        => await _context.Categories.Where(cat=>cat.State == Core.Models.Common.State.Active).ToListAsync();
         public async Task<Category> GetCategoryByIdAsync(Guid id)
-        => await Task.FromResult(_context.Categories.FirstOrDefault(c => c.Id == id));
+        => await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
         public async Task<Category> GetCategoryByNameAsync(string name)
-        => await Task.FromResult(_context.Categories.FirstOrDefault(c => c.Name == name));
+        => await _context.Categories.FirstOrDefaultAsync(c => c.Name == name);
         public async Task CreateCategoryAsync(Category category)
         {
-            _context.Categories.Add(category);
+            await _context.Categories.AddAsync(category);
             await UpdateCategoryAsync();
         }
         public async Task UpdateCategoryAsync()

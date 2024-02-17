@@ -48,7 +48,7 @@ function GoToSummary() {
     document.getElementById("Summary").style.transform = `translateX(0)`;
     lastPanel = true;
 }
-document.getElementById("Picture").addEventListener('change', AddImage);
+document.getElementById("CoursePicture").addEventListener('change', AddImage);
 function AddImage() {
     if (!this.files || !this.files[0]) return;
     const reader = new FileReader();
@@ -75,5 +75,24 @@ function SecondPanelToSummary() {
 }
 function LastPanelToSummary() {
     document.getElementById("SummaryPrice").innerHTML = document.getElementById("Price").value + " zł";
-    document.getElementById("SummaryAuthor").innerHTML = document.getElementById("Author").value;
+    document.getElementById("SummaryAuthor").innerHTML = document.getElementById("AuthorName").value;
+}
+function CreateCourse() {
+    var form = document.getElementById("CourseValidator");
+    if (form.checkValidity()) {
+        $.ajax({
+            url: "/Course/Create",
+            method: "POST",
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            data: new FormData(form),
+            success: function (data) {
+                console.log(data);
+            },
+            error(xhr) {
+                console.log(xhr);
+            }
+        })
+    }
 }

@@ -14,34 +14,31 @@ namespace Courses.Infrastructure.Repositories
             _context = context;
         }
         public async Task<Cart> GetCartByIdAsync(Guid cartId)
-        => await Task.FromResult(_context.Carts.FirstOrDefault(c => c.Id == cartId));
+        => await _context.Carts.FirstOrDefaultAsync(c => c.Id == cartId);
         public async Task<Cart> GetUserCartAsync(Guid userId)
-        => await Task.FromResult(_context.Carts.FirstOrDefault(c=>c.UserId == userId));
+        => await _context.Carts.FirstOrDefaultAsync(c=>c.UserId == userId);
         public async Task<List<Guid>> GetProductsInCartByIdAsync(Guid cartId)
-        {
-            var productsGuids = await Task.FromResult(_context.coursesCarts.Where(c=>c.Id == cartId).Select(c=>c.CourseId));
-            return productsGuids.ToList();
-        }
+            => await _context.coursesCarts.Where(c=>c.Id == cartId).Select(c=>c.CourseId).ToListAsync();
         public async Task AddToCartAsync(CoursesCart course)
         {
-            await Task.FromResult(_context.coursesCarts.Add(course));
+            await _context.coursesCarts.AddAsync(course);
             await UpdateCartAsync();
         }
         public async Task RemoveFromCartAsync(CoursesCart course) 
         {
-            await Task.FromResult(_context.coursesCarts.Remove(course));
+            _context.coursesCarts.Remove(course);
             await UpdateCartAsync();
         }
         public async Task CreateCartAsync(Cart cart)
         {
-            await Task.FromResult(_context.Carts.Add(cart));
+            await _context.Carts.AddAsync(cart);
             await UpdateCartAsync();
         }
 
         public async Task DeleteCartAsync(Guid cartId)
         {
-            var cart = _context.Carts.FirstOrDefault(c=>c.Id== cartId);
-            await Task.FromResult(_context.Remove(cart));
+            var cart = await _context.Carts.FirstOrDefaultAsync(c=>c.Id== cartId);
+            _context.Remove(cart);
             await UpdateCartAsync();
         }
         public async Task Sale(Cart cart)

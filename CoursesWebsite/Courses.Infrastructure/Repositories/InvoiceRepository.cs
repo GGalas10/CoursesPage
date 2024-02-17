@@ -17,7 +17,7 @@ namespace Courses.Infrastructure.Repositories
         {
             if (invoice == null)
                 throw new Exception("If you want create an invoice, it cannot be empty");
-            await Task.FromResult(_context.Invoices.Add(invoice));
+            await _context.Invoices.AddAsync(invoice);
             await Task.CompletedTask;
         }
         public Task<Invoice> GetInvoiceByIdAsync(Guid invoiceId)

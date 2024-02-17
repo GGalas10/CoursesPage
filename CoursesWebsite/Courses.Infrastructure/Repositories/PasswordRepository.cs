@@ -1,6 +1,7 @@
 ﻿using Courses.Core.Models.User;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Infrastructure.Repositories
 {
@@ -12,10 +13,10 @@ namespace Courses.Infrastructure.Repositories
             _context = context;
         }
         public async Task<UserPassword> GetByIdAsync(Guid id)
-            =>await Task.FromResult(_context.Password.FirstOrDefault(p=>p.Id == id));
+            =>await _context.Password.FirstOrDefaultAsync(p=>p.Id == id);
         public async Task CreateAsync(UserPassword password)
         {
-            await Task.FromResult(_context.Password.Add(password));
+            await _context.Password.AddAsync(password);
             if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
             else

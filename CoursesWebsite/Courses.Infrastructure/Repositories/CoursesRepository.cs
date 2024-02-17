@@ -3,6 +3,7 @@ using Courses.Core.Models.Course;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
 using Courses.Infrastructure.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Infrastructure.Services
 {
@@ -14,12 +15,12 @@ namespace Courses.Infrastructure.Services
             _context = context;
         }
         public async Task<Course> GetAsync(Guid id)
-        => await Task.FromResult(_context.Courses.FirstOrDefault(c => c.Id == id && c.State == State.Active));
+        => await _context.Courses.FirstOrDefaultAsync(c => c.Id == id && c.State == State.Active);
         public async Task<List<Course>> GetAllAsync()
-            => await Task.FromResult(_context.Courses.Where(c => c.State == State.Active).ToList());
+            => await _context.Courses.Where(c => c.State == State.Active).ToListAsync();
         public async Task<List<Course>> GetAllByCategoryIdAsync(Guid categoryId)
         {
-            var allGuidInCategory = await Task.FromResult(_context.coursesCategories.Where(c=>c.CategoryId == categoryId).ToList());
+            var allGuidInCategory = await _context.coursesCategories.Where(c=>c.CategoryId == categoryId).ToListAsync();
             var allCourses = new List<Course>();
             foreach(var oneGuid in allGuidInCategory)
             {
@@ -27,14 +28,14 @@ namespace Courses.Infrastructure.Services
             }
             return allCourses;
         }
-        public async Task CreateAsync(Course course)
+        public async Task<Guid> CreateAsync(Course course)
         {
-            var cours = await Task.FromResult(_context.Courses.FirstOrDefault(c=>c.Name == course.Name));
+            var cours = await _context.Courses.FirstOrDefaultAsync(c=>c.Name == course.Name);
             if (cours != null)
                 throw new Exception($"A cours with this name already exists");
             _context.Courses.Add(course);
             if (_context.SaveChangesAsync().Result > 0)
-                await Task.CompletedTask;
+                return course.Id;
             else
                 throw new Exception("Db can't save date");
         }
@@ -89,7 +90,7 @@ namespace Courses.Infrastructure.Services
         {
             if (lesson == null)
                 throw new Exception("Lesson can't be empty");
-            var Topic = await Task.FromResult(_context.topics.FirstOrDefault(t => t.Id == idTopic));
+            var Topic = await _context.topics.FirstOrDefaultAsync(t => t.Id == idTopic);
             if (Topic == null)
                 throw new Exception("Topic doesn't exists");
             Topic.AddLesson(lesson);
@@ -102,7 +103,7 @@ namespace Courses.Infrastructure.Services
         {
             if (lessons.Count < 0)
                 throw new Exception("List of lessons can't be empty");
-            var Topic = await Task.FromResult(_context.topics.FirstOrDefault(t => t.Id == idTopic));
+            var Topic = await _context.topics.FirstOrDefaultAsync(t => t.Id == idTopic);
             if (Topic == null)
                 throw new Exception("Topic doesn't exists");
             foreach(var lesson in lessons)

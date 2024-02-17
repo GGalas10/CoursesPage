@@ -2,6 +2,7 @@
 using Courses.Core.Models.Course;
 using Courses.Core.Repositories;
 using Courses.Core.Value_Object;
+using Courses.Infrastructure.Comands.Course;
 using Courses.Infrastructure.DTO;
 using Courses.Infrastructure.Services.Interfaces;
 
@@ -42,11 +43,11 @@ namespace Courses.Infrastructure.Services.Services
         }
         public async Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId)
             => _mapper.Map<IEnumerable<ViewCoursesDTO>>(await Task.FromResult(_coursesRepostiotory.GetAllAsync().Result));
-        public async Task CreateAsync(string name, string description, string author, DigitalItem picture,double price)
+        public async Task<Guid> CreateAsync(Create command)
         {
-            var course = new Course(name, description, author, picture,Math.Round(price,2));
-            await _coursesRepostiotory.CreateAsync(course);
-            await Task.CompletedTask;
+            DigitalItem picture = await DigitalItem.CreateFromIFromFile(command.CoursePicture);
+            var course = new Course(command.Title, command.Description, command.AuthorName, picture, Math.Round(command.Price, 2));
+            return await _coursesRepostiotory.CreateAsync(course);
         }
         public async Task AddTopicAsync(Guid courseId, string name, string description)
         {

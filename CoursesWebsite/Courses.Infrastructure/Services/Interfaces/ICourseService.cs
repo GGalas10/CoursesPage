@@ -11,7 +11,7 @@ namespace Courses.Infrastructure.Services.Interfaces
         Task<IEnumerable<ViewCoursesDTO>> GetByCourseIdAsync(IEnumerable<Guid> guids);
         Task<IEnumerable<CartCourseDTO>> GetCoursesForCart(IEnumerable<Guid> guids);
         Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId);
-        Task<Guid> CreateAsync(Create command);
+        Task<Guid> CreateAsync(Create command,Guid userId);
         Task AddTopicAsync(Guid courseId, string name, string description);
         Task AddLessonAsync(Guid courseId, Guid topicId, string name, string description, byte[] video);
     }

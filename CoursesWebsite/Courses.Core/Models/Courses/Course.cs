@@ -16,6 +16,7 @@ namespace Courses.Core.Models.Courses
         public DigitalItem Picutre { get; protected set; }
         public Guid? UserId { get; protected set; }
         public User? User { get; protected set; }
+        public CourseState courseState { get; protected set; }
         public ICollection<Topic> Topics => _topics;
         #endregion
         #region Constructors
@@ -31,6 +32,7 @@ namespace Courses.Core.Models.Courses
             SetPicture(picture);
             CreatedAt = DateTime.UtcNow;
             State = State.Active;
+            courseState = CourseState.Draft;
         }
 
         #endregion
@@ -39,7 +41,6 @@ namespace Courses.Core.Models.Courses
         {
             if (user == null)
                 throw new Exception("User cannot be null or empty");
-            UserId = user.Id;
             User = user;
         }
         public void SetName(string name)
@@ -64,7 +65,7 @@ namespace Courses.Core.Models.Courses
         {
             _topics.Add(topic);
         }
-        public void AddTopic(List<Topic> topics)
+        public void AddTopics(List<Topic> topics)
         {
             foreach (var topic in topics)
                 _topics.Add(topic);
@@ -78,6 +79,10 @@ namespace Courses.Core.Models.Courses
             if (price <= 0)
                 throw new Exception("Price cannot be smaller than or equal 0");
             Price = price;
+        }
+        public void SetCourseState(CourseState courseState)
+        {
+            this.courseState = courseState;
         }
         #endregion
     }

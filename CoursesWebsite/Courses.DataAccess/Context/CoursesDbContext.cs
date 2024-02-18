@@ -7,8 +7,12 @@ using Courses.Core.Models.Invoicing.Settings;
 using Courses.Core.Models.Orders;
 using Courses.Core.Models.Users;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Data;
+using System.Reflection.Emit;
+using System;
 
-namespace Courses.Infrastructure.Database
+namespace Courses.DataAccess.Context
 {
     public class CoursesDbContext : DbContext
     {
@@ -32,6 +36,7 @@ namespace Courses.Infrastructure.Database
         public DbSet<UserConfiguration> UserConfigurations { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderCourses> OrderCourses { get; set; }
+        public DbSet<UserCoursesAccess> UserCoursesAccesses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -99,7 +104,7 @@ namespace Courses.Infrastructure.Database
                 entity.HasKey(pk => pk.Id);
                 entity.HasOne(fk => fk.Cart).WithMany(fk => fk._coursesCart);
             });
-                
+
 
             modelBuilder.Entity<CoursesCategory>()
                 .HasKey(pk => pk.Id);
@@ -108,7 +113,7 @@ namespace Courses.Infrastructure.Database
                 entity.HasKey(pk => pk.Id);
                 entity.HasMany(fk => fk.Courses).WithOne(fk => fk.Invoice);
             });
-                
+
             modelBuilder.Entity<InvoiceSettings>()
                 .HasNoKey();
             modelBuilder.Entity<InvoicingCourses>(entity =>
@@ -120,7 +125,7 @@ namespace Courses.Infrastructure.Database
                 .HasKey(pk => pk.Id);
             modelBuilder.Entity<Recipient>()
                 .HasKey(pk => pk.Id);
-                
+
         }
     }
 }

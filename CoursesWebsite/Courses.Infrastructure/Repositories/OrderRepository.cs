@@ -1,7 +1,7 @@
 ﻿using Courses.Core.Models.Carts;
 using Courses.Core.Models.Orders;
 using Courses.Core.Repositories;
-using Courses.Infrastructure.Database;
+using Courses.DataAccess.Context;
 
 namespace Courses.Infrastructure.Repositories
 {

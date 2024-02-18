@@ -15,7 +15,6 @@ namespace Courses.Core.Models.Users
         {
             if(user == null) 
                 throw new Exception("User cannot be null or empty");
-            UserId = user.Id == Guid.Empty ? throw new Exception("User id cannot be null or empty") : user.Id ;
             User = user;
             SetRegion(Region); 
             SetTheme(theme);

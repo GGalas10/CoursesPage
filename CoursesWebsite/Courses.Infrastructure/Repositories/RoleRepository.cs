@@ -2,7 +2,7 @@
 using Courses.Core.Models.Users;
 using Courses.Core.Repositories;
 using Courses.Core.Value_Object;
-using Courses.Infrastructure.Database;
+using Courses.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Infrastructure.Repositories

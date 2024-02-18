@@ -1,4 +1,5 @@
 ﻿using Courses.Core.Models.Carts;
+using Courses.Core.Models.Courses;
 
 namespace Courses.Core.Models.Orders
 {
@@ -22,7 +23,7 @@ namespace Courses.Core.Models.Orders
         public Order(Cart cart)
         {
             Id = Guid.NewGuid();
-            UserId = cart.UserId;
+            UserId = (Guid)cart.UserId;
             foreach(var oneCourse in cart.CoursesCart)
             {
                 AddCourse(new OrderCourses(oneCourse.Price, oneCourse.Name));
@@ -42,6 +43,20 @@ namespace Courses.Core.Models.Orders
                 throw new Exception("Courses list cannot be empty");
             _Courses.AddRange(courses);
             UpdatedAt = DateTime.Now;
+        }
+        public void UpdateCoursePrice(Guid courseId, double price)
+        {
+            var course = _Courses.FirstOrDefault(c=>c.Id == courseId);
+            if (course == null)
+                throw new Exception($"Cannot find course with this ID {courseId}");
+            course.SetPrice(price);
+        }
+        public void RemoveCourse(Guid courseId)
+        {
+            var course = _Courses.FirstOrDefault(c => c.Id == courseId);
+            if (course == null)
+                throw new Exception($"Cannot find course with this ID {courseId}");
+            _Courses.Remove(course);
         }
         public void ChangeStatus(OrderStatus status)
         {

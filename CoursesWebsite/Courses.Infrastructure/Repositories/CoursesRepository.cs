@@ -1,7 +1,7 @@
 ﻿using Courses.Core.Models.Commons;
 using Courses.Core.Models.Courses;
 using Courses.Core.Repositories;
-using Courses.Infrastructure.Database;
+using Courses.DataAccess.Context;
 using Courses.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -80,7 +80,7 @@ namespace Courses.Infrastructure.Services
             if (topic.Count<0)
                 throw new Exception("List of topic can't be empty");
             var Course = await this.GetOrFailById(id);
-            Course.AddTopic(topic);
+            Course.AddTopics(topic);
             if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
             else

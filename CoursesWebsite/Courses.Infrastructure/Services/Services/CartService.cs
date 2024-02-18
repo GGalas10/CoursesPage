@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Courses.Core.Models.Cart;
+using Courses.Core.Models.Carts;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.DTO;
 using Courses.Infrastructure.Services.Interfaces;
@@ -9,15 +9,18 @@ namespace Courses.Infrastructure.Services.Services
     public class CartService : ICartService
     {
         private readonly ICartRepository _cartRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public CartService(ICartRepository cartRepository,IMapper mapper)
+        public CartService(ICartRepository cartRepository,IUserRepository userRepository,IMapper mapper)
         {
             _cartRepository = cartRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
         public async Task<Guid> CreateCartAsync(Guid userId)
         {
-            var cart = new Cart(userId);
+            var user = await _userRepository.GetByIdAsync(userId);
+            var cart = new Cart(user);
             await _cartRepository.CreateCartAsync(cart);
             return cart.Id;
         }
@@ -37,7 +40,10 @@ namespace Courses.Infrastructure.Services.Services
         public async Task UpdateUserIdAsync(Guid userId, Guid cartId)
         {
             var cart = await _cartRepository.GetCartByIdAsync(userId);
-            cart.SetUserGuid(userId);
+            if (userId == Guid.Empty)
+                throw new Exception("User id cannot be null or empty");
+            var user = await _userRepository.GetByIdAsync(userId);
+            cart.SetUser(user);
             await _cartRepository.UpdateCartAsync();
         }
         public async Task DeleteCartAsync(Guid CartId)

@@ -6,27 +6,26 @@ namespace Courses.Core.Models.Carts
     {
         public List<CoursesCart> _coursesCart { get; protected set; }
         public Guid Id { get; protected set; }
-        public Guid UserId { get; protected set; }
-        public User CartUser { get; protected set; }
+        public Guid? UserId { get; protected set; }
+        public User? CartUser { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public IEnumerable<CoursesCart> CoursesCart => _coursesCart;
+        private Cart() { }
         public Cart(User cartUser)
         {
             Id = Guid.NewGuid();
-            UserId = cartUser.Id;
-            CartUser = cartUser;
+            if(cartUser != null)
+                SetUser(cartUser);
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             _coursesCart = new List<CoursesCart>();
         }
-        public void SetUserGuid(Guid userId)
+        public void SetUser(User user)
         {
-            if (UserId == userId)
-                throw new Exception("This user has this cart");
-            if (userId == Guid.Empty)
-                throw new Exception("User id does not exists");
-            UserId = userId;
+            if (user == null)
+                throw new Exception("User cannot be null");
+            CartUser = user;
         }
         public void AddToCart(CoursesCart courses)
         {

@@ -33,7 +33,7 @@ namespace Courses.API.Controllers
             }
             try
             {
-                await _courseService.CreateAsync(command);
+                await _courseService.CreateAsync(command,UserId);
                 return Created();
             }
             catch (Exception ex)

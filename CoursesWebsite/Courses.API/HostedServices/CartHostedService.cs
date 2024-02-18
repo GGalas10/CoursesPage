@@ -1,5 +1,5 @@
 ﻿using Courses.Core.Repositories;
-using Courses.Infrastructure.Database;
+using Courses.DataAccess.Context;
 using Courses.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore.Metadata;
 

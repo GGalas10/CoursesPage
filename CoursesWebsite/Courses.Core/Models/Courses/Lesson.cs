@@ -1,7 +1,7 @@
-﻿using Courses.Core.Models.Common;
+﻿using Courses.Core.Models.Commons;
 using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models.Course
+namespace Courses.Core.Models.Courses
 {
     public class Lesson : Entity
     {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Courses.Core.Models.User;
+using Courses.Core.Models.Users;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Comands.Config;
 using Courses.Infrastructure.DTO;

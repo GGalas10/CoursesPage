@@ -1,6 +1,6 @@
 ﻿using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models.User
+namespace Courses.Core.Models.Users
 {
     public class UserPassword
     {

@@ -1,5 +1,5 @@
-﻿using Courses.Core.Models.Common;
-using Courses.Core.Models.User;
+﻿using Courses.Core.Models.Commons;
+using Courses.Core.Models.Users;
 using Courses.Core.Repositories;
 using Courses.Core.Value_Object;
 using Courses.Infrastructure.Database;

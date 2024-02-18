@@ -1,4 +1,4 @@
-﻿using Courses.Core.Models.Cart;
+﻿using Courses.Core.Models.Carts;
 
 namespace Courses.Core.Repositories
 {

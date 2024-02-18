@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Courses.Core.Models.Common
+namespace Courses.Core.Models.Commons
 {
     public class Entity
     {

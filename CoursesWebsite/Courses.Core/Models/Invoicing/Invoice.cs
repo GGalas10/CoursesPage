@@ -1,4 +1,4 @@
-﻿using Courses.Core.Models.Common;
+﻿using Courses.Core.Models.Commons;
 
 namespace Courses.Core.Models.Invoicing
 {

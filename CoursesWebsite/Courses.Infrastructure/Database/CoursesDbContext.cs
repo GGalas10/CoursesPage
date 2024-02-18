@@ -1,10 +1,11 @@
-﻿using Courses.Core.Models.Cart;
-using Courses.Core.Models.Category;
-using Courses.Core.Models.Common;
-using Courses.Core.Models.Course;
+﻿using Courses.Core.Models.Carts;
+using Courses.Core.Models.Categories;
+using Courses.Core.Models.Commons;
+using Courses.Core.Models.Courses;
 using Courses.Core.Models.Invoicing;
 using Courses.Core.Models.Invoicing.Settings;
-using Courses.Core.Models.User;
+using Courses.Core.Models.Orders;
+using Courses.Core.Models.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Infrastructure.Database
@@ -29,6 +30,8 @@ namespace Courses.Infrastructure.Database
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Recipient> Recipients { get; set; }
         public DbSet<UserConfiguration> UserConfigurations { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderCourses> OrderCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -87,14 +90,14 @@ namespace Courses.Infrastructure.Database
             modelBuilder.Entity<Cart>(entity =>
             {
                 entity.HasKey(p => p.Id);
-                entity.HasMany(mC => mC._Carts).WithOne(oC => oC.Cart);
+                entity.HasMany(mC => mC._coursesCart).WithOne(oC => oC.Cart);
             });
 
 
             modelBuilder.Entity<CoursesCart>(entity =>
             {
                 entity.HasKey(pk => pk.Id);
-                entity.HasOne(fk => fk.Cart).WithMany(fk => fk._Carts);
+                entity.HasOne(fk => fk.Cart).WithMany(fk => fk._coursesCart);
             });
                 
 

@@ -49,7 +49,7 @@ namespace Courses.Infrastructure.Services.Services
         {
             throw new NotImplementedException();
         }
-        public async Task AddProductAsync(Guid  cartId, string name,double price)
+        public async Task AddProductAsync(Guid cartId, string name,double price)
         {
             var cart = new CoursesCart(cartId,name,price);
             await _cartRepository.AddToCartAsync(cart);

@@ -1,4 +1,4 @@
-﻿using Courses.Core.Models.User;
+﻿using Courses.Core.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;

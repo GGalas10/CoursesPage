@@ -1,4 +1,4 @@
-﻿namespace Courses.Core.Models.Order
+﻿namespace Courses.Core.Models.Orders
 {
     public enum OrderStatus
     {

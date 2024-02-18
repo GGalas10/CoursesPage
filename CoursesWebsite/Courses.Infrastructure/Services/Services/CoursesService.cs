@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Courses.Core.Models.Course;
+using Courses.Core.Models.Courses;
 using Courses.Core.Repositories;
 using Courses.Core.Value_Object;
 using Courses.Infrastructure.Comands.Course;

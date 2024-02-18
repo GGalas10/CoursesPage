@@ -45,7 +45,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Category", b =>
+            modelBuilder.Entity("Courses.Core.Models.Categories", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +59,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,7 +79,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.CoursesCart", b =>
+            modelBuilder.Entity("Courses.Core.Models.CoursessCart", b =>
                 {
                     b.Property<Guid>("CartId")
                         .HasColumnType("uniqueidentifier");
@@ -90,7 +90,7 @@ namespace Courses.API.Migrations
                     b.ToTable("coursesCarts");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.CoursesCategory", b =>
+            modelBuilder.Entity("Courses.Core.Models.CoursessCategory", b =>
                 {
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
@@ -153,7 +153,7 @@ namespace Courses.API.Migrations
                     b.ToTable("topics");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -170,7 +170,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.UserPassword", b =>
+            modelBuilder.Entity("Courses.Core.Models.UsersPassword", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,7 +187,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Password");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.UserRole", b =>
+            modelBuilder.Entity("Courses.Core.Models.UsersRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
@@ -201,7 +201,7 @@ namespace Courses.API.Migrations
                     b.ToTable("UsersRoles");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Category", b =>
+            modelBuilder.Entity("Courses.Core.Models.Categories", b =>
                 {
                     b.OwnsOne("Courses.Core.Value_Object.Name", "Name", b1 =>
                         {
@@ -225,7 +225,7 @@ namespace Courses.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses", b =>
                 {
                     b.OwnsOne("Courses.Core.Value_Object.Name", "Author", b1 =>
                         {
@@ -432,7 +432,7 @@ namespace Courses.API.Migrations
 
             modelBuilder.Entity("Courses.Core.Models.Topic", b =>
                 {
-                    b.HasOne("Courses.Core.Models.Course", "Course")
+                    b.HasOne("Courses.Core.Models.Courses", "Course")
                         .WithMany("Topics")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -483,7 +483,7 @@ namespace Courses.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users", b =>
                 {
                     b.OwnsOne("Courses.Core.Value_Object.Name", "Login", b1 =>
                         {
@@ -549,11 +549,11 @@ namespace Courses.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.UserPassword", b =>
+            modelBuilder.Entity("Courses.Core.Models.UsersPassword", b =>
                 {
-                    b.HasOne("Courses.Core.Models.User", "User")
+                    b.HasOne("Courses.Core.Models.Users", "User")
                         .WithOne("UserPassword")
-                        .HasForeignKey("Courses.Core.Models.UserPassword", "UserId")
+                        .HasForeignKey("Courses.Core.Models.UsersPassword", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -602,7 +602,7 @@ namespace Courses.API.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses", b =>
                 {
                     b.Navigation("Topics");
                 });
@@ -612,7 +612,7 @@ namespace Courses.API.Migrations
                     b.Navigation("Lessons");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users", b =>
                 {
                     b.Navigation("UserPassword")
                         .IsRequired();

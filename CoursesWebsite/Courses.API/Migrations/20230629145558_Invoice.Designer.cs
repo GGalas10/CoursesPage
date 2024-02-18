@@ -72,7 +72,7 @@ namespace Courses.API.Migrations
                     b.ToTable("coursesCarts");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Category.Category", b =>
+            modelBuilder.Entity("Courses.Core.Models.Categories.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,7 +86,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Category.CoursesCategory", b =>
+            modelBuilder.Entity("Courses.Core.Models.Categories.CoursesCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,7 +103,7 @@ namespace Courses.API.Migrations
                     b.ToTable("coursesCategories");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Common.Address", b =>
+            modelBuilder.Entity("Courses.Core.Models.Commons.Address", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,7 +133,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course.Course", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses.Course", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -153,7 +153,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course.Lesson", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses.Lesson", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -172,7 +172,7 @@ namespace Courses.API.Migrations
                     b.ToTable("lessons");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course.Topic", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses.Topic", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,7 +290,7 @@ namespace Courses.API.Migrations
                     b.ToTable("invoiceSettings");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User.Role", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -304,7 +304,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User.User", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -321,7 +321,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User.UserPassword", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users.UserPassword", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -338,7 +338,7 @@ namespace Courses.API.Migrations
                     b.ToTable("Password");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User.UserRole", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users.UserRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
@@ -383,7 +383,7 @@ namespace Courses.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Category.Category", b =>
+            modelBuilder.Entity("Courses.Core.Models.Categories.Category", b =>
                 {
                     b.OwnsOne("Courses.Core.Value_Object.Name", "Name", b1 =>
                         {
@@ -407,7 +407,7 @@ namespace Courses.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course.Course", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses.Course", b =>
                 {
                     b.OwnsOne("Courses.Core.Value_Object.Name", "Author", b1 =>
                         {
@@ -494,9 +494,9 @@ namespace Courses.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course.Lesson", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses.Lesson", b =>
                 {
-                    b.HasOne("Courses.Core.Models.Course.Topic", "Topic")
+                    b.HasOne("Courses.Core.Models.Courses.Topic", "Topic")
                         .WithMany("Lessons")
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -588,9 +588,9 @@ namespace Courses.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course.Topic", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses.Topic", b =>
                 {
-                    b.HasOne("Courses.Core.Models.Course.Course", "Course")
+                    b.HasOne("Courses.Core.Models.Courses.Course", "Course")
                         .WithMany("Topics")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -643,7 +643,7 @@ namespace Courses.API.Migrations
 
             modelBuilder.Entity("Courses.Core.Models.Invoicing.Buyer", b =>
                 {
-                    b.HasOne("Courses.Core.Models.Common.Address", "Adress")
+                    b.HasOne("Courses.Core.Models.Commons.Address", "Adress")
                         .WithMany()
                         .HasForeignKey("AdressId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -690,7 +690,7 @@ namespace Courses.API.Migrations
 
             modelBuilder.Entity("Courses.Core.Models.Invoicing.Recipient", b =>
                 {
-                    b.HasOne("Courses.Core.Models.Common.Address", "DeliveryAdress")
+                    b.HasOne("Courses.Core.Models.Commons.Address", "DeliveryAdress")
                         .WithMany()
                         .HasForeignKey("DeliveryAdressId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -699,7 +699,7 @@ namespace Courses.API.Migrations
                     b.Navigation("DeliveryAdress");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User.Role", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users.Role", b =>
                 {
                     b.OwnsOne("Courses.Core.Value_Object.Name", "Name", b1 =>
                         {
@@ -723,7 +723,7 @@ namespace Courses.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User.User", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users.User", b =>
                 {
                     b.OwnsOne("Courses.Core.Value_Object.Name", "Login", b1 =>
                         {
@@ -789,11 +789,11 @@ namespace Courses.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User.UserPassword", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users.UserPassword", b =>
                 {
-                    b.HasOne("Courses.Core.Models.User.User", "User")
+                    b.HasOne("Courses.Core.Models.Users.User", "User")
                         .WithOne("UserPassword")
-                        .HasForeignKey("Courses.Core.Models.User.UserPassword", "UserId")
+                        .HasForeignKey("Courses.Core.Models.Users.UserPassword", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -849,12 +849,12 @@ namespace Courses.API.Migrations
                     b.Navigation("_Carts");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course.Course", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses.Course", b =>
                 {
                     b.Navigation("Topics");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.Course.Topic", b =>
+            modelBuilder.Entity("Courses.Core.Models.Courses.Topic", b =>
                 {
                     b.Navigation("Lessons");
                 });
@@ -869,7 +869,7 @@ namespace Courses.API.Migrations
                     b.Navigation("Courses");
                 });
 
-            modelBuilder.Entity("Courses.Core.Models.User.User", b =>
+            modelBuilder.Entity("Courses.Core.Models.Users.User", b =>
                 {
                     b.Navigation("UserPassword")
                         .IsRequired();

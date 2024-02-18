@@ -1,4 +1,4 @@
-﻿namespace Courses.Core.Models.Common
+﻿namespace Courses.Core.Models.Commons
 {
     public class Address
     {

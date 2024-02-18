@@ -1,9 +1,9 @@
-﻿using Courses.Core.Models.Common;
+﻿using Courses.Core.Models.Commons;
 using Courses.Core.Value_Object;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Courses.Core.Models.User
+namespace Courses.Core.Models.Users
 {
     public class User : Entity
     {

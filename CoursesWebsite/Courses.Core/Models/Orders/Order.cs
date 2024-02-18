@@ -1,4 +1,6 @@
-﻿namespace Courses.Core.Models.Order
+﻿using Courses.Core.Models.Carts;
+
+namespace Courses.Core.Models.Orders
 {
     public class Order
     {
@@ -15,6 +17,16 @@
             Id = Guid.NewGuid();
             UserId = userId;
             AddCourses(courses);
+            Status = OrderStatus.Created;
+        }
+        public Order(Cart cart)
+        {
+            Id = Guid.NewGuid();
+            UserId = cart.UserId;
+            foreach(var oneCourse in cart.CoursesCart)
+            {
+                AddCourse(new OrderCourses(oneCourse.Price, oneCourse.Name));
+            }
             Status = OrderStatus.Created;
         }
         public void AddCourse(OrderCourses course)

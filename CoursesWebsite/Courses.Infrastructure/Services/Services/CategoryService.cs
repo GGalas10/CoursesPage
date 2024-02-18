@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Courses.Core.Models.Category;
+using Courses.Core.Models.Categories;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.DTO;
 using Courses.Infrastructure.Services.Interfaces;

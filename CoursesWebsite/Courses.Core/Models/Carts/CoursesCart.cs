@@ -1,7 +1,7 @@
 ﻿using Courses.Core.Value_Object;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Courses.Core.Models.Cart
+namespace Courses.Core.Models.Carts
 {
     public class CoursesCart
     {

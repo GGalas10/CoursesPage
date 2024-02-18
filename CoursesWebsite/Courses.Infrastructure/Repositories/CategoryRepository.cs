@@ -1,4 +1,4 @@
-﻿using Courses.Core.Models.Category;
+﻿using Courses.Core.Models.Categories;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ namespace Courses.Infrastructure.Repositories
             _context = context;
         }
         public async Task<List<Category>> GetAll()
-        => await _context.Categories.Where(cat=>cat.State == Core.Models.Common.State.Active).ToListAsync();
+        => await _context.Categories.Where(cat=>cat.State == Core.Models.Commons.State.Active).ToListAsync();
         public async Task<Category> GetCategoryByIdAsync(Guid id)
         => await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
         public async Task<Category> GetCategoryByNameAsync(string name)

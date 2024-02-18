@@ -1,4 +1,4 @@
-﻿namespace Courses.Core.Models.Category
+﻿namespace Courses.Core.Models.Categories
 {
     public class CoursesCategory
     {

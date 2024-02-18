@@ -1,4 +1,4 @@
-﻿using Courses.Core.Models.User;
+﻿using Courses.Core.Models.Users;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,6 @@
 ﻿using Courses.Core.Value_Object;
 
-namespace Courses.Core.Models.Order
+namespace Courses.Core.Models.Orders
 {
     public class OrderCourses
     {

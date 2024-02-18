@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Courses.Core.Models.User
+namespace Courses.Core.Models.Users
 {
     public class UserConfiguration
     {

@@ -1,20 +1,24 @@
-﻿namespace Courses.Core.Models.Cart
+﻿using Courses.Core.Models.Users;
+
+namespace Courses.Core.Models.Carts
 {
     public class Cart
     {
-        public List<CoursesCart> _Carts { get; protected set; }
+        public List<CoursesCart> _coursesCart { get; protected set; }
         public Guid Id { get; protected set; }
         public Guid UserId { get; protected set; }
+        public User CartUser { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
-        public IEnumerable<CoursesCart> Carts => _Carts;
-        public Cart(Guid userId)
+        public IEnumerable<CoursesCart> CoursesCart => _coursesCart;
+        public Cart(User cartUser)
         {
             Id = Guid.NewGuid();
-            UserId = userId;
+            UserId = cartUser.Id;
+            CartUser = cartUser;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            _Carts = new List<CoursesCart>();
+            _coursesCart = new List<CoursesCart>();
         }
         public void SetUserGuid(Guid userId)
         {
@@ -28,18 +32,18 @@
         {
             if (courses == null)
                 throw new Exception("Courses does not be empty");
-            _Carts.Add(courses);
+            _coursesCart.Add(courses);
         }
         public void RemoveFromCart(CoursesCart courses)
         {
 
             if (courses == null)
                 throw new Exception("Courses does not be empty");
-            _Carts.Remove(courses);
+            _coursesCart.Remove(courses);
         }
         public void ClearCart()
         {
-            _Carts.Clear();
+            _coursesCart.Clear();
         }
     }
 }

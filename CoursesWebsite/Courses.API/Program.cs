@@ -1,7 +1,7 @@
 using Courses.API.HostedService;
 using Courses.API.Middlewares;
 using Courses.Core.Repositories;
-using Courses.Infrastructure.Database;
+using Courses.DataAccess.Context;
 using Courses.Infrastructure.Mappers;
 using Courses.Infrastructure.Repositories;
 using Courses.Infrastructure.Services;
@@ -28,7 +28,7 @@ builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 builder.Services.AddDbContext<CoursesDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
-        ,x=>x.MigrationsAssembly("Courses.API"));
+        ,x=>x.MigrationsAssembly("Courses.DataAccess"));
 });
 
 #region Services

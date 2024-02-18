@@ -1,7 +1,7 @@
 ﻿using Courses.Core.Models.Commons;
 using Courses.Core.Models.Users;
 using Courses.Core.Repositories;
-using Courses.Infrastructure.Database;
+using Courses.DataAccess.Context;
 using Courses.Infrastructure.Extensions;
 using Courses.Infrastructure.Sercurity;
 using Microsoft.EntityFrameworkCore;

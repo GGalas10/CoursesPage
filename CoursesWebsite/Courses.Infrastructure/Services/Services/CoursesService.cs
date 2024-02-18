@@ -11,10 +11,12 @@ namespace Courses.Infrastructure.Services.Services
     public class CoursesService : ICourseService
     {
         private readonly ICoursesRepository _coursesRepostiotory;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public CoursesService(ICoursesRepository coursesRepostiotory, IMapper mapper)
+        public CoursesService(ICoursesRepository coursesRepostiotory, IUserRepository userRepository, IMapper mapper)
         {
             _coursesRepostiotory = coursesRepostiotory;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -43,10 +45,11 @@ namespace Courses.Infrastructure.Services.Services
         }
         public async Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId)
             => _mapper.Map<IEnumerable<ViewCoursesDTO>>(await Task.FromResult(_coursesRepostiotory.GetAllAsync().Result));
-        public async Task<Guid> CreateAsync(Create command)
+        public async Task<Guid> CreateAsync(Create command,Guid UserId)
         {
+            var user = await _userRepository.GetByIdAsync(UserId);
             DigitalItem picture = await DigitalItem.CreateFromIFromFile(command.CoursePicture);
-            var course = new Course(command.Title, command.Description, command.AuthorName, picture, Math.Round(command.Price, 2));
+            var course = new Course(command.Title, command.Description, command.AuthorName, picture, Math.Round(command.Price, 2),user);
             return await _coursesRepostiotory.CreateAsync(course);
         }
         public async Task AddTopicAsync(Guid courseId, string name, string description)

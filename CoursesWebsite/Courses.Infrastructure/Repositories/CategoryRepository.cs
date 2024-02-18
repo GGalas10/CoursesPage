@@ -1,6 +1,6 @@
 ﻿using Courses.Core.Models.Categories;
 using Courses.Core.Repositories;
-using Courses.Infrastructure.Database;
+using Courses.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Infrastructure.Repositories

@@ -80,6 +80,7 @@ function LastPanelToSummary() {
 function CreateCourse() {
     var form = document.getElementById("CourseValidator");
     if (form.checkValidity()) {
+        console.log(true);
         $.ajax({
             url: "/Course/Create",
             method: "POST",
@@ -94,5 +95,10 @@ function CreateCourse() {
                 console.log(xhr);
             }
         })
+    } else {
+        alert(form.checkValidity())
     }
+}
+function CheckForm() {
+
 }

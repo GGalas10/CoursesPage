@@ -1,7 +1,7 @@
 ﻿using Courses.Core.Models.Invoicing;
 using Courses.Core.Models.Invoicing.Settings;
 using Courses.Core.Repositories;
-using Courses.Infrastructure.Database;
+using Courses.DataAccess.Context;
 
 namespace Courses.Infrastructure.Repositories
 {

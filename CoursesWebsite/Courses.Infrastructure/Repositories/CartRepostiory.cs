@@ -1,7 +1,6 @@
-﻿using Courses.Core.Models.Cart;
+﻿using Courses.Core.Models.Carts;
 using Courses.Core.Repositories;
-using Courses.Infrastructure.Database;
-using Courses.Infrastructure.DTO;
+using Courses.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Infrastructure.Repositories

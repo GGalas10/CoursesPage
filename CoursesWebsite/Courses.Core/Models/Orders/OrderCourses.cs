@@ -6,6 +6,7 @@ namespace Courses.Core.Models.Orders
     {
         public Guid Id { get; protected set; }
         public Guid OrderId { get; protected set; }
+        public Order Order { get; protected set; }
         public Name Name { get; protected set; }
         public double Price { get; protected set; }
         private OrderCourses() { }

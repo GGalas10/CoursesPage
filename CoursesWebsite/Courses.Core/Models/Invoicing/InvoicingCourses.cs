@@ -5,14 +5,14 @@ namespace Courses.Core.Models.Invoicing
     public class InvoicingCourses
     {
         public Guid CourseId { get; protected set; }
-        public Guid BillId { get; protected set; }
+        public string InvoiceId { get; protected set; }
         public Name CourseName { get; protected set; }
         public double Price { get; protected set; }
         public virtual Invoice Invoice { get; protected set; }
         private InvoicingCourses() { }
         public InvoicingCourses(Guid courseId,string courseName,double price)
         {
-            CourseId = courseId;
+            SetCourseId(courseId);
             SetCourseName(courseName);
             SetPrice(price);
         }
@@ -26,6 +26,12 @@ namespace Courses.Core.Models.Invoicing
         {
             if (price < 0) throw new Exception("Price cannot be less than 0");
             Price = Math.Round(price,2);
+        }
+        public void SetCourseId(Guid courseId)
+        {
+            if (courseId == Guid.Empty)
+                throw new Exception("Course id cannot be empty");
+            CourseId = courseId;
         }
     }
 }

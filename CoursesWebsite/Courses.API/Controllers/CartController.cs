@@ -45,7 +45,7 @@ namespace Courses.API.Controllers
         [HttpGet]
         public async Task<JsonResult> GetCartProduct()
         {
-            var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
+            var cartId = GetCurrentCartId();
             var cart = await _cartService.GetCartById(cartId);
             if (cart.ProductGuid.Count() <= 0)
             {
@@ -55,6 +55,40 @@ namespace Courses.API.Controllers
                 }
             }
             return Json(cart.ProductGuid);
+        }
+        [HttpPost]
+        public async Task<JsonResult> AddProductToCart(string courseName,double coursePrice)
+        {
+            try
+            {
+                var cartId = GetCurrentCartId();
+                await _cartService.AddProductAsync(cartId, courseName, coursePrice);
+                return Json("OK");
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(ex)
+                {
+                    StatusCode = 403,
+                };
+            }
+        }
+        [HttpPost]
+        public async Task<JsonResult> DeleteProductFromCart(Guid courseId)
+        {
+            try
+            {
+                var cartId = GetCurrentCartId();
+                await _cartService.DeleteProductAsync(cartId, courseId);
+                return Json("OK");
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(ex)
+                {
+                    StatusCode = 403,
+                };
+            }
         }
     }
 }

@@ -100,5 +100,12 @@ function CreateCourse() {
     }
 }
 function CheckForm() {
-
+    var title = document.getElementById("Title").value;
+    if (title == null || title == "") {
+        document.getElementById("FirstPanel").style.transform = `translateX(0)`;
+        document.getElementById("Summary").style.transform = `translateX(-200%)`;
+        
+    }
+    var description = document.getElementById("Description").value;
+    
 }

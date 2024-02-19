@@ -12,12 +12,19 @@ namespace Courses.Core.Models.Carts
         [ForeignKey("CartIdForCourses")]
         public Cart Cart { get; protected set; }
         private CoursesCart() { }
-        public CoursesCart(Guid courseId,string name,double price)
+        public CoursesCart(Guid courseId,string name,double price,Cart cart)
         {
             Id = Guid.NewGuid();
             CourseId = courseId;
             SetName(name);
             SetPrice(price);
+            SetCart(cart);
+        }
+        public void SetCart(Cart cart)
+        {
+            if (cart == null)
+                throw new Exception("Cart cannot be null");
+            Cart = cart;
         }
         public void SetName(string name) 
         { 

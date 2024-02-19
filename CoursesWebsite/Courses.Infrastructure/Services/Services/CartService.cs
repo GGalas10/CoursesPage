@@ -55,10 +55,12 @@ namespace Courses.Infrastructure.Services.Services
         {
             throw new NotImplementedException();
         }
-        public async Task AddProductAsync(Guid cartId, string name,double price)
+        public async Task AddProductAsync(Guid courseId, string name,double price,Guid cartId)
         {
-            var cart = new CoursesCart(cartId,name,price);
-            await _cartRepository.AddToCartAsync(cart);
+            var cart = await _cartRepository.GetCartByIdAsync(cartId);
+            var courseCart = new CoursesCart(courseId, name, price, cart);
+            cart.AddToCart(courseCart);
+            await _cartRepository.AddToCartAsync(courseCart);
         }
         public async Task DeleteProductAsync(Guid cartId, Guid courseId)
         {

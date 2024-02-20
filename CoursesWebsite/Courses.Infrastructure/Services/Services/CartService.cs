@@ -64,8 +64,17 @@ namespace Courses.Infrastructure.Services.Services
         }
         public async Task DeleteProductAsync(Guid cartId, Guid courseId)
         {
-           
-            //await _cartRepository.RemoveFromCartAsync(cart);
+            try
+            {
+                var cart = await _cartRepository.GetCartByIdAsync(cartId);
+                var courseInCart = cart._coursesCart.FirstOrDefault(e => e.CourseId == courseId);
+                if (courseInCart == null)
+                    throw new Exception("Course doesn't exist in cart");
+                await _cartRepository.RemoveFromCartAsync(courseInCart);
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }       
     }
 }

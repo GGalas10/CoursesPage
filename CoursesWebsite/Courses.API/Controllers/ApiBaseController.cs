@@ -1,19 +1,11 @@
 ﻿using Courses.Infrastructure.DTO;
-using Courses.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 namespace Courses.API.Controllers
 {
     public class ApiBaseController : Controller
     {
         protected Guid UserId;
-        private readonly IRoleService _roleService;
-        public ApiBaseController(IRoleService roleService)
-        {
-            _roleService = roleService;
-            UserId = User?.Identity?.IsAuthenticated == true ?
-            Guid.Parse(User.Identity.Name) :
-            Guid.Empty;
-        }
         protected void AddBearerTokenToCookie(TokenDto token)
         {
             HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
@@ -32,8 +24,16 @@ namespace Courses.API.Controllers
         }
         protected async Task<string> GetUserRole()
         {
-            var role = await _roleService.GetUserRoleAsync(UserId);
-            return role.Name;
+            if (IsAuthenticated())
+            {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                if (identity != null)
+                {
+                    var userRole =  identity.FindFirst("Role").Value;
+                    return userRole;
+                }
+            }
+            return string.Empty;
         }
         protected Guid GetCurrentCartId()
         {

@@ -10,7 +10,7 @@ namespace Courses.API.Controllers
     {      
         private readonly ICartService _cartService;
         private readonly ICourseService _courseService;
-        public CartController(ICartService cartService,ICourseService courseService):base()
+        public CartController(ICartService cartService,ICourseService courseService)
         {
             _cartService = cartService;
             _courseService = courseService;

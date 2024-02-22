@@ -1,4 +1,5 @@
-﻿using Courses.Infrastructure.DTO;
+﻿using Courses.Core.Repositories;
+using Courses.Infrastructure.DTO;
 using Courses.Infrastructure.Extensions;
 using Courses.Infrastructure.Services.Interfaces;
 using Courses.Infrastructure.Settings;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Courses.Infrastructure.Services.Services
@@ -13,9 +15,13 @@ namespace Courses.Infrastructure.Services.Services
     public class JwtHandler : IJwtHandler
     {
         private readonly JwtSettings _jwtsettings;
-        public JwtHandler(IOptions<JwtSettings> jwtsettings)
+        private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
+        public JwtHandler(IOptions<JwtSettings> jwtsettings,IUserRepository userRepository,IRoleRepository roleRepository)
         {
             _jwtsettings = jwtsettings.Value;
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
         public JWTDTO CreateToken(Guid userId, string role)
         {
@@ -41,6 +47,42 @@ namespace Courses.Infrastructure.Services.Services
                 Token = token,
                 Expires = expires.ToTimestamp(),
             };
+        }
+
+        public async Task<LoginModel> LoginWithRefreshToken(RefreshTokenDTO refreshToken)
+        {
+            try
+            {
+                if (refreshToken == null)
+                    throw new Exception("Refresh token is empty");
+                var user = await _userRepository.GetByRefreshToken(refreshToken.RefreshToken);               
+                if (user == null)
+                    throw new Exception("Cannot find user with refresh token");
+                var userRole = await _roleRepository.GetUserRole(user.Id);
+                var refresh = CreateRefreshToken();
+                user.SetRefreshToken(refresh.RefreshToken, refresh.Expires);
+                await _userRepository.UpdateAsync();
+                return new LoginModel()
+                {
+                    tokenJWT = CreateToken(user.Id, userRole.Name),
+                    refreshToken = refresh
+                };
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        private RefreshTokenDTO CreateRefreshToken()
+        {
+            var randomNumber = new byte[64];
+            var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            var refreshToken = new RefreshTokenDTO();
+            
+            refreshToken.Expires = DateTime.UtcNow.AddDays(7);
+            refreshToken.RefreshToken = Convert.ToBase64String(randomNumber);
+
+            return refreshToken;
         }
     }
 }

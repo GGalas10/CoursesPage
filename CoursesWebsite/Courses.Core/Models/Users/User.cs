@@ -14,6 +14,8 @@ namespace Courses.Core.Models.Users
         public Name Login { get; protected set; }
         public DateTime CreateAt { get; protected set; }
         public UserPassword UserPassword { get; set; }
+        public string RefreshToken { get; protected set; }
+        public DateTime ExpiredRefreshToken { get; protected set; }
         #endregion
         #region Constructors
         private User() { }
@@ -47,6 +49,15 @@ namespace Courses.Core.Models.Users
         public void SetUserName(string userName)
         {
             UserName = userName.Trim();
+        }
+        public void SetRefreshToken(string refreshToken,DateTime ExpiredTime)
+        {
+            if (string.IsNullOrEmpty(refreshToken))
+                throw new Exception("Refresh token cannot be empty");
+            if (ExpiredTime <= DateTime.UtcNow)
+                throw new Exception("Exired time cannot be less than now");
+            RefreshToken = refreshToken;
+            ExpiredRefreshToken = ExpiredTime;
         }
         #endregion
     }

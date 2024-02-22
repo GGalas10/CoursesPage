@@ -54,5 +54,16 @@ namespace Courses.Infrastructure.Services
             return (_context.SaveChanges() > 0) ? true:false;
         }
 
+        public async Task<User> GetByRefreshToken(string refreshToken)
+        {
+            if (refreshToken == null)
+                throw new Exception("refreshToken cannot be empty");
+            var user = await _context.Users.FirstOrDefaultAsync(u=>u.RefreshToken ==  refreshToken);
+            if (user == null)
+                throw new Exception("Cannot find user with refresh token");
+            if (user.ExpiredRefreshToken < DateTime.UtcNow)
+                throw new Exception("Refresh token expired");
+            return user;
+        }
     }
 }

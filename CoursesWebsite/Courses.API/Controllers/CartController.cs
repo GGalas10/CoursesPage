@@ -57,12 +57,12 @@ namespace Courses.API.Controllers
             return Json(cart.ProductGuid);
         }
         [HttpPost]
-        public async Task<JsonResult> AddProductToCart(string courseName,double coursePrice)
+        public async Task<JsonResult> AddProductToCart(Guid courseId,string courseName,double coursePrice)
         {
             try
             {
                 var cartId = GetCurrentCartId();
-                await _cartService.AddProductAsync(cartId, courseName, coursePrice);
+                await _cartService.AddProductAsync(courseId, courseName, coursePrice,cartId);
                 return Json("OK");
             }
             catch (Exception ex)

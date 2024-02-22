@@ -12,5 +12,6 @@ namespace Courses.Core.Repositories
         Task RegisterAsync(User user,string password);
         Task DeleteAsync(Guid id);
         Task<bool> UpdateAsync();
+        Task<User> GetByRefreshToken(string refreshToken);
     }
 }

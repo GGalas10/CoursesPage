@@ -1,6 +1,7 @@
 ﻿using Courses.Core.Repositories;
 using Courses.Infrastructure.DTO;
 using Courses.Infrastructure.Extensions;
+using Courses.Infrastructure.Sercurity;
 using Courses.Infrastructure.Services.Interfaces;
 using Courses.Infrastructure.Settings;
 using Microsoft.Extensions.Options;
@@ -30,7 +31,6 @@ namespace Courses.Infrastructure.Services.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new Claim(ClaimTypes.Role, role),
-                new Claim(ClaimTypes.Name, userId.ToString())
             };
             var expires = now.AddMinutes(_jwtsettings.ExpiryMinutes);
             var singingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtsettings.Key)),
@@ -44,18 +44,37 @@ namespace Courses.Infrastructure.Services.Services
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
             return new JWTDTO
             {
-                Token = token,
+                Token = SecureTokenService.EncryptToken(token),
                 Expires = expires.ToTimestamp(),
             };
         }
-
-        public async Task<LoginModel> LoginWithRefreshToken(RefreshTokenDTO refreshToken)
+        public async Task<LoginModel> LoginUserAsync(Guid userId)
+        {
+            try
+            {
+                var user = await _userRepository.GetByIdAsync(userId);
+                var userRole = await _roleRepository.GetUserRole(user.Id);
+                var refresh = CreateRefreshToken();
+                user.SetRefreshToken(refresh.RefreshToken, refresh.Expires);
+                await _userRepository.UpdateAsync();
+                return new LoginModel()
+                {
+                    tokenJWT = CreateToken(user.Id, userRole.Name),
+                    refreshToken = refresh.RefreshToken
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public async Task<LoginModel> LoginWithRefreshToken(string refreshToken)
         {
             try
             {
                 if (refreshToken == null)
                     throw new Exception("Refresh token is empty");
-                var user = await _userRepository.GetByRefreshToken(refreshToken.RefreshToken);               
+                var user = await _userRepository.GetByRefreshToken(refreshToken);               
                 if (user == null)
                     throw new Exception("Cannot find user with refresh token");
                 var userRole = await _roleRepository.GetUserRole(user.Id);
@@ -65,7 +84,7 @@ namespace Courses.Infrastructure.Services.Services
                 return new LoginModel()
                 {
                     tokenJWT = CreateToken(user.Id, userRole.Name),
-                    refreshToken = refresh
+                    refreshToken = refresh.RefreshToken
                 };
             } catch (Exception ex)
             {

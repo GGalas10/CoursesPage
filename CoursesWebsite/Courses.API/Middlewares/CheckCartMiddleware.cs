@@ -22,7 +22,7 @@ namespace Courses.API.Middlewares
             }
             else
             {
-                if (context.Request.Cookies.ContainsKey("Bearer"))
+                if (context.Request.Cookies.ContainsKey(".ASP_Custom_Token"))
                 {
                     var newCart = await _cartService.CreateCartAsync(Guid.Parse(context.User.Identity.Name));
                     context.Response.Cookies.Append("CartId", newCart.ToString(), new CookieOptions()

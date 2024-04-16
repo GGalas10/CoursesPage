@@ -51,13 +51,7 @@ namespace Courses.API.Controllers
                     ViewData["Error"] = "Błąd rejestracji";
                     return View();
                 }
-                HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
-                {
-                    HttpOnly = true,
-                    SameSite = SameSiteMode.Strict,
-                    Secure = true,
-                    Expires = DateTime.UtcNow.AddMinutes(15)
-                });
+                AddBearerTokenToCookie(token);
                 HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
                 return RedirectToAction("Index");
             }catch (Exception ex)
@@ -79,13 +73,7 @@ namespace Courses.API.Controllers
                         ViewData["Error"] = "Błędne dane logowania";
                         return View();
                     }
-                    HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
-                    {
-                        HttpOnly = true,
-                        SameSite = SameSiteMode.Strict,
-                        Secure = true,
-                        Expires = DateTime.UtcNow.AddMinutes(15)
-                    });
+                    AddBearerTokenToCookie(token);
                     HttpContext.Request.Cookies.TryGetValue("CartId", out string strCartId);
                     var cartId = Guid.Parse(strCartId);
                     return RedirectToAction("Index", "Home");
@@ -106,7 +94,7 @@ namespace Courses.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            HttpContext.Response.Cookies.Delete("Bearer");
+            HttpContext.Response.Cookies.Delete(".ASP_Custom_Token");
             return await Task.FromResult(RedirectToAction("Login"));
         }
         [HttpGet]

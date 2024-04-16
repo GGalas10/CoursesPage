@@ -6,7 +6,7 @@ namespace Courses.Core.Repositories
     public interface IRoleRepository
     {
         Task<Role> GetRoleAsync(Guid roleId);
-        Task<Role> GetRoleAsync(Name name);
+        Task<Role> GetRoleAsync(string name);
         Task<Role> GetUserRole(Guid userId);
         Task CreateRoleAsync(Role role);
         Task DeleteRoleAsync(Guid id);

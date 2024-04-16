@@ -1,8 +1,5 @@
 ﻿@model Courses.Infrastructure.Comands.User.Register;
-@{
     <link rel="stylesheet" href="~/css/User.css">
-}
-@{
     <form asp-controller="User" asp-action="Register" method="post">
         <div class="RegisterHeader"><p class="RegisterHeaderText">Rejestracja</p></div>
         <div class="RegisterBox">
@@ -19,12 +16,12 @@
                 <input type="password" asp-for="Password" id="RegisterPassword">
                 <div id="Rectangle"><div id="SmallSquare"></div></div>
             </div>
-            @if (ViewData["Error"] != string.Empty)
-                @ViewData["Error"]
+            @if (ViewData["Error"] != string.Empty){
+                <p style="font-size:1.5rem;">@ViewData["Error"]</p>
+            }
             <div class="OneBox">
                 <input type="submit" value="Zarejestruj" id="RegisterBtn">
             </div>
         </div>
     </form>
-}
 <script src="/js/site.js" asp-append-version="true"></script>

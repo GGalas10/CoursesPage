@@ -4,6 +4,7 @@ using Courses.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Courses.DataAccess.Migrations
 {
     [DbContext(typeof(CoursesDbContext))]
-    partial class CoursesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240416181326_ReturnToProject")]
+    partial class ReturnToProject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -349,36 +352,12 @@ namespace Courses.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("State")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("bd880af8-25aa-4570-b264-bdf260a45799"),
-                            Name = "User",
-                            State = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("ff904d8a-f1f3-4415-836d-dac0376296d4"),
-                            Name = "Admin",
-                            State = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("797530de-5d5e-4089-a98c-f0387482c1d4"),
-                            Name = "Creator",
-                            State = 0
-                        });
                 });
 
             modelBuilder.Entity("Courses.Core.Models.Users.User", b =>
@@ -395,10 +374,11 @@ namespace Courses.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Email");
 
-                    b.Property<DateTime?>("ExpiredRefreshToken")
+                    b.Property<DateTime>("ExpiredRefreshToken")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RefreshToken")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
@@ -895,6 +875,30 @@ namespace Courses.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Courses.Core.Models.Users.Role", b =>
+                {
+                    b.OwnsOne("Courses.Core.Value_Object.Name", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("RoleId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Name");
+
+                            b1.HasKey("RoleId");
+
+                            b1.ToTable("Roles");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RoleId");
+                        });
+
+                    b.Navigation("Name")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Courses.Core.Models.Users.User", b =>

@@ -38,12 +38,13 @@ namespace Courses.Infrastructure.Services.Services
                     throw new Exception("Wrong credentials");
                 }
                 var role = await _roleService.GetUserRoleAsync(user.Id);
-                var token = _jwtHandler.CreateToken(user.Id, role.Name);
+                var token = await _jwtHandler.LoginUserAsync(user.Id);
                 return new TokenDto
                 {
-                    Expires = token.Expires,
+                    Expires = token.tokenJWT.Expires,
+                    RefreshToken = token.refreshToken,
                     Role = role.Name,
-                    Token = token.Token,
+                    Token = token.tokenJWT.Token,
                 };
             }catch (Exception ex)
             {

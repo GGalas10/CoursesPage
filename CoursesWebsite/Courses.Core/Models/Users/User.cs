@@ -14,8 +14,8 @@ namespace Courses.Core.Models.Users
         public Name Login { get; protected set; }
         public DateTime CreateAt { get; protected set; }
         public UserPassword UserPassword { get; set; }
-        public string RefreshToken { get; protected set; }
-        public DateTime ExpiredRefreshToken { get; protected set; }
+        public string? RefreshToken { get; protected set; }
+        public DateTime? ExpiredRefreshToken { get; protected set; }
         #endregion
         #region Constructors
         private User() { }

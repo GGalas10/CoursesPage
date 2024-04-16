@@ -16,8 +16,8 @@ namespace Courses.Infrastructure.Repositories
         }
         public async Task<Role> GetRoleAsync(Guid id)
             => await _context.Roles.FirstOrDefaultAsync(r=>r.Id==id);
-        public async Task<Role> GetRoleAsync(Name name)
-            => await _context.Roles.FirstOrDefaultAsync(r => r.Name.Value == name);
+        public async Task<Role> GetRoleAsync(string name)
+            => await _context.Roles.FirstOrDefaultAsync(r => r.Name == name);
         public async Task AssignRole(Guid userId, Guid roleId)
         {           
             var userrole = new UserRole(userId, roleId);

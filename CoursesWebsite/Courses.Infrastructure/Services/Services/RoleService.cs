@@ -26,7 +26,10 @@ namespace Courses.Infrastructure.Services.Services
             await _roleRepository.AssignRole(userId, roleId);
         }
         public async Task<Guid> GetRoleIdByNameAsync(string name)
-            => await Task.FromResult(_roleRepository.GetRoleAsync(name).Result.Id);
+        {
+            var role = await _roleRepository.GetRoleAsync(name);
+            return role.Id;
+        }
         public async Task<Role> GetRoleIdByIdAsync(Guid id)
             => await _roleRepository.GetRoleAsync(id);
         public async Task<Role> GetUserRoleAsync(Guid userId)

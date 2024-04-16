@@ -8,12 +8,19 @@ namespace Courses.API.Controllers
         protected Guid UserId;
         protected void AddBearerTokenToCookie(TokenDto token)
         {
-            HttpContext.Response.Cookies.Append("Bearer", token.Token, new CookieOptions()
+            HttpContext.Response.Cookies.Append(".ASP_Custom_Token", token.Token, new CookieOptions()
             {
                 HttpOnly = true,
                 SameSite = SameSiteMode.Strict,
                 Secure = true,
-                Expires = DateTime.UtcNow.AddMinutes(15)
+                Expires = DateTime.UtcNow.AddDays(1)
+            });
+            HttpContext.Response.Cookies.Append(".ASP_Custom_RefreshToken", token.RefreshToken, new CookieOptions()
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.Strict,
+                Secure = true,
+                Expires = DateTime.UtcNow.AddDays(7),
             });
         }
         protected bool IsAuthenticated()

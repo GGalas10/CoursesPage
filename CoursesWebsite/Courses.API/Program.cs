@@ -4,6 +4,7 @@ using Courses.Core.Repositories;
 using Courses.DataAccess.Context;
 using Courses.Infrastructure.Mappers;
 using Courses.Infrastructure.Repositories;
+using Courses.Infrastructure.Sercurity;
 using Courses.Infrastructure.Services;
 using Courses.Infrastructure.Services.Interfaces;
 using Courses.Infrastructure.Services.Services;
@@ -11,6 +12,7 @@ using Courses.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Text;
 
@@ -32,7 +34,7 @@ builder.Services.AddDbContext<CoursesDbContext>(options =>
 });
 
 #region Services
-builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
+builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ICourseService, CoursesService>();
@@ -71,10 +73,36 @@ builder.Services.AddAuthentication(options =>
     };
     o.Events = new JwtBearerEvents
     {
-        OnMessageReceived = context =>
+        OnMessageReceived = async context =>
         {
-            context.Token = context.Request.Cookies["Bearer"];
-            return Task.CompletedTask;
+            var token = context.Request.Cookies[".ASP_Custom_Token"];
+            if (token != null) {
+                var decodeToken = SecureTokenService.DecryptToken(token);
+                var handler = new JwtSecurityTokenHandler();
+                var bearerToken = handler.ReadToken(SecureTokenService.DecryptToken(token));
+                if(bearerToken.ValidTo <= DateTime.UtcNow.AddMinutes(1))
+                {
+                    context.Response.Cookies.Delete(".ASP_Custom_Token");
+                    var jwtHandler = builder.Services.BuildServiceProvider().GetService<IJwtHandler>();
+                    var refreshToken = context.Request.Cookies[".ASP_Custom_RefreshToken"];
+                    var newLogin = await jwtHandler.LoginWithRefreshToken(refreshToken);
+                    context.Response.Cookies.Append(".ASP_Custom_Token", newLogin.tokenJWT.Token, new CookieOptions()
+                    {
+                        HttpOnly = true,
+                        SameSite = SameSiteMode.Strict,
+                        Secure = true,
+                        Expires = DateTime.UtcNow.AddDays(1),
+                    });
+                    context.Response.Cookies.Append(".ASP_Custom_RefreshToken", newLogin.refreshToken, new CookieOptions()
+                    {
+                        HttpOnly = true,
+                        SameSite = SameSiteMode.Strict,
+                        Secure = true,
+                        Expires = DateTime.UtcNow.AddDays(7),
+                    });
+                }
+                context.Token = decodeToken;
+            }
         }
     };
 });

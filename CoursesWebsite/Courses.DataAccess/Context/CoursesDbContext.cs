@@ -42,11 +42,8 @@ namespace Courses.DataAccess.Context
         {
             modelBuilder.Entity<Role>(entity =>
             {
-                entity.OwnsOne(o => o.Name, a =>
-                {
-                    a.Property(p => p.Value).HasColumnName("Name");
-                });
                 entity.HasKey(k => k.Id);
+                entity.HasData(new Role("User"), new Role("Admin"), new Role("Creator"));
             });
             modelBuilder.Entity<UserPassword>(entity =>
             {
@@ -125,7 +122,6 @@ namespace Courses.DataAccess.Context
                 .HasKey(pk => pk.Id);
             modelBuilder.Entity<Recipient>()
                 .HasKey(pk => pk.Id);
-
         }
     }
 }

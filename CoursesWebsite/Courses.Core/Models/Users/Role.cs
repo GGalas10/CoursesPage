@@ -6,11 +6,11 @@ namespace Courses.Core.Models.Users
     public class Role : Entity
     {
         #region Properties
-        public Name Name { get; protected set; }
+        public string Name { get; protected set; }
         #endregion
         #region Constructors
         private Role() { }
-        public Role(Name name) : base()
+        public Role(string name) : base()
         {
             SetName(name);
         }

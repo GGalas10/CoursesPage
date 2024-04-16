@@ -38,7 +38,7 @@ namespace Courses.API.Controllers
         {
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
             var course = await _courseService.GetByIdAsync(courseId);
-            await _cartService.AddProductAsync(cartId, course.Name,price);
+            await _cartService.AddProductAsync(courseId, course.Name,price, cartId);
         }
         [HttpPost("DeleteFromCart")]
         public async Task DeleteFromCart(Guid courseId)

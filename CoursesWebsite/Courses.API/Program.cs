@@ -2,6 +2,7 @@ using Courses.API.HostedService;
 using Courses.API.Middlewares;
 using Courses.Core.Repositories;
 using Courses.DataAccess.Context;
+using Courses.Infrastructure;
 using Courses.Infrastructure.Mappers;
 using Courses.Infrastructure.Repositories;
 using Courses.Infrastructure.Sercurity;
@@ -33,23 +34,9 @@ builder.Services.AddDbContext<CoursesDbContext>(options =>
         ,x=>x.MigrationsAssembly("Courses.DataAccess"));
 });
 
-#region Services
-builder.Services.AddScoped<IJwtHandler, JwtHandler>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IRoleService, RoleService>();
-builder.Services.AddScoped<ICourseService, CoursesService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IRoleRepository,RoleRepository>();
-builder.Services.AddScoped<ICoursesRepository,CoursesRepository>();
-builder.Services.AddScoped<IPasswordRepository, PasswordRepository>();
-builder.Services.AddScoped<ICartRepository, CartRepostiory>();
-builder.Services.AddScoped<ICartService, CartService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IUserConfigRepository, UserConfigRepository>();
-builder.Services.AddScoped<IUserConfigService, UserConfigService>();
 
-#endregion
+builder.Services.AddInfrastructure();
+
 
 builder.Services.AddHostedService<CartHostedService>();
 
@@ -106,6 +93,7 @@ builder.Services.AddAuthentication(options =>
         }
     };
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -121,10 +109,15 @@ app.UseStaticFiles();
 app.UseStatusCodePages(async context =>
 {
     var response = context.HttpContext.Response;
-
+    if (context.HttpContext.Request.Path.ToString().Contains("/PAdmin"))
+    {
+        if (response.StatusCode == (int)HttpStatusCode.Unauthorized ||
+           response.StatusCode == (int)HttpStatusCode.Forbidden)
+            response.Redirect("/API/PAdmin/Login");
+    }
     if (response.StatusCode == (int)HttpStatusCode.Unauthorized ||
             response.StatusCode == (int)HttpStatusCode.Forbidden)
-        response.Redirect("/Home/Unauthorized");
+        response.Redirect("/User/Login");
 });
 app.UseRouting();
 
@@ -132,7 +125,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 var _cartSerivce = app.Services.CreateScope();
 app.UseMiddleware<CheckCartMiddleware>(_cartSerivce.ServiceProvider.GetService<ICartService>());
-app.UseMiddleware<ErrorHandlerMiddleware>();
+//app.UseMiddleware<ErrorHandlerMiddleware>();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

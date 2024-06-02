@@ -6,6 +6,7 @@ namespace Courses.API.Controllers
     public class ApiBaseController : Controller
     {
         protected Guid UserId;
+        protected string UserRole;
         protected void AddBearerTokenToCookie(TokenDto token)
         {
             HttpContext.Response.Cookies.Append(".ASP_Custom_Token", token.Token, new CookieOptions()
@@ -33,15 +34,32 @@ namespace Courses.API.Controllers
         {
             if (IsAuthenticated())
             {
-                var identity = HttpContext.User.Identity as ClaimsIdentity;
-                if (identity != null)
+                var claims = HttpContext.User.Claims;
+                if (claims != null)
                 {
-                    var userRole =  identity.FindFirst("Role").Value;
-                    return userRole;
+                    var userRole = claims.First(x=>x.Type == ClaimTypes.Role);
+                    if (userRole == null)
+                        return "User";
+                    return userRole.Value;
                 }
             }
             return string.Empty;
         }
+        //protected void BindUser() 
+        //{
+        //    if (IsAuthenticated())
+        //    {
+        //        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        //        if (identity != null)
+        //        {
+        //            var userRole = identity.Claims.First(x => x.Type == "role");
+        //            if (userRole == null)
+        //                return "User";
+        //            return userRole.Value;
+        //        }
+        //    }
+        //    return string.Empty;
+        //}
         protected Guid GetCurrentCartId()
         {
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);

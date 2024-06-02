@@ -17,8 +17,9 @@ passwordInput.addEventListener("input", function () {
         test = 0;
     else
         test++;
-    if (test == 0) {
-        smallBox.innerHTML = "";
+    if (password.length < 8) {
+        smallBox.style.background = "linear-gradient(to right, red 25%, white 25%)";
+        smallBox.innerHTML = "Hasło za krótkie";
     };
     if (test == 1) {
         smallBox.style.background = "linear-gradient(to right, red 25%, white 25%)";

@@ -15,12 +15,17 @@ namespace Courses.API.Controllers
         {
             _userService = userService;
         }
-        [Authorize(Roles = "Admin")]
-        [HttpGet("Index")]
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            ViewData["Title"] = "Panel administracyjny";
-            return View();
+            var role = await GetUserRole();
+            if (role == "Admin")
+            {
+                ViewData["Title"] = "Panel administracyjny";
+                return View();
+            }
+            else
+                return Json("UPS");
         }
         [HttpGet("Login")]
         public IActionResult Login()

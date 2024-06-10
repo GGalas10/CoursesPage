@@ -1,14 +1,10 @@
 using Courses.API.HostedService;
 using Courses.API.Middlewares;
-using Courses.Core.Repositories;
 using Courses.DataAccess.Context;
 using Courses.Infrastructure;
 using Courses.Infrastructure.Mappers;
-using Courses.Infrastructure.Repositories;
 using Courses.Infrastructure.Sercurity;
-using Courses.Infrastructure.Services;
 using Courses.Infrastructure.Services.Interfaces;
-using Courses.Infrastructure.Services.Services;
 using Courses.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMvc();
 
@@ -87,8 +83,12 @@ builder.Services.AddAuthentication(options =>
                         Secure = true,
                         Expires = DateTime.UtcNow.AddDays(7),
                     });
+                    context.Token = newLogin.tokenJWT.Token;
                 }
-                context.Token = decodeToken;
+                else
+                {
+                    context.Token = decodeToken;
+                }
             }
         }
     };

@@ -11,21 +11,16 @@ namespace Courses.API.Controllers
     public class PAdminController : ApiBaseController
     {
         private readonly IUserService _userService;
-        public PAdminController(IUserService userService) :base()
+        public PAdminController(IUserService userService) : base()
         {
             _userService = userService;
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var role = await GetUserRole();
-            if (role == "Admin")
-            {
-                ViewData["Title"] = "Panel administracyjny";
-                return View();
-            }
-            else
-                return Json("UPS");
+            ViewData["Title"] = "Panel administracyjny";
+            return View();
         }
         [HttpGet("Login")]
         public IActionResult Login()
@@ -36,9 +31,9 @@ namespace Courses.API.Controllers
             }
             ViewData["Title"] = "Logowanie";
             return View();
-        }       
+        }
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody]Login command)
+        public async Task<IActionResult> Login([FromBody] Login command)
         {
             try
             {
@@ -49,7 +44,8 @@ namespace Courses.API.Controllers
                 }
                 AddBearerTokenToCookie(token);
                 return RedirectToAction("Index");
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return Json("Wrong credentials");
             }

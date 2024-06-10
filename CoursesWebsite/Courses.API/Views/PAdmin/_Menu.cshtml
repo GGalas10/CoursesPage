@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+@{
+    bool checker = false;
+    if (User.Identity.IsAuthenticated)
+    {
+        var claims = User.Claims;
+        var userRole = claims.First(x => x.Type == ClaimTypes.Role).Value;
+        if (userRole == "Admin")
+            checker = true;
+    }
+}
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,7 +28,7 @@
     
         <div id="Menu" class="RightMenu">
         <div class="ResizeBtn" onclick="ResizeMenu()"></div>
-        @if (checker())
+        @if (checker)
         {
             <div class="SingleMenuItem" onclick="GoTo('Index')"><div class="MenuText"><p>Dom</p></div><div class="ImgDiv"><img src="~/Images/home.png" class="MenuImg" /></div></div>
             <div class="SingleMenuItem" onclick="GoTo('Courses')"><div class="MenuText"><p>Moje kursy</p></div><div class="ImgDiv"><img src="~/Images/courses.png" class="MenuImg" /></div></div>
@@ -57,7 +68,7 @@
         }
     };
     function GoTo(location) {
-        document.location.href = `/API/PAdmin/${location}`;
+        document.location.href = `/Creator/${location}`;
     }
     function Logout() {
         $.ajax({

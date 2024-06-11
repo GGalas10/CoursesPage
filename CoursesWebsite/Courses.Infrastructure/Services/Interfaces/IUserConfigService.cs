@@ -1,5 +1,5 @@
 ﻿using Courses.Infrastructure.Comands.Config;
-using Courses.Infrastructure.DTO;
+using Courses.Infrastructure.DTO.UserDTOs.Basic;
 
 namespace Courses.Infrastructure.Services.Interfaces
 {

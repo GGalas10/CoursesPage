@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers.AdminUsers
 {
-    [Layout("~/Views/PAdmin/_Menu.cshtml")]
+    [Layout("_Menu")]
     public class CreatorController : ApiBaseController
     {
         [HttpGet]

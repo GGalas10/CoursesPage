@@ -30,7 +30,7 @@ namespace Courses.API.Controllers
                 return true;
             return false;
         }
-        protected async Task<string> GetUserRole()
+        protected string GetUserRole()
         {
             if (IsAuthenticated())
             {
@@ -45,25 +45,30 @@ namespace Courses.API.Controllers
             }
             return string.Empty;
         }
-        //protected void BindUser() 
-        //{
-        //    if (IsAuthenticated())
-        //    {
-        //        var identity = HttpContext.User.Identity as ClaimsIdentity;
-        //        if (identity != null)
-        //        {
-        //            var userRole = identity.Claims.First(x => x.Type == "role");
-        //            if (userRole == null)
-        //                return "User";
-        //            return userRole.Value;
-        //        }
-        //    }
-        //    return string.Empty;
-        //}
+        protected Guid GetUserId()
+        {
+            if (IsAuthenticated())
+            {
+                var claims = HttpContext.User.Claims;
+                if (claims != null)
+                {
+                    var userId = claims.First(x => x.Type == ClaimTypes.Name);
+                    if (userId == null)
+                        return Guid.Empty;
+                    return Guid.Parse(userId.Value);
+                }
+            }
+            return Guid.Empty;
+        }
         protected Guid GetCurrentCartId()
         {
             var cartId = Guid.Parse(HttpContext.Request.Cookies["CartId"]);
             return cartId;
+        }
+        public async void InitUser()
+        {
+            UserRole = GetUserRole();
+            UserId = GetUserId();
         }
     }
 }

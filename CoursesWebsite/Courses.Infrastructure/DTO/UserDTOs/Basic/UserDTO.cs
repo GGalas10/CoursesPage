@@ -1,4 +1,4 @@
-﻿namespace Courses.Infrastructure.DTO
+﻿namespace Courses.Infrastructure.DTO.UserDTOs.Basic
 {
     public class UserDTO
     {

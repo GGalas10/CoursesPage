@@ -2,7 +2,7 @@
 using Courses.Core.Models.Users;
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Comands.Config;
-using Courses.Infrastructure.DTO;
+using Courses.Infrastructure.DTO.UserDTOs.Basic;
 using Courses.Infrastructure.Extensions;
 using Courses.Infrastructure.Services.Interfaces;
 

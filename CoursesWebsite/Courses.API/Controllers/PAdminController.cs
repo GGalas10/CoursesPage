@@ -1,11 +1,14 @@
 ﻿using Courses.API.Extension;
+using Courses.API.Extensions.CustomAttributes;
 using Courses.Infrastructure.Comands.User;
+using Courses.Infrastructure.DTO.UserDTOs.Admin;
 using Courses.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
 {
+    [BindUser]
     [Layout("_Menu")]
     [Route("API/PAdmin")]
     public class PAdminController : ApiBaseController
@@ -19,8 +22,16 @@ namespace Courses.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewData["Title"] = "Panel administracyjny";
-            return View();
+            try
+            {
+                var user = await _userService.GetUserDTOById(UserId);
+                ViewData["Title"] = "Panel administracyjny";
+
+                return View(user);
+            }catch(Exception ex) 
+            {
+                return View(new UserDTOForAdmin() { UserName = "Undefined" });
+            }
         }
         [HttpGet("Login")]
         public IActionResult Login()

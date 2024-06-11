@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Courses.Core.Models.Carts;
 using Courses.Core.Repositories;
-using Courses.Infrastructure.DTO;
+using Courses.Infrastructure.DTO.UserDTOs.Basic;
 using Courses.Infrastructure.Services.Interfaces;
 
 namespace Courses.Infrastructure.Services.Services

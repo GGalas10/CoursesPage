@@ -29,7 +29,7 @@ namespace Courses.Infrastructure.Services.Services
             var now = DateTime.UtcNow;
             var claims = new Claim[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
+                new Claim(ClaimTypes.Name, userId.ToString()),
                 new Claim(ClaimTypes.Role, role),
             };
             var expires = now.AddMinutes(_jwtsettings.ExpiryMinutes);

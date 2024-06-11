@@ -1,5 +1,4 @@
-﻿using Courses.Core.Models;
-using Courses.Infrastructure.DTO;
+﻿using Courses.Infrastructure.DTO.UserDTOs.Basic;
 
 namespace Courses.Infrastructure.Services.Interfaces
 {

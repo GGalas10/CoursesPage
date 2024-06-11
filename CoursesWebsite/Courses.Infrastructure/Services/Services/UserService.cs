@@ -2,6 +2,7 @@
 using Courses.Core.Repositories;
 using Courses.Infrastructure.Comands.User;
 using Courses.Infrastructure.DTO;
+using Courses.Infrastructure.DTO.UserDTOs.Admin;
 using Courses.Infrastructure.Extensions;
 using Courses.Infrastructure.Sercurity;
 using Courses.Infrastructure.Services.Interfaces;
@@ -107,6 +108,15 @@ namespace Courses.Infrastructure.Services.Services
             await _userRepository.RegisterAsync(user, password);
             await _userConfigService.CreateUserConfigAsync(user.Id, "Theme1", "PL-pl");
             await Task.CompletedTask;
+        }
+
+        public async Task<UserDTOForAdmin> GetUserDTOById(Guid UserId)
+        {
+            var user = await _userRepository.GetByIdAsync(UserId);
+            if (user == null)
+                throw new Exception("User_Doesnt_Exist");
+            return UserDTOForAdmin.GetDTOFromUser(user);
+
         }
     }
 }

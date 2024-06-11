@@ -1,5 +1,26 @@
-﻿@model Courses.Infrastructure.DTO.UserDTOs.Admin.UserDTOForAdmin;
+﻿@using Courses.Core.RepositoryDTO
+@model UserWithNewestCourses;
 <content>
-<h4>Witaj @Model.UserName.ToUpper()</h4>
-
+    <section class="text-center GlassEfectSection">
+        <h4>Witaj @Model.UserName.ToUpper()</h4>
+        <p>W tym miejscu znajdziesz najważniejsz informację z Twojego profilu</p>       
+    </section>
+    <section class="text-center GlassEfectSection">
+        <h4>Twoje najnowsze kursy</h4>
+        @if (Model.newestCourses.Count() > 0)
+        {
+            foreach(var course in Model.newestCourses.Take(3))
+            {
+                <div id="@course.Id">
+                    <h6>@course.Name</h6>
+                    <div>@course.Picutre</div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Niestety nie masz jeszcze żadnego kursu</p>
+            <p>Przejdź do <a>Moje Kursy</a> aby dodać nowe</p>
+        }
+    </section>
 </content>

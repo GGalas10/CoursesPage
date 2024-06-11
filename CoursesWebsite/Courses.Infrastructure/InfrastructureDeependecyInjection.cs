@@ -25,6 +25,8 @@ namespace Courses.Infrastructure
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserConfigRepository, UserConfigRepository>();
             services.AddScoped<IUserConfigService, UserConfigService>();
+            services.AddScoped<IAdminPanelRepository, AdminPanelRepository>();
+            services.AddScoped<IAdminUserService, AdminUserService>();
             return services;
         }
     }

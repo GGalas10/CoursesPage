@@ -1,17 +1,16 @@
 ﻿using Courses.Core.Models.Courses;
+using Courses.Core.Models.Users;
 
-namespace Courses.Core.Models.Users
+namespace Courses.Core.Models.Accesses
 {
-    public class UserCoursesAccess
+    public sealed class PurchasedCourses
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; protected set; }
         public User User { get; protected set; }
-        public Guid CourseId { get; protected set; }
         public Course Course { get; protected set; }
         public DateTime BuyedAt { get; protected set; }
-        private UserCoursesAccess(){}
-        public UserCoursesAccess(User user, Course course)
+        private PurchasedCourses() { }
+        public PurchasedCourses(User user, Course course)
         {
             Id = Guid.NewGuid();
             SetUser(user);
@@ -22,11 +21,13 @@ namespace Courses.Core.Models.Users
         {
             if (user == null)
                 throw new Exception("User cannot be null");
+            User = user;
         }
         public void SetCourse(Course course)
         {
             if (course == null)
                 throw new Exception("Course cannot be null");
+            Course = course;
         }
     }
 }

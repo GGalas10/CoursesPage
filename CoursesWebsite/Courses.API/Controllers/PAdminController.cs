@@ -1,7 +1,7 @@
 ﻿using Courses.API.Extension;
 using Courses.API.Extensions.CustomAttributes;
+using Courses.Core.RepositoryDTO;
 using Courses.Infrastructure.Comands.User;
-using Courses.Infrastructure.DTO.UserDTOs.Admin;
 using Courses.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +14,11 @@ namespace Courses.API.Controllers
     public class PAdminController : ApiBaseController
     {
         private readonly IUserService _userService;
-        public PAdminController(IUserService userService) : base()
+        private readonly IAdminUserService _adminUserService;
+        public PAdminController(IUserService userService, IAdminUserService adminUserService) : base()
         {
             _userService = userService;
+            _adminUserService = adminUserService;
         }
         [Authorize(Roles = "Admin")]
         [HttpGet]
@@ -24,13 +26,13 @@ namespace Courses.API.Controllers
         {
             try
             {
-                var user = await _userService.GetUserDTOById(UserId);
+                var user = await _adminUserService.GetUserDTOById(UserId);
                 ViewData["Title"] = "Panel administracyjny";
 
                 return View(user);
             }catch(Exception ex) 
             {
-                return View(new UserDTOForAdmin() { UserName = "Undefined" });
+                return View(new UserWithNewestCourses() { UserName = "Undefined" });
             }
         }
         [HttpGet("Login")]

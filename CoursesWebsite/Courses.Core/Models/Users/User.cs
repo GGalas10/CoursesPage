@@ -1,11 +1,12 @@
-﻿using Courses.Core.Models.Commons;
+﻿using Courses.Core.Models.Accesses;
+using Courses.Core.Models.Commons;
 using Courses.Core.Value_Object;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Courses.Core.Models.Users
 {
-    public class User : Entity
+    public sealed class User : Entity
     {
         #region Properties
         public Name UserName { get; protected set; }
@@ -16,6 +17,8 @@ namespace Courses.Core.Models.Users
         public UserPassword UserPassword { get; set; }
         public string? RefreshToken { get; protected set; }
         public DateTime? ExpiredRefreshToken { get; protected set; }
+        public List<UserCoursesAccess> CreatedUserCourses { get; set; }
+        public List<PurchasedCourses> PurchasedUserCourses { get; set; }
         #endregion
         #region Constructors
         private User() { }

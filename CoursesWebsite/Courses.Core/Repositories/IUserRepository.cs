@@ -1,6 +1,4 @@
 ﻿using Courses.Core.Models.Users;
-using Courses.Core.Value_Object;
-using models = Courses.Core.Models;
 
 namespace Courses.Core.Repositories
 {

@@ -40,3 +40,19 @@
     color: #43414fa6;
     background-color: whitesmoke;
 }
+.GlassEfectSection {
+    background-color: #ffffff1a;
+    box-shadow: rgba(0,0,0,.4) 10px 10px;
+    width:75%;
+    padding:15px;
+    margin: auto;
+    margin-top:30px;
+    border-radius:25px;
+    backdrop-filter: blur(3.5px);
+}
+p{
+    font-size:1rem;
+}
+.NewestCourses {
+    
+}

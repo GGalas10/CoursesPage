@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection.Emit;
 using System;
+using Courses.Core.Models.Accesses;
 
 namespace Courses.DataAccess.Context
 {
@@ -37,6 +38,7 @@ namespace Courses.DataAccess.Context
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderCourses> OrderCourses { get; set; }
         public DbSet<UserCoursesAccess> UserCoursesAccesses { get; set; }
+        public DbSet<PurchasedCourses> PurchasedCourses  { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

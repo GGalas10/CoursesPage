@@ -2,7 +2,9 @@
 using Courses.Infrastructure.Repositories;
 using Courses.Infrastructure.Services;
 using Courses.Infrastructure.Services.Interfaces;
+using Courses.Infrastructure.Services.Interfaces.Statistic;
 using Courses.Infrastructure.Services.Services;
+using Courses.Infrastructure.Services.Services.Statistic;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Courses.Infrastructure
@@ -27,6 +29,9 @@ namespace Courses.Infrastructure
             services.AddScoped<IUserConfigService, UserConfigService>();
             services.AddScoped<IAdminPanelRepository, AdminPanelRepository>();
             services.AddScoped<IAdminUserService, AdminUserService>();
+            services.AddScoped<IUserStatisticRepository, UserStatisticRepository>();
+            services.AddScoped<IUserStatisticService, UserStatisticService>();
+            
             return services;
         }
     }

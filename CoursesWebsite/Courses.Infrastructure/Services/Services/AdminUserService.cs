@@ -12,13 +12,12 @@ namespace Courses.Infrastructure.Services.Services
             _panelRepository = panelRepository;
         }
 
-        public async Task<UserWithNewestCourses> GetUserDTOById(Guid UserId)
+        public async Task<UserForAdminDTO> GetUserDTOById(Guid UserId)
         {
             var user = await _panelRepository.GetUserForHomeViewByIdAsync(UserId);
             if (user == null)
                 throw new Exception("User_Doesnt_Exist");
-            return user;
-
+            return new UserForAdminDTO(user);
         }
     }
 }

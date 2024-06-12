@@ -53,6 +53,26 @@
 p{
     font-size:1rem;
 }
-.NewestCourses {
-    
+.CoursesSection {
+    justify-content: space-around;
+    display: flex;
+}
+.OneCourse{
+    width:25%;
+    justify-content:center;
+    display:grid;
+}
+.PrimaryBtn {
+    border: none;
+    margin-top: 15px !important;
+    margin: auto;
+    width: 60%;
+    background-color: #ffffff6b;
+    backdrop-filter: blur(1px);
+    font-size: 0.9rem;
+    color: whitesmoke;
+    border-radius:6px;
+}
+.PrimaryBtn:hover{
+    color: #646464;
 }

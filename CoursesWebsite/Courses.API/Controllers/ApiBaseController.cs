@@ -1,8 +1,10 @@
 ﻿using Courses.Infrastructure.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 namespace Courses.API.Controllers
 {
+    [Authorize]
     public class ApiBaseController : Controller
     {
         protected Guid UserId;

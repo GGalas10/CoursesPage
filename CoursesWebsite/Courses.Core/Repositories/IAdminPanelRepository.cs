@@ -1,9 +1,9 @@
-﻿using Courses.Core.RepositoryDTO;
+﻿using Courses.Core.Models.Users;
 
 namespace Courses.Core.Repositories
 {
     public interface IAdminPanelRepository
     {
-        Task<UserWithNewestCourses> GetUserForHomeViewByIdAsync(Guid userId);
+        Task<User> GetUserForHomeViewByIdAsync(Guid userId);
     }
 }

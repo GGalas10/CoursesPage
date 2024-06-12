@@ -1,9 +1,7 @@
 ﻿using Courses.API.Extension;
 using Courses.API.Extensions.CustomAttributes;
-using Courses.Core.RepositoryDTO;
 using Courses.Infrastructure.Comands.User;
 using Courses.Infrastructure.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers

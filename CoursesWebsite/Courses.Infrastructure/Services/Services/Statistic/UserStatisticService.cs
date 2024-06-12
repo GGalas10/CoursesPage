@@ -1,5 +1,5 @@
 ﻿using Courses.Core.Repositories;
-using Courses.Core.RepositoryDTO;
+using Courses.Infrastructure.DTO.Statistic;
 using Courses.Infrastructure.Services.Interfaces.Statistic;
 
 namespace Courses.Infrastructure.Services.Services.Statistic
@@ -38,6 +38,18 @@ namespace Courses.Infrastructure.Services.Services.Statistic
             }
             userCourses = userCourses.OrderByDescending(x=>x.CreatedAt).Take(HowMuch).ToList();
             return CoursesViewInAdminPanel.GetFromUserList(userCourses);
+        }
+
+        public async Task<UserSattlementDTO> GetUserSattlement(Guid UserId)
+        {
+            var repoResult = await _statisticRepository.GetUserSattlement(UserId);
+            var userSattlementDTO = new UserSattlementDTO();
+            foreach(var oneCourese in repoResult)
+            {
+                userSattlementDTO.HowMuchSell++;
+                userSattlementDTO.HowMuchEarned += oneCourese.Course.Price;
+            }
+            return userSattlementDTO;
         }
     }
 }

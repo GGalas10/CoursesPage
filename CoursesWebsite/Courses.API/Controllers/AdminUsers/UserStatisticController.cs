@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers.AdminUsers
 {
+    [BindUser]
     public class UserStatisticController : ApiBaseController
     {
         private readonly IUserStatisticService _userStatisticService;
@@ -11,7 +12,7 @@ namespace Courses.API.Controllers.AdminUsers
         {
             _userStatisticService = userStatisticService;
         }
-        [BindUser]
+        
         [HttpGet]
         public async Task<IActionResult> GetUserNewestCourses([FromQuery]int HowMuch)
         {
@@ -19,6 +20,19 @@ namespace Courses.API.Controllers.AdminUsers
             {
                 var userCourses = await _userStatisticService.GetNewestCourses(UserId, HowMuch);
                 return Json(userCourses);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetUserSattlement()
+        {
+            try
+            {
+                var result = await _userStatisticService.GetUserSattlement(UserId);
+                return Json(result);
             }
             catch (Exception ex)
             {

@@ -13,10 +13,14 @@ function GetUserNewestCourses() {
                             `<div class="GlassEfectSection OneCourse">
                             <h6>${element.name}</h6>
                             <img src="/Images/BrainHome.jpg" width=200px height=200px style="border-radius:25px"></img>
-                            <button class="PrimaryBtn">Przejdź</button>
+                            <button class="PrimaryBtn" onclick="GoToDetails('${element.id}')">Przejdź</button>
                             </div>`
                     } else {
-
+                        `<div class="GlassEfectSection OneCourse">
+                            <h6>${element.name}</h6>
+                            <img src="${element.picture}" width=200px height=200px style="border-radius:25px"></img>
+                            <button class="PrimaryBtn" onclick="GoToDetails('${element.id}')">Przejdź</button>
+                            </div>`
                     }
                 });
             }
@@ -25,4 +29,24 @@ function GetUserNewestCourses() {
             console.log(xhr);
         },
     })
+}
+function GoToDetails(Id) {
+    location.href =`/AdminCourses/Details?CourseId=${Id}`;
+}
+function GetUserSattlements() {
+    const section = document.getElementById("SattlementSection");
+    $.ajax({
+        url: "/UserStatistic/GetUserSattlement",
+        method: "GET",
+        success: function (data) {
+            section.innerHTML = `
+            <p>Na kursach zarobiłeś ${data.howMuchEarned} zł</p>
+            <p>Łacznie sprzedałeś ${data.howMuchSell} kursów</p>
+            <button class="PrimaryBtn" onclick="location.href = '/Creator/Settlements'">Przejdź do płatności</button>
+            `
+        },
+        error: function (xhr) {
+            console.log(xhr);
+        }
+    });
 }

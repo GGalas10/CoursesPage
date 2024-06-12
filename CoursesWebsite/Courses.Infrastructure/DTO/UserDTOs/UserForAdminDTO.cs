@@ -1,6 +1,6 @@
 ﻿using Courses.Core.Models.Users;
 
-namespace Courses.Core.RepositoryDTO
+namespace Courses.Infrastructure.DTO.UserDTOs
 {
     public class UserForAdminDTO
     {

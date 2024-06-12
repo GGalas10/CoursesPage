@@ -1,5 +1,5 @@
 ﻿using Courses.Core.Repositories;
-using Courses.Core.RepositoryDTO;
+using Courses.Infrastructure.DTO.UserDTOs;
 using Courses.Infrastructure.Services.Interfaces;
 
 namespace Courses.Infrastructure.Services.Services

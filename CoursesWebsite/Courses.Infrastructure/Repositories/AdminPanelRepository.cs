@@ -1,5 +1,5 @@
-﻿using Courses.Core.Repositories;
-using Courses.Core.RepositoryDTO;
+﻿using Courses.Core.Models.Users;
+using Courses.Core.Repositories;
 using Courses.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,13 +12,12 @@ namespace Courses.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<UserWithNewestCourses> GetUserForHomeViewByIdAsync(Guid userId)
+        public async Task<User> GetUserForHomeViewByIdAsync(Guid userId)
         {
-            var user = await _dbContext.Users.Include(x => x.CreatedUserCourses).ThenInclude(x=>x.Course).AsNoTracking().FirstOrDefaultAsync(x=>x.Id == userId);
+            var user = await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x=>x.Id == userId);
             if (user == null)
                 throw new Exception("User_Doesnt_Exist");
-            return UserWithNewestCourses.GetFromUser(user);
-            
+            return user;           
         }
     }
 }

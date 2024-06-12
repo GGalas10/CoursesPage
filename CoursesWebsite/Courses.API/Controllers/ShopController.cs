@@ -1,9 +1,10 @@
-﻿using Courses.Core.Models;
-using Courses.Infrastructure.Services.Interfaces;
+﻿using Courses.Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
 {
+    [AllowAnonymous]
     public class ShopController : ApiBaseController
     {
         private readonly ICategoryService _categoryService;

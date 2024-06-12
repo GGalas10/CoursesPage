@@ -1,15 +1,4 @@
-﻿@using System.Security.Claims
-<!DOCTYPE html>
-@{
-    bool checker = false;
-    if (User.Identity.IsAuthenticated)
-    {
-        var claims = User.Claims;
-        var userRole = claims.First(x => x.Type == ClaimTypes.Role).Value;
-        if (userRole == "Admin")
-            checker = true;
-    }
-}
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,7 +17,7 @@
     
         <div id="Menu" class="RightMenu">
         <div class="ResizeBtn" onclick="ResizeMenu()"></div>
-        @if (checker)
+        @if (User.IsInRole("Admin"))
         {
             <div class="SingleMenuItem" onclick="GoTo('Index')"><div class="MenuText"><p>Dom</p></div><div class="ImgDiv"><img src="~/Images/home.png" class="MenuImg" /></div></div>
             <div class="SingleMenuItem" onclick="GoTo('Courses')"><div class="MenuText"><p>Moje kursy</p></div><div class="ImgDiv"><img src="~/Images/courses.png" class="MenuImg" /></div></div>
@@ -38,8 +27,9 @@
         }
         else
         {
-            <div class="SingleMenuItem" onclick="GoTo('Login')"><div class="MenuText"><p>Zaloguj</p></div><div class="ImgDiv"><img src="~/Images/login.png" class="MenuImg" /></div></div>
+            <div class="SingleMenuItem" asp-controler="PAdmin" asp-action="Logout"><div class="MenuText"><p>Zaloguj</p></div><div class="ImgDiv"><img src="~/Images/login.png" class="MenuImg" /></div></div>
         }
+        <div class="SingleMenuItem" onclick="location.href='/'"><div class="MenuText"><p>Home Page</p></div><div class="ImgDiv"><img src="~/Images/logout.png" class="MenuImg" /></div></div>
         </div>
 
     <div class="container">
@@ -54,6 +44,7 @@
     <script src="~/js/Cart.js" asp-append-version="true"></script>
     
     @await RenderSectionAsync("Scripts", required: false)
+    <footer class="bg-body-tertiary text-center text-lg-start" style="font-size:0.6rem">© 2024 Copyright:Grzegorz Galas.Kontakt:grzegorzgalas10@gmail.com</footer>
 </body>
 </html>
 <script>
@@ -73,9 +64,9 @@
     function Logout() {
         $.ajax({
             method: "POST",
-            url: "/API/PAdmin/Logut",
+            url: "/API/PAdmin/Logout",
             success: function () {
-                document.href(`/API/PAdmin/Login`)
+                document.location.href = `/API/PAdmin/Login`;
             },
             error: function(xhr,error){
                 console.log(error);

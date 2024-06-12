@@ -1,5 +1,6 @@
 ﻿using Courses.Infrastructure.Comands.User;
 using Courses.Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
@@ -21,6 +22,7 @@ namespace Courses.API.Controllers
             ViewData["Title"] = "Lista kursów użytkownika";
             return View();
         }
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -95,6 +97,7 @@ namespace Courses.API.Controllers
         public async Task<IActionResult> Logout()
         {
             HttpContext.Response.Cookies.Delete(".ASP_Custom_Token");
+            HttpContext.Response.Cookies.Delete(".ASP_Custom_RefreshToken");
             return await Task.FromResult(RedirectToAction("Login"));
         }
         [HttpGet]

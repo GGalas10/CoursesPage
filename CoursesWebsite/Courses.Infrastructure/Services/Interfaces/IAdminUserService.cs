@@ -4,6 +4,6 @@ namespace Courses.Infrastructure.Services.Interfaces
 {
     public interface IAdminUserService
     {
-        Task<UserWithNewestCourses> GetUserDTOById(Guid UserId);
+        Task<UserForAdminDTO> GetUserDTOById(Guid UserId);
     }
 }

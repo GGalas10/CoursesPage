@@ -22,9 +22,9 @@ function LoginUser() {
         contentType: 'application/json',
         data: JSON.stringify(loginUser),
         success: function (data) {
-            document.getElementById("ErrorDiv").innerHTML =`<p>${data}</p>`;
+            location.href = data;
         }, error: function (xhr) {
-            console.log(xhr);
+            document.getElementById("ErrorDiv").innerHTML = `<p>${data}</p>`;
         }
     })
 }

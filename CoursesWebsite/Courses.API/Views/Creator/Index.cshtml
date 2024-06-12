@@ -1,3 +1,26 @@
-﻿<h1>
-    Witaj na stronie głównej.
-</h1>
+﻿@using Courses.Core.RepositoryDTO
+@model UserForAdminDTO;
+<content>
+    <section class="text-center GlassEfectSection">
+        <h4>Witaj @Model.UserName.ToUpper()</h4>
+        <p>W tym miejscu znajdziesz najważniejsz informację z Twojego profilu</p>
+    </section>
+    <section class="text-center GlassEfectSection">
+        <h4>Twoje najnowsze kursy</h4>
+        <section id="SectionForCourses" class="CoursesSection">
+        </section>
+    </section>
+    <section class="text-center GlassEfectSection">
+        <h4>Twoje Zarobki</h4>
+        <div>
+            <p>Zarobiłeś już: 0 zł</p>
+            <p>Sprzedając 0 kursów</p>
+        </div>
+    </section>
+</content>
+@section Scripts {
+<script src="/js/Statistic/UserStatistic.js" asp-append-version="true"></script>
+<script>
+    GetUserNewestCourses();
+</script>
+}

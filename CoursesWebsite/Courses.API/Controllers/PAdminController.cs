@@ -10,32 +10,15 @@ namespace Courses.API.Controllers
 {
     [BindUser]
     [Layout("_Menu")]
-    [Route("API/PAdmin")]
+    [Route("API/PAdmin/{action}")]
     public class PAdminController : ApiBaseController
     {
-        private readonly IUserService _userService;
-        private readonly IAdminUserService _adminUserService;
+        private readonly IUserService _userService;        
         public PAdminController(IUserService userService, IAdminUserService adminUserService) : base()
         {
             _userService = userService;
-            _adminUserService = adminUserService;
-        }
-        [Authorize(Roles = "Admin")]
+        }       
         [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            try
-            {
-                var user = await _adminUserService.GetUserDTOById(UserId);
-                ViewData["Title"] = "Panel administracyjny";
-
-                return View(user);
-            }catch(Exception ex) 
-            {
-                return View(new UserWithNewestCourses() { UserName = "Undefined" });
-            }
-        }
-        [HttpGet("Login")]
         public IActionResult Login()
         {
             if (IsAuthenticated())
@@ -45,7 +28,7 @@ namespace Courses.API.Controllers
             ViewData["Title"] = "Logowanie";
             return View();
         }
-        [HttpPost("Login")]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] Login command)
         {
             try
@@ -56,7 +39,7 @@ namespace Courses.API.Controllers
                     throw new Exception("Wrong credentials");
                 }
                 AddBearerTokenToCookie(token);
-                return RedirectToAction("Index");
+                return Ok("/API/PAdmin/Index");
             }
             catch (Exception ex)
             {
@@ -68,7 +51,8 @@ namespace Courses.API.Controllers
         {
             if (IsAuthenticated())
             {
-                HttpContext.Response.Cookies.Delete("Bearer");
+                HttpContext.Response.Cookies.Delete(".ASP_Custom_Token");
+                HttpContext.Response.Cookies.Delete(".ASP_Custom_RefreshToken");
                 return await Task.FromResult(RedirectToAction("Login"));
             }
             return RedirectToAction("Login", "PAdmin");

@@ -1,4 +1,4 @@
-﻿using Courses.Core.RepositoryDTO;
+﻿using Courses.Infrastructure.DTO.UserDTOs;
 
 namespace Courses.Infrastructure.Services.Interfaces
 {

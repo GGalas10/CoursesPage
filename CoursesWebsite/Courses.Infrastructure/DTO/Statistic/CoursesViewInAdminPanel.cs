@@ -1,6 +1,6 @@
 ﻿using Courses.Core.Models.Courses;
 
-namespace Courses.Core.RepositoryDTO
+namespace Courses.Infrastructure.DTO.Statistic
 {
     public class CoursesViewInAdminPanel
     {

@@ -1,4 +1,4 @@
-﻿@using Courses.Core.RepositoryDTO
+﻿@using Courses.Infrastructure.DTO.UserDTOs
 @model UserForAdminDTO;
 <content>
     <section class="text-center GlassEfectSection">
@@ -12,9 +12,7 @@
     </section>
     <section class="text-center GlassEfectSection">
         <h4>Twoje Zarobki</h4>
-        <div>
-            <p>Zarobiłeś już: 0 zł</p>
-            <p>Sprzedając 0 kursów</p>
+        <div id="SattlementSection">
         </div>
     </section>
 </content>
@@ -22,5 +20,6 @@
 <script src="/js/Statistic/UserStatistic.js" asp-append-version="true"></script>
 <script>
     GetUserNewestCourses();
+    GetUserSattlements();
 </script>
 }

@@ -8,7 +8,7 @@ namespace Courses.Core.Models.Courses
     {
         #region Properties
         private HashSet<Topic> _topics;
-        public Name Name { get; protected set; }
+        public string Name { get; protected set; }
         public Name Description { get; protected set; }
         public double Price { get; protected set; }
         public Name Author { get; protected set; }

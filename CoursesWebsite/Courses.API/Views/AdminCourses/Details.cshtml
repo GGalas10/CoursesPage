@@ -1,2 +1,17 @@
-﻿@model Guid;
-<h1>Twój kurs @Model</h1>
+﻿@using Courses.Infrastructure.DTO
+@model CourseDetails;
+<container>
+    <section class="d-flex justify-content-center GlassEfectSection">
+        <h1>@Model.Title</h1>
+    </section>
+    <section class="d-flex justify-content-center GlassEfectSection">
+        <span>@Model.Description</span>
+    </section>
+    <section class="d-flex justify-content-center GlassEfectSection">
+        <img src="@Model.Picture" width="100%"/>
+    </section>
+    <section class="d-grid justify-content-center text-center GlassEfectSection">
+        <p>Autor: @Model.Author</p>
+        <p>Cena: @Model.Price</p>
+    </section>
+</container>

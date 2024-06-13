@@ -5,7 +5,7 @@ namespace Courses.Core.Value_Object
     [Owned]
     public record Name : IEquatable<Name>
     {
-        public string Value { get; }
+        public string Value;
         public Name()
         {
             Value = string.Empty;

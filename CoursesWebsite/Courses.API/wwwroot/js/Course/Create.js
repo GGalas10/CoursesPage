@@ -82,12 +82,11 @@ function CreateCourse() {
     if (form.checkValidity()) {
         console.log(true);
         $.ajax({
-            url: "/Course/Create",
+            url: "/AdminCourses/Create",
             method: "POST",
             processData: false,
             contentType: false,
             dataType: "json",
-            data: new FormData(form),
             success: function (data) {
                 console.log(data);
             },

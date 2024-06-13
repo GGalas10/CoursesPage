@@ -63,7 +63,6 @@ namespace Courses.DataAccess.Context
             });
             modelBuilder.Entity<Course>(entity =>
             {
-                entity.OwnsOne(n => n.Name, a => { a.Property(p => p.Value).HasColumnName("Name"); });
                 entity.OwnsOne(d => d.Description, a => { a.Property(p => p.Value).HasColumnName("Description"); });
                 entity.OwnsOne(a => a.Author, a => { a.Property(p => p.Value).HasColumnName("Author"); });
                 entity.OwnsOne(p => p.Picutre, a => { a.Property(p => p.Value).HasColumnName("Picture"); });

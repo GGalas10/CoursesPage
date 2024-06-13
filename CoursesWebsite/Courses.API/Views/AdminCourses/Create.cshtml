@@ -1,16 +1,18 @@
-﻿<link rel="stylesheet" href="~/css/Course/Create.css" asp-append-version="true" />
-<form id="CourseValidator" class="CreatePanel">
+﻿@using Courses.Infrastructure.Comands.Course
+@model Create
+<link rel="stylesheet" href="~/css/Course/Create.css" asp-append-version="true" />
+<form id="CourseValidator" class="CreatePanel" enctype="multipart/form-data" method="post">
     <div id="FirstPanel" class="FirstPanel">
         <h1>Na początku uzupełnijmy podstawowe dane Twojego kursu</h1>
         <section>
             <label for="Title">Podaj nazwę kursu</label>
-            <input name="Title" id="Title" type="text" maxlength="50" placeholder="Tytuł kursu" required/>
+            <input asp-for="@Model.Title" type="text" maxlength="50" placeholder="Tytuł kursu" required/>
         </section>
         <section>
             <label for="Description">Poniżej opisz swój kurs</label>
-            <textarea name="Description" id="Description" required></textarea>
+            <textarea asp-for="@Model.Description" required></textarea>
         </section>
-        <div class="NextBtn" onclick="FirstPanelDone()">Dalej</div>
+        <div class="NextBtn" onclick="FirstPanelDone()"><p>Dalej</p></div>
     </div>
     <div id="SecondPanel" class="SecondPanel">
         <h1>Teraz wybierz zdjęcie</h1>
@@ -18,12 +20,12 @@
         <p>Jest to istotny element Twojego kursu ponieważ ładne zdjęcie zawsze przyciąga klientów.</p>
         <br />
         <label for="CoursePicture" class="ImgBtn">Wybierz zdjęcie</label>
-        <input name="CoursePicture" id="CoursePicture" type="file" style="display:none" accept="image/png, image/jpeg"/>
+        <input asp-for="@Model.CoursePicture" type="file" style="display:none" accept="image/png, image/jpeg" />
         <div id="PictureView" class="Pic"></div>
         </section>
         <section>
-            <div class="NextBtn TwoBtnInSection" onclick="ReturnToFirstPanel('false')">Wstecz</div>
-            <div class="NextBtn TwoBtnInSection" onclick="SecondPanelDone()">Dalej</div>
+            <div class="NextBtn TwoBtnInSection" onclick="ReturnToFirstPanel('false')"><p>Wstecz</p></div>
+            <div class="NextBtn TwoBtnInSection" onclick="SecondPanelDone()"><p>Dalej</p></div>
         </section>
 
     </div>
@@ -31,15 +33,15 @@
         <h1>To już ostatni krok tworzenia Twojego kursu</h1>
         <section>
             <label for="Price">Podaj cenę za swój kurs</label>
-            <input name="Price" id="Price" type="number" min="0" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)' required/>
+            <input asp-for="@Model.Price" type="number" min="0" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)' required />
         </section>
         <section>
         <label for="AuthorName">Podaj Imię i Nazwisko autora kursu</label>
-        <input type="text" name="AuthorName" id="AuthorName" required/>
+        <input type="text" asp-for="@Model.AuthorName"  required/>
         </section>
         <section style="max-height: 150px;">
-            <div class="NextBtn TwoBtnInSection" onclick="ReturnToSecondPanel('false')">Wstecz</div>
-            <div class="NextBtn TwoBtnInSection" onclick="GoToSummary()">Przejdź do podsumowania</div>
+            <div class="NextBtn TwoBtnInSection" onclick="ReturnToSecondPanel('false')"><p>Wstecz</p></div>
+            <div class="NextBtn TwoBtnInSection" onclick="GoToSummary()"><p>Przejdź do podsumowania</p></div>
         </section>
     </div>
     <div id="Summary" class="Sumary">
@@ -65,11 +67,11 @@
             </div>
         </div>
         <div class="SummaryButtons">
-            <div id="ReturnFirst" class="SummaryBtn" onclick="ReturnToFirstPanel('true')" style="width:15%">Zmień</div>
-            <div id="ReturnSecond" class="SummaryBtn" onclick="ReturnToSecondPanel('true')" style="width:55%">Zmień</div>
-            <div id="ReturnLast" class="SummaryBtn" onclick="ReturnToLastPanel()" style="width:15%">Zmień</div>
+            <div id="ReturnFirst" class="SummaryBtn" onclick="ReturnToFirstPanel('true')" style="width:15%"><p>Zmień</p></div>
+            <div id="ReturnSecond" class="SummaryBtn" onclick="ReturnToSecondPanel('true')" style="width:55%"><p>Zmień</p></div>
+            <div id="ReturnLast" class="SummaryBtn" onclick="ReturnToLastPanel()" style="width:15%"><p>Zmień</p></div>
             </div>
-        <div class="CreateCourse" id="CreateCourse" onclick="CreateCourse()">Stwórz kurs</div>
+        <button class="CreateCourse" id="CreateCourse">Stwórz kurs</button>
     </div>
 </form>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

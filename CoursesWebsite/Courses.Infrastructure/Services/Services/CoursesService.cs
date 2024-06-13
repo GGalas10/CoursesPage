@@ -66,5 +66,11 @@ namespace Courses.Infrastructure.Services.Services
             await _coursesRepostiotory.AddLessonAsync(topicId, lesson);
             await Task.CompletedTask;
         }
+        public async Task<CourseDetails> GetCourseDetailsByIdAsync(Guid courseId)
+        {
+            var course = await _coursesRepostiotory.GetAsync(courseId);
+            var detailsDTO = new CourseDetails(course);
+            return detailsDTO;
+        }
     }
 }

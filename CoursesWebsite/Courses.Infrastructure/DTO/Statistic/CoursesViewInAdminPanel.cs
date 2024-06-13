@@ -6,7 +6,7 @@ namespace Courses.Infrastructure.DTO.Statistic
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public byte[] Picutre { get; set; }
+        public string Picture { get; set; }
         public static List<CoursesViewInAdminPanel> GetFromUserList(List<Course> userCoureses)
         {
             var newList = new List<CoursesViewInAdminPanel>();
@@ -18,7 +18,7 @@ namespace Courses.Infrastructure.DTO.Statistic
                 {
                     Id = course.Id,
                     Name = course.Name,
-                    Picutre = course.Picutre,
+                    Picture = "data:image/jpeg;base64, " + Convert.ToBase64String(course.Picutre),
                 });
             }
             return newList;

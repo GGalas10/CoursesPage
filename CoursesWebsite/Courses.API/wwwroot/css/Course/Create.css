@@ -5,7 +5,6 @@
     overflow:hidden;
     height:900px;
     width:90%;
-    position:absolute;
     margin:auto;
 }
 .CreatePanel h1{
@@ -16,13 +15,13 @@
     background-color: #05d90545;
     font-size: 1.5rem;
     font-weight: bolder;
-    padding-top: 10px;
     text-align: center;
     cursor: pointer;
     user-select: none;
     height: 25%;
     border-radius: 25px;
     transition: 0.5s;
+    padding:10px;
 }
 .NextBtn:hover{
     color: #05d905a6;
@@ -31,7 +30,8 @@
 .TwoBtnInSection {
     height: 20%;
     margin: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 10px !important;
+    padding: 0;
 }
 /* || FIRST PANEL */
 .FirstPanel {
@@ -221,6 +221,7 @@
     border-radius: 25px;
     transition: 0.5s;
     width: 70%;
+    color: whitesmoke;
 }
 .CreateCourse:hover {
     color: #05d905a6;

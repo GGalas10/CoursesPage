@@ -39,9 +39,12 @@
 a{
     text-decoration: none;
 }
-footer{
-    position:absolute;
-    bottom:25px;
+span{
+    font-size:1rem;
+}
+footer {
+    position: absolute;
+    bottom: 25px;
 }
 html {
     position: relative;

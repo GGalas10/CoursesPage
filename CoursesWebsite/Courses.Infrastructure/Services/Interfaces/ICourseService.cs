@@ -14,5 +14,6 @@ namespace Courses.Infrastructure.Services.Interfaces
         Task<Guid> CreateAsync(Create command,Guid userId);
         Task AddTopicAsync(Guid courseId, string name, string description);
         Task AddLessonAsync(Guid courseId, Guid topicId, string name, string description, byte[] video);
+        Task<CourseDetails> GetCourseDetailsByIdAsync(Guid courseId);
     }
 }

@@ -16,6 +16,7 @@ function GetUserNewestCourses() {
                             <button class="PrimaryBtn" onclick="GoToDetails('${element.id}')">Przejdź</button>
                             </div>`
                     } else {
+                        section.innerHTML +=
                         `<div class="GlassEfectSection OneCourse">
                             <h6>${element.name}</h6>
                             <img src="${element.picture}" width=200px height=200px style="border-radius:25px"></img>

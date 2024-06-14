@@ -1,17 +1,22 @@
 ﻿@using Courses.Infrastructure.DTO
 @model CourseDetails;
-<container>
-    <section class="d-flex justify-content-center GlassEfectSection">
-        <h1>@Model.Title</h1>
-    </section>
-    <section class="d-flex justify-content-center GlassEfectSection">
-        <span>@Model.Description</span>
-    </section>
-    <section class="d-flex justify-content-center GlassEfectSection">
-        <img src="@Model.Picture" width="100%"/>
-    </section>
-    <section class="d-grid justify-content-center text-center GlassEfectSection">
-        <p>Autor: @Model.Author</p>
-        <p>Cena: @Model.Price</p>
+<container style="width:120%">
+    <section class="GlassEfectSection MainDetailsSection">
+        <section class="d-flex justify-content-center GlassEfectSection DetailsSection">
+            <h1>@Model.Title</h1>
+        </section>
+        <section class="d-flex justify-content-center GlassEfectSection DetailsSection">
+            <span>@Model.Description</span>
+        </section>
+        <section class="d-grid justify-content-center text-center GlassEfectSection DetailsSection">
+            <p>Autor: @Model.Author</p>
+            <p>Cena: @Model.Price zł</p>
+        </section>
+        <section class="d-flex justify-content-center GlassEfectSection DetailsSection" style="border-radius: 40px;">
+            <img src="@Model.Picture" width="500px" />
+        </section>    
+        <section class="d-flex justify-content-center GlassEfectSection DetailsSection">
+            <button class="PrimaryBtn" onclick="location.href='/AdminCourses/Edit?CourseId=@Model.Id'">Edytuj</button>
+        </section>
     </section>
 </container>

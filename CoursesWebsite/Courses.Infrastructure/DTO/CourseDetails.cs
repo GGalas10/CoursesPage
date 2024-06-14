@@ -4,6 +4,7 @@ namespace Courses.Infrastructure.DTO
 {
     public class CourseDetails
     {
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -13,6 +14,7 @@ namespace Courses.Infrastructure.DTO
         public List<TopicDTO> Topics { get; set; }
         public CourseDetails(Course course)
         {
+            Id = course.Id;
             Title = course.Name;
             Author = course.Author;
             Description = course.Description;

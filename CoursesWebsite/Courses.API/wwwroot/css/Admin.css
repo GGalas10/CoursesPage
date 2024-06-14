@@ -76,3 +76,11 @@ p{
 .PrimaryBtn:hover{
     color: #646464;
 }
+.DetailsSection{
+    width:95%;
+}
+.MainDetailsSection {
+    width: 100%;
+    display: grid;
+    margin: auto;
+}

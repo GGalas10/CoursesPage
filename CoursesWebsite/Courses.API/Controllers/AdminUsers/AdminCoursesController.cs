@@ -49,5 +49,18 @@ namespace Courses.API.Controllers.AdminUsers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit([FromQuery]Guid CourseId)
+        {
+            try
+            {
+                var result = await _courseService.GetCourseDetailsByIdAsync(CourseId);
+                return View(result);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

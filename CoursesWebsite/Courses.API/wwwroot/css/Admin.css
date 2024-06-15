@@ -84,3 +84,13 @@ p{
     display: grid;
     margin: auto;
 }
+.CustomInput {
+    border: none;
+    margin: 5px;
+    border-radius: 15px;
+    padding: 5px;
+    text-align: center;
+    background-color: #ffffff4f;
+    backdrop-filter: blur(2px);
+    color:whitesmoke;
+}

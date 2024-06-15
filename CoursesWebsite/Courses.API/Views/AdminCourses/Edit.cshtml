@@ -1,15 +1,24 @@
 ﻿@using Courses.Infrastructure.DTO
 @model CourseDetails;
 <link rel="stylesheet" href="~/css/Course/Create.css" asp-append-version="true" />
-<form asp-action="Edit" method="post" style="width:120%;font-size:1.1rem;" class="d-grid justify-content-center text-center GlassEfectSection MainDetailsSection">
+<form asp-action="Edit" method="post" style="width:120%;font-size:1.1rem;" class="d-grid text-center GlassEfectSection">
     <h1>Edytuj swój kurs</h1>
-    <label for="@Model.Title">Tytuł:</label>
-    <input type="text" asp-for="@Model.Title" /> 
-    <label for="@Model.Description">Opis:</label>
-    <textarea asp-for="@Model.Description"></textarea>
-    <label for="@Model.Author">Autor:</label>
-    <input type="text" asp-for="@Model.Author" />
-    <label for="@Model.Price">Cena:</label>
-    <input type="number" asp-for="@Model.Price" />
-    <button>Zapisz</button>
+    <section class="d-grid text-center">
+        <span for="@Model.Title" style="font-size:1.2rem;">Tytuł:</span>
+        <input type="text" asp-for="@Model.Title" class="CustomInput" />
+    </section>
+
+    <section class="d-grid text-center">
+        <span for="@Model.Description" style="font-size:1.2rem;">Opis:</span>
+        <textarea asp-for="@Model.Description" class="CustomInput" style="min-height:200px;"></textarea>
+    </section>
+    <section class="d-grid text-center">
+        <span for="@Model.Author" style="font-size:1.2rem;">Autor:</span>
+        <input type="text" asp-for="@Model.Author" class="CustomInput" />
+    </section>
+    <section class="d-grid text-center">
+        <span for="@Model.Price" style="font-size:1.2rem;">Cena:</span>
+        <input type="number" asp-for="@Model.Price" class="CustomInput" />
+    </section>
+    <button class="PrimaryBtn" style="width:10%;min-width:140px">Zapisz</button>
 </form>

@@ -2,11 +2,12 @@
 @model CourseDetails;
 <link rel="stylesheet" href="~/css/Course/Create.css" asp-append-version="true" />
 <header class="GlassEfectSection" style="width:120%;display:flex;justify-content:space-evenly;font-size:1.2rem;">
-    <div class="InactiveBtn" id="BaseDateBtn" onclick="ChangeBtn(this)">Dane podstawowe</div>
-    <div class="InactiveBtn" id="LesonBtn" onclick="ChangeBtn(this)">Lekcje</div>
+    <div class="ActiveBtn" id="BaseDateBtn" onclick="ChangeBtn(this)" data-value="Base">Dane podstawowe</div>
+    <div class="InactiveBtn" id="LesonBtn" onclick="ChangeBtn(this)" data-value="Lesson">Lekcje</div>
 </header>
 <form asp-action="Edit" method="post" style="width:120%;font-size:1.1rem;" class="d-grid text-center GlassEfectSection">
-    <h1>Edytuj swój kurs</h1>
+    <section id="BaseSection">
+    <h1>Edytuj podstawowe dane</h1>
     <section class="d-grid text-center">
         <span for="@Model.Title" style="font-size:1.2rem;">Tytuł:</span>
         <input type="text" asp-for="@Model.Title" class="CustomInput" />
@@ -23,6 +24,13 @@
     <section class="d-grid text-center">
         <span for="@Model.Price" style="font-size:1.2rem;">Cena:</span>
         <input type="number" asp-for="@Model.Price" class="CustomInput" />
+    </section>
+    </section>
+    <section class="overflow-hidden" id="LessonSection">
+        <h1>Edytuj zajęcia</h1>
+        <section>
+            <div>Dodaj lekcję</div>
+        </section>
     </section>
     <button class="PrimaryBtn" style="width:10%;min-width:140px">Zapisz</button>
 </form>

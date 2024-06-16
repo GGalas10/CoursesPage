@@ -117,3 +117,6 @@ p{
 .InactiveBtn:hover{
     background-color:#666565ad;
 }
+.hidden{
+    display:none;
+}

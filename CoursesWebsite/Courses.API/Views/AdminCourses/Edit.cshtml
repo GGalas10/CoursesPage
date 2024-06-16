@@ -1,6 +1,10 @@
 ﻿@using Courses.Infrastructure.DTO
 @model CourseDetails;
 <link rel="stylesheet" href="~/css/Course/Create.css" asp-append-version="true" />
+<header class="GlassEfectSection" style="width:120%;display:flex;justify-content:space-evenly;font-size:1.2rem;">
+    <div class="InactiveBtn" id="BaseDateBtn" onclick="ChangeBtn(this)">Dane podstawowe</div>
+    <div class="InactiveBtn" id="LesonBtn" onclick="ChangeBtn(this)">Lekcje</div>
+</header>
 <form asp-action="Edit" method="post" style="width:120%;font-size:1.1rem;" class="d-grid text-center GlassEfectSection">
     <h1>Edytuj swój kurs</h1>
     <section class="d-grid text-center">
@@ -22,3 +26,6 @@
     </section>
     <button class="PrimaryBtn" style="width:10%;min-width:140px">Zapisz</button>
 </form>
+@section Scripts{
+<script src="~/js/Course/Edit.js"></script>
+}

@@ -94,3 +94,26 @@ p{
     backdrop-filter: blur(2px);
     color:whitesmoke;
 }
+.ActiveBtn {
+    background-color: #ffffff82;
+    border-radius: 25px;
+    padding: 10px;
+    color: #d2e9f5;
+    width: 20%;
+    text-align: center;
+    cursor:pointer;
+    user-select:none;
+}
+.InactiveBtn {
+    background-color: #ffffff0d;
+    border-radius: 25px;
+    padding: 10px;
+    color: #f5f5f5;
+    width: 20%;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+.InactiveBtn:hover{
+    background-color:#666565ad;
+}

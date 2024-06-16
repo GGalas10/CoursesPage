@@ -2,6 +2,7 @@
 using Courses.API.Extensions.CustomAttributes;
 using Courses.Infrastructure.Comands.User;
 using Courses.Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Courses.API.Controllers
@@ -15,7 +16,8 @@ namespace Courses.API.Controllers
         public PAdminController(IUserService userService, IAdminUserService adminUserService) : base()
         {
             _userService = userService;
-        }       
+        }
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
@@ -26,6 +28,7 @@ namespace Courses.API.Controllers
             ViewData["Title"] = "Logowanie";
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] Login command)
         {

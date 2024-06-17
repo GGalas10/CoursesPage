@@ -33,10 +33,17 @@ namespace Courses.API.Controllers.AdminUsers
             }
         }
         [HttpGet]
-        public IActionResult Courses() 
+        public async Task<IActionResult> Courses() 
         {
-            ViewData["Title"] = "Moje kursy";
-            return View();
+            try
+            {
+                ViewData["Title"] = "Moje kursy";
+                var courses = await _adminUserService.GetAllUserCourses(UserId);
+                return View(courses);
+            }catch(Exception ex)
+            {
+                return View();
+            }
         }
         [HttpGet]
         public IActionResult Settlements()

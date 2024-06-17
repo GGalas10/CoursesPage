@@ -1,4 +1,6 @@
-﻿<container>
+﻿@using Courses.Infrastructure.DTO.Statistic
+@model List<CoursesViewInAdminPanel>
+<container>
     <header class="text-center GlassEfectSection">
         <h2>Wszystkie kursy</h2>
     </header>
@@ -8,4 +10,10 @@
             <span>Po cenie</span>
             <span onclick="location.href ='/AdminCourses/Create'" style="cursor:pointer">Dodaj nowy</span></div>
     </section>
-</container>
+        @foreach(var item in Model)
+        {
+        <p>@item.Name</p>
+        <img src="@item.Picture" />
+        
+        }
+    </container>

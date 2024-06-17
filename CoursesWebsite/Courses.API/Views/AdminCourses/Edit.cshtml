@@ -29,8 +29,22 @@
     <section class="overflow-hidden" id="LessonSection">
         <h1>Edytuj zajęcia</h1>
         <section>
-            <div>Dodaj lekcję</div>
+            @foreach(var oneTopic in Model.Topics)
+            {
+                <div>
+                    @oneTopic.Name
+                    <span>@oneTopic.Description</span>
+                    <section>
+                        Lekcje w Temacie:
+                        @foreach(var lesson in oneTopic.lessons)
+                        {
+                            <div>@lesson.LessonNumber. @lesson.Name</div>
+                        }
+                    </section>
+                </div>
+            }
         </section>
+        <button>Dodaj kolejną lekcję.</button>
     </section>
     <button class="PrimaryBtn" style="width:10%;min-width:140px">Zapisz</button>
 </form>

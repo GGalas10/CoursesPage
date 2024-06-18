@@ -120,3 +120,10 @@ p{
 .hidden{
     display:none;
 }
+.OneArticleCourse {
+    display: flex;
+    padding: 5px;
+    margin: auto;
+    justify-content: space-around;
+    margin-top:15px;
+}

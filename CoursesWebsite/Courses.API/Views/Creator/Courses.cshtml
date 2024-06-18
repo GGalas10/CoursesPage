@@ -12,8 +12,10 @@
     </section>
         @foreach(var item in Model)
         {
-        <p>@item.Name</p>
-        <img src="@item.Picture" />
-        
+            <article class="GlassEfectSection d-flex justify-content-around">
+                <P>@(Model.IndexOf(item) + 1)</P>               
+                <p>@item.Name</p>
+                <div class="PrimaryBtn" style="width: 15%;text-align: center;margin:0;margin-top:0 !important;height:25px">Szczegóły</div>
+            </article>
         }
     </container>

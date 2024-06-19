@@ -12,10 +12,10 @@
     </section>
         @foreach(var item in Model)
         {
-            <article class="GlassEfectSection d-flex justify-content-around">
+            <article class="GlassEfectSection d-flex justify-content-around" style="box-sizing: border-box;padding-top: 35px;">
                 <P>@(Model.IndexOf(item) + 1)</P>               
                 <p>@item.Name</p>
-                <div class="PrimaryBtn" style="width: 15%;text-align: center;margin:0;margin-top:0 !important;height:25px">Szczegóły</div>
+                <a class="PrimaryBtn" style="width: 15%;text-align: center;margin:0;margin-top:0 !important;height:25px" href="/AdminCourses/Details?CourseId=@item.Id">Szczegóły</a>
             </article>
         }
     </container>

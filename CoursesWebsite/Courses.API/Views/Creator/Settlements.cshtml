@@ -1,3 +1,20 @@
-﻿<h1>
-    Witaj na stronie Rozliczeń.
-</h1>
+﻿<section class="GlassEfectSection">
+    <section class="text-center">
+        <h1>
+            Witaj na stronie Rozliczeń.
+        </h1>
+        <span>W tej sekcji znajdziesz informację na temat twoich finansów na Naszej stronie.</span>
+    </section>
+    <div class="d-flex justify-content-around" style="margin-top:25px">
+       <p class="InactiveBtn" data-value="Statistic" onclick="SattlementsChangeBtn(this)">Statystyki</p>
+       <p class="InactiveBtn" data-value="Finances" onclick="SattlementsChangeBtn(this)">Finanse</p>
+       <p class="InactiveBtn" data-value="Raports" onclick="SattlementsChangeBtn(this)">Raporty</p>
+       <p class="InactiveBtn" data-value="Invoices" onclick="SattlementsChangeBtn(this)">Faktury</p>
+    </div>
+</section>
+<container class="GlassEfectSection MainContainerSattlements hidden" id="DataSection">
+
+</container>
+@section Scripts{
+    <script src="/js/Course/Edit.js"></script>
+}

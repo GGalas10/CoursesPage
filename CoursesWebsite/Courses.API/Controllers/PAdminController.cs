@@ -23,7 +23,7 @@ namespace Courses.API.Controllers
         {
             if (IsAuthenticated())
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Creator");
             }
             ViewData["Title"] = "Logowanie";
             return View();
@@ -40,7 +40,7 @@ namespace Courses.API.Controllers
                     throw new Exception("Wrong credentials");
                 }
                 AddBearerTokenToCookie(token);
-                return Ok("/API/PAdmin/Index");
+                return Ok("/Creator");
             }
             catch (Exception ex)
             {

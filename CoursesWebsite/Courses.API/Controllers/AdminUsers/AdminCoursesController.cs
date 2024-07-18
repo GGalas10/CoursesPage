@@ -62,5 +62,17 @@ namespace Courses.API.Controllers.AdminUsers
                 return BadRequest();
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> AddTopicToLesson(AddTopic command)
+        {
+            try
+            {
+                return Ok(command);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -49,6 +49,46 @@ function GetUserStatistic() {
         },
     });
 }
+function AddTopicSection(courseId) {
+    document.getElementById("LessonAndTopicSection").classList.remove("hidden");
+    document.getElementById("LessonAndTopicSection").innerHTML = `
+    <h3>Dodawanie Tematu</h3>
+    <label for="TopicName">Nazwa tematu</label>
+    <input name="TopicName" id="TopicName" type="text"/>
+    <label for="TopicDescription">Opis</label>
+    <textarea id="TopicDescription" name="TopicDescription"></textarea>
+    <p onclick="AddTopicToCourse('${courseId}')" class="PrimaryBtn ButtonFromP">Zapisz Temat</p>
+    `;
+}
+function AddTopicToCourse(courseId) {
+    var topicName = document.getElementById("TopicName").value;
+    var topicDescription = document.getElementById("TopicDescription").value;
+    if (topicName == "") {
+        alert("Uzupełnij pole nazwy tematu");
+        return;
+    }
+    if (topicDescription == "") {
+        alert("Uzupełnij pole opisu tematu");
+        return;
+    }
+    var formData = new FormData();
+    formData.append('CourseId', courseId);
+    formData.append("topicName", topicName);
+    formData.append("topicDescription", topicDescription);
+    $.ajax({
+        url: "/AdminCourses/AddTopicToLesson",
+        data: formData,
+        method: "POST",
+        contentType: false,
+        processData: false,
+        success: function () {
+
+        },
+        error: function (xhr) {
+            console.log(xhr);
+        },
+    });
+}
 const statModal = `<section class="text-center" style="width:100%"><h1>Statystyka</h1></section>`;
 const financeModal = `<section class="text-center" style="width:100%"><h1>Finanse</h1></section>`;
 const raportsModal = `<section class="text-center" style="width:100%"><h1>Raporty</h1></section>`;

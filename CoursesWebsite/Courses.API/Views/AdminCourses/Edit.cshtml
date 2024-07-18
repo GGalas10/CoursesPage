@@ -44,10 +44,13 @@
                 </div>
             }
         </section>
-        <button>Dodaj kolejną lekcję.</button>
+        <p onclick="AddTopicSection('@Model.Id')" class="PrimaryBtn ButtonFromP" style="width: 15%;">Dodaj kolejną temat</p>
     </section>
     <button class="PrimaryBtn" style="width:10%;min-width:140px">Zapisz</button>
 </form>
+<section class="GlassEfectSection d-grid justify-content-center text-center hidden" style="width:120%;font-size:1.1rem;" id="LessonAndTopicSection">
+    
+</section>
 @section Scripts{
 <script src="~/js/Course/Edit.js"></script>
 }

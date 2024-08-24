@@ -6,12 +6,13 @@ namespace Courses.Infrastructure.DTO
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public int Description { get; set; }
+        public string Description { get; set; }
         public List<LessonDTO> lessons { get; set; }
         public TopicDTO(Topic topic)
         {
             this.Id = topic.Id;
             this.Name = topic.Name;
+            this.Description = topic.Description;
             lessons = LessonDTO.GetFromLessonList(topic.Lessons.ToList());
         }
         public static List<TopicDTO> GetFromTopicList(List<Topic> topics)

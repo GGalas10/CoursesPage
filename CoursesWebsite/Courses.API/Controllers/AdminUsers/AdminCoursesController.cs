@@ -63,11 +63,12 @@ namespace Courses.API.Controllers.AdminUsers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> AddTopicToLesson(AddTopic command)
+        public async Task<IActionResult> AddTopicToCourse(AddTopic command)
         {
             try
             {
-                return Ok(command);
+                await _courseService.AddTopicAsync(command.CourseId,command.topicName,command.topicDescription);
+                return Ok();
             }
             catch(Exception ex)
             {

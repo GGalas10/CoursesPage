@@ -63,6 +63,8 @@ namespace Courses.Core.Models.Courses
         }
         public void AddTopic(Topic topic)
         {
+            if(_topics == null)
+                _topics = new HashSet<Topic>();
             _topics.Add(topic);
         }
         public void AddTopics(List<Topic> topics)

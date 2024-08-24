@@ -4,6 +4,7 @@ using Courses.Core.Repositories;
 using Courses.DataAccess.Context;
 using Courses.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Courses.Infrastructure.Services
 {
@@ -15,7 +16,7 @@ namespace Courses.Infrastructure.Services
             _context = context;
         }
         public async Task<Course> GetAsync(Guid id)
-        => await _context.Courses.FirstOrDefaultAsync(c => c.Id == id && c.State == State.Active);
+        => await _context.Courses.Include(x=>x.Topics).ThenInclude(x=>x.Lessons).FirstOrDefaultAsync(c => c.Id == id && c.State == State.Active);
         public async Task<List<Course>> GetAllAsync()
             => await _context.Courses.Where(c => c.State == State.Active).ToListAsync();
         public async Task<List<Course>> GetAllByCategoryIdAsync(Guid categoryId)
@@ -70,7 +71,8 @@ namespace Courses.Infrastructure.Services
                 throw new Exception("Topic can't be empty");
             var Course = await this.GetOrFailById(id);
             Course.AddTopic(topic);
-            if (_context.SaveChangesAsync().Result > 0)
+            _context.topics.Add(topic);
+            if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Db can't save date");
@@ -81,7 +83,8 @@ namespace Courses.Infrastructure.Services
                 throw new Exception("List of topic can't be empty");
             var Course = await this.GetOrFailById(id);
             Course.AddTopics(topic);
-            if (_context.SaveChangesAsync().Result > 0)
+			_context.topics.AddRange(topic);
+			if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Db can't save date");
@@ -94,7 +97,8 @@ namespace Courses.Infrastructure.Services
             if (Topic == null)
                 throw new Exception("Topic doesn't exists");
             Topic.AddLesson(lesson);
-            if (_context.SaveChangesAsync().Result > 0)
+            _context.lessons.Add(lesson);
+			if (_context.SaveChangesAsync().Result > 0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Db can't save date");
@@ -110,7 +114,8 @@ namespace Courses.Infrastructure.Services
             {
                 Topic.AddLesson(lesson);
             }
-            if(_context.SaveChangesAsync().Result>0)
+			_context.lessons.AddRange(lessons);
+			if (_context.SaveChangesAsync().Result>0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Db can't save date");

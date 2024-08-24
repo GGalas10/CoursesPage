@@ -76,13 +76,13 @@ function AddTopicToCourse(courseId) {
     formData.append("topicName", topicName);
     formData.append("topicDescription", topicDescription);
     $.ajax({
-        url: "/AdminCourses/AddTopicToLesson",
+        url: "/AdminCourses/AddTopicToCourse",
         data: formData,
         method: "POST",
         contentType: false,
         processData: false,
         success: function () {
-
+            location.reload();
         },
         error: function (xhr) {
             console.log(xhr);

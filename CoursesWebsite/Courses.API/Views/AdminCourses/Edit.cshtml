@@ -26,21 +26,25 @@
         <input type="number" asp-for="@Model.Price" class="CustomInput" />
     </section>
     </section>
-    <section class="overflow-hidden" id="LessonSection">
+    <section class="overflow-hidden hidden" id="LessonSection">
         <h1>Edytuj zajęcia</h1>
         <section>
             @foreach(var oneTopic in Model.Topics)
             {
-                <div>
-                    @oneTopic.Name
-                    <span>@oneTopic.Description</span>
-                    <section>
-                        Lekcje w Temacie:
-                        @foreach(var lesson in oneTopic.lessons)
-                        {
-                            <div>@lesson.LessonNumber. @lesson.Name</div>
-                        }
-                    </section>
+                <div class="GlassEfectSection">
+                    <h2>Temat @Model.Topics.IndexOf(oneTopic)</h2>
+                    <div>
+                        @oneTopic.Name
+                        <span>@oneTopic.Description</span>
+                        <section>
+                            Lekcje w Temacie:
+                            @foreach(var lesson in oneTopic.lessons)
+                            {
+                                <div>@lesson.LessonNumber. @lesson.Name</div>
+                            }
+                        </section>
+                        <p class="PrimaryBtn ButtonFromP">Dodaj lekcję</p>
+                    </div>
                 </div>
             }
         </section>

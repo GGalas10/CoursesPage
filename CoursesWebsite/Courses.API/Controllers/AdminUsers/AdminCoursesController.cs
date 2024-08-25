@@ -75,5 +75,10 @@ namespace Courses.API.Controllers.AdminUsers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet]
+        public IActionResult AddLessonView()
+        {
+            return PartialView("~/Views/Shared/Partials/Courses/_AddLessonPartialView.cshtml");
+        }
     }
 }

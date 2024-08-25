@@ -1,3 +1,21 @@
+function AddLessonBtn() {
+    $.ajax({
+        url: "/AdminCourses/AddLessonView",
+        method: "GET",
+        success: function () {
+            var newDiv = document.createElement("div");
+            newDiv.id = "DivForLesson";
+            document.body.appendChild(newDiv);
+            $("#DivForLesson").load("/AdminCourses/AddLessonView");
+        },
+        error: function () {
+
+        },
+    });
+}
+function ReturnAddLessonView() {
+    document.body.removeChild(document.getElementById("DivForLesson"));
+}
 function ChangeBtn(clickedBtn) {
     $(".ActiveBtn").addClass("InactiveBtn");
     $(".ActiveBtn").removeClass("ActiveBtn");

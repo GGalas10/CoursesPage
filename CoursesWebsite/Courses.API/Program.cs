@@ -15,13 +15,10 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-builder.Services.AddControllersWithViews();
-builder.Services.AddSession();
-builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMvc();
-
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddSession();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
 builder.Services.AddDbContext<CoursesDbContext>(options =>

@@ -1,12 +1,12 @@
-function AddLessonBtn() {
+function AddLessonBtn(TopicId) {
     $.ajax({
-        url: "/AdminCourses/AddLessonView",
+        url: `/AdminCourses/AddLessonView?topicId=${TopicId}`,
         method: "GET",
         success: function () {
             var newDiv = document.createElement("div");
             newDiv.id = "DivForLesson";
             document.body.appendChild(newDiv);
-            $("#DivForLesson").load("/AdminCourses/AddLessonView");
+            $("#DivForLesson").load(`/AdminCourses/AddLessonView?topicId=${TopicId}`);
         },
         error: function () {
 
@@ -16,6 +16,7 @@ function AddLessonBtn() {
 function ReturnAddLessonView() {
     document.body.removeChild(document.getElementById("DivForLesson"));
 }
+
 function ChangeBtn(clickedBtn) {
     $(".ActiveBtn").addClass("InactiveBtn");
     $(".ActiveBtn").removeClass("ActiveBtn");

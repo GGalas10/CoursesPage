@@ -36,14 +36,14 @@
                     <div>
                         @oneTopic.Name
                         <span>@oneTopic.Description</span>
-                        <section>
+                        <section id="Topic_@oneTopic.Id">
                             Lekcje w Temacie:
                             @foreach(var lesson in oneTopic.lessons)
                             {
                                 <div>@lesson.LessonNumber. @lesson.Name</div>
                             }
                         </section>
-                        <p class="PrimaryBtn ButtonFromP" onclick="AddLessonBtn()">Dodaj lekcję</p>                     
+                        <p class="PrimaryBtn ButtonFromP" onclick="AddLessonBtn('@oneTopic.Id')">Dodaj lekcję</p>                     
                     </div>
                 </div>
             }

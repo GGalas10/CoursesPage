@@ -120,5 +120,14 @@ namespace Courses.Infrastructure.Services
             else
                 throw new Exception("Db can't save date");
         }
+        public async Task<Topic> GetTopicByIdAsync(Guid topicId)
+        {
+            if (topicId == Guid.Empty)
+                throw new Exception("Topic Id cannot be empty");
+            var topic = await _context.topics.AsNoTracking().AsSplitQuery().Include(x=>x.Lessons).FirstOrDefaultAsync(x=>x.Id == topicId);
+            if (topic == null)
+                throw new Exception($"Cannot find Topic with Id:{topicId}");
+            return topic;
+        }
     }
 }

@@ -19,14 +19,14 @@ namespace Courses.API.Controllers.AdminUsers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details([FromQuery]Guid CourseId)
+        public async Task<IActionResult> Details([FromQuery] Guid CourseId)
         {
             try
             {
                 var result = await _courseService.GetCourseDetailsByIdAsync(CourseId);
                 return View(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest();
             }
@@ -37,12 +37,12 @@ namespace Courses.API.Controllers.AdminUsers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm]Create command)
+        public async Task<IActionResult> Create([FromForm] Create command)
         {
             try
             {
-                var result = await _courseService.CreateAsync(command,UserId);
-                return RedirectToAction("Details",new {CourseId = result });
+                var result = await _courseService.CreateAsync(command, UserId);
+                return RedirectToAction("Details", new { CourseId = result });
             }
             catch (Exception ex)
             {
@@ -50,35 +50,48 @@ namespace Courses.API.Controllers.AdminUsers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> Edit([FromQuery]Guid CourseId)
+        public async Task<IActionResult> Edit([FromQuery] Guid CourseId)
         {
             try
             {
                 var result = await _courseService.GetCourseDetailsByIdAsync(CourseId);
                 return View(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest();
             }
+        }
+        [HttpGet]
+        public IActionResult AddLessonView(Guid topicId)
+        {
+            return PartialView("~/Views/Shared/Partials/Courses/_AddLessonPartialView.cshtml", topicId);
         }
         [HttpPost]
         public async Task<IActionResult> AddTopicToCourse(AddTopic command)
         {
             try
             {
-                await _courseService.AddTopicAsync(command.CourseId,command.topicName,command.topicDescription);
+                await _courseService.AddTopicAsync(command.CourseId, command.topicName, command.topicDescription);
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
-        public IActionResult AddLessonView()
+        [HttpPost]
+        public async Task<IActionResult> AddLessonToTopic([FromForm]AddLessonCommand command)
         {
-            return PartialView("~/Views/Shared/Partials/Courses/_AddLessonPartialView.cshtml");
+            try
+            {
+                await _courseService.AddLessonAsync(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

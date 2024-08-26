@@ -5,7 +5,7 @@ namespace Courses.Core.Models.Courses
 {
     public class Topic : Entity
     {
-        private List<Lesson> _lessons;
+        private List<Lesson> _lessons = new List<Lesson>();
         public Name Name { get; protected set; }
         public Name Description { get; protected set; }
         public virtual Course Course { get; protected set; }

@@ -14,5 +14,6 @@ namespace Courses.Core.Repositories
         Task AddTopicsAsync(Guid id,List<Topic> topic);
         Task AddLessonAsync(Guid IdTopic, Lesson lesson);
         Task AddLessonsAsync(Guid IdTopic, List<Lesson> lessons);
+        Task<Topic> GetTopicByIdAsync(Guid topicId);
     }
 }

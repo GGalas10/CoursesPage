@@ -58,12 +58,11 @@ namespace Courses.Infrastructure.Services.Services
             await _coursesRepostiotory.AddTopicAsync(courseId, topic);
             await Task.CompletedTask;
         }
-        public async Task AddLessonAsync(Guid courseId, Guid topicId, string name, string description, byte[] video)
+        public async Task AddLessonAsync(AddLessonCommand command)
         {
-            var course = await _coursesRepostiotory.GetAsync(courseId);
-            var topic = course.Topics.FirstOrDefault(t => t.Id == topicId);
-            var lesson = new Lesson(name, description, video, topic.Lessons.Count() + 1);
-            await _coursesRepostiotory.AddLessonAsync(topicId, lesson);
+            var topic = await _coursesRepostiotory.GetTopicByIdAsync(command.topicId);
+            var lesson = new Lesson(command.lessonName,command.lessonDescription,null,topic.Lessons.Count()+1);
+            await _coursesRepostiotory.AddLessonAsync(command.topicId, lesson);
             await Task.CompletedTask;
         }
         public async Task<CourseDetails> GetCourseDetailsByIdAsync(Guid courseId)

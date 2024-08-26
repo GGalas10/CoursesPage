@@ -14,11 +14,12 @@ namespace Courses.Core.Models.Courses
         #endregion
         #region Constructors
         private Lesson() { }
-        public Lesson(string lessonName, string lessonDescription, byte[] video, int lessonNumber) : base()
+        public Lesson(string lessonName, string lessonDescription, byte[]? video, int lessonNumber) : base()
         {
             SetName(lessonName);
             SetDescription(lessonDescription);
-            SetVideo(video);
+            if (video != null)
+                SetVideo(video);
             SetLessonNumber(lessonNumber);
             State = State.Active;
         }

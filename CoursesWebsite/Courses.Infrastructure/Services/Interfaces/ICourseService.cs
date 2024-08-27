@@ -13,7 +13,7 @@ namespace Courses.Infrastructure.Services.Interfaces
         Task<IEnumerable<ViewCoursesDTO>> GetByCategoryAsync(Guid categoryId);
         Task<Guid> CreateAsync(Create command,Guid userId);
         Task AddTopicAsync(Guid courseId, string name, string description);
-        Task AddLessonAsync(AddLessonCommand command);
+        Task<int> AddLessonAsync(AddLessonCommand command);
         Task<CourseDetails> GetCourseDetailsByIdAsync(Guid courseId);
     }
 }

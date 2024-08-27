@@ -85,8 +85,8 @@ namespace Courses.API.Controllers.AdminUsers
         {
             try
             {
-                await _courseService.AddLessonAsync(command);
-                return Ok();
+                var result = await _courseService.AddLessonAsync(command);
+                return Ok(result);
             }
             catch (Exception ex)
             {

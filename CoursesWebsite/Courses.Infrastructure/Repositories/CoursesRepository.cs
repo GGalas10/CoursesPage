@@ -93,12 +93,13 @@ namespace Courses.Infrastructure.Services
         {
             if (lesson == null)
                 throw new Exception("Lesson can't be empty");
-            var Topic = await _context.topics.FirstOrDefaultAsync(t => t.Id == idTopic);
+            var Topic = await _context.topics.Include(x=>x.Lessons).FirstOrDefaultAsync(t => t.Id == idTopic);
             if (Topic == null)
                 throw new Exception("Topic doesn't exists");
             Topic.AddLesson(lesson);
-            _context.lessons.Add(lesson);
-			if (_context.SaveChangesAsync().Result > 0)
+            _context.Add(lesson);
+            _context.Update(Topic);
+			if (await _context.SaveChangesAsync() > 0)
                 await Task.CompletedTask;
             else
                 throw new Exception("Db can't save date");

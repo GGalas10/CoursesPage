@@ -8,8 +8,8 @@ namespace Courses.Core.Models.Courses
         #region Properties
         public Name LessonName { get; protected set; }
         public Name LessonDescription { get; protected set; }
-        public DigitalItem Video { get; protected set; }
-        public Number LessonNumber { get; protected set; }
+        public DigitalItem? Video { get; protected set; }
+        public int LessonNumber { get; protected set; }
         public virtual Topic Topic { get; protected set; }
         #endregion
         #region Constructors
@@ -21,7 +21,6 @@ namespace Courses.Core.Models.Courses
             if (video != null)
                 SetVideo(video);
             SetLessonNumber(lessonNumber);
-            State = State.Active;
         }
         #endregion
         #region Methods

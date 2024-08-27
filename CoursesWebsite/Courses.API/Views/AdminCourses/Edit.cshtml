@@ -38,7 +38,7 @@
                         <span>@oneTopic.Description</span>
                         <section id="Topic_@oneTopic.Id">
                             Lekcje w Temacie:
-                            @foreach(var lesson in oneTopic.lessons)
+                            @foreach(var lesson in oneTopic.lessons.OrderBy(x=>x.LessonNumber))
                             {
                                 <div>@lesson.LessonNumber. @lesson.Name</div>
                             }

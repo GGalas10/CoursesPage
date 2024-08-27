@@ -58,12 +58,12 @@ namespace Courses.Infrastructure.Services.Services
             await _coursesRepostiotory.AddTopicAsync(courseId, topic);
             await Task.CompletedTask;
         }
-        public async Task AddLessonAsync(AddLessonCommand command)
+        public async Task<int> AddLessonAsync(AddLessonCommand command)
         {
             var topic = await _coursesRepostiotory.GetTopicByIdAsync(command.topicId);
             var lesson = new Lesson(command.lessonName,command.lessonDescription,null,topic.Lessons.Count()+1);
             await _coursesRepostiotory.AddLessonAsync(command.topicId, lesson);
-            await Task.CompletedTask;
+            return lesson.LessonNumber;
         }
         public async Task<CourseDetails> GetCourseDetailsByIdAsync(Guid courseId)
         {

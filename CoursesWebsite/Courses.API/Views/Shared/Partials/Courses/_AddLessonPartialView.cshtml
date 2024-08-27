@@ -12,7 +12,7 @@
             <label for="lessonName">Nazwa lekcji:</label>
             <input type="text" name="lessonName" maxlength="100" id="lessonName" required/>
             <label for="lessonDescription">Opis lekcji</label>
-            <textarea name="lessonDescription" maxlength="300" id="lessonDescription"></textarea>
+            <textarea name="lessonDescription" maxlength="300" id="lessonDescription" required></textarea>
         </div>
         <button class="PrimaryBtn" onclick="ComingSoon()">Dodaj film</button>
         <p class="PrimaryBtn ButtonFromP" onclick="AddNewLesson()">Zapisz</p>
@@ -27,9 +27,14 @@
         var form = document.getElementById("LessonForm");
         if (!form.checkValidity()) {
             alert("Wypełnij wszystkie pola");
+            form.reportValidity()
+            return;
         }
         var dataForm = new FormData(form);
-        console.log(dataForm);
+        var dataClone = {
+            topicId: document.getElementById("topicId").value,
+            lessonName: document.getElementById("lessonName").value,
+        };
         $.ajax({
             url: "/AdminCourses/AddLessonToTopic",
             method: "POST",
@@ -38,7 +43,9 @@
             processData: false,
             contentType: false,
             success: function (data) {
-
+                ReturnAddLessonView();
+                console.log(`Topic_${dataClone.topicId}`);
+                document.getElementById(`Topic_${dataClone.topicId}`).innerHTML += `<div>${data}. ${dataClone.lessonName}</div>`;
             },
             error: function (err) {
                 console.log(err);

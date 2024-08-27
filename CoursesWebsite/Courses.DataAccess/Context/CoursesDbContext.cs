@@ -79,7 +79,6 @@ namespace Courses.DataAccess.Context
             {
                 entity.OwnsOne(n => n.LessonName, a => { a.Property(p => p.Value).HasColumnName("LessonName"); });
                 entity.OwnsOne(d => d.LessonDescription, a => { a.Property(p => p.Value).HasColumnName("LessonDescription"); });
-                entity.OwnsOne(n => n.LessonNumber, a => { a.Property(p => p.Value).HasColumnName("LessonNumber"); });
                 entity.OwnsOne(d => d.Video, a => { a.Property(p => p.Value).HasColumnName("Video"); });
                 entity.HasOne(t => t.Topic);
             });

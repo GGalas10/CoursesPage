@@ -16,7 +16,7 @@ namespace Courses.Core.Value_Object
                 throw new Exception("Number cannot be smaller than 0");
         }
         public static implicit operator Number(int value)
-            => new(value);
+            => new Number(value);
         public static implicit operator int(Number value)
             => value.Value;
     }

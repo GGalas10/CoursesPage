@@ -4,6 +4,7 @@ using Courses.Core.Repositories;
 using Courses.Core.Value_Object;
 using Courses.Infrastructure.Comands.Course;
 using Courses.Infrastructure.DTO;
+using Courses.Infrastructure.DTO.CoursesDTO;
 using Courses.Infrastructure.Services.Interfaces;
 
 namespace Courses.Infrastructure.Services.Services
@@ -70,6 +71,12 @@ namespace Courses.Infrastructure.Services.Services
             var course = await _coursesRepostiotory.GetAsync(courseId);
             var detailsDTO = new CourseDetails(course);
             return detailsDTO;
+        }
+
+        public async Task<LessonEditDTO> GetLessonByIdAsync(Guid lessonId)
+        {
+            var lesson = await _coursesRepostiotory.GetLessonByIdAsync(lessonId);
+            return new LessonEditDTO(lesson);
         }
     }
 }

@@ -80,6 +80,19 @@ namespace Courses.API.Controllers.AdminUsers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> EditLesson(Guid lessonId)
+        {
+            try
+            {
+                var dto = await _courseService.GetLessonByIdAsync(lessonId);
+                return PartialView("~/Views/Shared/Partials/Courses/_EditLessonPartialView.cshtml", dto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> AddLessonToTopic([FromForm]AddLessonCommand command)
         {

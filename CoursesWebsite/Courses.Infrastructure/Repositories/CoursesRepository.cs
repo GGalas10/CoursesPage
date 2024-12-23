@@ -130,5 +130,15 @@ namespace Courses.Infrastructure.Services
                 throw new Exception($"Cannot find Topic with Id:{topicId}");
             return topic;
         }
+
+        public async Task<Lesson> GetLessonByIdAsync(Guid lessonId)
+        {
+            if (lessonId == Guid.Empty)
+                throw new Exception("Topic Id cannot be empty");
+            var lesson = await _context.lessons.AsNoTracking().FirstOrDefaultAsync(x => x.Id == lessonId);
+            if (lesson == null)
+                throw new Exception($"Cannot find Topic with Id:{lessonId}");
+            return lesson;
+        }
     }
 }

@@ -40,7 +40,7 @@
                             Lekcje w Temacie:
                             @foreach(var lesson in oneTopic.lessons.OrderBy(x=>x.LessonNumber))
                             {
-                                <div>@lesson.LessonNumber. @lesson.Name</div>
+                                <div style="cursor:pointer" onclick="OpenEditLessonModal('@lesson.Id')">@lesson.LessonNumber. @lesson.Name</div>
                             }
                         </section>
                         <p class="PrimaryBtn ButtonFromP" onclick="AddLessonBtn('@oneTopic.Id')">Dodaj lekcję</p>                     

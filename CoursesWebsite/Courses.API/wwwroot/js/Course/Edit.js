@@ -17,6 +17,22 @@ function ReturnAddLessonView() {
     document.body.removeChild(document.getElementById("DivForLesson"));
 }
 
+function OpenEditLessonModal(LessonId) {
+    $.ajax({
+        url: `/AdminCourses/EditLesson?lessonId=${LessonId}`,
+        method: "GET",
+        success: function () {
+            var newDiv = document.createElement("div");
+            newDiv.id = "DivForLesson";
+            document.body.appendChild(newDiv);
+            $("#DivForLesson").load(`/AdminCourses/EditLesson?lessonId=${LessonId}`);
+        },
+        error: function () {
+
+        },
+    });
+}
+
 function ChangeBtn(clickedBtn) {
     $(".ActiveBtn").addClass("InactiveBtn");
     $(".ActiveBtn").removeClass("ActiveBtn");

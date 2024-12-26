@@ -8,14 +8,12 @@
         <form id="LessonForm">
             <h1>Edytuj lekcję</h1>
             <div style="width: 80%;margin: auto;display: flex;flex-flow: column;">
-                <input name="topicId" type="hidden" value="@Model.lessonId" id="topicId" />
                 <label for="lessonName">Nazwa lekcji:</label>
-                <input type="text" name="lessonName" maxlength="100" id="lessonName" value="@Model.lessonName" required />
+                <p type="text" name="lessonName" maxlength="100" id="lessonName" value="@Model.lessonName"></p>
                 <label for="lessonDescription">Opis lekcji</label>
-                <textarea name="lessonDescription" maxlength="300" id="lessonDescription" required>@Model.lessonDescription</textarea>
+                <p name="lessonDescription" maxlength="300" id="lessonDescription">@Model.lessonDescription</p>
             </div>
-            <button class="PrimaryBtn" onclick="ComingSoon()">Dodaj film</button>
-            <p class="PrimaryBtn ButtonFromP" onclick="AddNewLesson()">Zapisz</p>
+            <p class="PrimaryBtn ButtonFromP" onclick="ReturnAddLessonView()">Wróć</p>
         </form>
     </section>
 </section>

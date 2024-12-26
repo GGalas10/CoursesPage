@@ -16,16 +16,15 @@ function AddLessonBtn(TopicId) {
 function ReturnAddLessonView() {
     document.body.removeChild(document.getElementById("DivForLesson"));
 }
-
 function OpenEditLessonModal(LessonId) {
     $.ajax({
         url: `/AdminCourses/EditLesson?lessonId=${LessonId}`,
         method: "GET",
-        success: function () {
+        success: async function () {
             var newDiv = document.createElement("div");
             newDiv.id = "DivForLesson";
             document.body.appendChild(newDiv);
-            $("#DivForLesson").load(`/AdminCourses/EditLesson?lessonId=${LessonId}`);
+            $("#DivForLesson").load(`/AdminCourses/EditLesson?lessonId=${LessonId}`);     
         },
         error: function () {
 

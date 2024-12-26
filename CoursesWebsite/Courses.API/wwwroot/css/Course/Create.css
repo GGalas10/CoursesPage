@@ -232,3 +232,46 @@
     display: flex;
     justify-content: space-between;
 }
+.LessonsForTopic {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 10px;
+    width: 80%;
+    margin: auto;
+}
+.LessonsForTopic div{
+    flex: 1 1 30%;
+    display:flex;
+    max-width:30%;
+}
+.LessonEditBtn {
+    border: none;
+    margin: 3px;
+    background: #002ddf47;
+    color: whitesmoke;
+    border-radius: 15px;
+    padding: 0 6px;
+    backdrop-filter: blur(15px);
+    box-shadow: 1px 4px 3px #7a80d3a6;
+    font-size: 0.7rem;
+    font-weight: bolder;
+}
+.LessonEditBtn:hover,.LessonDeleteBtn:hover{
+    opacity:0.8;
+}
+.LessonEditBtn:active,.LessonDeleteBtn:active{
+    opacity:0.6;
+}
+.LessonDeleteBtn {
+    border: none;
+    margin: 3px;
+    background: #ff000040;
+    color: whitesmoke;
+    border-radius: 15px;
+    padding: 0 6px;
+    backdrop-filter: blur(15px);
+    box-shadow: 1px 4px 3px #ff000087;
+    font-size: 0.7rem;
+    font-weight: bolder;
+}

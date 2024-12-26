@@ -36,11 +36,18 @@
                     <div>
                         @oneTopic.Name
                         <span>@oneTopic.Description</span>
-                        <section id="Topic_@oneTopic.Id">
-                            Lekcje w Temacie:
+                        <p>Lekcje w Temacie:</p>
+                        <section id="Topic_@oneTopic.Id" class="LessonsForTopic">
+                            
                             @foreach(var lesson in oneTopic.lessons.OrderBy(x=>x.LessonNumber))
                             {
-                                <div style="cursor:pointer" onclick="OpenEditLessonModal('@lesson.Id')">@lesson.LessonNumber. @lesson.Name</div>
+                                <div style="cursor:pointer;justify-content:space-between">
+                                    <span style="max-width:47%">@lesson.LessonNumber. @lesson.Name</span>
+                                    <div style="max-width:47%">
+                                        <input type="button" value="Edytuj" class="LessonEditBtn" onclick="OpenEditLessonModal('@lesson.Id')" />
+                                        <input type="button" value="Usuń" class="LessonDeleteBtn" />
+                                    </div>
+                                </div>
                             }
                         </section>
                         <p class="PrimaryBtn ButtonFromP" onclick="AddLessonBtn('@oneTopic.Id')">Dodaj lekcję</p>                     

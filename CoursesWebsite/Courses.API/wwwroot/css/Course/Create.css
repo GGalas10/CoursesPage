@@ -275,3 +275,17 @@
     font-size: 0.7rem;
     font-weight: bolder;
 }
+
+.expandBtnSection {
+    position: absolute;
+    top: 19px;
+    right: 419px;
+}
+.CollapseSection {
+    transition: max-height 0.5s;
+    max-height:0;
+}
+.ExpandSection {
+    transition: max-height 0.5s;
+    max-height: 2000px;
+}

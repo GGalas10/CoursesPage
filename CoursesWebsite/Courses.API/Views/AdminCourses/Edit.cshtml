@@ -33,6 +33,12 @@
             {
                 <div class="GlassEfectSection">
                     <h2>Temat @Model.Topics.IndexOf(oneTopic)</h2>
+                    <div class="expandBtnSection" id="ExpandSection_@oneTopic.Id">
+                        <svg id="collapseBtn" width="25" height="25" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="collapse('@oneTopic.Id')" style="cursor:pointer">
+                            <circle cx="50" cy="50" r="45" stroke="black" stroke-width="5" fill="white" />
+                            <polyline points="30,60 50,40 70,60" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
                     <div>
                         @oneTopic.Name
                         <span>@oneTopic.Description</span>
@@ -64,4 +70,33 @@
 </section>
 @section Scripts{
 <script src="~/js/Course/Edit.js"></script>
+<script>
+    function collapse(topicId){
+        if(document.getElementById(`Topic_${topicId}`)){
+            document.getElementById(`Topic_${topicId}`).classList.remove("ExpandSection");
+            document.getElementById(`Topic_${topicId}`).classList.add("CollapseSection");
+            document.getElementById(`Topic_${topicId}`).style.overflow = "hidden";
+            setTimeout(()=>{
+                document.getElementById(`Topic_${topicId}`).style.display = "none";
+            }, "500");
+            document.getElementById(`ExpandSection_${topicId}`).innerHTML = expandBtn.replace("REPLACE",`${topicId}`);
+        }
+    }
+    function expand(topicId){
+        if(document.getElementById(`Topic_${topicId}`)){
+                document.getElementById(`Topic_${topicId}`).style.display = "flex";
+            document.getElementById(`Topic_${topicId}`).classList.remove("CollapseSection"); 
+            document.getElementById(`Topic_${topicId}`).classList.add("ExpandSection");
+            document.getElementById(`ExpandSection_${topicId}`).innerHTML = collapseBtn.replace("REPLACE",`${topicId}`);
+        }
+    }
+    const expandBtn = ` <svg id="expandBtn" width="25" height="25" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="expand('REPLACE')">
+                          <circle cx="50" cy="50" r="45" stroke="black" stroke-width="5" fill="white"/>
+                          <polyline points="30,40 50,60 70,40" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>`;
+    const collapseBtn = `<svg id="collapseBtn" width="25" height="25" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="collapse('REPLACE')" style="cursor:pointer">
+                            <circle cx="50" cy="50" r="45" stroke="black" stroke-width="5" fill="white" />
+                            <polyline points="30,60 50,40 70,60" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>`;
+</script>
 }

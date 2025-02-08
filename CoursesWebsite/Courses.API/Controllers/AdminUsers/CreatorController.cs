@@ -52,10 +52,10 @@ namespace Courses.API.Controllers.AdminUsers
             return View();
         }
         [HttpGet]
-        public IActionResult Settings()
+        public async Task<IActionResult> Settings()
         {
-            ViewData["Title"] = "Ustawienia";
-            return View();
+            var result = await _adminUserService.GetUserForSettings(UserId);
+            return View(result);
         }
     }
 }

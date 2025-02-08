@@ -8,9 +8,11 @@ namespace Courses.Infrastructure.Services.Services
     public class AdminUserService : IAdminUserService
     {
         private readonly IAdminPanelRepository _panelRepository;
-        public AdminUserService(IAdminPanelRepository panelRepository)
+        private readonly IUserRepository _userRepository;
+        public AdminUserService(IAdminPanelRepository panelRepository,IUserRepository userRepository)
         {
             _panelRepository = panelRepository;
+            _userRepository = userRepository;
         }
         public async Task<UserForAdminDTO> GetUserDTOById(Guid UserId)
         {
@@ -23,6 +25,11 @@ namespace Courses.Infrastructure.Services.Services
         {
             var courses = await _panelRepository.GetAllUserCoursesAsync(UserId);
             return CoursesViewInAdminPanel.GetFromUserList(courses);
+        }
+        public async Task<UserSettingsDTO> GetUserForSettings(Guid UserId)
+        {
+            var result = await _userRepository.GetByIdAsync(UserId);
+            return UserSettingsDTO.GetFromModel(result);
         }
     }
 }

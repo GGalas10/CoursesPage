@@ -1,3 +1,18 @@
-﻿<h1>
+﻿@using Courses.Infrastructure.DTO.UserDTOs
+@model UserSettingsDTO
+@{
+    ViewData["Title"] = "Ustawienia";
+}
+<h1 style="text-align:center">
     Witaj na stronie z ustawieniami użytkownika.
+    <br />Jesteś z nami od @Model.createAt.ToString("d")
 </h1>
+<div class="GlassEfectSection text-center">
+    <label for="name" style="font-size:1rem;">Nazwa użytkownika</label>
+    <p name="name" id="name">@Model.name</p>
+    <button>Zmień nazwę</button>
+    <label for="email" style="font-size:1rem;">Twój emial</label>
+    <p name="email" id="email">@Model.email</p>
+    <button>Zmień email</button>
+    <button>Dodaj weryfikację dwustopniową</button>
+</div>

@@ -31,5 +31,19 @@ namespace Courses.Infrastructure.Services.Services
             var result = await _userRepository.GetByIdAsync(UserId);
             return UserSettingsDTO.GetFromModel(result);
         }
+        public async Task ChangeUserName(string userName, Guid UserId)
+        {
+            if (string.IsNullOrEmpty(userName))
+                throw new Exception("New_User_Name_Cannot_Be_Null_Or_Empty");
+
+            await _userRepository.ChangeUserName(userName,UserId);
+        }
+        public async Task ChangeUserEmail(string email, Guid UserId)
+        {
+            if (string.IsNullOrEmpty(email))
+                throw new Exception("New_User_Name_Cannot_Be_Null_Or_Empty");
+
+            await _userRepository.ChangeUesrEmail(email,UserId);
+        }
     }
 }

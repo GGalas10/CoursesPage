@@ -34,6 +34,7 @@ namespace Courses.API.Controllers
             ViewData["Title"] = "Logowanie";
             return View();
         }
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Register()
         {

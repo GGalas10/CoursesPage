@@ -57,5 +57,43 @@ namespace Courses.API.Controllers.AdminUsers
             var result = await _adminUserService.GetUserForSettings(UserId);
             return View(result);
         }
+        [HttpGet]
+        public async Task<IActionResult> ChangeNameModal()
+        {
+            var result = await _adminUserService.GetUserForSettings(UserId);
+            return PartialView("_ChangeNameView", result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangeUserName([FromBody] string userName)
+        {
+            try
+            {
+                await _adminUserService.ChangeUserName(userName,UserId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> ChangeEmailModal()
+        {
+            var result = await _adminUserService.GetUserForSettings(UserId);
+            return PartialView("_ChangeEmailView", result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangeEmailName([FromBody] string userEmail)
+        {
+            try
+            {
+                await _adminUserService.ChangeUserEmail(userEmail,UserId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

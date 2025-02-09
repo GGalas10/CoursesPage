@@ -65,5 +65,19 @@ namespace Courses.Infrastructure.Services
                 throw new Exception("Refresh token expired");
             return user;
         }
+        public async Task ChangeUserName(string userName,Guid userId)
+        {
+            var user = await this.GetOrFailByIdAsync(userId);
+            
+            user.SetUserName(userName);
+            await UpdateAsync();
+        }
+        public async Task ChangeUesrEmail(string email, Guid userId)
+        {
+            var user = await this.GetOrFailByIdAsync(userId);
+
+            user.SetEmail(email);
+            await UpdateAsync();
+        }
     }
 }

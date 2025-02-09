@@ -11,5 +11,7 @@ namespace Courses.Core.Repositories
         Task DeleteAsync(Guid id);
         Task<bool> UpdateAsync();
         Task<User> GetByRefreshToken(string refreshToken);
+        Task ChangeUserName(string userName, Guid userId);
+        Task ChangeUesrEmail(string email, Guid userId);
     }
 }

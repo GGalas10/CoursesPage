@@ -1,0 +1,20 @@
+﻿@using Courses.Infrastructure.DTO.UserDTOs
+@model UserSettingsDTO
+<style>
+    .ChangeModalMainSection{
+        position:absolute;
+
+    }
+    .SecondChangeModal{
+        position:absolute;
+        height:600px;
+        width:300px;
+    }
+</style>
+<section class="ChangeModalMainSection">
+    <div class="SecondChangeModal">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" placeholder="@Model"/>
+        <p>Zmień nazwę</p>
+    </div>
+</section>

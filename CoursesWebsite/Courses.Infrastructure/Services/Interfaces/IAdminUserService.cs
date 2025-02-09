@@ -8,5 +8,7 @@ namespace Courses.Infrastructure.Services.Interfaces
         Task<UserForAdminDTO> GetUserDTOById(Guid UserId);
         Task<List<CoursesViewInAdminPanel>> GetAllUserCourses(Guid UserId);
         Task<UserSettingsDTO> GetUserForSettings(Guid UserId);
+        Task ChangeUserName(string userName, Guid UserId);
+        Task ChangeUserEmail(string email, Guid UserId);
     }
 }

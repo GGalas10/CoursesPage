@@ -134,3 +134,16 @@ p{
     display: grid;
     margin-top: 25px;
 }
+.SettingsBtn {
+    padding: 5px 10px;
+    width: 250px;
+    margin: 10px auto;
+    border-radius: 15px;
+    border: none;
+    background: #135b5b;
+    color: whitesmoke;
+    font-size: .9rem;
+}
+.SettingsBtn:hover{
+    background-color:#0d4242;
+}

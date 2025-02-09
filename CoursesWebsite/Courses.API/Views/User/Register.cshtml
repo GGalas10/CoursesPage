@@ -14,7 +14,7 @@
             <div class="OneBox">
                 <label id="LabelRegister">Podaj hasło</label>
                 <input type="password" asp-for="Password" id="RegisterPassword">
-                <div id="Rectangle"><div id="SmallSquare"></div></div>
+                <div id="Rectangle"><div id="SmallSquare" style="user-select:none"></div></div>
             </div>
             @if (ViewData["Error"] != string.Empty){
                 <p style="font-size:1.5rem;">@ViewData["Error"]</p>

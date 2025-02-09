@@ -59,7 +59,7 @@ builder.Services.AddAuthentication(options =>
             if (token != null) {
                 var decodeToken = SecureTokenService.DecryptToken(token);
                 var handler = new JwtSecurityTokenHandler();
-                var bearerToken = handler.ReadToken(SecureTokenService.DecryptToken(token));
+                var bearerToken = handler.ReadToken(decodeToken);
                 if(bearerToken.ValidTo <= DateTime.UtcNow.AddMinutes(1))
                 {
                     context.Response.Cookies.Delete(".ASP_Custom_Token");

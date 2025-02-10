@@ -11,9 +11,20 @@
 <div class="GlassEfectSection text-center d-grid">
     <label for="name" style="font-size:1rem;">Nazwa użytkownika</label>
     <p name="name" id="name">@Model.name</p>
-    <button class="SettingsBtn">Zmień nazwę</button>
+    <button class="SettingsBtn" onclick="GetChangeNameModal()">Zmień nazwę</button>
     <label for="email" style="font-size:1rem;">Twój emial</label>
     <p name="email" id="email">@Model.email</p>
     <button class="SettingsBtn">Zmień email</button>
     <button class="SettingsBtn">Dodaj weryfikację dwustopniową</button>
 </div>
+<section id="SectionForChangesModals">
+
+</section>
+@section scripts{
+<script>
+    function GetChangeNameModal(){
+        $("#SectionForChangesModals").load("/Creator/ChangeNameModal");
+            console.log(document.getElementById("SectionForChangesModals"));
+    }
+</script>
+}

@@ -3,18 +3,28 @@
 <style>
     .ChangeModalMainSection{
         position:absolute;
-
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
     }
     .SecondChangeModal{
-        position:absolute;
+        margin:auto;
         height:600px;
         width:300px;
     }
 </style>
-<section class="ChangeModalMainSection">
+<section class="ChangeModalMainSection" id="ChangeNameModal">
     <div class="SecondChangeModal">
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" placeholder="@Model"/>
-        <p>Zmień nazwę</p>
+        <p>Zmień email</p>
     </div>
 </section>
+<script>
+    function CloseModal(){
+        if(document.getElementById("ChangeNameModal")){
+            document.getElementById("ChangeNameModal").remove();
+        }
+    }
+</script>

@@ -61,7 +61,7 @@ namespace Courses.API.Controllers.AdminUsers
         public async Task<IActionResult> ChangeNameModal()
         {
             var result = await _adminUserService.GetUserForSettings(UserId);
-            return PartialView("_ChangeNameView", result);
+            return PartialView("~/Views/Shared/Partials/Settings/_ChangeNameView.cshtml", result);
         }
         [HttpPost]
         public async Task<IActionResult> ChangeUserName([FromBody] string userName)

@@ -64,7 +64,7 @@ namespace Courses.API.Controllers.AdminUsers
             return PartialView("~/Views/Shared/Partials/Settings/_ChangeNameView.cshtml", result);
         }
         [HttpPost]
-        public async Task<IActionResult> ChangeUserName([FromBody] string userName)
+        public async Task<IActionResult> ChangeUserName([FromQuery] string userName)
         {
             try
             {
